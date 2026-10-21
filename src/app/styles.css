@@ -2,6 +2,9 @@
    Kleur: Utrecht-rood als enige accent, verder wit en grijs. Rood betekent "actief" of "dichtbij in Leidsche Rijn". */
 :root {
   --bg: #ffffff;
+  /* Achtergrond van de lijst, waar de kaarten op liggen */
+  --page: #f4f3f1;
+  --card: #ffffff;
   --surface: #f3f3f3;
   --surface-2: #e8e8e8;
   --ink: #1a1a1a;
@@ -30,6 +33,8 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     --bg: #131313;
+    --page: #0e0e0e;
+    --card: #1d1d1d;
     --surface: #1f1f1f;
     --surface-2: #2b2b2b;
     --ink: #f0f0f0;
@@ -55,6 +60,8 @@
 }
 :root[data-theme='dark'] {
   --bg: #131313;
+  --page: #0e0e0e;
+  --card: #1d1d1d;
   --surface: #1f1f1f;
   --surface-2: #2b2b2b;
   --ink: #f0f0f0;
@@ -88,7 +95,7 @@ html {
 }
 body {
   margin: 0;
-  background: var(--bg);
+  background: var(--page);
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 16px;
@@ -437,9 +444,7 @@ h3 {
   margin: 0;
   padding: 0;
   display: grid;
-}
-.card-list > li + li {
-  border-top: 1px solid var(--line);
+  gap: 8px;
 }
 
 /* — Activiteit — */
@@ -448,14 +453,20 @@ h3 {
   gap: 3px;
   width: 100%;
   text-align: left;
-  background: transparent;
+  background: var(--card);
   border: 0;
-  border-radius: 0;
-  padding: 12px 2px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
+  padding: 11px 13px;
   min-width: 0;
 }
-.card:hover {
-  background: var(--surface-2);
+.card:active {
+  background: var(--surface);
+}
+@media (hover: hover) {
+  .card:hover {
+    background: var(--surface);
+  }
 }
 .card-time {
   display: flex;
@@ -468,7 +479,11 @@ h3 {
   font-variant-numeric: tabular-nums;
 }
 .card-time .kind {
-  font-weight: 400;
+  font-weight: 600;
+  color: var(--brand-ink);
+  background: var(--brand-soft);
+  padding: 0 7px;
+  border-radius: 6px;
 }
 .card-new {
   color: var(--brand-ink);
@@ -490,12 +505,7 @@ h3 {
   margin-right: 8px;
   font-weight: 400;
 }
-.card-time .kind::before {
-  content: '·';
-  color: var(--muted);
-  margin-right: 8px;
-  font-weight: 400;
-}
+
 .card-title {
   font-size: 1.02rem;
   line-height: 1.28;
