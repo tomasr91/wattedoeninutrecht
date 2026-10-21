@@ -1,0 +1,40 @@
+# Bronnen diagnosticeren: handmatig starten via Actions → "Bronnen diagnose" → Run workflow.
+# Schrijft diagnose.json naar de aparte branch "diagnose" (niet naar main).
+name: Bronnen diagnose
+
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: 'URL''s gescheiden door spaties (leeg = standaardlijst)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Diagnose
+        env:
+          COLLECTOR_CONTACT: ${{ vars.COLLECTOR_CONTACT }}
+        run: npx tsx collector/diagnose.ts ${{ github.event.inputs.urls }} > /tmp/diagnose.json; cat /tmp/diagnose.json
+      - name: Naar branch diagnose
+        run: |
+          git config user.name "agenda-bot"
+          git config user.email "agenda-bot@users.noreply.github.com"
+          git checkout --orphan diagnose
+          git rm -rq --cached .
+          cp /tmp/diagnose.json diagnose.json
+          git add diagnose.json
+          git commit -qm "Diagnose $(date -u +%Y-%m-%dT%H:%M)"
+          git push -f origin diagnose

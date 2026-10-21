@@ -24,8 +24,25 @@ export class FetchError extends Error {
     public readonly url: string,
     public readonly status?: number,
   ) {
-    super(message);
+    super(`${message} (${shortUrl(url)})`);
   }
+}
+
+function shortUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    return `${u.host}${u.pathname}${u.search}`.slice(0, 120);
+  } catch {
+    return url.slice(0, 120);
+  }
+}
+
+/** Netwerkfout leesbaar maken: "fetch failed" zegt niets, de oorzaak (DNS, time-out, TLS, reset) wel. */
+export function describeNetworkError(e: unknown): string {
+  const err = e as { name?: string; message?: string; cause?: { code?: string; message?: string } };
+  if (err?.name === 'TimeoutError' || err?.name === 'AbortError') return 'time-out';
+  const cause = err?.cause?.code ?? err?.cause?.message;
+  return cause ? `${err.message ?? 'netwerkfout'}: ${cause}` : String(err?.message ?? e);
 }
 
 export interface HttpOptions {
@@ -125,7 +142,7 @@ export async function fetchText(url: string, opts: HttpOptions = {}): Promise<st
       return await res.text();
     } catch (e) {
       const retryable = !(e instanceof FetchError) || (e.status !== undefined && (e.status === 429 || e.status >= 500));
-      if (attempt >= retries || !retryable) throw e instanceof FetchError ? e : new FetchError(String((e as Error).message ?? e), url);
+      if (attempt >= retries || !retryable) throw e instanceof FetchError ? e : new FetchError(describeNetworkError(e), url);
       await sleep(2000 * (attempt + 1));
     }
   }
