@@ -42,6 +42,7 @@
     },
     {
       "id": "tivolivredenburg",
+      "excludeTitles": ["comedy ?cloud", "comedy night"],
       "$why": "Uit: Cloudflare weigert servers van GitHub. Tivoli komt via data/curated/tivoli.json, dat een geplande Claude-taak elke dinsdag 00:00 vernieuwt.",
       "enabled": false,
       "options": {
@@ -98,13 +99,14 @@
       "id": "comedyhuis",
       "enabled": true,
       "options": {
-        "$comment": "Titels met een van deze woorden worden overgeslagen (open mics, talentavonden, cursussen).",
-        "exclude": ["open mic", "talent", "masterclass", "cursus", "eindshow", "workshop"]
+        "$comment": "Alleen concrete shows (een comedian of een benoemde voorstelling). Titels met een van deze woorden worden overgeslagen: open mics, talentavonden, cursussen en de vaste avonden met wisselende line-up.",
+        "exclude": ["open mic", "talent", "masterclass", "cursus", "course", "eindshow", "workshop", "avondshow", "middagshow", "comedy night", "showcase", "comedy cloud", "comedycloud", "glühwein & comedy", "comedy & diner", "line-upshow", "writers room"]
       }
     },
     {
       "id": "hofman",
-      "enabled": true
+      "$why": "Uit: alleen een algemene wekelijkse avond zonder concrete line-up.",
+      "enabled": false
     },
     {
       "id": "pathe",

@@ -186,6 +186,11 @@ async function main() {
   const anyOk = results.some((r) => r.ok);
   const existing = dbm.loadActivities(db);
   const { activities: reconciled, stats, removed } = reconcile(existing, results, nowIso, today);
+  // Bronnen die uit staan: hun activiteiten uit de app halen (alleen bij een volledige run).
+  if (!only) {
+    const disabled = new Set(config.sources.filter((c) => !c.enabled).map((c) => c.id));
+    for (const a of reconciled) if (disabled.has(a.sources[0].sourceId)) dropKeys.push(sourceKey(a));
+  }
   const dropSet = new Set(dropKeys);
   const activities = reconciled.filter((a) => !dropSet.has(sourceKey(a)));
   removed.push(...dropKeys);

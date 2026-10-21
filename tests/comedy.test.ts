@@ -12,7 +12,9 @@ const card = (slug: string, title: string, taal: string, place: string, date: st
 <div class="fwpl-item dt">${date}</div><div class="fwpl-item tm">${time}</div><div class="fwpl-item show-status">Tickets te koop</div></div>`;
 
 const html = `<html><body>
-${card('vrijdagavondshow-23-oktober', '[TESTDATA] Vrijdagavondshow', 'Nederlands', 'Catharijnepoort 6', 'vr 23 okt', '20:30', 'Tickets €18,95.')}
+${card('comedian-x-solo', '[TESTDATA] Comedian X – Solo', 'Nederlands', 'Catharijnepoort 6', 'vr 23 okt', '20:30', 'Tickets €18,95.')}
+${card('vrijdagavondshow-23-oktober', '[TESTDATA] Vrijdagavondshow', 'Nederlands', 'Catharijnepoort 6', 'vr 23 okt', '20:30')}
+${card('dutch-courage', '[TESTDATA] Dutch Courage – Comedian Y', 'Engels', 'Oudegracht 36', 'za 24 okt', '20:00')}
 ${card('all-english-23-october', '[TESTDATA] All English Comedy Night', 'Engels', 'Oudegracht 36', 'vr 23 okt', '20:30')}
 ${card('open-mic', '[TESTDATA] Open Mic Regulars', 'Nederlands', 'Catharijnepoort 6', 'wo 21 okt', '20:30')}
 ${card('comedy-cloud', '[TESTDATA] Comedy Cloud', 'Nederlands', 'TivoliVredenburg', 'do 29 okt', '20:30')}
@@ -23,13 +25,13 @@ describe('Comedyhuis', () => {
   const items = parseComedyhuis(html, '2026-10-21');
   const shows = items.filter((i) => isRealShow(i)).map((i) => comedyToRaw(i, '2026-10-21T00:00:00Z'));
   it('leest titel, datum (met jaar), tijd, taal en plek', () => {
-    expect(items[0]).toMatchObject({ title: '[TESTDATA] Vrijdagavondshow', date: '2026-10-23', time: '20:30', language: 'Nederlands', place: 'Catharijnepoort 6' });
+    expect(items[0]).toMatchObject({ title: '[TESTDATA] Comedian X – Solo', date: '2026-10-23', time: '20:30', language: 'Nederlands', place: 'Catharijnepoort 6' });
   });
-  it('slaat open mics en shows in Tivoli over, houdt Engelstalige avonden', () => {
-    expect(shows.map((s) => s.title)).toEqual(['[TESTDATA] Vrijdagavondshow', '[TESTDATA] All English Comedy Night', '[TESTDATA] International Showcase (Engelstalig)']);
+  it('alleen concrete shows: geen open mics, vaste avonden met wisselende line-up of shows in Tivoli', () => {
+    expect(shows.map((s) => s.title)).toEqual(['[TESTDATA] Comedian X – Solo', '[TESTDATA] Dutch Courage – Comedian Y (Engelstalig)']);
   });
   it('herkent de zalen en de prijs', () => {
-    expect(shows.map((s) => s.venueName)).toEqual(['Comedyhuis', 'De Kargadoor', 'Comedyhuis aan de Werf']);
+    expect(shows.map((s) => s.venueName)).toEqual(['Comedyhuis', 'De Kargadoor']);
     expect(shows[0].priceText).toBe('€18,95');
     expect(shows[0].start).toBe('2026-10-23T20:30');
   });

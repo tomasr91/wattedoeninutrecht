@@ -568,25 +568,6 @@
     },
     {
       "sourceName": "TivoliVredenburg",
-      "sourceEventId": "tivoli-40121983",
-      "url": "https://www.tivolivredenburg.nl/agenda/40121983/comedycloud-29-10-2026",
-      "title": "ComedyCloud",
-      "start": "2026-10-29",
-      "venueName": "TivoliVredenburg",
-      "address": "Vredenburgkade 11, 3511 WC Utrecht",
-      "locality": "Binnenstad",
-      "hints": [],
-      "bookingText": "tickets",
-      "kind": "Comedy",
-      "checkedAt": "2026-10-21T10:45:00Z",
-      "confidence": "middel",
-      "extraUncertainties": [
-        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
-      ],
-      "allDay": false
-    },
-    {
-      "sourceName": "TivoliVredenburg",
       "sourceEventId": "tivoli-32970205",
       "url": "https://www.tivolivredenburg.nl/agenda/32970205/discozwemmen-29-10-2026",
       "title": "Discozwemmen",
@@ -920,25 +901,6 @@
       "hints": [],
       "bookingText": "tickets",
       "kind": "Metal & punk",
-      "checkedAt": "2026-10-21T10:45:00Z",
-      "confidence": "middel",
-      "extraUncertainties": [
-        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
-      ],
-      "allDay": false
-    },
-    {
-      "sourceName": "TivoliVredenburg",
-      "sourceEventId": "tivoli-51034507",
-      "url": "https://www.tivolivredenburg.nl/agenda/51034507/climate-comedy-night-2026-jubileumeditie-03-11-2026",
-      "title": "Climate Comedy Night 2026 – Jubileumeditie",
-      "start": "2026-11-03",
-      "venueName": "TivoliVredenburg",
-      "address": "Vredenburgkade 11, 3511 WC Utrecht",
-      "locality": "Binnenstad",
-      "hints": [],
-      "bookingText": "tickets",
-      "kind": "Comedy",
       "checkedAt": "2026-10-21T10:45:00Z",
       "confidence": "middel",
       "extraUncertainties": [

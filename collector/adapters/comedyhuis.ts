@@ -5,7 +5,8 @@
  *  - /agenda-en-tickets/ toont de hele agenda (tot enkele maanden vooruit) als lijst van
  *    .fwpl-result-blokken: titel met link naar /shows/<slug>/, line-up, korte omschrijving,
  *    taal ("Nederlands"/"Engels"), adres, datum ("vr 23 okt", zonder jaar), tijd en status.
- *  - We tonen de echte shows; open mics, talentwedstrijden, cursussen en masterclasses niet.
+ *  - Alleen concrete shows (een comedian of benoemde voorstelling). Niet: open mics, talentwedstrijden,
+ *    cursussen, masterclasses en de vaste avonden met wisselende line-up (vrijdagavondshow, comedy night, showcase).
  *    Shows in TivoliVredenburg (komen al via Tivoli) en buiten Utrecht (Houten) worden overgeslagen.
  *  - robots.txt staat alles toe.
  */
@@ -18,7 +19,7 @@ import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
 const BASE = 'https://comedyhuis.nl';
 const ID = 'comedyhuis';
 const NAME = 'Comedyhuis';
-export const DEFAULT_EXCLUDE = ['open mic', 'talent', 'masterclass', 'cursus', 'eindshow', 'workshop'];
+export const DEFAULT_EXCLUDE = ['open mic', 'talent', 'masterclass', 'cursus', 'course', 'eindshow', 'workshop', 'avondshow', 'middagshow', 'comedy night', 'showcase', 'comedy cloud', 'comedycloud', 'glühwein & comedy', 'comedy & diner', 'line-upshow', 'writers room'];
 const SKIP_PLACES = /tivolivredenburg|aan de slinger|houten/i;
 
 /** Bekende plekken van het Comedyhuis (coördinaten bij benadering). */
@@ -126,6 +127,7 @@ export const comedyhuis: SourceAdapter = {
       .filter((i) => isRealShow(i, exclude))
       .map((i) => comedyToRaw(i, ctx.nowIso))
       .filter((e) => e.start.slice(0, 10) >= ctx.today && e.start.slice(0, 10) <= ctx.until);
-    return { events, coverage: { from: ctx.today, to: ctx.until }, notes: `${events.length} shows van ${items.length} in de agenda` };
+    // De agenda is volledig: wat niet (meer) getoond wordt, gaat direct uit de app.
+    return { events, coverage: { from: ctx.today, to: ctx.until }, authoritative: true, notes: `${events.length} shows van ${items.length} in de agenda` };
   },
 };
