@@ -4,7 +4,7 @@
  * Zonder netwerk valt de app terug op de laatst geladen data; de app toont dan
  * de datum van de laatste update, zodat oude informatie herkenbaar blijft.
  */
-const CACHE = 'ufa-v1';
+const CACHE = 'ufa-v2';
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './manifest.webmanifest'])).then(() => self.skipWaiting()));
@@ -20,7 +20,9 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET' || url.origin !== self.location.origin) return;
   const isData = url.pathname.includes('/data/');
-  if (isData || e.request.mode === 'navigate') {
+  // Alleen bestanden met een hash in de naam (assets/) mogen uit de cache; manifest en iconen altijd vers.
+  const isHashed = url.pathname.includes('/assets/');
+  if (isData || e.request.mode === 'navigate' || !isHashed) {
     // Netwerk eerst
     e.respondWith(
       fetch(e.request)
@@ -33,7 +35,7 @@ self.addEventListener('fetch', (e) => {
     );
     return;
   }
-  // Statische bestanden (met hash in de naam): cache eerst
+  // Bestanden met hash in de naam: cache eerst
   e.respondWith(
     caches.match(e.request).then(
       (hit) =>

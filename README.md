@@ -13,7 +13,7 @@ echte activiteiten met een link naar de bron.
 ## Gebruik
 
 - Bovenaan kies je **Kinderen** of **Volwassenen**. Een gezinsactiviteit (bv. een markt) staat in allebei.
-- **Dit weekend** en **Volgend weekend** tonen zaterdag en zondag; bij Volwassenen ook de vrijdagavond (vanaf 18:00).
+- **Dit weekend** en **Volgend weekend** tonen zaterdag en zondag; bij Volwassenen ook de vrijdagavond (vanaf 18:00). Met **Datum** kies je zelf één dag (× om te wissen).
 - De app toont altijd de komende drie maanden.
 - **Agenda** is chronologisch per dag: eendaagse en meerdaagse activiteiten (een meerdaags festival staat
   één keer, op de eerste dag). **Doorlopend** bevat exposities, speurtochten en alles wat twee weken of langer

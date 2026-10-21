@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState, type TouchEvent } from 'react';
 import type { Activity, Dataset, Profile } from '../domain/types';
 import { makePeriod } from '../domain/filters';
 import { defaultProfile } from '../domain/profile';
-import { dateOf, diffDays, formatShortDate, todayInAmsterdam, formatDateTime } from '../domain/dates';
+import { addMonths, dateOf, diffDays, formatLongDate, formatShortDate, todayInAmsterdam, formatDateTime } from '../domain/dates';
 import { buildLists, DEFAULT_LIST_OPTIONS, weekendWindow, type ListAudience, type ListItem, type WeekendChoice } from '../domain/views';
 import { loadDataset } from './data';
 import { load, save } from './storage';
@@ -18,9 +18,11 @@ type Pane = 'agenda' | 'doorlopend';
 interface ViewState {
   audience: ListAudience;
   weekend: WeekendChoice | null;
+  /** Zelf gekozen dag ('YYYY-MM-DD'); sluit de weekendknoppen uit. */
+  day: string | null;
 }
 
-const DEFAULT_VIEW: ViewState = { audience: 'kinderen', weekend: null };
+const DEFAULT_VIEW: ViewState = { audience: 'kinderen', weekend: null, day: null };
 
 export function App() {
   const today = todayInAmsterdam();
@@ -33,7 +35,8 @@ export function App() {
   });
   const [view, setViewState] = useState<ViewState>(() => {
     const v = load<Partial<ViewState> & { onlyWeekend?: boolean }>('view', DEFAULT_VIEW);
-    return { audience: v.audience ?? DEFAULT_VIEW.audience, weekend: v.weekend ?? (v.onlyWeekend ? 'dit' : null) };
+    const day = v.day && v.day >= today ? v.day : null;
+    return { audience: v.audience ?? DEFAULT_VIEW.audience, weekend: day ? null : v.weekend ?? (v.onlyWeekend ? 'dit' : null), day };
   });
   const [pane, setPane] = useState<Pane>('agenda');
   const [slide, setSlide] = useState<'' | 'from-left' | 'from-right'>('');
@@ -61,7 +64,7 @@ export function App() {
   };
 
   // Altijd de komende drie maanden (zo ver kijken de bronnen vooruit).
-  const period = useMemo(() => makePeriod('drie-maanden', today), [today]);
+  const period = useMemo(() => (view.day ? { from: view.day, to: view.day } : makePeriod('drie-maanden', today)), [today, view.day]);
   const lists = useMemo(
     () =>
       data
@@ -111,7 +114,9 @@ export function App() {
   const lastRun = data?.status.lastSuccessfulRun;
   const staleDays = lastRun ? diffDays(dateOf(lastRun), today) : undefined;
   const wk = view.weekend ? weekendWindow(view.weekend, today, view.audience) : undefined;
-  const scope = wk
+  const scope = view.day
+    ? formatLongDate(view.day)
+    : wk
     ? [
         wk.fridayEvening ? `${formatShortDate(wk.fridayEvening)} (avond)` : '',
         wk.from === wk.to ? `${formatShortDate(wk.from)}` : `${formatShortDate(wk.from)} en ${formatShortDate(wk.to)}`,
@@ -173,10 +178,26 @@ export function App() {
                 ['volgend', 'Volgend weekend'],
               ] as const
             ).map(([w, label]) => (
-              <button key={w} className={`toggle ${view.weekend === w ? 'is-on' : ''}`} aria-pressed={view.weekend === w} onClick={() => setView({ weekend: view.weekend === w ? null : w })}>
+              <button key={w} className={`toggle ${view.weekend === w ? 'is-on' : ''}`} aria-pressed={view.weekend === w} onClick={() => setView({ weekend: view.weekend === w ? null : w, day: null })}>
                 {label}
               </button>
             ))}
+            <span className={`toggle date-toggle ${view.day ? 'is-on' : ''}`}>
+              <span aria-hidden="true">{view.day ? formatShortDate(view.day) : '📅 Datum'}</span>
+              <input
+                type="date"
+                aria-label="Kies een datum"
+                min={today}
+                max={addMonths(today, 3)}
+                value={view.day ?? ''}
+                onChange={(e) => setView({ day: e.target.value || null, weekend: null })}
+              />
+              {view.day && (
+                <button className="date-clear" aria-label="Datum wissen" onClick={() => setView({ day: null })}>
+                  ×
+                </button>
+              )}
+            </span>
           </div>
 
           <div className="pane-tabs" role="tablist" aria-label="Weergave">

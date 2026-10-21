@@ -1,21 +1,26 @@
-/* Layout: rode kopbalk met de Dom (scrolt weg), daaronder een witte plakkende bedieningsbalk; de agenda is één rustige kolom.
-   Kleur: Utrecht-rood als enige accent, verder wit en grijs. Rood betekent "actief" of "dichtbij in Leidsche Rijn". */
+/* Layout: grachtenblauwe kopbalk met de Dom (scrolt weg); daaronder een wit blok met de bediening dat over de
+   kopbalk heen schuift en blijft plakken; daaronder witte kaarten op koel lichtgrijs.
+   Kleur: één blauwe kleurfamilie. Blauw = gekozen/actief. Groen/oranje = geschiktheid, rood alleen voor waarschuwingen. */
 :root {
   --bg: #ffffff;
   /* Achtergrond van de lijst, waar de kaarten op liggen */
-  --page: #f4f3f1;
+  --page: #eef1f4;
   --card: #ffffff;
   --surface: #f3f3f3;
   --surface-2: #e8e8e8;
   --ink: #1a1a1a;
   --muted: #595959;
   --line: #d9d9d9;
-  --brand: #a3262a;
-  --brand-ink: #962226;
+  --brand: #24506e;
+  --brand-ink: #1f4864;
   --on-brand: #ffffff;
-  --brand-soft: #f6e8e8;
-  --head-bg: #efeeeb;
-  --head-art: #c9c4bc;
+  --brand-soft: #e4edf4;
+  --head-bg: #1f3a4d;
+  --head-ink: #ffffff;
+  --head-muted: #c3d3df;
+  --head-dom: #cfe0ec;
+  --head-art: rgb(255 255 255 / 14%);
+  --day-ink: #1f3a4d;
   --good: #3b5f22;
   --good-bg: #e6eedf;
   --warn: #7a4d00;
@@ -33,19 +38,23 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     --bg: #131313;
-    --page: #0e0e0e;
-    --card: #1d1d1d;
+    --page: #0c0f12;
+    --card: #1a1e22;
     --surface: #1f1f1f;
     --surface-2: #2b2b2b;
     --ink: #f0f0f0;
     --muted: #a8a8a8;
     --line: #353535;
-    --brand: #a83a3a;
-    --brand-ink: #ee9a9a;
+    --brand: #5b8db3;
+    --brand-ink: #9cc3e0;
     --on-brand: #ffffff;
-    --brand-soft: #3a2020;
-    --head-bg: #1c1c1c;
-    --head-art: #3a3a3a;
+    --brand-soft: #1c2b37;
+    --head-bg: #142734;
+    --head-ink: #ffffff;
+    --head-muted: #a9bccb;
+    --head-dom: #b9cfe0;
+    --head-art: rgb(255 255 255 / 10%);
+    --day-ink: #d6e3ee;
     --good: #a9d18e;
     --good-bg: #24301c;
     --warn: #f2c46b;
@@ -60,19 +69,23 @@
 }
 :root[data-theme='dark'] {
   --bg: #131313;
-  --page: #0e0e0e;
-  --card: #1d1d1d;
+  --page: #0c0f12;
+  --card: #1a1e22;
   --surface: #1f1f1f;
   --surface-2: #2b2b2b;
   --ink: #f0f0f0;
   --muted: #a8a8a8;
   --line: #353535;
-  --brand: #a83a3a;
-  --brand-ink: #ee9a9a;
+  --brand: #5b8db3;
+  --brand-ink: #9cc3e0;
   --on-brand: #ffffff;
-  --brand-soft: #3a2020;
-  --head-bg: #1c1c1c;
-  --head-art: #3a3a3a;
+  --brand-soft: #1c2b37;
+  --head-bg: #142734;
+  --head-ink: #ffffff;
+  --head-muted: #a9bccb;
+  --head-dom: #b9cfe0;
+  --head-art: rgb(255 255 255 / 10%);
+  --day-ink: #d6e3ee;
   --good: #a9d18e;
   --good-bg: #24301c;
   --warn: #f2c46b;
@@ -162,7 +175,7 @@ h3 {
   position: relative;
   overflow: hidden;
   background: var(--head-bg);
-  color: var(--ink);
+  color: var(--head-ink);
 }
 .masthead-art {
   position: absolute;
@@ -178,14 +191,14 @@ h3 {
   position: relative;
 }
 .brand svg {
-  color: var(--brand);
+  color: var(--head-dom);
 }
 .masthead-inner {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: 12px;
-  padding-block: 18px 16px;
+  padding-block: 18px 34px;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
@@ -212,13 +225,13 @@ h3 {
   font-style: italic;
   font-weight: 600;
   font-size: 0.92rem;
-  color: var(--muted);
+  color: var(--head-muted);
 }
 .icon-btn.on-brand {
-  background: var(--bg);
-  color: var(--ink);
+  background: rgb(255 255 255 / 15%);
+  color: var(--head-ink);
   align-self: center;
-  box-shadow: var(--shadow);
+  box-shadow: none;
 }
 
 .controls {
@@ -227,6 +240,9 @@ h3 {
   z-index: 20;
   background: var(--bg);
   border-bottom: 1px solid var(--line);
+  /* Schuift over de onderkant van de kopbalk: banner en bediening als één geheel */
+  margin-top: -18px;
+  border-radius: 18px 18px 0 0;
 }
 .controls-inner {
   display: grid;
@@ -274,8 +290,38 @@ h3 {
 
 .toggle-row {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr 1fr 0.85fr;
   gap: 6px;
+}
+.date-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.date-toggle input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border: 0;
+  cursor: pointer;
+}
+.date-clear {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--brand);
+  color: var(--on-brand);
+  font-size: 15px;
+  line-height: 22px;
+  padding: 0;
 }
 .toggle-row .toggle {
   border-radius: 10px;
@@ -433,11 +479,8 @@ h3 {
 }
 .day-head {
   font-size: 1rem;
-  padding-top: 6px;
-  border-top: 2px solid var(--ink);
-}
-.day-head.is-weekend {
-  border-top-color: var(--brand);
+  padding: 8px 2px 0;
+  color: var(--day-ink);
 }
 .card-list {
   list-style: none;
