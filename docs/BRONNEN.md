@@ -30,7 +30,7 @@ en per run een maximum aantal detailpagina's. Omschrijvingen van bronnen worden 
 | Bron | Resultaat | Oorzaak |
 |---|---|---|
 | Stadsschouwburg, Utrecht Natuurlijk, Podium Sprits, Podium Hoge Woerd | werkt | — |
-| TivoliVredenburg | geweigerd (403) | Cloudflare-controle ("Just a moment…") voor servers in datacenters. Structureel; wordt niet omzeild. Tivoli-data blijft uit de handmatige set. |
+| TivoliVredenburg | geweigerd (403) | Cloudflare-controle ("Just a moment…") voor servers in datacenters. Structureel; wordt niet omzeild. De adapter staat daarom uit; een geplande Claude-taak vervangt elke dinsdag 00:00 `data/curated/tivoli.json` (zelfde genres), de nachtelijke update neemt dat over. |
 | Bibliotheek Utrecht (op-shop.nl) | 503 | Onderhoudspagina "Tijdelijk niet beschikbaar". Tijdelijk. |
 | Jaarbeurs | 404 | Hele site gaf "Tijdelijk offline". Tijdelijk. |
 | UITagenda Utrecht | TLS-fout | Server gaf een standaardcertificaat ("Kubernetes Ingress Controller Fake Certificate"). Probleem bij de site. |

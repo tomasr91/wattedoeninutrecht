@@ -1,0 +1,1971 @@
+{
+  "meta": {
+    "collectedAt": "2026-10-21T10:45:00Z",
+    "collectedBy": "Claude (geplande taak: elke dinsdag 00:00 vervangen)",
+    "method": "Programma van tivolivredenburg.nl/agenda, alleen de genres uit sources.config.json (tivolivredenburg.options.genres) plus familie. Dit bestand wordt elke week in zijn geheel vervangen; de nachtelijke update van GitHub kan Tivoli niet zelf ophalen (Cloudflare-controle).",
+    "note": "Niet met de hand bewerken: wijzigingen worden dinsdag overschreven."
+  },
+  "events": [
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-30179895",
+      "url": "https://www.tivolivredenburg.nl/agenda/30179895/guilt-trip-21-10-2026",
+      "title": "Guilt Trip",
+      "start": "2026-10-21",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Metal & punk",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-98918178",
+      "url": "https://www.tivolivredenburg.nl/agenda/98918178/freya-ridings-21-10-2026",
+      "title": "Freya Ridings",
+      "start": "2026-10-21",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-92614864",
+      "url": "https://www.tivolivredenburg.nl/agenda/92614864/warren-zeiders-21-10-2026",
+      "title": "Warren Zeiders",
+      "start": "2026-10-21",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Roots & americana",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-50755242",
+      "url": "https://www.tivolivredenburg.nl/agenda/50755242/mina-nader-22-10-2026",
+      "title": "Mina Nader",
+      "start": "2026-10-22",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Comedy",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-17159560",
+      "url": "https://www.tivolivredenburg.nl/agenda/17159560/celine-cairo-22-10-2026",
+      "title": "Celine Cairo",
+      "start": "2026-10-22",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-38902906",
+      "url": "https://www.tivolivredenburg.nl/agenda/38902906/niels-geusebroek-sings-coldplay-22-10-2026",
+      "title": "Niels Geusebroek sings Coldplay",
+      "start": "2026-10-22",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Nederlandstalig",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-35302200",
+      "url": "https://www.tivolivredenburg.nl/agenda/35302200/popronde-utrecht-22-10-2026",
+      "title": "Popronde Utrecht",
+      "start": "2026-10-22",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-17348860",
+      "url": "https://www.tivolivredenburg.nl/agenda/17348860/ios-23-10-2026",
+      "title": "IOS",
+      "start": "2026-10-23",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Nederlandstalig",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-95181615",
+      "url": "https://www.tivolivredenburg.nl/agenda/95181615/the-hu-23-10-2026",
+      "title": "The Hu",
+      "start": "2026-10-23",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Metal & punk",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-68627469",
+      "url": "https://www.tivolivredenburg.nl/agenda/68627469/black-sea-dahu-23-10-2026",
+      "title": "Black Sea Dahu",
+      "start": "2026-10-23",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-69095320",
+      "url": "https://www.tivolivredenburg.nl/agenda/69095320/pop-o-matic-23-10-2026",
+      "title": "Pop-O-Matic",
+      "start": "2026-10-23",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-23092969",
+      "url": "https://www.tivolivredenburg.nl/agenda/23092969/midnight-til-morning-24-10-2026",
+      "title": "Midnight Til Morning",
+      "start": "2026-10-24",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Pop",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-95366412",
+      "url": "https://www.tivolivredenburg.nl/agenda/95366412/disco-arabesquo-24-10-2026",
+      "title": "Disco Arabesquo",
+      "start": "2026-10-24",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Club",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-90997142",
+      "url": "https://www.tivolivredenburg.nl/agenda/90997142/hoezo-show-8-25-10-2026",
+      "title": "Hoe?Zo! Show (8+)",
+      "start": "2026-10-25",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-53448188",
+      "url": "https://www.tivolivredenburg.nl/agenda/53448188/gloryhammer-25-10-2026",
+      "title": "Gloryhammer",
+      "start": "2026-10-25",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Metal & punk",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-95650731",
+      "url": "https://www.tivolivredenburg.nl/agenda/95650731/op-avontuur-met-dikkie-dik-2-25-10-2026",
+      "title": "Op Avontuur met Dikkie Dik (2+)",
+      "start": "2026-10-25T10:00",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "end": "2026-10-25T10:45",
+      "priceText": "Kind € 13 / volwassene € 16",
+      "openingNote": "Zaal: Grote zaal. Tweede voorstelling om 12:00.",
+      "durationMinutes": 45,
+      "summary": "Muzikale voorstelling met Dikkie Dik voor peuters en kleuters, ongeveer drie kwartier.",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-95650731#2",
+      "url": "https://www.tivolivredenburg.nl/agenda/95650731/op-avontuur-met-dikkie-dik-2-25-10-2026",
+      "title": "Op Avontuur met Dikkie Dik (2+)",
+      "start": "2026-10-25T12:00",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "end": "2026-10-25T12:45",
+      "priceText": "Kind € 13 / volwassene € 16",
+      "openingNote": "Zaal: Grote zaal.",
+      "durationMinutes": 45,
+      "summary": "Muzikale voorstelling met Dikkie Dik voor peuters en kleuters, ongeveer drie kwartier.",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-48173061",
+      "url": "https://www.tivolivredenburg.nl/agenda/48173061/son-lux-26-10-2026",
+      "title": "Son Lux",
+      "start": "2026-10-26",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-29212732",
+      "url": "https://www.tivolivredenburg.nl/agenda/29212732/paul-carrack-26-10-2026",
+      "title": "Paul Carrack",
+      "start": "2026-10-26",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Rock",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-69214441",
+      "url": "https://www.tivolivredenburg.nl/agenda/69214441/ceelo-green-26-10-2026",
+      "title": "CeeLo Green",
+      "start": "2026-10-26",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Pop",
+      "statusText": "afgelast",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-43739677",
+      "url": "https://www.tivolivredenburg.nl/agenda/43739677/clawfinger-27-10-2026",
+      "title": "Clawfinger",
+      "start": "2026-10-27",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Metal & punk",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-64227135",
+      "url": "https://www.tivolivredenburg.nl/agenda/64227135/eliades-ochoa-27-10-2026",
+      "title": "Eliades Ochoa",
+      "start": "2026-10-27",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Classic pop",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-52894527",
+      "url": "https://www.tivolivredenburg.nl/agenda/52894527/linedance-workshop-27-10-2026",
+      "title": "Linedance workshop",
+      "start": "2026-10-27",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Roots & americana",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-13549941",
+      "url": "https://www.tivolivredenburg.nl/agenda/13549941/arlo-parks-28-10-2026",
+      "title": "Arlo Parks",
+      "start": "2026-10-28",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-86255092",
+      "url": "https://www.tivolivredenburg.nl/agenda/86255092/kristin-hersh-28-10-2026",
+      "title": "Kristin Hersh",
+      "start": "2026-10-28",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-97950637",
+      "url": "https://www.tivolivredenburg.nl/agenda/97950637/prize-collect-coparck-28-10-2026",
+      "title": "Prize Collect + Coparck",
+      "start": "2026-10-28",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-53712184",
+      "url": "https://www.tivolivredenburg.nl/agenda/53712184/noah-guthrie-28-10-2026",
+      "title": "Noah Guthrie",
+      "start": "2026-10-28",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-41806470",
+      "url": "https://www.tivolivredenburg.nl/agenda/41806470/ronde-29-10-2026",
+      "title": "RONDÉ",
+      "start": "2026-10-29",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Nederlandstalig",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-71139172",
+      "url": "https://www.tivolivredenburg.nl/agenda/71139172/stu-larsen-29-10-2026",
+      "title": "Stu Larsen",
+      "start": "2026-10-29",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-40121983",
+      "url": "https://www.tivolivredenburg.nl/agenda/40121983/comedycloud-29-10-2026",
+      "title": "ComedyCloud",
+      "start": "2026-10-29",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Comedy",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-32970205",
+      "url": "https://www.tivolivredenburg.nl/agenda/32970205/discozwemmen-29-10-2026",
+      "title": "Discozwemmen",
+      "start": "2026-10-29",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Pop",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-65385879",
+      "url": "https://www.tivolivredenburg.nl/agenda/65385879/fat-dog-30-10-2026",
+      "title": "Fat Dog",
+      "start": "2026-10-30",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-98201006",
+      "url": "https://www.tivolivredenburg.nl/agenda/98201006/marko-hietala-30-10-2026",
+      "title": "Marko Hietala",
+      "start": "2026-10-30",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Metal & punk",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-50108691",
+      "url": "https://www.tivolivredenburg.nl/agenda/50108691/dan-owen-30-10-2026",
+      "title": "Dan Owen",
+      "start": "2026-10-30",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-13158097",
+      "url": "https://www.tivolivredenburg.nl/agenda/13158097/michael-prins-30-10-2026",
+      "title": "Michael Prins",
+      "start": "2026-10-30",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-25584878",
+      "url": "https://www.tivolivredenburg.nl/agenda/25584878/iconic-queer-pop-party-30-10-2026",
+      "title": "Iconic Queer Pop Party",
+      "start": "2026-10-30",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Pop",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-86127282",
+      "url": "https://www.tivolivredenburg.nl/agenda/86127282/lola-cedes-31-10-2026",
+      "title": "Lola Cedès",
+      "start": "2026-10-31",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-95641370",
+      "url": "https://www.tivolivredenburg.nl/agenda/95641370/micha-31-10-2026",
+      "title": "MICHA",
+      "start": "2026-10-31",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-41239133",
+      "url": "https://www.tivolivredenburg.nl/agenda/41239133/rabo-open-stage-aron-veninga-31-10-2026",
+      "title": "Rabo Open Stage: Aron Veninga",
+      "start": "2026-10-31",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-27088861",
+      "url": "https://www.tivolivredenburg.nl/agenda/27088861/jiggy-halloween-31-10-2026",
+      "title": "Jiggy: Halloween",
+      "start": "2026-10-31",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Club",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-42960560",
+      "url": "https://www.tivolivredenburg.nl/agenda/42960560/emo-night-mainland-halloween-edition-31-10-2026",
+      "title": "Emo Night Mainland: Halloween edition",
+      "start": "2026-10-31",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Club",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-43439933",
+      "url": "https://www.tivolivredenburg.nl/agenda/43439933/dotan-31-10-2026",
+      "title": "Dotan",
+      "start": "2026-10-31",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-44286163",
+      "url": "https://www.tivolivredenburg.nl/agenda/44286163/mayan-01-11-2026",
+      "title": "MaYaN",
+      "start": "2026-11-01",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Metal & punk",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-14398259",
+      "url": "https://www.tivolivredenburg.nl/agenda/14398259/stephen-wilson-jr-01-11-2026",
+      "title": "Stephen Wilson Jr.",
+      "start": "2026-11-01",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Roots & americana",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-63481989",
+      "url": "https://www.tivolivredenburg.nl/agenda/63481989/fresku-metropole-orkest-01-11-2026",
+      "title": "Fresku & Metropole Orkest",
+      "start": "2026-11-01",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Nederlandstalig",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-88353797",
+      "url": "https://www.tivolivredenburg.nl/agenda/88353797/rabo-open-stage-the-rebel-as-poet-01-11-2026",
+      "title": "Rabo Open Stage: The Rebel as Poet",
+      "start": "2026-11-01",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-67027875",
+      "url": "https://www.tivolivredenburg.nl/agenda/67027875/erra-currents-02-11-2026",
+      "title": "Erra + Currents",
+      "start": "2026-11-02",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Metal & punk",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-16345823",
+      "url": "https://www.tivolivredenburg.nl/agenda/16345823/carpenter-brut-health-03-11-2026",
+      "title": "Carpenter Brut + HEALTH",
+      "start": "2026-11-03",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Metal & punk",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-51034507",
+      "url": "https://www.tivolivredenburg.nl/agenda/51034507/climate-comedy-night-2026-jubileumeditie-03-11-2026",
+      "title": "Climate Comedy Night 2026 – Jubileumeditie",
+      "start": "2026-11-03",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Comedy",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-73964444",
+      "url": "https://www.tivolivredenburg.nl/agenda/73964444/boeklancering-job-dutchtuber-6-04-11-2026",
+      "title": "Boeklancering JOB Dutchtuber (6+)",
+      "start": "2026-11-04",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-28843440",
+      "url": "https://www.tivolivredenburg.nl/agenda/28843440/matthew-mole-04-11-2026",
+      "title": "Matthew Mole",
+      "start": "2026-11-04",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-67586452",
+      "url": "https://www.tivolivredenburg.nl/agenda/67586452/walk-off-the-earth-04-11-2026",
+      "title": "Walk off the Earth",
+      "start": "2026-11-04",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Pop",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-70779815",
+      "url": "https://www.tivolivredenburg.nl/agenda/70779815/le-guess-who-2026-passe-partout-05-11-2026",
+      "title": "Le Guess Who? 2026 – passe-partout",
+      "start": "2026-11-05",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-22764589",
+      "url": "https://www.tivolivredenburg.nl/agenda/22764589/le-guess-who-thursday-05-11-2026",
+      "title": "Le Guess Who? – Thursday",
+      "start": "2026-11-05",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-89096007",
+      "url": "https://www.tivolivredenburg.nl/agenda/89096007/le-guess-who-friday-06-11-2026",
+      "title": "Le Guess Who? – Friday",
+      "start": "2026-11-06",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-29075463",
+      "url": "https://www.tivolivredenburg.nl/agenda/29075463/le-guess-who-saturday-07-11-2026",
+      "title": "Le Guess Who? – Saturday",
+      "start": "2026-11-07",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-16610539",
+      "url": "https://www.tivolivredenburg.nl/agenda/16610539/le-guess-who-sunday-08-11-2026",
+      "title": "Le Guess Who? – Sunday",
+      "start": "2026-11-08",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-15507716",
+      "url": "https://www.tivolivredenburg.nl/agenda/15507716/candy-dulfer-presents-the-funk-legacy-allstar-show-09-11-2026",
+      "title": "Candy Dulfer presents The Funk Legacy Allstar Show",
+      "start": "2026-11-09",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Classic pop",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-13548851",
+      "url": "https://www.tivolivredenburg.nl/agenda/13548851/mogwai-10-11-2026",
+      "title": "Mogwai",
+      "start": "2026-11-10",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-74332996",
+      "url": "https://www.tivolivredenburg.nl/agenda/74332996/the-sisters-of-mercy-10-11-2026",
+      "title": "The Sisters of Mercy",
+      "start": "2026-11-10",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Rock",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-24176870",
+      "url": "https://www.tivolivredenburg.nl/agenda/24176870/otis-gibbs-10-11-2026",
+      "title": "Otis Gibbs",
+      "start": "2026-11-10",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Roots & americana",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-41645336",
+      "url": "https://www.tivolivredenburg.nl/agenda/41645336/ash-10-11-2026",
+      "title": "Ash",
+      "start": "2026-11-10",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-37855526",
+      "url": "https://www.tivolivredenburg.nl/agenda/37855526/abigail-lapell-10-11-2026",
+      "title": "Abigail Lapell",
+      "start": "2026-11-10",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-50918282",
+      "url": "https://www.tivolivredenburg.nl/agenda/50918282/gone-country-11-11-2026",
+      "title": "Gone Country",
+      "start": "2026-11-11",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Roots & americana",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-23791601",
+      "url": "https://www.tivolivredenburg.nl/agenda/23791601/lp-11-11-2026",
+      "title": "LP",
+      "start": "2026-11-11",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-92947009",
+      "url": "https://www.tivolivredenburg.nl/agenda/92947009/robert-lester-folsom-11-11-2026",
+      "title": "Robert Lester Folsom",
+      "start": "2026-11-11",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-77873642",
+      "url": "https://www.tivolivredenburg.nl/agenda/77873642/roufaida-11-11-2026",
+      "title": "Roufaida",
+      "start": "2026-11-11",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Pop",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-31164636",
+      "url": "https://www.tivolivredenburg.nl/agenda/31164636/against-the-current-12-11-2026",
+      "title": "Against the Current",
+      "start": "2026-11-12",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Metal & punk",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-90000164",
+      "url": "https://www.tivolivredenburg.nl/agenda/90000164/vals-alarm-12-11-2026",
+      "title": "VALS ALARM",
+      "start": "2026-11-12",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-11971088",
+      "url": "https://www.tivolivredenburg.nl/agenda/11971088/boris-12-11-2026",
+      "title": "Boris",
+      "start": "2026-11-12",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Metal & punk",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-73897608",
+      "url": "https://www.tivolivredenburg.nl/agenda/73897608/angela-groothuizen-12-11-2026",
+      "title": "Angela Groothuizen",
+      "start": "2026-11-12",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Nederlandstalig",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-41086885",
+      "url": "https://www.tivolivredenburg.nl/agenda/41086885/noor-12-11-2026",
+      "title": "NOOR",
+      "start": "2026-11-12",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Singer-songwriter",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-90243273",
+      "url": "https://www.tivolivredenburg.nl/agenda/90243273/saint-levant-13-11-2026",
+      "title": "Saint Levant",
+      "start": "2026-11-13",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Pop",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-21799375",
+      "url": "https://www.tivolivredenburg.nl/agenda/21799375/elmer-13-11-2026",
+      "title": "Elmer",
+      "start": "2026-11-13",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Nederlandstalig",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-52113717",
+      "url": "https://www.tivolivredenburg.nl/agenda/52113717/caro-13-11-2026",
+      "title": "Caro",
+      "start": "2026-11-13",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Nederlandstalig",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-20189966",
+      "url": "https://www.tivolivredenburg.nl/agenda/20189966/onon-locklead-bella-shanne-13-11-2026",
+      "title": "ON&ON: Locklead, BELLA, SHANNE",
+      "start": "2026-11-13",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Club",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-82304376",
+      "url": "https://www.tivolivredenburg.nl/agenda/82304376/lois-lane-14-11-2026",
+      "title": "Loïs Lane",
+      "start": "2026-11-14",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Nederlandstalig",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-37097990",
+      "url": "https://www.tivolivredenburg.nl/agenda/37097990/haevn-14-11-2026",
+      "title": "HAEVN",
+      "start": "2026-11-14",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Pop",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-71531752",
+      "url": "https://www.tivolivredenburg.nl/agenda/71531752/coos-14-11-2026",
+      "title": "Coos",
+      "start": "2026-11-14",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Indie",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-11885533",
+      "url": "https://www.tivolivredenburg.nl/agenda/11885533/guido-belcanto-14-11-2026",
+      "title": "Guido Belcanto",
+      "start": "2026-11-14",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Classic pop",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-84292894",
+      "url": "https://www.tivolivredenburg.nl/agenda/84292894/only-10s-14-11-2026",
+      "title": "Only 10s",
+      "start": "2026-11-14",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Pop",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-96234697",
+      "url": "https://www.tivolivredenburg.nl/agenda/96234697/linedance-with-little-ones-14-11-2026",
+      "title": "Linedance with Little Ones",
+      "start": "2026-11-14T10:30",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Workshop",
+      "end": "2026-11-14T11:30",
+      "priceText": "€ 7,50",
+      "openingNote": "Zaal: Omloop Grote Zaal.",
+      "audiences": [
+        "gezin"
+      ],
+      "categories": [
+        "sport",
+        "muziek"
+      ],
+      "estimatedMinMonths": 0,
+      "estimatedMaxMonths": 24,
+      "fitReasons": [
+        "Voor ouders met een baby of peuter in draagdoek of draagzak"
+      ],
+      "extraUncertainties": [
+        "Bron noemt geen leeftijd, alleen 'past in een draagdoek'; leeftijd is een inschatting"
+      ],
+      "summary": "Linedance-workshop voor ouders met hun kleintje in draagdoek of draagzak.",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-47373986",
+      "url": "https://www.tivolivredenburg.nl/agenda/47373986/tuimelaar-05-15-11-2026",
+      "title": "Tuimelaar (0,5+)",
+      "start": "2026-11-15",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "openingNote": "Zaal: Cloud Nine.",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-44601811",
+      "url": "https://www.tivolivredenburg.nl/agenda/44601811/de-grote-vriendelijke-pakjesavond-25-11-2026",
+      "title": "De Grote Vriendelijke Pakjesavond",
+      "start": "2026-11-25",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [],
+      "bookingText": "tickets",
+      "kind": "Podcast",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-55816281",
+      "url": "https://www.tivolivredenburg.nl/agenda/55816281/de-letterliedjes-show-6-29-11-2026",
+      "title": "De Letterliedjes Show (6+)",
+      "start": "2026-11-29",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-17082880",
+      "url": "https://www.tivolivredenburg.nl/agenda/17082880/slodde-vos-in-winter-wonderland-3-13-12-2026",
+      "title": "SlodDe & VoS in Winter Wonderland (3+)",
+      "start": "2026-12-13",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "openingNote": "Zaal: Cloud Nine.",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-49555990",
+      "url": "https://www.tivolivredenburg.nl/agenda/49555990/christmas-sing-a-long-8-20-12-2026",
+      "title": "Christmas Sing-a-Long (8+)",
+      "start": "2026-12-20",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-23507736",
+      "url": "https://www.tivolivredenburg.nl/agenda/23507736/bibliothekentour-feest-4-27-12-2026",
+      "title": "Bibliothekentour: Feest (4+)",
+      "start": "2026-12-27",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-15796063",
+      "url": "https://www.tivolivredenburg.nl/agenda/15796063/de-planeten-7-27-12-2026",
+      "title": "De Planeten (7+)",
+      "start": "2026-12-27",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-22848059",
+      "url": "https://www.tivolivredenburg.nl/agenda/22848059/cellobende-4-27-12-2026",
+      "title": "Cellobende (4+)",
+      "start": "2026-12-27",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "openingNote": "Zaal: Cloud Nine.",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-60776568",
+      "url": "https://www.tivolivredenburg.nl/agenda/60776568/de-gelaarsde-kat-5-28-12-2026",
+      "title": "De Gelaarsde Kat (5+)",
+      "start": "2026-12-28",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-28905244",
+      "url": "https://www.tivolivredenburg.nl/agenda/28905244/bibliothekentour-feest-4-28-12-2026",
+      "title": "Bibliothekentour: Feest (4+)",
+      "start": "2026-12-28",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-55021896",
+      "url": "https://www.tivolivredenburg.nl/agenda/55021896/my-first-festival-2026-28-12-2026",
+      "title": "My First Festival 2026",
+      "start": "2026-12-28T11:30",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "end": "2026-12-28T16:30",
+      "priceText": "Gezinsticket € 17 p.p. / kind € 20,50 / volwassene € 23,50",
+      "audiences": [
+        "gezin",
+        "kinderen"
+      ],
+      "categories": [
+        "festival",
+        "muziek"
+      ],
+      "estimatedMinMonths": 24,
+      "special": true,
+      "cautions": [
+        "Geluidsniveau tot 91 dB; gehoorbescherming aanbevolen",
+        "Lange dag; kies een deel van het programma"
+      ],
+      "extraUncertainties": [
+        "De bron noemt geen minimumleeftijd; leeftijd is een inschatting"
+      ],
+      "summary": "Familiefestival door het hele gebouw met concerten, workshops en foodtrucks.",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-93964626",
+      "url": "https://www.tivolivredenburg.nl/agenda/93964626/bibliothekentour-feest-4-29-12-2026",
+      "title": "Bibliothekentour: Feest (4+)",
+      "start": "2026-12-29",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-78252493",
+      "url": "https://www.tivolivredenburg.nl/agenda/78252493/olifantje-in-het-bos-3-29-12-2026",
+      "title": "Olifantje in het bos (3+)",
+      "start": "2026-12-29",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "extraUncertainties": [
+        "Datum volgens de URL; de pagina noemt mogelijk woensdag 30 december. Controleer de bron.",
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-37012659",
+      "url": "https://www.tivolivredenburg.nl/agenda/37012659/bibliothekentour-feest-4-30-12-2026",
+      "title": "Bibliothekentour: Feest (4+)",
+      "start": "2026-12-30",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-83504720",
+      "url": "https://www.tivolivredenburg.nl/agenda/83504720/knisper-05-30-12-2026",
+      "title": "Knisper (0,5+)",
+      "start": "2026-12-30",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "openingNote": "Zaal: Cloud Nine.",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-91618504",
+      "url": "https://www.tivolivredenburg.nl/agenda/91618504/licht-2-03-01-2027",
+      "title": "LiCHT (2+)",
+      "start": "2027-01-03",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "openingNote": "Zaal: Pandora.",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    },
+    {
+      "sourceName": "TivoliVredenburg",
+      "sourceEventId": "tivoli-15252797",
+      "url": "https://www.tivolivredenburg.nl/agenda/15252797/baas-met-het-guy-salamon-jazztrio-6-24-01-2027",
+      "title": "Baas met het Guy Salamon Jazztrio (6+)",
+      "start": "2027-01-24",
+      "venueName": "TivoliVredenburg",
+      "address": "Vredenburgkade 11, 3511 WC Utrecht",
+      "locality": "Binnenstad",
+      "hints": [
+        "Familie"
+      ],
+      "bookingText": "tickets",
+      "kind": "Familievoorstelling",
+      "checkedAt": "2026-10-21T10:45:00Z",
+      "confidence": "middel",
+      "extraUncertainties": [
+        "Aanvangstijd nog niet opgehaald; staat op de bronpagina"
+      ],
+      "allDay": false
+    }
+  ]
+}

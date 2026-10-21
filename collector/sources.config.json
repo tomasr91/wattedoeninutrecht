@@ -40,7 +40,8 @@
     },
     {
       "id": "tivolivredenburg",
-      "enabled": true,
+      "$why": "Uit: Cloudflare weigert servers van GitHub. Tivoli komt via data/curated/tivoli.json, dat een geplande Claude-taak elke dinsdag 00:00 vernieuwt.",
+      "enabled": false,
       "options": {
         "$comment": "Alleen deze Tivoli-genres (plus altijd familie). Pop & rock, club & elektronisch, comedy. Haal een slug weg of voeg er een toe; lijst staat op tivolivredenburg.nl/agenda.",
         "genres": [
