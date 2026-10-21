@@ -53,11 +53,13 @@ describe('doorlopend versus agenda', () => {
     expect(isLongRunning(act({ start: '2026-11-01', end: '2026-11-20', categories: ['feest'] }))).toBe(true);
     expect(isLongRunning(act({ start: '2026-11-01', endUnknown: true, ongoing: true }))).toBe(true);
   });
-  it('zonder einddatum wordt niet getoond', () => {
+  it('zonder einddatum alleen onder Doorlopend; vaste markten niet', () => {
     const open = act({ start: '2026-10-01', end: '2027-01-21', endUnknown: true, ongoing: true });
-    const vaag = act({ start: '2026-10-01', end: '2027-01-21', ongoing: true, uncertainties: ['Doorlopend; einddatum en seizoen niet vermeld'] });
-    const expo = act({ start: '2026-10-01', end: '2026-12-31', ongoing: true, categories: ['expositie'] });
-    expect(buildLists([open, vaag, expo], opts(), ctx).ongoing.map((i) => i.activity.id)).toEqual([expo.id]);
+    const vaag = act({ start: '2026-10-01', end: '2027-01-21', uncertainties: ['Doorlopend; einddatum en seizoen niet vermeld'] });
+    const markt = act({ start: '2026-10-01', end: '2027-01-21', endUnknown: true, ongoing: true, categories: ['markt'] });
+    const l = buildLists([open, vaag, markt], opts(), ctx);
+    expect(new Set(l.ongoing.map((i) => i.activity.id))).toEqual(new Set([open.id, vaag.id]));
+    expect(l.days).toHaveLength(0);
   });
   it('splitst de lijst en zet doorlopend niet in de dagagenda', () => {
     const expo = act({ start: '2026-09-01', end: '2026-12-31', allDay: true, ongoing: true, categories: ['expositie'] });

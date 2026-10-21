@@ -63,6 +63,7 @@ export function weekendWindow(
  * Een festival van een paar dagen blijft in de gewone agenda.
  */
 export function isLongRunning(a: Activity): boolean {
+  if (hasNoEndDate(a)) return true;
   if (a.endUnknown) return true;
   const span = diffDays(dateOf(a.start), activityEndDate(a));
   if (span >= 14) return true;
@@ -131,8 +132,8 @@ export function buildLists(
 
   for (const a of activities) {
     if (a.isTestData || a.status === 'verlopen') continue;
-    // Zonder einddatum zou iets voor altijd blijven staan: niet tonen.
-    if (hasNoEndDate(a)) continue;
+    // Zonder einddatum: alleen onder Doorlopend (zie isLongRunning); vaste markten helemaal niet.
+    if (hasNoEndDate(a) && (a.categories.includes('markt') || /markt/i.test(a.kind ?? ''))) continue;
     const friday = isFridayEvening(a);
     if (activityEndDate(a) < ctx.today || (!overlapsPeriod(a, window) && !friday)) continue;
     if (!matchesAudience(a, opts.audience)) continue;
