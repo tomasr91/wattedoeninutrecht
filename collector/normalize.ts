@@ -191,6 +191,7 @@ export function normalize(raw: RawEvent): Activity {
     lastChecked: raw.checkedAt,
     special: raw.special ?? e.special,
   };
-  activity.summary = raw.summary ?? autoSummary(activity);
+  // Alleen een echte, zelfgeschreven samenvatting; een automatische herhaalt wat er al staat.
+  if (raw.summary) activity.summary = raw.summary;
   return activity;
 }

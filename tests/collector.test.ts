@@ -194,7 +194,7 @@ describe('normalisatie', () => {
     expect(a.age).toMatchObject({ officialMinMonths: 24, officialMaxMonths: 48 });
     expect(a.price.kind).toBe('gratis');
     expect(a.booking.status).toBe('niet-nodig');
-    expect(a.summary).toBe('Voorleesmoment voor 2-4 jaar in Bibliotheek Vleuterweide.');
+    expect(a.summary).toBeUndefined(); // geen automatische samenvatting meer
     expect(a.uncertainties).toEqual([]);
   });
   it('maakt ontbrekende informatie zichtbaar', () => {

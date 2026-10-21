@@ -65,7 +65,7 @@ describe('open einddatum en onzekerheden', () => {
   it('markeert de einddatum als onbekend en belooft geen "t/m" in de samenvatting', () => {
     const a = normalize(raw);
     expect(a.endUnknown).toBe(true);
-    expect(a.summary).not.toMatch(/t\/m/);
+    expect(a.summary ?? '').not.toMatch(/t\/m/);
   });
 
   it('toont elke onzekerheid maar één keer', () => {

@@ -1,24 +1,14 @@
 import type { Activity, Profile } from '../../domain/types';
-import { childFits, formatAge, monthsLabel, type Fit } from '../../domain/age';
+import { childFits, monthsLabel, type Fit } from '../../domain/age';
 import { dateOf, diffDays, formatLongDate, timeOf } from '../../domain/dates';
-import { distanceFromHome, travelEstimate, ZONE_LABEL } from '../../domain/geo';
+import { distanceFromHome, travelEstimate } from '../../domain/geo';
 import { categoryLabel } from '../../domain/profile';
 import { Sheet } from './Sheet';
 import { priceLabel, whenLabel } from './ActivityCard';
 import { IconCalendarPlus, IconExternal, IconRoute, IconShare } from './Icons';
-import { useState } from 'react';
-
-const FIT_LABEL: Record<Fit, string> = {
-  geschikt: 'Geschikt',
-  mogelijk: 'Misschien',
-  'te-jong': 'Te jong',
-  'te-oud': 'Te oud',
-  onbekend: 'Onbekend',
-  'niet-voor-kinderen': 'Voor volwassenen',
-};
 
 const BOOKING_LABEL = {
-  verplicht: 'Reserveren of kaartje kopen nodig',
+  verplicht: 'Kaartje kopen of reserveren nodig',
   aanbevolen: 'Reserveren aanbevolen',
   'niet-nodig': 'Vrije inloop, reserveren niet nodig',
   onbekend: 'Niet bekend of reserveren nodig is',
@@ -83,197 +73,186 @@ export function DetailSheet({
   onOpen: (a: Activity) => void;
 }) {
   const onDay = dateOf(a.start) < today ? today : dateOf(a.start);
-  const fits = childFits(a, profile.children, onDay);
+  const fits = profile.children.length ? childFits(a, profile.children, onDay) : [];
   const adultOnly = a.audiences.length > 0 && a.audiences.every((x) => x === 'volwassenen');
   const km = distanceFromHome(a.venue, profile.home);
   const travel = km !== undefined ? travelEstimate(km) : undefined;
   const stale = diffDays(dateOf(a.lastChecked), today) > 14;
   const official = a.age.officialMinMonths !== undefined || a.age.officialMaxMonths !== undefined;
   const estimated = a.age.estimatedMinMonths !== undefined || a.age.estimatedMaxMonths !== undefined;
+  const ageText = a.age.label
+    ? a.age.label
+    : official
+      ? capital(rangeText(a.age.officialMinMonths, a.age.officialMaxMonths))
+      : estimated
+        ? `Ongeveer ${rangeText(a.age.estimatedMinMonths, a.age.estimatedMaxMonths)}`
+        : undefined;
+  const price = a.price.text ?? (a.price.kind !== 'onbekend' ? priceLabel(a) : undefined);
+  const where = [a.venue.name, a.venue.locality && !a.venue.name.includes(a.venue.locality) ? a.venue.locality : undefined].filter(Boolean).join(', ');
+  const kind = a.kind ?? (a.categories[0] ? categoryLabel(a.categories[0]) : undefined);
+  const needsBooking = a.booking.status === 'verplicht' || a.booking.status === 'aanbevolen';
 
   return (
     <Sheet
       title={a.title}
       onClose={onClose}
       footer={
-        <div className="action-row">
-          <a className="btn" href={routeUrl(a)} target="_blank" rel="noopener noreferrer">
-            <IconRoute size={18} /> Route
+        <div className="detail-actions">
+          <a className="btn btn-primary" href={a.booking.url ?? a.url} target="_blank" rel="noopener noreferrer">
+            <IconExternal size={18} /> {a.booking.url ? 'Tickets' : 'Naar de bron'}
           </a>
-          <a className="btn btn-primary" href={a.url} target="_blank" rel="noopener noreferrer">
-            <IconExternal size={18} /> Naar de bron
-          </a>
+          <div className="action-row three">
+            <a className="btn" href={routeUrl(a)} target="_blank" rel="noopener noreferrer">
+              <IconRoute size={18} /> Route
+            </a>
+            <a className="btn" href={calendarUrl(a)} target="_blank" rel="noopener noreferrer">
+              <IconCalendarPlus size={18} /> Agenda
+            </a>
+            <ShareButton a={a} today={today} />
+          </div>
         </div>
       }
     >
-      <div className={`detail zone-${a.zone}`}>
+      <div className="detail">
+        {kind && <span className="detail-kind">{kind}</span>}
         {a.status === 'geannuleerd' && <p className="banner banner-bad">Volgens de bron gaat deze activiteit niet door.</p>}
         {a.status === 'uitverkocht' && <p className="banner banner-warn">Volgens de bron is deze activiteit uitverkocht.</p>}
 
-        <p className="detail-when">{whenLabel(a, today)}</p>
-        {a.openingNote && <p className="muted">{a.openingNote}</p>}
-        {a.summary && <p className="detail-summary">{a.summary}</p>}
+        <ul className="detail-facts">
+          <li>
+            <span aria-hidden="true">📅</span>
+            <span>{whenLabel(a, today)}</span>
+          </li>
+          <li>
+            <span aria-hidden="true">📍</span>
+            <span>
+              {where}
+              {km !== undefined && travel && (
+                <span className="muted">
+                  {' '}
+                  · {km < 10 ? km.toFixed(1).replace('.', ',') : Math.round(km)} km · ± {travel.minutes} min {travel.mode === 'fiets' ? 'fietsen' : 'rijden'}
+                </span>
+              )}
+            </span>
+          </li>
+          {price && (
+            <li>
+              <span aria-hidden="true">💶</span>
+              <span>{price}</span>
+            </li>
+          )}
+          {a.durationMinutes && (
+            <li>
+              <span aria-hidden="true">⏱</span>
+              <span>
+                {a.durationIsEstimate ? 'Ongeveer ' : ''}
+                {a.durationMinutes} minuten
+              </span>
+            </li>
+          )}
+          {a.indoor !== 'onbekend' && (
+            <li>
+              <span aria-hidden="true">{a.indoor === 'buiten' ? '🌳' : '🏠'}</span>
+              <span>{INDOOR_LABEL[a.indoor]}</span>
+            </li>
+          )}
+          {(needsBooking || a.booking.availability) && (
+            <li>
+              <span aria-hidden="true">🎟</span>
+              <span>
+                {needsBooking ? BOOKING_LABEL[a.booking.status] : ''}
+                {a.booking.availability && <span className="warn-text">{needsBooking ? ' · ' : ''}{a.booking.availability.label}</span>}
+              </span>
+            </li>
+          )}
+        </ul>
+
+        {(a.summary || a.openingNote) && (
+          <div className="detail-text">
+            {a.summary && <p>{a.summary}</p>}
+            {a.openingNote && <p className="muted">{a.openingNote}</p>}
+          </div>
+        )}
 
         <section className="detail-block">
           <h3>Voor wie</h3>
           {adultOnly ? (
-            <p>Voor volwassenen.</p>
+            <p>Voor volwassenen</p>
           ) : (
-            <ul className="fit-list">
-              {fits.map((f) => (
-                <li key={f.childId}>
-                  <span className={`fit-badge fit-${f.fit}`}>{FIT_LABEL[f.fit]}</span>
-                  <div>
-                    <strong>{f.childName}</strong>{' '}
-                    <span className="muted">
-                      is op {formatLongDate(onDay)} {formatAge(f.age)}
-                    </span>
-                    <div className="small">
-                      {f.reason}
-                      {f.basis === 'geschat' && ' · inschatting, niet van de bron'}
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-          {!adultOnly && (
-            <p className="small muted">
-              {official
-                ? `Officiële leeftijd volgens de bron: ${a.age.label ?? rangeText(a.age.officialMinMonths, a.age.officialMaxMonths)}.`
-                : 'De bron noemt geen leeftijd.'}
-              {estimated && ` Onze inschatting: ${rangeText(a.age.estimatedMinMonths, a.age.estimatedMaxMonths)}.`}
-            </p>
-          )}
-          {a.age.fitReasons && a.age.fitReasons.length > 0 && (
-            <ul className="plain-list good-list">
-              {a.age.fitReasons.map((r) => (
-                <li key={r}>{r}</li>
-              ))}
-            </ul>
-          )}
-          {a.age.cautions && a.age.cautions.length > 0 && (
-            <ul className="plain-list caution-list">
-              {a.age.cautions.map((r) => (
-                <li key={r}>{r}</li>
-              ))}
-            </ul>
+            <>
+              {ageText && <p className="detail-age">{ageText}</p>}
+              {fits.length > 0 && fits.every((f) => f.fit === 'onbekend') && !ageText && <p className="muted">De bron noemt geen leeftijd.</p>}
+              {fits.length > 0 && !fits.every((f) => f.fit === 'onbekend') && (
+                <ul className="child-fits">
+                  {fits.map((f) => (
+                    <li key={f.childId} className={`fit-chip fit-${f.fit}`}>
+                      <strong>{f.childName}</strong> {FIT_WORDS[f.fit]}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {a.age.cautions && a.age.cautions.length > 0 && <p className="small warn-text">{a.age.cautions.join(' · ')}</p>}
+            </>
           )}
         </section>
 
-        <section className="detail-block">
-          <h3>Praktisch</h3>
-          <dl className="facts">
-            <dt>Waar</dt>
-            <dd>
-              {a.venue.name}
-              {a.venue.address && <div className="small muted">{a.venue.address}</div>}
-              <div className="small">
-                <span className="zone-dot" aria-hidden="true" /> {a.venue.locality ? `${a.venue.locality} · ` : ''}
-                {ZONE_LABEL[a.zone]}
-              </div>
-            </dd>
-            <dt>Afstand</dt>
-            <dd>
-              {km !== undefined && travel ? (
-                <>
-                  ca. {km < 10 ? km.toFixed(1).replace('.', ',') : Math.round(km)} km hemelsbreed vanaf {profile.home!.label};{' '}
-                  {travel.mode === 'fiets' ? 'fietsen' : 'met de auto'} ca. {travel.minutes} min
-                  {a.venue.geoPrecision !== 'exact' && <div className="small muted">Locatie benaderd, afstand is indicatief</div>}
-                </>
-              ) : (
-                <span className="muted">{profile.home ? 'Onbekend: de bron geeft geen precieze locatie' : 'Vul bij Instellingen je adres in om afstanden te zien'}</span>
-              )}
-            </dd>
-            <dt>Prijs</dt>
-            <dd>
-              {a.price.text ?? priceLabel(a)}
-              {a.price.kind === 'onbekend' && !a.price.text && <div className="small muted">Check de bron</div>}
-            </dd>
-            <dt>Binnen/buiten</dt>
-            <dd>{INDOOR_LABEL[a.indoor]}</dd>
-            {a.durationMinutes && (
-              <>
-                <dt>Duur</dt>
-                <dd>
-                  {a.durationIsEstimate ? 'ca. ' : ''}
-                  {a.durationMinutes} min{a.durationIsEstimate && <span className="small muted"> (inschatting)</span>}
-                </dd>
-              </>
-            )}
-            <dt>Reserveren</dt>
-            <dd>
-              {BOOKING_LABEL[a.booking.status]}
-              {a.booking.availability && (
-                <div className="small">
-                  {a.booking.availability.label} (gecontroleerd {fmtChecked(a.booking.availability.checkedAt, today)})
-                </div>
-              )}
-              {a.booking.url && (
-                <div>
-                  <a href={a.booking.url} target="_blank" rel="noopener noreferrer">
-                    Naar kaartverkoop
-                  </a>
-                </div>
-              )}
-            </dd>
-            <dt>Soort</dt>
-            <dd>{[a.kind, ...a.categories.map(categoryLabel)].filter((x, i, arr) => x && arr.indexOf(x) === i).join(', ')}</dd>
-          </dl>
-          <a className="link-row" href={calendarUrl(a)} target="_blank" rel="noopener noreferrer">
-            <IconCalendarPlus size={18} /> Zet in Google Agenda
-          </a>
-          <ShareRow a={a} today={today} />
-        </section>
-
-        {others.length > 0 && (
-          <section className="detail-block">
-            <h3>Zelfde activiteit op andere locaties</h3>
-            <ul className="plain-list">
-              {others.map((o) => (
-                <li key={o.id}>
-                  <button className="text-btn" onClick={() => onOpen(o)}>
-                    {o.venue.name}
-                    {o.venue.locality ? ` (${o.venue.locality})` : ''}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        <section className="detail-block">
-          <h3>Bron en zekerheid</h3>
-          {stale && (
-            <p className="banner banner-warn">
-              Langer dan twee weken niet gecontroleerd. Kijk op de bronpagina of het nog klopt.
-            </p>
-          )}
-          <ul className="plain-list">
-            {a.sources.map((s) => (
-              <li key={`${s.sourceId}-${s.url}`}>
+        <details className="detail-more">
+          <summary>Meer informatie</summary>
+          {stale && <p className="small warn-text">Langer dan twee weken niet gecontroleerd; kijk op de bronpagina of het nog klopt.</p>}
+          <p className="small">
+            Bron:{' '}
+            {a.sources.map((s, i) => (
+              <span key={`${s.sourceId}-${s.url}`}>
+                {i > 0 && ', '}
                 <a href={s.url} target="_blank" rel="noopener noreferrer">
                   {s.sourceName}
                 </a>{' '}
-                <span className="small muted">gecontroleerd {fmtChecked(s.lastChecked, today)}</span>
-              </li>
+                <span className="muted">(gecontroleerd {fmtChecked(s.lastChecked, today)})</span>
+              </span>
             ))}
-          </ul>
+          </p>
+          {a.venue.address && <p className="small muted">Adres: {a.venue.address}</p>}
           {a.uncertainties.length > 0 && (
             <>
-              <p className="small">Wat we niet zeker weten:</p>
-              <ul className="plain-list unsure-list">
+              <p className="small">Niet zeker:</p>
+              <ul className="plain-list unsure-list small">
                 {a.uncertainties.map((u) => (
                   <li key={u}>{u}</li>
                 ))}
               </ul>
             </>
           )}
-        </section>
+          {others.length > 0 && (
+            <>
+              <p className="small">Ook op andere locaties:</p>
+              <ul className="plain-list small">
+                {others.map((o) => (
+                  <li key={o.id}>
+                    <button className="text-btn" onClick={() => onOpen(o)}>
+                      {o.venue.name}
+                      {o.venue.locality ? ` (${o.venue.locality})` : ''}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </details>
       </div>
     </Sheet>
   );
 }
+
+const FIT_WORDS: Record<Fit, string> = {
+  geschikt: 'geschikt',
+  mogelijk: 'misschien nog wat jong',
+  'te-jong': 'nog te jong',
+  'te-oud': 'te oud',
+  onbekend: 'leeftijd onbekend',
+  'niet-voor-kinderen': 'niet voor kinderen',
+};
+
+const capital = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
 
 function rangeText(min?: number, max?: number): string {
   if (min !== undefined && max !== undefined) return `${monthsLabel(min)} t/m ${monthsLabel(max)}`;
@@ -283,8 +262,7 @@ function rangeText(min?: number, max?: number): string {
 }
 
 /** Delen via het deelmenu van de telefoon (WhatsApp e.d.); anders WhatsApp-link. */
-function ShareRow({ a, today }: { a: Activity; today: string }) {
-  const [done, setDone] = useState(false);
+function ShareButton({ a, today }: { a: Activity; today: string }) {
   const text = `${a.title}\n${whenLabel(a, today)} · ${a.venue.name}`;
   const share = async () => {
     try {
@@ -296,11 +274,10 @@ function ShareRow({ a, today }: { a: Activity; today: string }) {
       return; // geannuleerd
     }
     window.open(`https://wa.me/?text=${encodeURIComponent(`${text}\n${a.url}`)}`, '_blank', 'noopener');
-    setDone(true);
   };
   return (
-    <button className="link-row text-btn" onClick={share}>
-      <IconShare size={18} /> {done ? 'Gedeeld' : 'Delen'}
+    <button className="btn" onClick={share}>
+      <IconShare size={18} /> Delen
     </button>
   );
 }
