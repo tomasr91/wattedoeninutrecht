@@ -131,7 +131,7 @@ export function fitSummary(fits: ChildFit[]): {
   const good = fits.filter((f) => f.fit === 'geschikt');
   const maybe = fits.filter((f) => f.fit === 'mogelijk');
   if (good.length === fits.length) {
-    return { label: fits.length > 1 ? 'Beide kinderen' : `Geschikt voor ${good[0].childName}`, tone: 'good' };
+    return { label: fits.length > 2 ? 'Alle kinderen' : fits.length === 2 ? 'Beide kinderen' : `Geschikt voor ${good[0].childName}`, tone: 'good' };
   }
   if (good.length > 0) {
     return { label: `Geschikt voor ${good.map((f) => f.childName).join(' & ')}`, tone: 'ok' };

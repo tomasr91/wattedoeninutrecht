@@ -133,7 +133,6 @@ export function App() {
             <DomTower height={54} />
             <div>
               <h1>Uit in 030</h1>
-              <p className="brand-sub">Leidsche Rijn · Utrecht</p>
             </div>
           </div>
           <button className="icon-btn on-brand" onClick={() => setSettingsOpen(true)} aria-label="Gezin en bronnen">
@@ -209,7 +208,7 @@ export function App() {
             <footer className="list-foot small muted">
               {view.audience === 'kinderen' && lists.hiddenForAge > 0 && (
                 <p>
-                  {lists.hiddenForAge} activiteit{lists.hiddenForAge === 1 ? ' is' : 'en zijn'} verborgen omdat ze voor beide kinderen te jong of te oud zijn.
+                  {lists.hiddenForAge} activiteit{lists.hiddenForAge === 1 ? ' is' : 'en zijn'} verborgen omdat ze voor {profile.children.length === 1 ? 'je kind' : profile.children.length === 2 ? 'beide kinderen' : 'alle kinderen'} te jong of te oud zijn.
                 </p>
               )}
               {lastRun && (

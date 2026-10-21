@@ -1,7 +1,7 @@
 import type { Activity, Child, Profile, UpdateStatus } from '../../domain/types';
 import { kindLabel } from '../../domain/kind';
 import type { ListAudience } from '../../domain/views';
-import { formatDateTime } from '../../domain/dates';
+import { addMonths, formatDateTime } from '../../domain/dates';
 import { fmtChecked } from '../components/DetailSheet';
 import { Sheet } from '../components/Sheet';
 
@@ -33,6 +33,12 @@ export function SettingsSheet({
     const cur = hidden[aud];
     setProfile({ ...p, hiddenKinds: { ...hidden, [aud]: cur.includes(k) ? cur.filter((x) => x !== k) : [...cur, k] } });
   };
+  const addChild = () =>
+    setProfile({
+      ...p,
+      children: [...p.children, { id: `kind${Date.now()}`, name: '', birthDate: addMonths(today, -36) }],
+    });
+  const removeChild = (i: number) => setProfile({ ...p, children: p.children.filter((_, j) => j !== i) });
   const setChild = (i: number, patch: Partial<Child>) =>
     setProfile({ ...p, children: p.children.map((c, j) => (j === i ? { ...c, ...patch } : c)) });
 
@@ -61,9 +67,16 @@ export function SettingsSheet({
                     onChange={(e) => e.target.value && setChild(i, { birthDate: e.target.value, birthDateEstimated: false })}
                   />
                 </label>
+                <button className="text-btn small child-remove" onClick={() => removeChild(i)}>
+                  Verwijderen
+                </button>
               </div>
             );
           })}
+          {p.children.length === 0 && <p className="small muted">Geen kinderen ingevuld: de Kinderen-lijst toont dan alles, zonder leeftijdscheck.</p>}
+          <button className="btn add-child" onClick={addChild}>
+            + Kind toevoegen
+          </button>
         </section>
 
         {(['volwassenen', 'kinderen'] as const).map((aud) => (

@@ -23,7 +23,7 @@ echte activiteiten met een link naar de bron.
 - Onder Doorlopend staat bovenaan **Komt eraan**: jaarlijkse momenten (Koningsdag, kerst in Leidsche Rijn Centrum, festivals) die binnen acht weken vallen maar nog geen datum in de agenda hebben. Zie `data/vaste-momenten.json`.
 - Per lijst kun je soorten verbergen (Gezin → Soorten). Bij Volwassenen staan standaard uit: Indie, Metal & punk, Expositie, Dans, Roots & americana, Opera, Musical en Podcast.
 - Nieuw toegevoegde activiteiten krijgen een week lang het label **Nieuw** (per toestel bijgehouden). **Gratis** en **Binnen** staan als label op de kaart; bij een activiteit kun je hem **delen** (WhatsApp e.d.).
-- Via het gezinsicoon rechtsboven vul je naam en geboortedatum van de kinderen in en zie je de status van de bronnen, het tijdstip van de laatste update en de app-versie (bouwmoment).
+- Via het gezinsicoon rechtsboven vul je naam en geboortedatum van de kinderen in (kinderen toevoegen of verwijderen kan daar ook) en zie je de status van de bronnen, het tijdstip van de laatste update en de app-versie (bouwmoment).
 
 Zie ook [docs/BRONNEN.md](docs/BRONNEN.md) voor de bronnen en hun beperkingen, en
 [docs/ARCHITECTUUR.md](docs/ARCHITECTUUR.md) voor de opbouw van de code.
