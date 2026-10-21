@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import type { Activity } from '../../domain/types';
+import { NewContext } from '../newContext';
 import { fitSummary } from '../../domain/age';
 import { dateOf, formatShortDate, relativeDayLabel, timeOf } from '../../domain/dates';
 import type { ListItem } from '../../domain/views';
@@ -65,6 +67,7 @@ export function ActivityCard({
   onOpen: (item: ListItem) => void;
 }) {
   const a = item.activity;
+  const isNew = useContext(NewContext).has(a.id);
   const fit = item.fits ? fitSummary(item.fits) : undefined;
   const k = kindLabel(a);
   const kind = k === NO_KIND ? undefined : k;
@@ -91,8 +94,10 @@ export function ActivityCard({
       </span>
       {ongoing && a.openingNote && <span className="card-note">{a.openingNote}</span>}
       <span className="card-tags">
+        {isNew && <span className="tag tag-new">Nieuw</span>}
         {fit && fit.label && <span className={`fit fit-${fit.tone}`}>{fit.label}</span>}
         {a.price.kind === 'gratis' && <span className="tag tag-free">Gratis</span>}
+        {a.indoor === 'binnen' && <span className="tag">Binnen</span>}
         {(a.booking.status === 'verplicht' || a.booking.status === 'aanbevolen') && !cancelled && <span className="tag">Reserveren</span>}
         {a.booking.availability && a.status !== 'uitverkocht' && <span className="tag tag-warn">{a.booking.availability.label}</span>}
       </span>

@@ -101,11 +101,11 @@ export function upsertSource(db: Db, s: { id: string; name: string; method: stri
 
 export function recordSourceRun(db: Db, id: string, r: { ok: boolean; at: string; count: number; error?: string; notes?: string }): void {
   if (r.ok) {
-    db.prepare('UPDATE sources SET last_attempt = ?, last_success = ?, last_error = NULL, last_count = ?, notes = ? WHERE id = ?').run(
+    db.prepare('UPDATE sources SET last_attempt = ?, last_success = ?, last_error = NULL, failing_since = NULL, last_count = ?, notes = ? WHERE id = ?').run(
       r.at, r.at, r.count, r.notes ?? null, id,
     );
   } else {
-    db.prepare('UPDATE sources SET last_attempt = ?, last_error = ?, notes = ? WHERE id = ?').run(r.at, r.error ?? 'onbekende fout', r.notes ?? null, id);
+    db.prepare('UPDATE sources SET last_attempt = ?, last_error = ?, failing_since = COALESCE(failing_since, ?), notes = ? WHERE id = ?').run(r.at, r.error ?? 'onbekende fout', r.at, r.notes ?? null, id);
   }
 }
 
@@ -118,6 +118,7 @@ export function sourceStatuses(db: Db): SourceRunStatus[] {
     ok: r.last_error === null && r.last_success !== null,
     lastAttempt: (r.last_attempt as string) ?? undefined,
     lastSuccess: (r.last_success as string) ?? undefined,
+    failingSince: (r.failing_since as string) ?? undefined,
     fetched: Number(r.last_count ?? 0),
     error: (r.last_error as string) ?? undefined,
     notes: (r.notes as string) ?? undefined,

@@ -27,6 +27,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
   pages: write
   id-token: write
 
@@ -72,6 +73,21 @@ jobs:
             git commit -m "Dagelijkse update $(date -u +%Y-%m-%d)"
             git pull --rebase
             git push
+          fi
+
+      - name: Melding bij bronnen die al dagen mislukken
+        if: github.event_name != 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          body="$(node scripts/check-sources.mjs)"
+          title="Bronnen mislukken"
+          nr=$(gh issue list --state open --label bronnen --json number --jq '.[0].number' 2>/dev/null || true)
+          if [ -n "$body" ]; then
+            gh label create bronnen --color B60205 --description "Automatische melding over bronnen" 2>/dev/null || true
+            if [ -n "$nr" ]; then gh issue edit "$nr" --body "$body"; else gh issue create --title "$title" --label bronnen --body "$body"; fi
+          elif [ -n "$nr" ]; then
+            gh issue close "$nr" --comment "Alle bronnen werken weer."
           fi
 
       - run: npm run build

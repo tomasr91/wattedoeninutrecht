@@ -10,6 +10,8 @@ import { DetailSheet } from './components/DetailSheet';
 import { IconUser } from './components/Icons';
 import { DomTower } from './components/DomTower';
 import { DayList, OngoingList } from './views/ListView';
+import { updateSeen, type SeenState } from '../domain/newness';
+import { NewContext } from './newContext';
 import { SettingsSheet } from './views/SettingsView';
 
 type Pane = 'agenda' | 'doorlopend';
@@ -38,8 +40,14 @@ export function App() {
   const [detail, setDetail] = useState<{ a: Activity; others: Activity[] } | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
 
+  const [fresh, setFresh] = useState<Set<string>>(new Set());
   useEffect(() => {
-    loadDataset().then(setData, (e: Error) => setError(e.message));
+    loadDataset().then((d) => {
+      const { state, fresh: f } = updateSeen(load<SeenState | null>('seen', null), d.activities.map((a) => a.id), today);
+      save('seen', state);
+      setFresh(f);
+      setData(d);
+    }, (e: Error) => setError(e.message));
   }, []);
 
   const setView = (patch: Partial<ViewState>) => {
@@ -114,6 +122,7 @@ export function App() {
   const who = view.audience === 'kinderen' ? 'voor de kinderen' : 'voor volwassenen';
 
   return (
+    <NewContext.Provider value={fresh}>
     <div className="app">
       <header className="masthead">
         <span className="masthead-art" aria-hidden="true">
@@ -238,5 +247,6 @@ export function App() {
         />
       )}
     </div>
+    </NewContext.Provider>
   );
 }

@@ -5,7 +5,8 @@ import { distanceFromHome, travelEstimate, ZONE_LABEL } from '../../domain/geo';
 import { categoryLabel } from '../../domain/profile';
 import { Sheet } from './Sheet';
 import { priceLabel, whenLabel } from './ActivityCard';
-import { IconCalendarPlus, IconExternal, IconRoute } from './Icons';
+import { IconCalendarPlus, IconExternal, IconRoute, IconShare } from './Icons';
+import { useState } from 'react';
 
 const FIT_LABEL: Record<Fit, string> = {
   geschikt: 'Geschikt',
@@ -222,6 +223,7 @@ export function DetailSheet({
           <a className="link-row" href={calendarUrl(a)} target="_blank" rel="noopener noreferrer">
             <IconCalendarPlus size={18} /> Zet in Google Agenda
           </a>
+          <ShareRow a={a} today={today} />
         </section>
 
         {others.length > 0 && (
@@ -278,4 +280,27 @@ function rangeText(min?: number, max?: number): string {
   if (min !== undefined) return `vanaf ${monthsLabel(min)}`;
   if (max !== undefined) return `t/m ${monthsLabel(max)}`;
   return 'alle leeftijden';
+}
+
+/** Delen via het deelmenu van de telefoon (WhatsApp e.d.); anders WhatsApp-link. */
+function ShareRow({ a, today }: { a: Activity; today: string }) {
+  const [done, setDone] = useState(false);
+  const text = `${a.title}\n${whenLabel(a, today)} · ${a.venue.name}`;
+  const share = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: a.title, text, url: a.url });
+        return;
+      }
+    } catch {
+      return; // geannuleerd
+    }
+    window.open(`https://wa.me/?text=${encodeURIComponent(`${text}\n${a.url}`)}`, '_blank', 'noopener');
+    setDone(true);
+  };
+  return (
+    <button className="link-row text-btn" onClick={share}>
+      <IconShare size={18} /> {done ? 'Gedeeld' : 'Delen'}
+    </button>
+  );
 }

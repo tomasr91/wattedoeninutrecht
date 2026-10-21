@@ -528,6 +528,12 @@ h3 {
   color: var(--good);
   font-weight: 600;
 }
+.tag-new {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+  font-weight: 600;
+}
 .tag-warn {
   background: var(--warn-bg);
   border-color: var(--warn-bg);

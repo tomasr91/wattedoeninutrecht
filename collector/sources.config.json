@@ -89,7 +89,7 @@
         "$comment": "WordPress met The Events Calendar; REST-API /wp-json/tribe/events/v1. Wekelijks terugkerende activiteiten (parkrun, schaken) staan niet in de API.",
         "site": "https://maximapark.nl",
         "locality": "Leidsche Rijn",
-        "excludeTitles": ["^Informatiemarkt"]
+        "excludeTitles": ["^Informatiemarkt", "^Uitgelicht bij Podium Hoge Woerd"]
       }
     },
     {

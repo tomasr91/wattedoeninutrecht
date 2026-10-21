@@ -22,6 +22,7 @@ echte activiteiten met een link naar de bron.
   Voorlezen wordt niet getoond (`excludeCategories` in `src/domain/views.ts`).
 - Onder Doorlopend staat bovenaan **Komt eraan**: jaarlijkse momenten (Koningsdag, kerst in Leidsche Rijn Centrum, festivals) die binnen acht weken vallen maar nog geen datum in de agenda hebben. Zie `data/vaste-momenten.json`.
 - Per lijst kun je soorten verbergen (Gezin → Soorten). Bij Volwassenen staan standaard uit: Indie, Metal & punk, Expositie, Dans, Roots & americana, Opera, Musical en Podcast.
+- Nieuw toegevoegde activiteiten krijgen een week lang het label **Nieuw** (per toestel bijgehouden). **Gratis** en **Binnen** staan als label op de kaart; bij een activiteit kun je hem **delen** (WhatsApp e.d.).
 - Via het gezinsicoon rechtsboven vul je naam en geboortedatum van de kinderen in en zie je de status van de bronnen, het tijdstip van de laatste update en de app-versie (bouwmoment).
 
 Zie ook [docs/BRONNEN.md](docs/BRONNEN.md) voor de bronnen en hun beperkingen, en
@@ -34,7 +35,7 @@ Vereist: Node.js 22.13 of nieuwer.
 ```bash
 npm install
 npm run dev          # app op http://localhost:5173 (gebruikt public/data/activities.json)
-npm test             # 152 tests
+npm test             # 155 tests
 npm run typecheck    # TypeScript voor app én verzamellaag
 ```
 
@@ -82,6 +83,12 @@ optioneel in `.env` (zie `.env.example`). Er zijn geen API-sleutels of geheimen 
 Let op: de code, de agenda en de website zijn openbaar.
 De app bevat geen persoonsgegevens: het gezinsprofiel en je bewaarde activiteiten staan alleen
 in de browser op je telefoon.
+
+### Meldingen
+
+Mislukt een bron drie dagen achter elkaar, dan opent de workflow een GitHub-melding (label `bronnen`); GitHub mailt je daarover. Werkt alles weer, dan sluit de melding vanzelf.
+
+`scripts/weekend-digest.ts` maakt een tekstoverzicht van het komende weekend (basis voor de wekelijkse weekendtips).
 
 ### De dagelijkse planning
 

@@ -35,6 +35,8 @@ export const IconRoute = ({ size }: IconProps) =>
   svg(<><circle cx="6" cy="18" r="2" /><circle cx="18" cy="6" r="2" /><path d="M8 18h6.5a3.5 3.5 0 0 0 0-7h-5a3.5 3.5 0 0 1 0-7H16" /></>, size);
 export const IconCalendarPlus = ({ size }: IconProps) =>
   svg(<><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M4 9.5h16M9 3v4M15 3v4M12 12.5v5M9.5 15h5" /></>, size);
+export const IconShare = ({ size }: IconProps) =>
+  svg(<><path d="M12 15V4" /><path d="m8 8 4-4 4 4" /><path d="M6 12v7a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-7" /></>, size);
 export const IconRefresh = ({ size }: IconProps) =>
   svg(<><path d="M19 12a7 7 0 1 1-2.1-5" /><path d="M19 4v4h-4" /></>, size);
 export const IconInfo = ({ size }: IconProps) =>

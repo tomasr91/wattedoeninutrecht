@@ -182,6 +182,8 @@ export interface SourceRunStatus {
   ok: boolean;
   lastAttempt?: string;
   lastSuccess?: string;
+  /** Sinds wanneer de bron onafgebroken mislukt. */
+  failingSince?: string;
   fetched: number;
   error?: string;
   notes?: string;
