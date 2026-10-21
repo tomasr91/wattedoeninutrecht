@@ -1,6 +1,6 @@
 {
-  "lastSuccessfulRun": "2026-10-21T18:01:57.008Z",
-  "lastRun": "2026-10-21T18:01:57.008Z",
+  "lastSuccessfulRun": "2026-10-21T18:02:54.905Z",
+  "lastRun": "2026-10-21T18:02:54.905Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
@@ -15,8 +15,11 @@
       "sourceId": "comedyhuis",
       "sourceName": "Comedyhuis",
       "enabled": true,
-      "ok": false,
-      "fetched": 0
+      "ok": true,
+      "lastAttempt": "2026-10-21T18:02:53.052Z",
+      "lastSuccess": "2026-10-21T18:02:53.052Z",
+      "fetched": 120,
+      "notes": "120 shows van 324 in de agenda"
     },
     {
       "sourceId": "handmatig",
@@ -144,8 +147,8 @@
     }
   ],
   "totals": {
-    "active": 958,
-    "added": 16,
+    "active": 1078,
+    "added": 120,
     "updated": 0,
     "cancelled": 0,
     "expired": 0,
