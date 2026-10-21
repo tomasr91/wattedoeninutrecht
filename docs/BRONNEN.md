@@ -25,6 +25,20 @@ en per run een maximum aantal detailpagina's. Omschrijvingen van bronnen worden 
 | **Generiek iCal** | `type: "ical"` | iCal-feeds | Elke bron met een .ics-feed (bv. WordPress "The Events Calendar": `/?ical=1`) | Kwaliteit hangt af van de feed. |
 | **Generiek JSON-LD** | `type: "jsonld"` | schema.org `Event` | Elke pagina met gestructureerde evenementdata | Veel kleine organisaties hebben dit niet. |
 
+## Eerste live run (21 oktober 2026, GitHub Actions)
+
+| Bron | Resultaat | Oorzaak |
+|---|---|---|
+| Stadsschouwburg, Utrecht Natuurlijk, Podium Sprits, Podium Hoge Woerd | werkt | — |
+| TivoliVredenburg | geweigerd (403) | Cloudflare-controle ("Just a moment…") voor servers in datacenters. Structureel; wordt niet omzeild. Tivoli-data blijft uit de handmatige set. |
+| Bibliotheek Utrecht (op-shop.nl) | 503 | Onderhoudspagina "Tijdelijk niet beschikbaar". Tijdelijk. |
+| Jaarbeurs | 404 | Hele site gaf "Tijdelijk offline". Tijdelijk. |
+| UITagenda Utrecht | TLS-fout | Server gaf een standaardcertificaat ("Kubernetes Ingress Controller Fake Certificate"). Probleem bij de site. |
+| Kasteel de Haar | TLS-fout | Server gaf een verlopen certificaat van een andere domeinnaam. Probleem bij de site. |
+
+TLS-controle wordt nooit uitgezet. Diagnose opnieuw draaien: Actions → **Bronnen diagnose** → Run workflow;
+het resultaat staat op de branch `diagnose`.
+
 ## Over de startdataset
 
 De database is gevuld met 140 activiteiten die op 21-10-2026 met de hand zijn nagelopen op de
