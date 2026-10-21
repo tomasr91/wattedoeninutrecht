@@ -1,14 +1,14 @@
 {
-  "lastSuccessfulRun": "2026-10-21T17:28:52.981Z",
-  "lastRun": "2026-10-21T17:28:52.981Z",
+  "lastSuccessfulRun": "2026-10-21T17:32:46.687Z",
+  "lastRun": "2026-10-21T17:32:46.687Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
       "sourceName": "Bibliotheek Utrecht",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-21T17:27:06.260Z",
-      "lastSuccess": "2026-10-21T17:27:06.260Z",
+      "lastAttempt": "2026-10-21T17:31:05.227Z",
+      "lastSuccess": "2026-10-21T17:31:05.227Z",
       "fetched": 379
     },
     {
@@ -129,7 +129,7 @@
   "totals": {
     "active": 942,
     "added": 0,
-    "updated": 224,
+    "updated": 155,
     "cancelled": 0,
     "expired": 0,
     "merged": 21
