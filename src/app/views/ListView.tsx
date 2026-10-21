@@ -60,7 +60,6 @@ export function OngoingList({ lists, onOpen, empty, expected = [] }: { lists: Li
   return (
     <div className="day-list">
       <ExpectedBlock items={expected} />
-      <p className="section-hint">Exposities, speurtochten en ander aanbod dat weken loopt. Wat het eerst afloopt staat bovenaan. Let op de openingstijden.</p>
       <ul className="card-list">
         {lists.ongoing.map((i) => (
           <li key={i.activity.id}>
