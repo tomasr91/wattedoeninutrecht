@@ -1,0 +1,9 @@
+{
+  "name": "wattedoeninutrecht",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npx --yes serve@14.2.4 .",
+    "build:single": "node scripts/build-single.mjs"
+  }
+}
