@@ -21,6 +21,11 @@ export interface SourceResult {
    * oorspronkelijke website gecontroleerd; hun controledatum blijft dan staan.
    */
   keepCheckedDates?: boolean;
+  /**
+   * De bron levert altijd de volledige lijst (bv. de handmatige bestanden): wat er niet meer in
+   * staat, wordt direct verwijderd in plaats van na een paar runs als geannuleerd gemarkeerd.
+   */
+  authoritative?: boolean;
   activities: Activity[];
 }
 
@@ -72,7 +77,7 @@ export function reconcile(
   results: SourceResult[],
   nowIso: string,
   today: string,
-): { activities: StoredActivity[]; stats: ReconcileStats } {
+): { activities: StoredActivity[]; stats: ReconcileStats; removed: string[] } {
   const stats: ReconcileStats = { added: 0, updated: 0, unchanged: 0, cancelled: 0, expired: 0, missing: 0 };
   const byKey = new Map(existing.map((a) => [sourceKey(a), { ...a }]));
   const okSources = new Map(results.filter((r) => r.ok).map((r) => [r.sourceId, r]));
@@ -113,6 +118,14 @@ export function reconcile(
       if (changed) stats.updated++;
       else stats.unchanged++;
     }
+  }
+
+  // Volledige lijsten: wat er niet meer in staat, gaat eruit
+  const removed: string[] = [];
+  for (const [key, a] of byKey) {
+    if (seen.has(key) || !okSources.get(a.sources[0].sourceId)?.authoritative) continue;
+    byKey.delete(key);
+    removed.push(key);
   }
 
   // Niet meer gevonden bij een geslaagde bron
@@ -161,5 +174,5 @@ export function reconcile(
     }
   }
 
-  return { activities: [...byKey.values()], stats };
+  return { activities: [...byKey.values()], stats, removed };
 }

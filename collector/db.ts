@@ -86,6 +86,13 @@ export function saveActivities(db: Db, list: StoredActivity[], nowIso: string): 
 }
 
 /** Ruim activiteiten op die langer dan `days` dagen verlopen zijn (historie blijft beperkt). */
+export function deleteActivities(db: Db, keys: string[]): number {
+  const del = db.prepare('DELETE FROM activities WHERE source_key = ?');
+  let n = 0;
+  for (const k of keys) n += Number(del.run(k).changes);
+  return n;
+}
+
 export function pruneExpired(db: Db, beforeDate: string): number {
   const r = db.prepare("DELETE FROM activities WHERE status = 'verlopen' AND end_date < ?").run(beforeDate);
   return Number(r.changes);

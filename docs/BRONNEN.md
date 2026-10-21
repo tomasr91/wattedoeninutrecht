@@ -43,6 +43,15 @@ en per run een maximum aantal detailpagina's. Omschrijvingen van bronnen worden 
 TLS-controle wordt nooit uitgezet. Diagnose opnieuw draaien: Actions → **Bronnen diagnose** → Run workflow;
 het resultaat staat op de branch `diagnose`.
 
+## Handmatig verzameld: alleen wat geen koppeling heeft
+
+`data/curated/` bevat alleen activiteiten van bronnen zonder werkende automatische koppeling.
+- Lukt de koppeling van een bron in een run (bv. UITagenda weer bereikbaar), dan slaat de update de
+  handmatige kopieën van die bron over, haalt ze uit de bestanden en verwijdert ze uit de database.
+- De handmatige lijst is "volledig": wat uit een bestand verdwijnt, verdwijnt direct uit de app.
+- Tivoli en Leidsche Rijn Centrum (`tivoli.json`, `leidsche-rijn-centrum.json`) en de overige losse items
+  (markten, Geertjes Hoeve, evenementen) worden elke dinsdag door de geplande Claude-taak nagelopen.
+
 ## Over de startdataset
 
 De database is gevuld met 140 activiteiten die op 21-10-2026 met de hand zijn nagelopen op de

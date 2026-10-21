@@ -25,7 +25,7 @@ import type { SourceAdapter } from './adapters/types.ts';
 import { uitagendaUtrecht } from './adapters/uitagenda-utrecht.ts';
 import { bibliotheekUtrecht } from './adapters/bibliotheek-utrecht.ts';
 import { podiumHogeWoerd } from './adapters/podium-hoge-woerd.ts';
-import { curatedAdapter } from './adapters/curated.ts';
+import { curatedAdapter, pruneCuratedFiles } from './adapters/curated.ts';
 import { tivoliVredenburg } from './adapters/tivolivredenburg.ts';
 import { stadsschouwburgUtrecht } from './adapters/stadsschouwburg-utrecht.ts';
 import { podiumSprits } from './adapters/podium-sprits.ts';
@@ -124,6 +124,7 @@ async function main() {
   log(`Update gestart ${nowIso} — venster ${today} t/m ${until}${dryRun ? ' (dry-run)' : ''}`);
   const runId = dryRun ? -1 : dbm.startRun(db, nowIso);
   const results: SourceResult[] = [];
+  const okNames = new Map<string, { name: string; count: number }>();
 
   for (const cfg of config.sources) {
     const adapter = adapterFor(cfg);
@@ -148,7 +149,8 @@ async function main() {
         options: cfg.options ?? {},
       });
       const activities = r.events.map(normalize);
-      results.push({ sourceId: adapter.id, ok: true, coverage: r.coverage, keepCheckedDates: r.keepCheckedDates, activities });
+      results.push({ sourceId: adapter.id, ok: true, coverage: r.coverage, keepCheckedDates: r.keepCheckedDates, authoritative: r.authoritative, activities });
+      okNames.set(adapter.id, { name: adapter.name, count: activities.length });
       log(`  ✓ ${activities.length} activiteiten in ${Math.round((Date.now() - t0) / 1000)}s${r.notes ? ` — ${r.notes}` : ''}`);
       if (!dryRun) dbm.recordSourceRun(db, adapter.id, { ok: true, at: nowIso, count: activities.length, notes: r.notes });
     } catch (e) {
@@ -159,9 +161,18 @@ async function main() {
     }
   }
 
+  // Handmatige kopieën van een bron die deze run zelf is gelukt, zijn dubbel: weglaten (en dus opruimen).
+  const live = new Set([...okNames].filter(([id, v]) => id !== 'handmatig' && v.count > 0).map(([, v]) => v.name));
+  const manual = results.find((r) => r.sourceId === 'handmatig' && r.ok);
+  if (manual && live.size) {
+    const before = manual.activities.length;
+    manual.activities = manual.activities.filter((a) => !live.has(a.sources[0].sourceName));
+    if (before !== manual.activities.length) log(`Handmatig: ${before - manual.activities.length} kopieën overgeslagen; die bronnen werkten zelf`);
+  }
+
   const anyOk = results.some((r) => r.ok);
   const existing = dbm.loadActivities(db);
-  const { activities, stats } = reconcile(existing, results, nowIso, today);
+  const { activities, stats, removed } = reconcile(existing, results, nowIso, today);
   if (geocodingEnabled()) {
     const n = await geocodeMissing(db, activities, log);
     log(`Geocodering: ${n} locaties aangevuld`);
@@ -173,6 +184,11 @@ async function main() {
     return anyOk ? 0 : 1;
   }
   dbm.saveActivities(db, activities, nowIso);
+  if (live.size) {
+    const n = pruneCuratedFiles(join(ROOT, 'data', 'curated'), live);
+    if (n) log(`Handmatige bestanden opgeschoond: ${n} items van bronnen die zelf werken`);
+  }
+  if (removed.length) log(`Verwijderd: ${dbm.deleteActivities(db, removed)} activiteiten die niet meer in een volledige lijst staan`);
   const pruned = dbm.pruneExpired(db, addDays(today, -config.pruneExpiredAfterDays));
   if (pruned) log(`Opgeruimd: ${pruned} lang verlopen activiteiten`);
   dbm.finishRun(db, runId, { ok: anyOk, at: new Date().toISOString(), stats, log: logLines.join('\n') });

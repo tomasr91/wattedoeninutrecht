@@ -18,6 +18,8 @@ export interface AdapterResult {
   coverage?: { from: string; to: string };
   /** Bij handmatig gecontroleerde data: controledatum niet verversen. */
   keepCheckedDates?: boolean;
+  /** Levert altijd de volledige lijst; ontbrekende items worden verwijderd. */
+  authoritative?: boolean;
   notes?: string;
 }
 
