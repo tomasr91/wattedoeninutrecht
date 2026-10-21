@@ -28,13 +28,22 @@ jobs:
         env:
           COLLECTOR_CONTACT: ${{ vars.COLLECTOR_CONTACT }}
         run: npx tsx collector/diagnose.ts ${{ github.event.inputs.urls }} > /tmp/diagnose.json; cat /tmp/diagnose.json
+      - name: TLS en doorverwijzingen controleren
+        run: |
+          for h in www.uitagendautrecht.nl www.kasteeldehaar.nl www.jaarbeurs.nl jaarbeurs.nl; do
+            echo "=== $h" >> /tmp/tls.txt
+            echo | timeout 20 openssl s_client -connect $h:443 -servername $h -showcerts 2>&1 | grep -E "^ *[0-9] s:|^ *i:|NotAfter|v:NotBefore|Verify return|verify error" >> /tmp/tls.txt || true
+            curl -sS -o /dev/null -w "curl: %{http_code} %{url_effective} ip=%{remote_ip}\n" -L --max-time 20 -A "UtrechtFamilyAgendaBot/0.1" https://$h/ >> /tmp/tls.txt 2>&1 || true
+            getent ahosts $h | head -3 >> /tmp/tls.txt || true
+          done
+          cat /tmp/tls.txt
       - name: Naar branch diagnose
         run: |
           git config user.name "agenda-bot"
           git config user.email "agenda-bot@users.noreply.github.com"
           git checkout --orphan diagnose
           git rm -rq --cached .
-          cp /tmp/diagnose.json diagnose.json
-          git add diagnose.json
+          cp /tmp/diagnose.json diagnose.json; cp /tmp/tls.txt tls.txt
+          git add diagnose.json tls.txt
           git commit -qm "Diagnose $(date -u +%Y-%m-%dT%H:%M)"
           git push -f origin diagnose
