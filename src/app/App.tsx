@@ -133,7 +133,7 @@ export function App() {
             <DomTower height={54} />
             <div>
               <h1>Uit in 030</h1>
-              <p className="brand-sub">Elk weekend wat te doen</p>
+              <p className="brand-sub">Ontdek. Kies. Ga.</p>
             </div>
           </div>
           <button className="icon-btn on-brand" onClick={() => setSettingsOpen(true)} aria-label="Gezin en bronnen">
