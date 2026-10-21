@@ -37,7 +37,7 @@ describe('doorlopende activiteiten en leeftijd', () => {
 
   it('filter "geschikt voor kind 1" en de score gebruiken de dag binnen de periode', () => {
     const period = makePeriod('komende-maand', '2026-10-21');
-    const ctx = { today: '2026-10-21', period, children: profile.children, home: profile.home, savedIds: new Set<string>() };
+    const ctx = { today: '2026-10-21', period, children: profile.children, home: profile.home!, savedIds: new Set<string>() };
     const shown = applyFilters([{ ...expo, isTestData: false }], { ...EMPTY_FILTERS, child: 'kind1' }, ctx);
     expect(shown).toHaveLength(1);
     const score = scoreActivity(expo, profile, { today: '2026-10-21', period });

@@ -74,10 +74,10 @@ export function App() {
               onlyBike: false,
               hiddenKinds: profile.hiddenKinds?.[view.audience] ?? [],
             },
-            { today, period, children: profile.children },
+            { today, period, children: profile.children, home: profile.home },
           )
         : null,
-    [data, view, today, period, profile.children, profile.hiddenKinds],
+    [data, view, today, period, profile.children, profile.hiddenKinds, profile.home],
   );
   const datedCount = lists ? lists.days.reduce((n, d) => n + d.items.length, 0) : 0;
   const expected = (data?.expected ?? []).filter((e) => e.audience === 'beide' || e.audience === view.audience);

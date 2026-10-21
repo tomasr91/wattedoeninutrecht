@@ -13,6 +13,7 @@ import { defaultProfile } from '../src/domain/profile';
 import { fitSummary } from '../src/domain/age';
 import { dateOf, formatShortDate, timeOf, todayInAmsterdam } from '../src/domain/dates';
 import { kindLabel } from '../src/domain/kind';
+import { DEFAULT_HOME } from '../src/domain/geo';
 import type { Child, Dataset } from '../src/domain/types';
 
 const arg = (k: string) => process.argv.find((a) => a.startsWith(`--${k}=`))?.split('=')[1];
@@ -33,7 +34,7 @@ for (const audience of ['kinderen', 'volwassenen'] as ListAudience[]) {
   const lists = buildLists(
     activities,
     { ...DEFAULT_LIST_OPTIONS, audience, weekend, hiddenKinds: profile.hiddenKinds?.[audience] ?? [] },
-    { today, period: makePeriod('drie-maanden', today), children },
+    { today, period: makePeriod('drie-maanden', today), children, home: DEFAULT_HOME },
   );
   console.log(`\n## ${audience === 'kinderen' ? 'Kinderen' : 'Volwassenen'} (${wk.fridayEvening ? 'vr-avond, ' : ''}${formatShortDate(wk.from)}–${formatShortDate(wk.to)})`);
   for (const d of lists.days) {

@@ -177,12 +177,12 @@ export function DetailSheet({
             <dd>
               {km !== undefined && travel ? (
                 <>
-                  ca. {km < 10 ? km.toFixed(1).replace('.', ',') : Math.round(km)} km hemelsbreed vanaf {profile.home.label};{' '}
+                  ca. {km < 10 ? km.toFixed(1).replace('.', ',') : Math.round(km)} km hemelsbreed vanaf {profile.home!.label};{' '}
                   {travel.mode === 'fiets' ? 'fietsen' : 'met de auto'} ca. {travel.minutes} min
                   {a.venue.geoPrecision !== 'exact' && <div className="small muted">Locatie benaderd, afstand is indicatief</div>}
                 </>
               ) : (
-                <span className="muted">Onbekend: de bron geeft geen precieze locatie</span>
+                <span className="muted">{profile.home ? 'Onbekend: de bron geeft geen precieze locatie' : 'Vul bij Gezin je adres in om afstanden te zien'}</span>
               )}
             </dd>
             <dt>Prijs</dt>

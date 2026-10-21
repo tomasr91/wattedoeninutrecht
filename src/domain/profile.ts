@@ -1,6 +1,5 @@
 import type { Category, Profile } from './types';
 import { birthDateFromAge } from './age';
-import { DEFAULT_HOME } from './geo';
 import { DEFAULT_WEIGHTS } from './scoring';
 import { DEFAULT_HIDDEN_ADULT_KINDS } from './kind';
 
@@ -38,7 +37,6 @@ export function defaultProfile(today: string): Profile {
       { id: 'kind1', name: 'Kind 1', birthDate: birthDateFromAge(24, today), birthDateEstimated: true },
       { id: 'kind2', name: 'Kind 2', birthDate: birthDateFromAge(42, today), birthDateEstimated: true },
     ],
-    home: { ...DEFAULT_HOME },
     maxDistanceKm: 30,
     leidscheRijnPreference: 1,
     interests: ['theater', 'voorlezen', 'muziek', 'museum', 'natuur', 'feest', 'festival', 'markt', 'spel', 'expositie', 'workshop'],

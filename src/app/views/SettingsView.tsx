@@ -1,9 +1,11 @@
-import type { Activity, Child, Profile, UpdateStatus } from '../../domain/types';
+import type { Activity, Child, Home, Profile, UpdateStatus } from '../../domain/types';
 import { kindLabel } from '../../domain/kind';
 import type { ListAudience } from '../../domain/views';
 import { addMonths, formatDateTime } from '../../domain/dates';
 import { fmtChecked } from '../components/DetailSheet';
 import { Sheet } from '../components/Sheet';
+import { lookupAddress } from '../geocode';
+import { useState } from 'react';
 
 /** Instellingen: alleen wat nu nodig is — de kinderen en de status van de bronnen. */
 export function SettingsSheet({
@@ -79,6 +81,8 @@ export function SettingsSheet({
           </button>
         </section>
 
+        <HomeBlock home={p.home} onChange={(home) => setProfile({ ...p, home })} />
+
         {(['volwassenen', 'kinderen'] as const).map((aud) => (
           <section key={aud} className="settings-block" aria-labelledby={`set-kinds-${aud}`}>
             <h3 id={`set-kinds-${aud}`}>Soorten bij {aud === 'kinderen' ? 'Kinderen' : 'Volwassenen'}</h3>
@@ -137,5 +141,60 @@ export function SettingsSheet({
         )}
       </div>
     </Sheet>
+  );
+}
+
+/** Thuisadres voor de afstanden in de lijst. */
+function HomeBlock({ home, onChange }: { home?: Home; onChange: (h?: Home) => void }) {
+  const [q, setQ] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState<string | null>(null);
+  const search = async () => {
+    if (!q.trim()) return;
+    setBusy(true);
+    setMsg(null);
+    try {
+      const h = await lookupAddress(q.trim());
+      if (h) {
+        onChange(h);
+        setQ('');
+      } else setMsg('Adres niet gevonden. Probeer straat + huisnummer + plaats, of een postcode.');
+    } catch {
+      setMsg('Zoeken lukte niet. Controleer je verbinding.');
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <section className="settings-block" aria-labelledby="set-home">
+      <h3 id="set-home">Adres voor afstanden</h3>
+      {home ? (
+        <p>
+          Afstanden vanaf <strong>{home.label}</strong>.{' '}
+          <button className="text-btn small" onClick={() => onChange(undefined)}>
+            Wissen
+          </button>
+        </p>
+      ) : (
+        <p className="small muted">Nog geen adres: de lijst toont dan geen afstanden.</p>
+      )}
+      <form
+        className="home-form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          search();
+        }}
+      >
+        <label htmlFor="home-q" className="sr-only">
+          Adres of postcode
+        </label>
+        <input id="home-q" type="text" value={q} placeholder="Straat 1, Utrecht of 3541 AA" autoComplete="street-address" onChange={(e) => setQ(e.target.value)} />
+        <button className="btn" type="submit" disabled={busy || !q.trim()}>
+          {busy ? 'Zoeken…' : home ? 'Wijzig' : 'Zoek'}
+        </button>
+      </form>
+      {msg && <p className="small banner-warn">{msg}</p>}
+      <p className="small muted">Het adres blijft op deze telefoon. Voor het opzoeken gaat het eenmalig naar PDOK (Kadaster).</p>
+    </section>
   );
 }

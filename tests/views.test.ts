@@ -6,7 +6,7 @@ import { testActivity, testProfile, TEST_TODAY } from './fixtures';
 
 const profile = testProfile();
 const period = makePeriod('komende-maand', TEST_TODAY); // wo 21-10 t/m vr 20-11
-const ctx = { today: TEST_TODAY, period, children: profile.children };
+const ctx = { today: TEST_TODAY, period, children: profile.children, home: profile.home };
 // testActivity is standaard isTestData; buildLists slaat die over, dus hier uitzetten.
 const act = (o: Parameters<typeof testActivity>[0]) => testActivity({ isTestData: false, categories: ['workshop'], ...o });
 const opts = (o: Partial<ListOptions> = {}): ListOptions => ({ ...DEFAULT_LIST_OPTIONS, ...o });

@@ -154,7 +154,8 @@ export type PeriodPreset = 'deze-week' | 'komende-maand' | 'drie-maanden' | 'wee
 
 export interface Profile {
   children: Child[];
-  home: Home;
+  /** Thuisadres voor afstanden; leeg = geen afstanden tonen. */
+  home?: Home;
   /** Maximale afstand in km voor de standaardweergave. */
   maxDistanceKm: number;
   /** 0 = geen voorkeur, 1 = normaal, 2 = sterk. */

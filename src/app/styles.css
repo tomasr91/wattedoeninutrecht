@@ -492,7 +492,7 @@ h3 {
   background: var(--zone, var(--muted));
 }
 .zone-leidsche-rijn {
-  --zone: var(--brand);
+  --zone: var(--muted);
 }
 .zone-utrecht {
   --zone: var(--muted);
@@ -851,6 +851,12 @@ h3 {
   grid-column: 1 / -1;
   justify-self: start;
   color: var(--muted);
+}
+.home-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin: 8px 0;
 }
 .add-child {
   margin-top: 12px;

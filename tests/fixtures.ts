@@ -1,3 +1,4 @@
+import { DEFAULT_HOME } from '../src/domain/geo';
 /**
  * ⚠️ TESTDATA — FICTIEF ⚠️
  * Alles in dit bestand is verzonnen en alleen bedoeld voor geautomatiseerde
@@ -52,6 +53,7 @@ export function testProfile(): Profile {
     { id: 'kind1', name: 'Kind 1', birthDate: '2024-10-21' }, // 2 jaar op 21-10-2026
     { id: 'kind2', name: 'Kind 2', birthDate: '2023-04-21' }, // 3,5 jaar op 21-10-2026
   ];
+  p.home = { ...DEFAULT_HOME };
   return p;
 }
 

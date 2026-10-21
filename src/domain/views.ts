@@ -116,7 +116,7 @@ export function buildLists(
   opts: ListOptions,
   ctx: { today: string; period: { from: string; to: string }; children: Child[]; home?: Home },
 ): Lists {
-  const home = ctx.home ?? DEFAULT_HOME;
+  const home = ctx.home;
   const wk = opts.weekend ? weekendWindow(opts.weekend, ctx.today, opts.audience) : undefined;
   const window = wk ?? ctx.period;
   const isFridayEvening = (a: Activity) =>

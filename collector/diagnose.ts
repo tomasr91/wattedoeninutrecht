@@ -18,7 +18,7 @@ const DEFAULT_URLS = [
   'https://www.kasteeldehaar.nl/agenda',
 ];
 
-const HEADERS = ['server', 'content-type', 'location', 'cf-ray', 'cf-mitigated', 'x-cache', 'via', 'x-sucuri-id', 'x-served-by', 'retry-after'];
+const HEADERS = ['access-control-allow-origin', 'server', 'content-type', 'location', 'cf-ray', 'cf-mitigated', 'x-cache', 'via', 'x-sucuri-id', 'x-served-by', 'retry-after'];
 
 async function probe(url: string) {
   const out: Record<string, unknown> = { url };

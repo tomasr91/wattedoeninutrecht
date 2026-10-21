@@ -42,8 +42,8 @@ export function haversineKm(aLat: number, aLon: number, bLat: number, bLon: numb
   return 2 * R * Math.asin(Math.sqrt(s));
 }
 
-export function distanceFromHome(venue: Venue, home: Home): number | undefined {
-  if (venue.lat === undefined || venue.lon === undefined) return undefined;
+export function distanceFromHome(venue: Venue, home?: Home): number | undefined {
+  if (!home || venue.lat === undefined || venue.lon === undefined) return undefined;
   return haversineKm(home.lat, home.lon, venue.lat, venue.lon);
 }
 
@@ -75,7 +75,7 @@ export function classifyZone(venue: Venue, home: Home = DEFAULT_HOME): Zone {
 }
 
 export const ZONE_LABEL: Record<Zone, string> = {
-  'leidsche-rijn': 'Leidsche Rijn e.o.',
+  'leidsche-rijn': 'Utrecht',
   utrecht: 'Utrecht',
   omgeving: 'Omgeving',
 };
