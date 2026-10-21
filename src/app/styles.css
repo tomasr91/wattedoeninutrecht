@@ -192,14 +192,19 @@ h3 {
   display: block;
 }
 .brand h1 {
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+  font-optical-sizing: auto;
   font-weight: 700;
-  font-size: 1.3rem;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-size: 1.65rem;
+  line-height: 1;
+  letter-spacing: -0.015em;
 }
 .brand-sub {
-  margin: 3px 0 1px;
-  font-size: 0.85rem;
+  margin: 4px 0 1px;
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 0.92rem;
   color: var(--muted);
 }
 .icon-btn.on-brand {

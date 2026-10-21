@@ -18,7 +18,7 @@ const html = `<title>Uit in 030</title>
 <meta name="description" content="Persoonlijke gezinsagenda voor Leidsche Rijn, Utrecht en omgeving.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Noto+Sans:wght@400;600;700&display=swap">
 <style>${css}</style>
 <div id="root"></div>
 <script type="application/json" id="ufa-dataset">${data}</script>
