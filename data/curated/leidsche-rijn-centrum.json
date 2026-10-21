@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "collectedAt": "2026-10-21T14:50:00Z",
+    "collectedBy": "Claude (geplande taak: elke dinsdag 00:00 vervangen)",
+    "method": "Evenementen van leidscherijncentrum.nl (Nieuws & Events en de evenementpagina's), zonder winkelopeningen. De nachtelijke update van GitHub kan deze site niet bereiken (time-out).",
+    "note": "Niet met de hand bewerken: wijzigingen worden dinsdag overschreven."
+  },
+  "events": [
+    {
+      "sourceName": "Leidsche Rijn Centrum",
+      "venueName": "Leidsche Rijn Centrum",
+      "locality": "Leidsche Rijn Centrum",
+      "checkedAt": "2026-10-21T14:50:00Z",
+      "indoor": "binnen",
+      "sourceEventId": "lrc-halloween-xxl",
+      "url": "https://leidscherijncentrum.nl/events/halloween-xxl/",
+      "title": "Halloween XXL: spookhuis en De Engste Winkel van Utrecht",
+      "start": "2026-10-28T12:00",
+      "end": "2026-11-01T18:00",
+      "allDay": false,
+      "openingNote": "Wo, do, za en zo 12:00–18:00; vr 12:00–20:00. Spookhuis aan de Parijsboulevard, Engste Winkel op Brusselplein 89.",
+      "priceText": "Gratis",
+      "bookingStatus": "niet-nodig",
+      "audiences": [
+        "gezin",
+        "kinderen",
+        "volwassenen"
+      ],
+      "categories": [
+        "feest"
+      ],
+      "kind": "Halloween",
+      "cautions": [
+        "Spookhuis kan eng zijn voor peuters en kleuters"
+      ],
+      "extraUncertainties": [
+        "Geen leeftijd vermeld"
+      ],
+      "confidence": "hoog",
+      "summary": "Gratis spookhuis en griezelwinkel in het winkelgebied, vijf dagen lang.",
+      "special": true
+    },
+    {
+      "sourceName": "Leidsche Rijn Centrum",
+      "venueName": "Leidsche Rijn Centrum",
+      "locality": "Leidsche Rijn Centrum",
+      "checkedAt": "2026-10-21T14:50:00Z",
+      "indoor": "buiten",
+      "sourceEventId": "lrc-halloween-speurtocht",
+      "url": "https://leidscherijncentrum.nl/events/halloween-xxl/",
+      "title": "Halloween-speurtocht met goodiebag",
+      "start": "2026-10-30T15:00",
+      "allDay": false,
+      "openingNote": "Kaart ophalen vanaf 15:00 bij Rijntjes Speelparadijs, Jumbo of de uitgang van parkeergarage Parijsboulevard. Neem een pen mee. Ook de Heksenketel (gratis pumpkin juice) op het Brusselplein.",
+      "audiences": [
+        "kinderen",
+        "gezin"
+      ],
+      "categories": [
+        "speurtocht"
+      ],
+      "kind": "Speurtocht & spel",
+      "bookingStatus": "niet-nodig",
+      "extraUncertainties": [
+        "Prijs en leeftijd niet vermeld"
+      ],
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "Leidsche Rijn Centrum",
+      "venueName": "Hof van Bern, Leidsche Rijn Centrum",
+      "locality": "Leidsche Rijn Centrum",
+      "checkedAt": "2026-10-21T14:50:00Z",
+      "indoor": "buiten",
+      "sourceEventId": "lrc-vuurspuwshow",
+      "url": "https://leidscherijncentrum.nl/events/halloween-xxl/",
+      "title": "Vuurspuwshow (Halloween XXL)",
+      "start": "2026-10-30T19:00",
+      "allDay": false,
+      "audiences": [
+        "gezin",
+        "volwassenen",
+        "kinderen"
+      ],
+      "categories": [
+        "feest"
+      ],
+      "kind": "Halloween",
+      "extraUncertainties": [
+        "Prijs en duur niet vermeld"
+      ],
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "Leidsche Rijn Centrum",
+      "venueName": "Leidsche Rijn Centrum",
+      "locality": "Leidsche Rijn Centrum",
+      "checkedAt": "2026-10-21T14:50:00Z",
+      "indoor": "buiten",
+      "sourceEventId": "lrc-intocht-sinterklaas",
+      "url": "https://leidscherijncentrum.nl/nieuws-en-events/",
+      "title": "Intocht Sinterklaas in Leidsche Rijn Centrum",
+      "start": "2026-11-15",
+      "allDay": false,
+      "audiences": [
+        "kinderen",
+        "gezin"
+      ],
+      "categories": [
+        "feest"
+      ],
+      "kind": "Sinterklaas",
+      "bookingStatus": "niet-nodig",
+      "extraUncertainties": [
+        "Tijd en route nog niet vermeld"
+      ],
+      "confidence": "middel",
+      "special": true,
+      "priceText": "Gratis",
+      "estimatedMinMonths": 18,
+      "estimatedMaxMonths": 108
+    },
+    {
+      "sourceName": "Leidsche Rijn Centrum",
+      "venueName": "Leidsche Rijn Centrum",
+      "locality": "Leidsche Rijn Centrum",
+      "checkedAt": "2026-10-21T14:50:00Z",
+      "indoor": "buiten",
+      "sourceEventId": "lrc-slidesche-rijn",
+      "url": "https://leidscherijncentrum.nl/nieuws-en-events/",
+      "title": "Slidesche Rijn",
+      "start": "2026-12-19",
+      "end": "2026-12-20",
+      "allDay": true,
+      "audiences": [
+        "kinderen",
+        "gezin"
+      ],
+      "kind": "Kerst",
+      "extraUncertainties": [
+        "Programma, tijden en prijs nog niet vermeld"
+      ],
+      "confidence": "laag"
+    }
+  ]
+}

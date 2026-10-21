@@ -38,7 +38,7 @@ en per run een maximum aantal detailpagina's. Omschrijvingen van bronnen worden 
 | UITagenda Utrecht | TLS-fout | Server gaf een standaardcertificaat ("Kubernetes Ingress Controller Fake Certificate"). Probleem bij de site. |
 | Kasteel de Haar | TLS-fout | Server gaf een verlopen certificaat van een andere domeinnaam. Probleem bij de site. |
 
-| Leidsche Rijn Centrum (leidscherijncentrum.nl) | time-out | Server reageerde niet vanaf GitHub (21-10, tijdens de PHP-storing). Nog niet gekoppeld; opnieuw proberen. |
+| Leidsche Rijn Centrum (leidscherijncentrum.nl) | time-out | Server reageert niet vanaf GitHub. Evenementen staan in `data/curated/leidsche-rijn-centrum.json`, dat de geplande Claude-taak elke dinsdag 00:00 vernieuwt (samen met Tivoli). |
 
 TLS-controle wordt nooit uitgezet. Diagnose opnieuw draaien: Actions → **Bronnen diagnose** → Run workflow;
 het resultaat staat op de branch `diagnose`.

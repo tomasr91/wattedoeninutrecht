@@ -1,2599 +1,2569 @@
 {
- "meta": {
-  "collectedAt": "2026-10-21T07:15:00Z",
-  "collectedBy": "Claude (webonderzoek in opdracht van de gebruiker)",
-  "method": "Handmatig nagelopen op 21-10-2026 via de officiële agenda's: Bibliotheek Utrecht (OP-shop), UITagenda Utrecht, Podium Hoge Woerd; twee Sinterklaasintochten via Kidsproof (secundair). Alleen gegevens die op de bronpagina's stonden; ontbrekende informatie staat als onzekerheid vermeld.",
-  "note": "Samenvattingen zijn zelf geschreven, geen brontekst."
- },
- "events": [
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-leidsche-rijn-centrum-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-21T10:30",
-   "end": "2026-10-21T11:00",
-   "venueName": "Bibliotheek Leidsche Rijn Centrum",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-vleuten-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-21T10:30",
-   "end": "2026-10-21T11:00",
-   "venueName": "Bibliotheek Vleuten",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-vleuterweide-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-21T10:30",
-   "end": "2026-10-21T11:00",
-   "venueName": "Bibliotheek Vleuterweide",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-neude-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-21T10:30",
-   "end": "2026-10-21T11:00",
-   "venueName": "Bibliotheek Neude",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-oog-in-al-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-21T10:30",
-   "end": "2026-10-21T11:00",
-   "venueName": "Bibliotheek Oog in Al",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-zuilen-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-21T10:30",
-   "end": "2026-10-21T11:00",
-   "venueName": "Bibliotheek Zuilen",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-hoograven-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-21T10:30",
-   "end": "2026-10-21T11:00",
-   "venueName": "Bibliotheek Hoograven",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-kanaleneiland-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-21T10:30",
-   "end": "2026-10-21T11:00",
-   "venueName": "Bibliotheek Kanaleneiland",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-leidsche-rijn-centrum-2026-10-28",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-28T10:30",
-   "end": "2026-10-28T11:00",
-   "venueName": "Bibliotheek Leidsche Rijn Centrum",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-vleuten-2026-10-28",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-28T10:30",
-   "end": "2026-10-28T11:00",
-   "venueName": "Bibliotheek Vleuten",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-vleuterweide-2026-10-28",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-28T10:30",
-   "end": "2026-10-28T11:00",
-   "venueName": "Bibliotheek Vleuterweide",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-neude-2026-10-28",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-28T10:30",
-   "end": "2026-10-28T11:00",
-   "venueName": "Bibliotheek Neude",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-oog-in-al-2026-10-28",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-28T10:30",
-   "end": "2026-10-28T11:00",
-   "venueName": "Bibliotheek Oog in Al",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-zuilen-2026-10-28",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-28T10:30",
-   "end": "2026-10-28T11:00",
-   "venueName": "Bibliotheek Zuilen",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-hoograven-2026-10-28",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-28T10:30",
-   "end": "2026-10-28T11:00",
-   "venueName": "Bibliotheek Hoograven",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-kanaleneiland-2026-10-28",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-28T10:30",
-   "end": "2026-10-28T11:00",
-   "venueName": "Bibliotheek Kanaleneiland",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-10811-overvecht-2026-10-22",
-   "url": "https://bibliotheekutrecht.op-shop.nl/10811/voorlezen-2-4-jaar/22-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-22T10:30",
-   "end": "2026-10-22T11:00",
-   "venueName": "Bibliotheek Overvecht",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-overvecht-2026-10-29",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-29T10:30",
-   "end": "2026-10-29T11:00",
-   "venueName": "Bibliotheek Overvecht",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-hoograven-2026-10-24",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-24T10:30",
-   "end": "2026-10-24T11:00",
-   "venueName": "Bibliotheek Hoograven",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-oog-in-al-2026-10-24",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-10-24T11:00",
-   "end": "2026-10-24T11:30",
-   "venueName": "Bibliotheek Oog in Al",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-leidsche-rijn-centrum-2026-12-16",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-12-16T10:30",
-   "end": "2026-12-16T11:00",
-   "venueName": "Bibliotheek Leidsche Rijn Centrum",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-vleuten-2026-12-16",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-12-16T10:30",
-   "end": "2026-12-16T11:00",
-   "venueName": "Bibliotheek Vleuten",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-vleuterweide-2026-12-16",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-12-16T10:30",
-   "end": "2026-12-16T11:00",
-   "venueName": "Bibliotheek Vleuterweide",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-neude-2026-12-16",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-12-16T10:30",
-   "end": "2026-12-16T11:00",
-   "venueName": "Bibliotheek Neude",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-oog-in-al-2026-12-16",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-12-16T10:30",
-   "end": "2026-12-16T11:00",
-   "venueName": "Bibliotheek Oog in Al",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-zuilen-2026-12-16",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-12-16T10:30",
-   "end": "2026-12-16T11:00",
-   "venueName": "Bibliotheek Zuilen",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-hoograven-2026-12-16",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-12-16T10:30",
-   "end": "2026-12-16T11:00",
-   "venueName": "Bibliotheek Hoograven",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-565-kanaleneiland-2026-12-16",
-   "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-12-16T10:30",
-   "end": "2026-12-16T11:00",
-   "venueName": "Bibliotheek Kanaleneiland",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-10819-overvecht-2026-12-17",
-   "url": "https://bibliotheekutrecht.op-shop.nl/10819/voorlezen-2-4-jaar/17-12-2026",
-   "title": "Voorlezen (2-4 jaar)",
-   "start": "2026-12-17T10:30",
-   "end": "2026-12-17T11:00",
-   "venueName": "Bibliotheek Overvecht",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-2-4"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-566-vleuten-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (4-6 jaar)",
-   "start": "2026-10-21T14:30",
-   "end": "2026-10-21T15:00",
-   "venueName": "Bibliotheek Vleuten",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-4-6"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-566-leidsche-rijn-centrum-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (4-6 jaar)",
-   "start": "2026-10-21T15:00",
-   "end": "2026-10-21T15:30",
-   "venueName": "Bibliotheek Leidsche Rijn Centrum",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-4-6"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-566-vleuterweide-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (4-6 jaar)",
-   "start": "2026-10-21T15:00",
-   "end": "2026-10-21T15:30",
-   "venueName": "Bibliotheek Vleuterweide",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-4-6"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-566-de-meern-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/21-10-2026",
-   "title": "Voorlezen (4-6 jaar)",
-   "start": "2026-10-21T15:30",
-   "end": "2026-10-21T16:00",
-   "venueName": "Bibliotheek De Meern",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-4-6"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-566-vleuten-2026-12-16",
-   "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/16-12-2026",
-   "title": "Voorlezen (4-6 jaar)",
-   "start": "2026-12-16T14:30",
-   "end": "2026-12-16T15:00",
-   "venueName": "Bibliotheek Vleuten",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-4-6"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-566-leidsche-rijn-centrum-2026-12-16",
-   "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/16-12-2026",
-   "title": "Voorlezen (4-6 jaar)",
-   "start": "2026-12-16T15:00",
-   "end": "2026-12-16T15:30",
-   "venueName": "Bibliotheek Leidsche Rijn Centrum",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-4-6"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-566-vleuterweide-2026-12-16",
-   "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/16-12-2026",
-   "title": "Voorlezen (4-6 jaar)",
-   "start": "2026-12-16T15:00",
-   "end": "2026-12-16T15:30",
-   "venueName": "Bibliotheek Vleuterweide",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-4-6"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-566-de-meern-2026-12-16",
-   "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/16-12-2026",
-   "title": "Voorlezen (4-6 jaar)",
-   "start": "2026-12-16T15:30",
-   "end": "2026-12-16T16:00",
-   "venueName": "Bibliotheek De Meern",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-4-6"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-10865-zuilen-2026-10-23",
-   "url": "https://bibliotheekutrecht.op-shop.nl/10865/voorlezen-4-6-jaar/23-10-2026",
-   "title": "Voorlezen (4-6 jaar)",
-   "start": "2026-10-23T15:00",
-   "end": "2026-10-23T15:30",
-   "venueName": "Bibliotheek Zuilen",
-   "priceText": "Gratis",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-4-6"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-9386-leidsche-rijn-centrum-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/9386/louis-paraplouis-voorlezen-en-knutselen-4/21-10-2026",
-   "title": "Louis Paraplouis - voorlezen en knutselen (4+)",
-   "start": "2026-10-21T14:00",
-   "end": "2026-10-21T15:30",
-   "venueName": "Bibliotheek Leidsche Rijn Centrum",
-   "priceText": "Gratis",
-   "bookingText": "wel reserveren",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Herfstvakantieactiviteit: voorlezen gevolgd door knutselen, voor kleuters vanaf 4 jaar.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|louis-paraplouis"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-9385-neude-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/9385/louis-paraplouis-voorlezen-en-knutselen-4/21-10-2026",
-   "title": "Louis Paraplouis - voorlezen en knutselen (4+)",
-   "start": "2026-10-21T10:30",
-   "end": "2026-10-21T12:00",
-   "venueName": "Bibliotheek Neude",
-   "priceText": "Gratis",
-   "bookingText": "wel reserveren",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Herfstvakantieactiviteit: voorlezen gevolgd door knutselen, voor kleuters vanaf 4 jaar.",
-   "confidence": "hoog",
-   "seriesKey": "bieb|louis-paraplouis"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-9381-kanaleneiland-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/9381/workshop-striptekenen-dog-man-7/21-10-2026",
-   "title": "Workshop striptekenen: Dog Man (7+)",
-   "start": "2026-10-21T10:30",
-   "end": "2026-10-21T12:00",
-   "venueName": "Bibliotheek Kanaleneiland",
-   "priceText": "Gratis",
-   "bookingText": "wel reserveren",
-   "hints": [
-    "Jeugd"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "bieb|dogman"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-9382-overvecht-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/9382/workshop-striptekenen-dog-man-7/21-10-2026",
-   "title": "Workshop striptekenen: Dog Man (7+)",
-   "start": "2026-10-21T14:30",
-   "end": "2026-10-21T16:00",
-   "venueName": "Bibliotheek Overvecht",
-   "priceText": "Gratis",
-   "bookingText": "wel reserveren",
-   "hints": [
-    "Jeugd"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "bieb|dogman"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-11031-vleuterweide-2026-10-21",
-   "url": "https://bibliotheekutrecht.op-shop.nl/11031/destiny-avontuur-aan-tafel-8-13-jaar/21-10-2026",
-   "title": "Destiny: avontuur aan tafel (8-13 jaar)",
-   "start": "2026-10-21T14:00",
-   "end": "2026-10-21T16:00",
-   "venueName": "Bibliotheek Vleuterweide",
-   "priceText": "Gratis",
-   "bookingText": "inloop",
-   "hints": [
-    "Jeugd"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "bieb|destiny"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-11032-vleuterweide-2026-10-23",
-   "url": "https://bibliotheekutrecht.op-shop.nl/11032/destiny-avontuur-aan-tafel-8-13-jaar/23-10-2026",
-   "title": "Destiny: avontuur aan tafel (8-13 jaar)",
-   "start": "2026-10-23T10:00",
-   "end": "2026-10-23T12:00",
-   "venueName": "Bibliotheek Vleuterweide",
-   "priceText": "Gratis",
-   "bookingText": "inloop",
-   "hints": [
-    "Jeugd"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "bieb|destiny"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-8292-leidsche-rijn-centrum-2026-10-22",
-   "url": "https://bibliotheekutrecht.op-shop.nl/8292/spelletjesmiddag-6-12-jaar/22-10-2026",
-   "title": "Spelletjesmiddag (6-12 jaar)",
-   "start": "2026-10-22T15:00",
-   "end": "2026-10-22T17:00",
-   "venueName": "Bibliotheek Leidsche Rijn Centrum",
-   "priceText": "Gratis",
-   "bookingText": "inloop",
-   "hints": [
-    "Jeugd"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "bieb|spelletjesmiddag"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-9253-neude-2026-10-22",
-   "url": "https://bibliotheekutrecht.op-shop.nl/9253/herfststukjes-ik-niet-op-jou-9/22-10-2026",
-   "title": "Herfststukjes: Ik niet op jou (9+)",
-   "start": "2026-10-22T19:30",
-   "end": "2026-10-22T20:30",
-   "venueName": "Bibliotheek Neude",
-   "priceText": "€ 10 kind / € 13 volwassene",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugd"
-   ],
-   "confidence": "hoog"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-9220-neude-2026-10-23",
-   "url": "https://bibliotheekutrecht.op-shop.nl/9220/herfststukjes-de-dinozoekers-triceratops-5/23-10-2026",
-   "title": "Herfststukjes: De dinozoekers-Triceratops (5+)",
-   "start": "2026-10-23T14:00",
-   "end": "2026-10-23T14:50",
-   "venueName": "Bibliotheek Neude",
-   "priceText": "€ 10 kind / € 13 volwassene",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Korte jeugdvoorstelling (50 minuten) over dinosaurussen, vanaf 5 jaar.",
-   "confidence": "hoog",
-   "durationMinutes": 50
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-9379-neude-2026-10-23",
-   "url": "https://bibliotheekutrecht.op-shop.nl/9379/winnie-de-poeh-is-jarig-4-8-jaar/23-10-2026",
-   "title": "Winnie de Poeh is jarig! (4-8 jaar)",
-   "start": "2026-10-23T15:30",
-   "end": "2026-10-23T16:30",
-   "venueName": "Bibliotheek Neude",
-   "priceText": "Gratis",
-   "bookingText": "inloop",
-   "hints": [
-    "Jeugd"
-   ],
-   "confidence": "hoog"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-398-leidsche-rijn-centrum-2026-10-23",
-   "url": "https://bibliotheekutrecht.op-shop.nl/398/voorlezen-in-het-engels-4-8-jaar/vanaf/23-10-2026",
-   "title": "Voorlezen in het Engels (4-8 jaar)",
-   "start": "2026-10-23T15:30",
-   "end": "2026-10-23T16:00",
-   "venueName": "Bibliotheek Leidsche Rijn Centrum",
-   "hints": [
-    "Jeugd"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "bieb|voorlezen-engels"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-11188-neude-2026-10-24",
-   "url": "https://bibliotheekutrecht.op-shop.nl/11188/boekpresentatie-limbusland-pieter-koolwijk-8/24-10-2026",
-   "title": "Boekpresentatie Limbusland - Pieter Koolwijk (8+)",
-   "start": "2026-10-24T15:00",
-   "end": "2026-10-24T16:30",
-   "venueName": "Bibliotheek Neude",
-   "priceText": "Gratis",
-   "bookingText": "wel reserveren",
-   "hints": [
-    "Jeugd"
-   ],
-   "confidence": "hoog"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-11036-leidsche-rijn-centrum-2026-10-25",
-   "url": "https://bibliotheekutrecht.op-shop.nl/11036/babyconcert-ik-droom-0-2-jaar/25-10-2026",
-   "title": "Babyconcert 'Ik droom' (0-2 jaar)",
-   "start": "2026-10-25T10:00",
-   "end": "2026-10-25T10:30",
-   "venueName": "Bibliotheek Leidsche Rijn Centrum",
-   "priceText": "€ 7 lid / € 10 niet-lid",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugd"
-   ],
-   "summary": "Kort concert van een half uur voor baby's en dreumesen tot en met 2 jaar, samen met een ouder.",
-   "confidence": "hoog",
-   "durationMinutes": 30
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-10286-neude-2026-10-25",
-   "url": "https://bibliotheekutrecht.op-shop.nl/10286/rondleiding-brullen-in-de-bieb-4-7-jaar/25-10-2026",
-   "title": "Rondleiding: Brullen in de Bieb (4-7 jaar)",
-   "start": "2026-10-25T10:30",
-   "end": "2026-10-25T11:15",
-   "venueName": "Bibliotheek Neude",
-   "priceText": "Gratis",
-   "bookingText": "wel reserveren",
-   "hints": [
-    "Jeugd"
-   ],
-   "confidence": "hoog",
-   "durationMinutes": 45
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-11060",
-   "url": "https://bibliotheekutrecht.op-shop.nl/11060/installatie-steentje-bij-steentje/17-10-2026",
-   "title": "Installatie: Steentje bij steentje",
-   "start": "2026-10-17",
-   "end": "2026-10-25",
-   "allDay": true,
-   "ongoing": true,
-   "venueName": "Bibliotheek Neude",
-   "priceText": "Gratis",
-   "bookingText": "inloop",
-   "hints": [
-    "Jeugd"
-   ],
-   "categories": [
-    "expositie"
-   ],
-   "audiences": [
-    "kinderen",
-    "gezin"
-   ],
-   "indoor": "binnen",
-   "extraUncertainties": [
-    "Openingstijden: zie de bibliotheek"
-   ],
-   "confidence": "hoog"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-8638-leidsche-rijn-centrum-2026-12-16",
-   "url": "https://bibliotheekutrecht.op-shop.nl/8638/workshop-songwriting-in-alle-talen-8-12-jaar/16-12-2026",
-   "title": "Workshop: Songwriting in alle talen (8-12 jaar)",
-   "start": "2026-12-16T16:00",
-   "end": "2026-12-16T17:15",
-   "venueName": "Bibliotheek Leidsche Rijn Centrum",
-   "priceText": "Gratis",
-   "bookingText": "wel reserveren",
-   "hints": [
-    "Jeugd"
-   ],
-   "confidence": "hoog"
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-11141-leidsche-rijn-centrum-2026-12-13",
-   "url": "https://bibliotheekutrecht.op-shop.nl/11141/workshop-japanse-kalligrafie/13-12-2026",
-   "title": "Workshop: Japanse kalligrafie",
-   "start": "2026-12-13T15:00",
-   "end": "2026-12-13T16:30",
-   "venueName": "Bibliotheek Leidsche Rijn Centrum",
-   "priceText": "Gratis",
-   "bookingText": "wel reserveren",
-   "hints": [
-    "Volwassenen"
-   ],
-   "confidence": "hoog",
-   "audiences": [
-    "volwassenen"
-   ]
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-7286-neude-2026-12-14",
-   "url": "https://bibliotheekutrecht.op-shop.nl/7286/tegenlicht-meet-up/14-12-2026",
-   "title": "Tegenlicht Meet-Up",
-   "start": "2026-12-14T19:30",
-   "end": "2026-12-14T21:30",
-   "venueName": "Bibliotheek Neude",
-   "priceText": "Gratis",
-   "bookingText": "wel reserveren",
-   "hints": [
-    "Volwassenen"
-   ],
-   "confidence": "hoog",
-   "audiences": [
-    "volwassenen"
-   ]
-  },
-  {
-   "sourceName": "Bibliotheek Utrecht",
-   "sourceEventId": "bieb-11189-neude-2026-10-24",
-   "url": "https://bibliotheekutrecht.op-shop.nl/11189/wereldfietsercafe/24-10-2026",
-   "title": "WereldfietserCafé",
-   "start": "2026-10-24T15:00",
-   "end": "2026-10-24T16:30",
-   "venueName": "Bibliotheek Neude",
-   "priceText": "Gratis",
-   "bookingText": "wel reserveren",
-   "hints": [
-    "Volwassenen"
-   ],
-   "confidence": "hoog",
-   "audiences": [
-    "volwassenen"
-   ]
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-150082",
-   "url": "https://www.uitagendautrecht.nl/evenement/150082/kerstvakantie-in-de-bieb-feest-4",
-   "title": "Kerstvakantie in de Bieb: Feest (4+)",
-   "start": "2026-12-27T11:00",
-   "end": "2026-12-30",
-   "venueName": "Diverse vestigingen Bibliotheek Utrecht",
-   "locality": "Utrecht",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "extraUncertainties": [
-    "Welke vestigingen en welke dag precies: zie de bron"
-   ],
-   "confidence": "middel",
-   "special": true
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-133930-14:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/133930/winterkost-de-kersthaas-4",
-   "title": "Winterkost: De Kersthaas (4+)",
-   "start": "2026-12-23T14:00",
-   "venueName": "Bibliotheek Neude",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "special": true,
-   "seriesKey": "ua|kersthaas"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-133930-16:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/133930/winterkost-de-kersthaas-4",
-   "title": "Winterkost: De Kersthaas (4+)",
-   "start": "2026-12-23T16:00",
-   "venueName": "Bibliotheek Neude",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "special": true,
-   "seriesKey": "ua|kersthaas"
-  },
-  {
-   "sourceName": "Podium Hoge Woerd",
-   "sourceEventId": "phw-alle-kinderen-stinken-2026-10-21-15:00",
-   "url": "https://www.podiumhogewoerd.nl/agenda/alle-kinderen-stinken",
-   "title": "Alle kinderen stinken (6+)",
-   "start": "2026-10-21T15:00",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugd",
-    "Herfststukjes"
-   ],
-   "confidence": "hoog"
-  },
-  {
-   "sourceName": "Podium Hoge Woerd",
-   "sourceEventId": "phw-samar-en-de-bange-koning-2026-10-23-15:00",
-   "url": "https://www.podiumhogewoerd.nl/agenda/samar-en-de-bange-koning",
-   "title": "Samar en de bange koning (8+)",
-   "start": "2026-10-23T15:00",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugd",
-    "Herfststukjes"
-   ],
-   "confidence": "hoog"
-  },
-  {
-   "sourceName": "Podium Hoge Woerd",
-   "sourceEventId": "phw-the-new-gen-2026-10-24-20:30",
-   "url": "https://www.podiumhogewoerd.nl/agenda/the-new-gen",
-   "title": "UC-Crew: The New Gen",
-   "start": "2026-10-24T20:30",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Dans"
-   ],
-   "confidence": "hoog",
-   "audiences": [
-    "volwassenen"
-   ],
-   "categories": [
-    "theater"
-   ]
-  },
-  {
-   "sourceName": "Podium Hoge Woerd",
-   "sourceEventId": "phw-het-lammetje-dat-een-varken-is-4-2026-10-25-15:00",
-   "url": "https://www.podiumhogewoerd.nl/agenda/het-lammetje-dat-een-varken-is-4",
-   "title": "Het lammetje dat een varken is (4+)",
-   "start": "2026-10-25T15:00",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugd",
-    "Herfststukjes"
-   ],
-   "summary": "Jeugdvoorstelling van Het Filiaal theatermakers met boerderijverhalen, vanaf 4 jaar, in het theater in De Meern.",
-   "confidence": "hoog"
-  },
-  {
-   "sourceName": "Podium Hoge Woerd",
-   "sourceEventId": "phw-biotopia-2026-10-29-20:30",
-   "url": "https://www.podiumhogewoerd.nl/agenda/biotopia",
-   "title": "SHIFFT: Biotopia",
-   "start": "2026-10-29T20:30",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Dans"
-   ],
-   "confidence": "hoog",
-   "audiences": [
-    "volwassenen"
-   ],
-   "categories": [
-    "theater"
-   ]
-  },
-  {
-   "sourceName": "Podium Hoge Woerd",
-   "sourceEventId": "phw-heartbeats-2026-10-30-20:00",
-   "url": "https://www.podiumhogewoerd.nl/agenda/heartbeats",
-   "title": "Theater Rotterdam: Heartbeats",
-   "start": "2026-10-30T20:00",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Theater"
-   ],
-   "confidence": "hoog",
-   "audiences": [
-    "volwassenen"
-   ],
-   "categories": [
-    "theater"
-   ]
-  },
-  {
-   "sourceName": "Podium Hoge Woerd",
-   "sourceEventId": "phw-gelukkig-maar-2026-10-31-20:00",
-   "url": "https://www.podiumhogewoerd.nl/agenda/gelukkig-maar",
-   "title": "Myrte Siebinga: GELUKKIG MAAR",
-   "start": "2026-10-31T20:00",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Cabaret"
-   ],
-   "statusText": "Geannuleerd",
-   "confidence": "hoog",
-   "audiences": [
-    "volwassenen"
-   ],
-   "categories": [
-    "theater"
-   ]
-  },
-  {
-   "sourceName": "Podium Hoge Woerd",
-   "sourceEventId": "phw-integratieplan-2026-10-31-20:00",
-   "url": "https://www.podiumhogewoerd.nl/agenda/integratieplan",
-   "title": "Saman Amini: Integratieplan #2 — Alles is Perspectief",
-   "start": "2026-10-31T20:00",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Cabaret"
-   ],
-   "statusText": "Uitverkocht",
-   "confidence": "hoog",
-   "audiences": [
-    "volwassenen"
-   ],
-   "categories": [
-    "theater"
-   ]
-  },
-  {
-   "sourceName": "Podium Hoge Woerd",
-   "sourceEventId": "phw-revue-revanche-2026-11-03-20:00",
-   "url": "https://www.podiumhogewoerd.nl/agenda/revue-revanche",
-   "title": "Valentina Toth: Revue Revanche (try-out)",
-   "start": "2026-11-03T20:00",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Cabaret"
-   ],
-   "statusText": "Laatste tickets",
-   "confidence": "hoog",
-   "audiences": [
-    "volwassenen"
-   ],
-   "categories": [
-    "theater"
-   ]
-  },
-  {
-   "sourceName": "Podium Hoge Woerd",
-   "sourceEventId": "phw-adoptie-2026-11-04-19:30",
-   "url": "https://www.podiumhogewoerd.nl/agenda/adoptie",
-   "title": "Jeugdzorg onder de loep (talk)",
-   "start": "2026-11-04T19:30",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Talks"
-   ],
-   "confidence": "hoog",
-   "audiences": [
-    "volwassenen"
-   ],
-   "categories": [
-    "lezing"
-   ]
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149080-15:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/149080/het-kleine-theater-lady-en-de-vage-hond-4",
-   "title": "Het Kleine Theater: Lady en de Vage Hond (4+)",
-   "start": "2026-11-08T15:00",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|het-kleine-theater-lady-en-de-vage-hond-4"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149929-15:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/149929/mark-van-vliet-en-g-orkest-toetie-4",
-   "title": "Mark van Vliet en G-Orkest: Toetie (4+)",
-   "start": "2026-12-13T15:00",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|mark-van-vliet-en-g-orkest-toetie-4"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149932-14:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/149932/jaski-en-groenteman-de-musical-zonder-billen-4",
-   "title": "Jaski en Groenteman: De musical zonder billen (4+)",
-   "start": "2026-12-26T14:00",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|jaski-en-groenteman-de-musical-zonder-billen-4"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149933-13:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/149933/het-kleine-theater-robin-hood-4",
-   "title": "Het Kleine Theater: Robin Hood (4+)",
-   "start": "2026-12-30T13:00",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|het-kleine-theater-robin-hood-4"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149933-15:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/149933/het-kleine-theater-robin-hood-4",
-   "title": "Het Kleine Theater: Robin Hood (4+)",
-   "start": "2026-12-30T15:00",
-   "venueName": "Podium Hoge Woerd",
-   "locality": "De Meern",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|het-kleine-theater-robin-hood-4"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-86965",
-   "url": "https://www.uitagendautrecht.nl/evenement/86965/rondleiding-langs-het-unieke-romeinse-schip-en-door-het-castellum",
-   "title": "Rondleiding langs het Romeinse schip en door het Castellum",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "allDay": true,
-   "ongoing": true,
-   "openingNote": "Za en zo 14:00–15:00",
-   "venueName": "Museum Hoge Woerd",
-   "locality": "De Meern",
-   "extraUncertainties": [
-    "Doorlopend; einddatum niet vermeld",
-    "Prijs niet vermeld"
-   ],
-   "confidence": "middel",
-   "categories": [
-    "rondleiding",
-    "museum"
-   ],
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "indoor": "binnen",
-   "estimatedMinMonths": 48,
-   "summary": "Rondleiding in het weekend langs de Romeinse rivierboot De Meern 1 en het nagebouwde castellum.",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-64756",
-   "url": "https://www.uitagendautrecht.nl/evenement/64756/archeolab-1",
-   "title": "ArcheoLab in Museum Hoge Woerd",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "allDay": true,
-   "ongoing": true,
-   "openingNote": "Diverse tijden; zie museum",
-   "venueName": "Museum Hoge Woerd",
-   "locality": "De Meern",
-   "extraUncertainties": [
-    "Doorlopend; einddatum niet vermeld",
-    "Prijs en leeftijd niet vermeld"
-   ],
-   "confidence": "middel",
-   "categories": [
-    "museum",
-    "workshop"
-   ],
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "indoor": "binnen",
-   "estimatedMinMonths": 48,
-   "summary": "Doe-ruimte in het Romeinse museum in De Meern waar je als archeoloog zelf vondsten onderzoekt.",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-143265",
-   "url": "https://www.uitagendautrecht.nl/evenement/143265/weekendvaart-de-meern-1",
-   "title": "Weekendvaart De Meern 1",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "allDay": true,
-   "ongoing": true,
-   "openingNote": "Za en zo 14:00",
-   "venueName": "Museum Hoge Woerd",
-   "locality": "De Meern",
-   "extraUncertainties": [
-    "Doorlopend; einddatum en seizoen niet vermeld",
-    "Prijs niet vermeld"
-   ],
-   "confidence": "middel",
-   "categories": [
-    "rondleiding"
-   ],
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "indoor": "buiten",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-140161",
-   "url": "https://www.uitagendautrecht.nl/evenement/140161/doe-expo-het-klokkenhuis-6",
-   "title": "Doe-expo Het Klokkenhuis (6+)",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "allDay": true,
-   "ongoing": true,
-   "openingNote": "Zondag 12:00–17:00",
-   "venueName": "De Vrijstaat",
-   "locality": "Leidsche Rijn",
-   "hints": [
-    "Jeugd"
-   ],
-   "extraUncertainties": [
-    "Doorlopend; einddatum niet vermeld",
-    "Prijs niet vermeld",
-    "Exacte locatie niet in de bron; wijk volgens UITagenda"
-   ],
-   "confidence": "middel",
-   "categories": [
-    "expositie"
-   ],
-   "indoor": "binnen"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-140948",
-   "url": "https://www.uitagendautrecht.nl/evenement/140948/noet-noet-en-het-geheime-kasteelfeest",
-   "title": "Noet Noet en het geheime kasteelfeest",
-   "start": "2026-10-21",
-   "end": "2026-12-31",
-   "allDay": true,
-   "ongoing": true,
-   "openingNote": "Openingstijden kasteel",
-   "venueName": "Kasteel de Haar",
-   "locality": "Haarzuilens",
-   "hints": [
-    "Kinderen"
-   ],
-   "extraUncertainties": [
-    "Prijs en leeftijd niet vermeld in de agenda"
-   ],
-   "confidence": "middel",
-   "categories": [
-    "spel",
-    "museum"
-   ],
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "estimatedMinMonths": 36,
-   "special": false,
-   "summary": "Gezinsactiviteit in Kasteel de Haar rond het kasteelpersonage Noet Noet; loopt het hele jaar."
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-83585",
-   "url": "https://www.uitagendautrecht.nl/evenement/83585/kinderspeurtochten-kasteel-de-haar",
-   "title": "Kinderspeurtochten Kasteel de Haar",
-   "start": "2026-10-21",
-   "end": "2026-12-31",
-   "allDay": true,
-   "ongoing": true,
-   "openingNote": "Dagelijks 11:00–17:00 (volgens agenda)",
-   "venueName": "Kasteel de Haar",
-   "locality": "Haarzuilens",
-   "hints": [
-    "Kinderen"
-   ],
-   "extraUncertainties": [
-    "Prijs niet vermeld in de agenda"
-   ],
-   "confidence": "middel",
-   "categories": [
-    "spel"
-   ],
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "estimatedMinMonths": 48
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-147257",
-   "url": "https://www.uitagendautrecht.nl/evenement/147257/tuinen-vol-verhalen",
-   "title": "Tuinen vol verhalen (Kasteel de Haar)",
-   "start": "2026-10-21",
-   "end": "2026-10-31",
-   "allDay": true,
-   "ongoing": true,
-   "openingNote": "12:00–13:30 en 14:30–16:00",
-   "venueName": "Kasteel de Haar",
-   "locality": "Haarzuilens",
-   "extraUncertainties": [
-    "Prijs niet vermeld"
-   ],
-   "confidence": "middel",
-   "categories": [
-    "rondleiding",
-    "natuur"
-   ],
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "indoor": "buiten",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-88805",
-   "url": "https://www.uitagendautrecht.nl/evenement/88805/lumineuze-nachten-van-kasteel-de-haar",
-   "title": "Lumineuze Nachten Kasteel de Haar",
-   "start": "2026-12-04",
-   "end": "2027-01-03",
-   "allDay": true,
-   "ongoing": true,
-   "openingNote": "Avondprogramma; zie bron voor tijden en tickets",
-   "venueName": "Kasteel de Haar",
-   "locality": "Haarzuilens",
-   "hints": [
-    "Festivals"
-   ],
-   "categories": [
-    "feest",
-    "rondleiding"
-   ],
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "indoor": "buiten",
-   "bookingText": "tickets",
-   "extraUncertainties": [
-    "Tijden en prijs niet vermeld in de agenda"
-   ],
-   "confidence": "middel",
-   "special": true,
-   "summary": "Lichtroute door de kasteeltuinen van Kasteel de Haar in de donkere decembermaand."
-  },
-  {
-   "sourceName": "UITagenda Utrecht / Sint Maarten Parade",
-   "sourceEventId": "ua-51641",
-   "url": "https://www.uitagendautrecht.nl/evenement/51641/sint-maarten-parade",
-   "title": "Sint Maarten Parade: De Ronde van Sint Maarten",
-   "start": "2026-11-07T18:00",
-   "end": "2026-11-07T21:00",
-   "venueName": "Route door de binnenstad",
-   "locality": "Binnenstad",
-   "lat": 52.0907,
-   "lon": 5.1214,
-   "priceText": "Gratis",
-   "bookingStatus": "niet-nodig",
-   "hints": [
-    "Gezinnen",
-    "#kinderen",
-    "#0 10"
-   ],
-   "categories": [
-    "feest",
-    "festival"
-   ],
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "estimatedMinMonths": 0,
-   "estimatedMaxMonths": 120,
-   "indoor": "buiten",
-   "special": true,
-   "fitReasons": [
-    "Zelf tempo bepalen, overal aanhaken",
-    "Route geschikt voor kinderwagens"
-   ],
-   "cautions": [
-    "Begint na het avondeten",
-    "Druk en donker; neem een lampion of lampje mee"
-   ],
-   "summary": "Lichtjesroute van ca. 4 km door de binnenstad, langs o.a. Neude, Domkerk en Museum Speelklok. Je kunt overal aanhaken; tip van de organisatie: start uiterlijk 19:00.",
-   "extraUncertainties": [
-    "Coördinaten: middelpunt van de route (Domplein)"
-   ],
-   "confidence": "hoog",
-   "bookingUrl": "https://sintmaartenparade.nl/",
-   "geoPrecision": "approx"
-  },
-  {
-   "sourceName": "Kidsproof Utrecht (secundaire bron)",
-   "sourceEventId": "kp-intocht-utrecht-2026",
-   "url": "https://www.kidsproof.nl/utrecht/uitje/intocht-sinterklaas-utrecht-boot/",
-   "title": "Intocht Sinterklaas Utrecht (per boot)",
-   "start": "2026-11-15",
-   "allDay": true,
-   "venueName": "Weerdsluis / Domplein",
-   "locality": "Binnenstad",
-   "lat": 52.0985,
-   "lon": 5.1195,
-   "priceText": "Gratis",
-   "bookingStatus": "niet-nodig",
-   "categories": [
-    "feest"
-   ],
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "indoor": "buiten",
-   "special": true,
-   "estimatedMinMonths": 18,
-   "estimatedMaxMonths": 108,
-   "cautions": [
-    "Kan erg druk zijn"
-   ],
-   "summary": "Sinterklaas komt per boot aan in de binnenstad; te zien bij de Weerdsluis en op het Domplein.",
-   "extraUncertainties": [
-    "Tijd en route nog niet bekendgemaakt",
-    "Gemeld door een secundaire bron; controleer de gemeente of organisatie",
-    "Coördinaten benaderd"
-   ],
-   "confidence": "middel",
-   "hints": [],
-   "geoPrecision": "approx"
-  },
-  {
-   "sourceName": "Kidsproof Utrecht (secundaire bron)",
-   "sourceEventId": "kp-intocht-lr-2026",
-   "url": "https://www.kidsproof.nl/utrecht/uitje/leidsche-rijn-centrum-sinterklaas/",
-   "title": "Sinterklaas in Leidsche Rijn Centrum",
-   "start": "2026-11-15",
-   "allDay": true,
-   "venueName": "Leidsche Rijn Centrum",
-   "locality": "Leidsche Rijn Centrum",
-   "priceText": "Gratis",
-   "bookingStatus": "niet-nodig",
-   "categories": [
-    "feest"
-   ],
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "indoor": "buiten",
-   "special": true,
-   "estimatedMinMonths": 18,
-   "estimatedMaxMonths": 108,
-   "summary": "Intocht van Sinterklaas in het winkelhart van Leidsche Rijn.",
-   "extraUncertainties": [
-    "Tijdstip niet bekend",
-    "Gemeld door een secundaire bron; controleer bij Leidsche Rijn Centrum"
-   ],
-   "confidence": "middel",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-67787",
-   "url": "https://www.uitagendautrecht.nl/evenement/67787/huis-van-sinterklaas",
-   "title": "Huis van Sinterklaas — Museum Catharijneconvent",
-   "start": "2026-11-14",
-   "end": "2026-12-04",
-   "allDay": true,
-   "ongoing": true,
-   "openingNote": "10:00–17:00",
-   "venueName": "Museum Catharijneconvent",
-   "categories": [
-    "feest",
-    "museum"
-   ],
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "indoor": "binnen",
-   "special": true,
-   "estimatedMinMonths": 24,
-   "estimatedMaxMonths": 96,
-   "summary": "Het museum verandert in het huis van Sinterklaas, met kamers om te ontdekken voor jonge kinderen.",
-   "extraUncertainties": [
-    "De agendatitel noemt 2025 terwijl de data in 2026 vallen; controleer bij het museum",
-    "Prijs en tijdsloten niet gecontroleerd"
-   ],
-   "confidence": "middel",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-133945",
-   "url": "https://www.uitagendautrecht.nl/evenement/133945/kerstlichtjesfestival",
-   "title": "Kerstlichtjesfestival",
-   "start": "2026-12-19T13:00",
-   "end": "2026-12-19T18:00",
-   "venueName": "Stadsklooster Utrecht",
-   "locality": "Utrecht",
-   "hints": [
-    "Festivals"
-   ],
-   "categories": [
-    "feest",
-    "festival"
-   ],
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "special": true,
-   "extraUncertainties": [
-    "Doelgroep en prijs niet gecontroleerd"
-   ],
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-147259",
-   "url": "https://www.uitagendautrecht.nl/evenement/147259/luminiscence",
-   "title": "Luminiscence",
-   "start": "2026-10-07",
-   "end": "2027-01-03",
-   "allDay": true,
-   "ongoing": true,
-   "venueName": "Jacobikerk",
-   "hints": [
-    "Festivals"
-   ],
-   "categories": [
-    "expositie",
-    "feest"
-   ],
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "indoor": "binnen",
-   "special": true,
-   "extraUncertainties": [
-    "Tijden, prijs en leeftijd niet gecontroleerd"
-   ],
-   "confidence": "middel",
-   "summary": "Licht- en klankvoorstelling in de Jacobikerk, tot begin januari."
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149742",
-   "url": "https://www.uitagendautrecht.nl/evenement/149742/kleur-de-stad-2026",
-   "title": "Kleur de Stad 2026",
-   "start": "2026-12-16",
-   "end": "2027-01-03",
-   "allDay": true,
-   "ongoing": true,
-   "venueName": "Stadhuis Utrecht",
-   "hints": [
-    "Festivals"
-   ],
-   "categories": [
-    "feest",
-    "muziek"
-   ],
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "special": true,
-   "extraUncertainties": [
-    "Programma en tijden: zie bron"
-   ],
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-123489-2026-10-21-10:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/123489/podium-sprits-blok-doos-2",
-   "title": "De Grote Haay: Blok & Doos (2+)",
-   "start": "2026-10-21T10:00",
-   "venueName": "ZIMIHC theater Zuilen",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "summary": "Peutervoorstelling vanaf 2 jaar over spelen met blokken en dozen; gemaakt voor de allerkleinsten.",
-   "confidence": "hoog",
-   "seriesKey": "ua|podium-sprits-blok-doos-2"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-123489-2026-10-21-11:30",
-   "url": "https://www.uitagendautrecht.nl/evenement/123489/podium-sprits-blok-doos-2",
-   "title": "De Grote Haay: Blok & Doos (2+)",
-   "start": "2026-10-21T11:30",
-   "venueName": "ZIMIHC theater Zuilen",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "summary": "Peutervoorstelling vanaf 2 jaar over spelen met blokken en dozen; gemaakt voor de allerkleinsten.",
-   "confidence": "hoog",
-   "seriesKey": "ua|podium-sprits-blok-doos-2"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-106964-2026-10-21-11:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/106964/het-lammetje-dat-een-varken-is-4",
-   "title": "Het lammetje dat een varken is en andere boerderijverhalen (4+)",
-   "start": "2026-10-21T11:00",
-   "venueName": "Filiaaltheater",
-   "locality": "Utrecht",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|het-lammetje-dat-een-varken-is-4"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-106964-2026-10-21-14:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/106964/het-lammetje-dat-een-varken-is-4",
-   "title": "Het lammetje dat een varken is en andere boerderijverhalen (4+)",
-   "start": "2026-10-21T14:00",
-   "venueName": "Filiaaltheater",
-   "locality": "Utrecht",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|het-lammetje-dat-een-varken-is-4"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-147502-2026-10-21-11:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/147502/de-horde-het-koffertje-4",
-   "title": "De Horde: Het Koffertje (4+)",
-   "start": "2026-10-21T11:00",
-   "venueName": "Theater Kikker",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|de-horde-het-koffertje-4"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-147502-2026-10-21-15:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/147502/de-horde-het-koffertje-4",
-   "title": "De Horde: Het Koffertje (4+)",
-   "start": "2026-10-21T15:00",
-   "venueName": "Theater Kikker",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|de-horde-het-koffertje-4"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-147503-2026-10-21-14:30",
-   "url": "https://www.uitagendautrecht.nl/evenement/147503/studio-figur-kakek-opa-en-ik-8",
-   "title": "Studio Figur: Kakek, Opa en ik (8+)",
-   "start": "2026-10-21T14:30",
-   "venueName": "Theater Kikker",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|studio-figur-kakek-opa-en-ik-8"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-147309-2026-10-21-15:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/147309/de-proefkeuken-en-de-wc-van-tijd-8-1",
-   "title": "De Proefkeuken en de WC van tijd (8+)",
-   "start": "2026-10-21T15:00",
-   "venueName": "Stadsschouwburg Utrecht",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|de-proefkeuken-en-de-wc-van-tijd-8-1"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-147411-2026-10-31-15:30",
-   "url": "https://www.uitagendautrecht.nl/evenement/147411/overleven-in-de-jungle-8-1",
-   "title": "Overleven in de jungle (8+)",
-   "start": "2026-10-31T15:30",
-   "venueName": "Stadsschouwburg Utrecht",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|overleven-in-de-jungle-8-1"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-148954-2026-11-04-10:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/148954/simone-de-jong-company-kluizelaar-2-1",
-   "title": "Simone de Jong Company: Kluizelaar (2+)",
-   "start": "2026-11-04T10:00",
-   "venueName": "ZIMIHC theater Zuilen",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "summary": "Ochtendvoorstelling voor peuters vanaf 2 jaar.",
-   "confidence": "hoog",
-   "seriesKey": "ua|simone-de-jong-company-kluizelaar-2-1"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149291-2026-11-08-14:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/149291/sally-woest-4",
-   "title": "SALLY: Woest (4+)",
-   "start": "2026-11-08T14:00",
-   "venueName": "Stadsschouwburg Utrecht",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|sally-woest-4"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149292-2026-11-08-15:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/149292/nu-is-het-nog-rustig-8",
-   "title": "Nu is het nog rustig (8+)",
-   "start": "2026-11-08T15:00",
-   "venueName": "Stadsschouwburg Utrecht",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|nu-is-het-nog-rustig-8"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149010-2026-11-13-16:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/149010/schweigman-en-bontehond-prikkels-8-1",
-   "title": "Schweigman & BonteHond: Prikkels (8+)",
-   "start": "2026-11-13T16:00",
-   "venueName": "ZIMIHC theater Stefanus",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|schweigman-en-bontehond-prikkels-8-1"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149721-2026-12-11-10:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/149721/rachel-schuit-door-weer-en-wind-2",
-   "title": "Rachel Schuit: Door weer en wind (2+)",
-   "start": "2026-12-11T10:00",
-   "venueName": "ZIMIHC theater Zuilen",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "summary": "Peutervoorstelling vanaf 2 jaar over het weer, met twee ochtendvoorstellingen.",
-   "confidence": "hoog",
-   "seriesKey": "ua|rachel-schuit-door-weer-en-wind-2"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149721-2026-12-11-11:15",
-   "url": "https://www.uitagendautrecht.nl/evenement/149721/rachel-schuit-door-weer-en-wind-2",
-   "title": "Rachel Schuit: Door weer en wind (2+)",
-   "start": "2026-12-11T11:15",
-   "venueName": "ZIMIHC theater Zuilen",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "summary": "Peutervoorstelling vanaf 2 jaar over het weer, met twee ochtendvoorstellingen.",
-   "confidence": "hoog",
-   "seriesKey": "ua|rachel-schuit-door-weer-en-wind-2"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149148-2026-12-13-11:30",
-   "url": "https://www.uitagendautrecht.nl/evenement/149148/de-vliegende-koffer-ollietrollie-3",
-   "title": "De vliegende koffer: OllieTrollie (3+)",
-   "start": "2026-12-13T11:30",
-   "venueName": "Kanaal30",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|de-vliegende-koffer-ollietrollie-3"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149722-2026-12-13-10:00",
-   "url": "https://www.uitagendautrecht.nl/evenement/149722/klein-amsterdam-producties-de-ridder-zonder-billen-3",
-   "title": "Klein Amsterdam Producties: De ridder zonder billen (3+)",
-   "start": "2026-12-13T10:00",
-   "venueName": "ZIMIHC theater Zuilen",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|klein-amsterdam-producties-de-ridder-zonder-billen-3"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149722-2026-12-13-11:15",
-   "url": "https://www.uitagendautrecht.nl/evenement/149722/klein-amsterdam-producties-de-ridder-zonder-billen-3",
-   "title": "Klein Amsterdam Producties: De ridder zonder billen (3+)",
-   "start": "2026-12-13T11:15",
-   "venueName": "ZIMIHC theater Zuilen",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|klein-amsterdam-producties-de-ridder-zonder-billen-3"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149723-2026-12-23-09:30",
-   "url": "https://www.uitagendautrecht.nl/evenement/149723/krulmuziek-kerstconcert-0-2",
-   "title": "Krulmuziek: Kerstconcert (0+/2+)",
-   "start": "2026-12-23T09:30",
-   "venueName": "ZIMIHC theater Zuilen",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "summary": "Kort kerstconcert voor baby's en peuters; meerdere ochtendvoorstellingen.",
-   "confidence": "hoog",
-   "seriesKey": "ua|krulmuziek-kerstconcert-0-2",
-   "special": true
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149723-2026-12-23-10:15",
-   "url": "https://www.uitagendautrecht.nl/evenement/149723/krulmuziek-kerstconcert-0-2",
-   "title": "Krulmuziek: Kerstconcert (0+/2+)",
-   "start": "2026-12-23T10:15",
-   "venueName": "ZIMIHC theater Zuilen",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "summary": "Kort kerstconcert voor baby's en peuters; meerdere ochtendvoorstellingen.",
-   "confidence": "hoog",
-   "seriesKey": "ua|krulmuziek-kerstconcert-0-2",
-   "special": true
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149723-2026-12-23-11:15",
-   "url": "https://www.uitagendautrecht.nl/evenement/149723/krulmuziek-kerstconcert-0-2",
-   "title": "Krulmuziek: Kerstconcert (0+/2+)",
-   "start": "2026-12-23T11:15",
-   "venueName": "ZIMIHC theater Zuilen",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "summary": "Kort kerstconcert voor baby's en peuters; meerdere ochtendvoorstellingen.",
-   "confidence": "hoog",
-   "seriesKey": "ua|krulmuziek-kerstconcert-0-2",
-   "special": true
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149725-2026-12-27-14:30",
-   "url": "https://www.uitagendautrecht.nl/evenement/149725/myrthe-van-der-vuurst-de-vries-als-ik-de-baas-was-6",
-   "title": "Myrthe van der Vuurst de Vries: Als ik de baas was... (6+)",
-   "start": "2026-12-27T14:30",
-   "venueName": "ZIMIHC theater Zuilen",
-   "bookingText": "tickets",
-   "hints": [
-    "Jeugdtheater"
-   ],
-   "confidence": "hoog",
-   "seriesKey": "ua|myrthe-van-der-vuurst-de-vries-als-ik-de-baas-was-6"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-147271",
-   "url": "https://www.uitagendautrecht.nl/evenement/147271/lego-r-world-2026",
-   "title": "LEGO® World 2026 (laatste dag)",
-   "start": "2026-10-21",
-   "venueName": "Jaarbeurs",
-   "hints": [
-    "Festivals"
-   ],
-   "extraUncertainties": [
-    "Tijden en prijs niet gecontroleerd"
-   ],
-   "confidence": "middel",
-   "allDay": true,
-   "categories": [
-    "spel",
-    "festival"
-   ],
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "indoor": "binnen",
-   "estimatedMinMonths": 48,
-   "bookingText": "tickets",
-   "special": true
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149661",
-   "url": "https://www.uitagendautrecht.nl/evenement/149661/herfststukjes-2026",
-   "title": "Herfststukjes 2026 (jeugdtheaterfestival)",
-   "start": "2026-10-17",
-   "end": "2026-10-25",
-   "venueName": "Diverse locaties Utrecht",
-   "hints": [
-    "Jeugdtheater",
-    "Festivals"
-   ],
-   "confidence": "hoog",
-   "locality": "Utrecht",
-   "allDay": true,
-   "ongoing": true,
-   "categories": [
-    "theater",
-    "festival"
-   ],
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "summary": "Herfstvakantiefestival met jeugdvoorstellingen op verschillende podia in de stad."
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-145682",
-   "url": "https://www.uitagendautrecht.nl/evenement/145682/domplein-200-jaar",
-   "title": "Puin tot Plein — Domplein 200 jaar",
-   "start": "2026-06-02",
-   "end": "2026-11-11",
-   "venueName": "Domplein",
-   "extraUncertainties": [
-    "Programma per dag: zie bron"
-   ],
-   "confidence": "middel",
-   "allDay": true,
-   "ongoing": true,
-   "categories": [
-    "expositie",
-    "festival"
-   ],
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "indoor": "buiten",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-146169",
-   "url": "https://www.uitagendautrecht.nl/evenement/146169/popronde-utrecht",
-   "title": "Popronde Utrecht",
-   "start": "2026-10-22T18:30",
-   "end": "2026-10-23T01:00",
-   "venueName": "Diverse locaties Utrecht",
-   "confidence": "hoog",
-   "locality": "Utrecht",
-   "categories": [
-    "muziek",
-    "festival"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-150030",
-   "url": "https://www.uitagendautrecht.nl/evenement/150030/panfest",
-   "title": "PANFest",
-   "start": "2026-10-31T11:00",
-   "end": "2026-10-31T16:00",
-   "venueName": "Waterliniemuseum Fort bij Vechten",
-   "hints": [
-    "Festivals"
-   ],
-   "extraUncertainties": [
-    "Doelgroep en prijs niet gecontroleerd"
-   ],
-   "confidence": "middel",
-   "categories": [
-    "festival"
-   ],
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ]
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-121791",
-   "url": "https://www.uitagendautrecht.nl/evenement/121791/warming-up-festival",
-   "title": "Warming Up Festival",
-   "start": "2026-10-31",
-   "end": "2026-11-01",
-   "venueName": "Stadsschouwburg Utrecht",
-   "extraUncertainties": [
-    "Tijden niet gecontroleerd"
-   ],
-   "confidence": "middel",
-   "allDay": true,
-   "categories": [
-    "festival",
-    "theater"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-49264",
-   "url": "https://www.uitagendautrecht.nl/evenement/49264/le-guess-who-1",
-   "title": "Le Guess Who?",
-   "start": "2026-11-05",
-   "end": "2026-11-08",
-   "venueName": "Diverse locaties Utrecht",
-   "extraUncertainties": [
-    "De agendatitel noemt nog de data van 2025; controleer het programma"
-   ],
-   "confidence": "middel",
-   "locality": "Utrecht",
-   "allDay": true,
-   "ongoing": true,
-   "categories": [
-    "muziek",
-    "festival"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "bookingText": "tickets",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-132855",
-   "url": "https://www.uitagendautrecht.nl/evenement/132855/u-festival-1",
-   "title": "U? Festival",
-   "start": "2026-11-07T12:00",
-   "end": "2026-11-07T20:30",
-   "venueName": "De Nijverheid",
-   "confidence": "hoog",
-   "locality": "Utrecht",
-   "categories": [
-    "festival"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-47200",
-   "url": "https://www.uitagendautrecht.nl/evenement/47200/smartlappenfestival-4",
-   "title": "Smartlappenfestival Utrecht",
-   "start": "2026-11-13",
-   "end": "2026-11-15",
-   "venueName": "Diverse locaties Utrecht",
-   "confidence": "hoog",
-   "locality": "Utrecht",
-   "allDay": true,
-   "categories": [
-    "muziek",
-    "festival"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-126732",
-   "url": "https://www.uitagendautrecht.nl/evenement/126732/heroes-dutch-comic-con-1",
-   "title": "Heroes Dutch Comic Con",
-   "start": "2026-11-21T10:00",
-   "end": "2026-11-22T18:00",
-   "venueName": "Jaarbeurs",
-   "confidence": "hoog",
-   "categories": [
-    "festival"
-   ],
-   "audiences": [
-    "volwassenen",
-    "gezin"
-   ],
-   "bookingText": "tickets",
-   "indoor": "binnen",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-77639",
-   "url": "https://www.uitagendautrecht.nl/evenement/77639/winterwinkelen-bij-de-makers-van-merwede-1",
-   "title": "Winterwinkelen bij de makers van Merwede",
-   "start": "2026-11-22T11:00",
-   "end": "2026-11-22T17:00",
-   "venueName": "Vechtclub XL",
-   "confidence": "hoog",
-   "locality": "Utrecht",
-   "categories": [
-    "markt"
-   ],
-   "audiences": [
-    "volwassenen",
-    "gezin"
-   ],
-   "special": true,
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-148637",
-   "url": "https://www.uitagendautrecht.nl/evenement/148637/fotoboekenweek",
-   "title": "Fotoboekenweek",
-   "start": "2026-11-25",
-   "end": "2026-12-12",
-   "venueName": "Diverse locaties Utrecht",
-   "confidence": "hoog",
-   "locality": "Utrecht",
-   "allDay": true,
-   "ongoing": true,
-   "categories": [
-    "expositie",
-    "festival"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149379",
-   "url": "https://www.uitagendautrecht.nl/evenement/149379/het-winterborrel-festival",
-   "title": "Hét Winterborrel Festival",
-   "start": "2026-12-18T15:00",
-   "end": "2026-12-19T01:00",
-   "venueName": "Werkspoorkathedraal",
-   "confidence": "hoog",
-   "categories": [
-    "festival"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "bookingText": "tickets",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149990",
-   "url": "https://www.uitagendautrecht.nl/evenement/149990/internationaal-kamermuziekfestival-utrecht-2026",
-   "title": "Internationaal Kamermuziekfestival Utrecht 2026",
-   "start": "2026-12-27",
-   "end": "2026-12-30",
-   "venueName": "Diverse locaties Utrecht",
-   "confidence": "hoog",
-   "locality": "Utrecht",
-   "allDay": true,
-   "categories": [
-    "muziek",
-    "festival"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "bookingText": "tickets",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-150077",
-   "url": "https://www.uitagendautrecht.nl/evenement/150077/poeziefestival",
-   "title": "Poëziefestival",
-   "start": "2027-01-30T13:00",
-   "end": "2027-01-30T22:00",
-   "venueName": "Bibliotheek Neude",
-   "confidence": "hoog",
-   "categories": [
-    "festival",
-    "lezing"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-147248",
-   "url": "https://www.uitagendautrecht.nl/evenement/147248/graffiti",
-   "title": "Graffiti — tentoonstelling",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "venueName": "Centraal Museum",
-   "extraUncertainties": [
-    "Einddatum van de tentoonstelling niet gecontroleerd"
-   ],
-   "confidence": "middel",
-   "allDay": true,
-   "ongoing": true,
-   "openingNote": "Di t/m zo 11:00–17:00",
-   "categories": [
-    "expositie",
-    "museum"
-   ],
-   "audiences": [
-    "volwassenen",
-    "gezin"
-   ],
-   "indoor": "binnen",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-148636",
-   "url": "https://www.uitagendautrecht.nl/evenement/148636/occupy-time",
-   "title": "OCCUPY TIME",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "venueName": "FOTODOK",
-   "extraUncertainties": [
-    "Einddatum niet gecontroleerd"
-   ],
-   "confidence": "middel",
-   "locality": "Utrecht",
-   "allDay": true,
-   "ongoing": true,
-   "openingNote": "Wo t/m zo 11:30–17:30",
-   "categories": [
-    "expositie"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "indoor": "binnen",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149091",
-   "url": "https://www.uitagendautrecht.nl/evenement/149091/tentoonstelling-een-bodem-vol-romeinse-vondsten-3",
-   "title": "Tentoonstelling 'Een bodem vol Romeinse vondsten'",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "venueName": "Domplein 4-5",
-   "hints": [
-    "Kinderen",
-    "Gezinnen"
-   ],
-   "extraUncertainties": [
-    "Einddatum niet gecontroleerd"
-   ],
-   "confidence": "middel",
-   "allDay": true,
-   "ongoing": true,
-   "openingNote": "Diverse tijden",
-   "categories": [
-    "expositie"
-   ],
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "indoor": "binnen"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-147314",
-   "url": "https://www.uitagendautrecht.nl/evenement/147314/connor-schumacher-asset-liability-equity",
-   "title": "Connor Schumacher: Asset, Liability & Equity",
-   "start": "2026-10-23T20:00",
-   "venueName": "Stadsschouwburg Utrecht",
-   "confidence": "hoog",
-   "categories": [
-    "theater"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "bookingText": "tickets",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-147412",
-   "url": "https://www.uitagendautrecht.nl/evenement/147412/seasession-regarde-bien",
-   "title": "Seasession: Regarde Bien",
-   "start": "2026-10-31T20:00",
-   "venueName": "Stadsschouwburg Utrecht",
-   "confidence": "hoog",
-   "categories": [
-    "theater",
-    "muziek"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "bookingText": "tickets",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-134798",
-   "url": "https://www.uitagendautrecht.nl/evenement/134798/lilian-hak-1",
-   "title": "Lilian Hak",
-   "start": "2026-11-14T20:30",
-   "venueName": "Schiller Theater Place Royale",
-   "confidence": "hoog",
-   "locality": "Utrecht",
-   "categories": [
-    "muziek"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "bookingText": "tickets",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-147577",
-   "url": "https://www.uitagendautrecht.nl/evenement/147577/freya-ridings",
-   "title": "Freya Ridings",
-   "start": "2026-10-21T20:15",
-   "venueName": "TivoliVredenburg",
-   "confidence": "hoog",
-   "categories": [
-    "muziek"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "bookingText": "tickets",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-104772",
-   "url": "https://www.uitagendautrecht.nl/evenement/104772/son-lux",
-   "title": "Son Lux",
-   "start": "2026-10-26T20:00",
-   "venueName": "TivoliVredenburg",
-   "confidence": "hoog",
-   "categories": [
-    "muziek"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "bookingText": "tickets",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-148484",
-   "url": "https://www.uitagendautrecht.nl/evenement/148484/studium-generale-hoe-zoek-je-naar-leven-op-andere-planeten",
-   "title": "Studium Generale: Hoe zoek je naar leven op andere planeten?",
-   "start": "2026-10-26T20:00",
-   "venueName": "Academiegebouw",
-   "confidence": "hoog",
-   "locality": "Binnenstad",
-   "lat": 52.0901,
-   "lon": 5.1225,
-   "categories": [
-    "lezing"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "hints": [],
-   "geoPrecision": "approx"
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-147518",
-   "url": "https://www.uitagendautrecht.nl/evenement/147518/fietstocht-langs-industrieel-erfgoed-en-nieuwe-bestemmingen",
-   "title": "Fietstocht langs industrieel erfgoed en nieuwe bestemmingen",
-   "start": "2026-10-21T11:00",
-   "venueName": "Het Utrechts Archief",
-   "confidence": "hoog",
-   "locality": "Utrecht",
-   "categories": [
-    "rondleiding"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "indoor": "buiten",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149859",
-   "url": "https://www.uitagendautrecht.nl/evenement/149859/good-grief-nicolaikerk",
-   "title": "Good Grief: Nicolaïkerk",
-   "start": "2026-10-31T10:00",
-   "end": "2026-10-31T18:00",
-   "venueName": "Nicolaïkerk",
-   "confidence": "hoog",
-   "categories": [
-    "festival"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-149066",
-   "url": "https://www.uitagendautrecht.nl/evenement/149066/nacht-van-de-wijn-festival",
-   "title": "Nacht van de Wijn",
-   "start": "2026-11-06",
-   "end": "2026-11-08",
-   "venueName": "Werkspoorkathedraal",
-   "confidence": "hoog",
-   "allDay": true,
-   "categories": [
-    "festival"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "bookingText": "tickets",
-   "hints": []
-  },
-  {
-   "sourceName": "UITagenda Utrecht",
-   "sourceEventId": "ua-101992",
-   "url": "https://www.uitagendautrecht.nl/evenement/101992/no-man-s-land",
-   "title": "No Man's Land",
-   "start": "2026-12-02T09:30",
-   "end": "2026-12-02T18:00",
-   "venueName": "TivoliVredenburg",
-   "confidence": "hoog",
-   "categories": [
-    "festival"
-   ],
-   "audiences": [
-    "volwassenen"
-   ],
-   "hints": []
-  }
- ]
+  "meta": {
+    "collectedAt": "2026-10-21T07:15:00Z",
+    "collectedBy": "Claude (webonderzoek in opdracht van de gebruiker)",
+    "method": "Handmatig nagelopen op 21-10-2026 via de officiële agenda's: Bibliotheek Utrecht (OP-shop), UITagenda Utrecht, Podium Hoge Woerd; twee Sinterklaasintochten via Kidsproof (secundair). Alleen gegevens die op de bronpagina's stonden; ontbrekende informatie staat als onzekerheid vermeld.",
+    "note": "Samenvattingen zijn zelf geschreven, geen brontekst."
+  },
+  "events": [
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-leidsche-rijn-centrum-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-21T10:30",
+      "end": "2026-10-21T11:00",
+      "venueName": "Bibliotheek Leidsche Rijn Centrum",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-vleuten-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-21T10:30",
+      "end": "2026-10-21T11:00",
+      "venueName": "Bibliotheek Vleuten",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-vleuterweide-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-21T10:30",
+      "end": "2026-10-21T11:00",
+      "venueName": "Bibliotheek Vleuterweide",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-neude-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-21T10:30",
+      "end": "2026-10-21T11:00",
+      "venueName": "Bibliotheek Neude",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-oog-in-al-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-21T10:30",
+      "end": "2026-10-21T11:00",
+      "venueName": "Bibliotheek Oog in Al",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-zuilen-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-21T10:30",
+      "end": "2026-10-21T11:00",
+      "venueName": "Bibliotheek Zuilen",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-hoograven-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-21T10:30",
+      "end": "2026-10-21T11:00",
+      "venueName": "Bibliotheek Hoograven",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-kanaleneiland-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-21T10:30",
+      "end": "2026-10-21T11:00",
+      "venueName": "Bibliotheek Kanaleneiland",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-leidsche-rijn-centrum-2026-10-28",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-28T10:30",
+      "end": "2026-10-28T11:00",
+      "venueName": "Bibliotheek Leidsche Rijn Centrum",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-vleuten-2026-10-28",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-28T10:30",
+      "end": "2026-10-28T11:00",
+      "venueName": "Bibliotheek Vleuten",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-vleuterweide-2026-10-28",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-28T10:30",
+      "end": "2026-10-28T11:00",
+      "venueName": "Bibliotheek Vleuterweide",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-neude-2026-10-28",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-28T10:30",
+      "end": "2026-10-28T11:00",
+      "venueName": "Bibliotheek Neude",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-oog-in-al-2026-10-28",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-28T10:30",
+      "end": "2026-10-28T11:00",
+      "venueName": "Bibliotheek Oog in Al",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-zuilen-2026-10-28",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-28T10:30",
+      "end": "2026-10-28T11:00",
+      "venueName": "Bibliotheek Zuilen",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-hoograven-2026-10-28",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-28T10:30",
+      "end": "2026-10-28T11:00",
+      "venueName": "Bibliotheek Hoograven",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-kanaleneiland-2026-10-28",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-28T10:30",
+      "end": "2026-10-28T11:00",
+      "venueName": "Bibliotheek Kanaleneiland",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-10811-overvecht-2026-10-22",
+      "url": "https://bibliotheekutrecht.op-shop.nl/10811/voorlezen-2-4-jaar/22-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-22T10:30",
+      "end": "2026-10-22T11:00",
+      "venueName": "Bibliotheek Overvecht",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-overvecht-2026-10-29",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-29T10:30",
+      "end": "2026-10-29T11:00",
+      "venueName": "Bibliotheek Overvecht",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-hoograven-2026-10-24",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-24T10:30",
+      "end": "2026-10-24T11:00",
+      "venueName": "Bibliotheek Hoograven",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-oog-in-al-2026-10-24",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-10-24T11:00",
+      "end": "2026-10-24T11:30",
+      "venueName": "Bibliotheek Oog in Al",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-leidsche-rijn-centrum-2026-12-16",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-12-16T10:30",
+      "end": "2026-12-16T11:00",
+      "venueName": "Bibliotheek Leidsche Rijn Centrum",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-vleuten-2026-12-16",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-12-16T10:30",
+      "end": "2026-12-16T11:00",
+      "venueName": "Bibliotheek Vleuten",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-vleuterweide-2026-12-16",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-12-16T10:30",
+      "end": "2026-12-16T11:00",
+      "venueName": "Bibliotheek Vleuterweide",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-neude-2026-12-16",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-12-16T10:30",
+      "end": "2026-12-16T11:00",
+      "venueName": "Bibliotheek Neude",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-oog-in-al-2026-12-16",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-12-16T10:30",
+      "end": "2026-12-16T11:00",
+      "venueName": "Bibliotheek Oog in Al",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-zuilen-2026-12-16",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-12-16T10:30",
+      "end": "2026-12-16T11:00",
+      "venueName": "Bibliotheek Zuilen",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-hoograven-2026-12-16",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-12-16T10:30",
+      "end": "2026-12-16T11:00",
+      "venueName": "Bibliotheek Hoograven",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-565-kanaleneiland-2026-12-16",
+      "url": "https://bibliotheekutrecht.op-shop.nl/565/voorlezen-2-4-jaar/vanaf/16-12-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-12-16T10:30",
+      "end": "2026-12-16T11:00",
+      "venueName": "Bibliotheek Kanaleneiland",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-10819-overvecht-2026-12-17",
+      "url": "https://bibliotheekutrecht.op-shop.nl/10819/voorlezen-2-4-jaar/17-12-2026",
+      "title": "Voorlezen (2-4 jaar)",
+      "start": "2026-12-17T10:30",
+      "end": "2026-12-17T11:00",
+      "venueName": "Bibliotheek Overvecht",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Een half uur prentenboeken voorlezen door vrijwilligers, voor peuters met hun ouder.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-2-4"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-566-vleuten-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (4-6 jaar)",
+      "start": "2026-10-21T14:30",
+      "end": "2026-10-21T15:00",
+      "venueName": "Bibliotheek Vleuten",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-4-6"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-566-leidsche-rijn-centrum-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (4-6 jaar)",
+      "start": "2026-10-21T15:00",
+      "end": "2026-10-21T15:30",
+      "venueName": "Bibliotheek Leidsche Rijn Centrum",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-4-6"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-566-vleuterweide-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (4-6 jaar)",
+      "start": "2026-10-21T15:00",
+      "end": "2026-10-21T15:30",
+      "venueName": "Bibliotheek Vleuterweide",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-4-6"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-566-de-meern-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/21-10-2026",
+      "title": "Voorlezen (4-6 jaar)",
+      "start": "2026-10-21T15:30",
+      "end": "2026-10-21T16:00",
+      "venueName": "Bibliotheek De Meern",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-4-6"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-566-vleuten-2026-12-16",
+      "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/16-12-2026",
+      "title": "Voorlezen (4-6 jaar)",
+      "start": "2026-12-16T14:30",
+      "end": "2026-12-16T15:00",
+      "venueName": "Bibliotheek Vleuten",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-4-6"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-566-leidsche-rijn-centrum-2026-12-16",
+      "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/16-12-2026",
+      "title": "Voorlezen (4-6 jaar)",
+      "start": "2026-12-16T15:00",
+      "end": "2026-12-16T15:30",
+      "venueName": "Bibliotheek Leidsche Rijn Centrum",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-4-6"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-566-vleuterweide-2026-12-16",
+      "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/16-12-2026",
+      "title": "Voorlezen (4-6 jaar)",
+      "start": "2026-12-16T15:00",
+      "end": "2026-12-16T15:30",
+      "venueName": "Bibliotheek Vleuterweide",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-4-6"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-566-de-meern-2026-12-16",
+      "url": "https://bibliotheekutrecht.op-shop.nl/566/voorlezen-4-6-jaar/vanaf/16-12-2026",
+      "title": "Voorlezen (4-6 jaar)",
+      "start": "2026-12-16T15:30",
+      "end": "2026-12-16T16:00",
+      "venueName": "Bibliotheek De Meern",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-4-6"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-10865-zuilen-2026-10-23",
+      "url": "https://bibliotheekutrecht.op-shop.nl/10865/voorlezen-4-6-jaar/23-10-2026",
+      "title": "Voorlezen (4-6 jaar)",
+      "start": "2026-10-23T15:00",
+      "end": "2026-10-23T15:30",
+      "venueName": "Bibliotheek Zuilen",
+      "priceText": "Gratis",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Voorleesmoment voor kleuters in de bibliotheek, ongeveer een half uur.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-4-6"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-9386-leidsche-rijn-centrum-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/9386/louis-paraplouis-voorlezen-en-knutselen-4/21-10-2026",
+      "title": "Louis Paraplouis - voorlezen en knutselen (4+)",
+      "start": "2026-10-21T14:00",
+      "end": "2026-10-21T15:30",
+      "venueName": "Bibliotheek Leidsche Rijn Centrum",
+      "priceText": "Gratis",
+      "bookingText": "wel reserveren",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Herfstvakantieactiviteit: voorlezen gevolgd door knutselen, voor kleuters vanaf 4 jaar.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|louis-paraplouis"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-9385-neude-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/9385/louis-paraplouis-voorlezen-en-knutselen-4/21-10-2026",
+      "title": "Louis Paraplouis - voorlezen en knutselen (4+)",
+      "start": "2026-10-21T10:30",
+      "end": "2026-10-21T12:00",
+      "venueName": "Bibliotheek Neude",
+      "priceText": "Gratis",
+      "bookingText": "wel reserveren",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Herfstvakantieactiviteit: voorlezen gevolgd door knutselen, voor kleuters vanaf 4 jaar.",
+      "confidence": "hoog",
+      "seriesKey": "bieb|louis-paraplouis"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-9381-kanaleneiland-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/9381/workshop-striptekenen-dog-man-7/21-10-2026",
+      "title": "Workshop striptekenen: Dog Man (7+)",
+      "start": "2026-10-21T10:30",
+      "end": "2026-10-21T12:00",
+      "venueName": "Bibliotheek Kanaleneiland",
+      "priceText": "Gratis",
+      "bookingText": "wel reserveren",
+      "hints": [
+        "Jeugd"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "bieb|dogman"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-9382-overvecht-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/9382/workshop-striptekenen-dog-man-7/21-10-2026",
+      "title": "Workshop striptekenen: Dog Man (7+)",
+      "start": "2026-10-21T14:30",
+      "end": "2026-10-21T16:00",
+      "venueName": "Bibliotheek Overvecht",
+      "priceText": "Gratis",
+      "bookingText": "wel reserveren",
+      "hints": [
+        "Jeugd"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "bieb|dogman"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-11031-vleuterweide-2026-10-21",
+      "url": "https://bibliotheekutrecht.op-shop.nl/11031/destiny-avontuur-aan-tafel-8-13-jaar/21-10-2026",
+      "title": "Destiny: avontuur aan tafel (8-13 jaar)",
+      "start": "2026-10-21T14:00",
+      "end": "2026-10-21T16:00",
+      "venueName": "Bibliotheek Vleuterweide",
+      "priceText": "Gratis",
+      "bookingText": "inloop",
+      "hints": [
+        "Jeugd"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "bieb|destiny"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-11032-vleuterweide-2026-10-23",
+      "url": "https://bibliotheekutrecht.op-shop.nl/11032/destiny-avontuur-aan-tafel-8-13-jaar/23-10-2026",
+      "title": "Destiny: avontuur aan tafel (8-13 jaar)",
+      "start": "2026-10-23T10:00",
+      "end": "2026-10-23T12:00",
+      "venueName": "Bibliotheek Vleuterweide",
+      "priceText": "Gratis",
+      "bookingText": "inloop",
+      "hints": [
+        "Jeugd"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "bieb|destiny"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-8292-leidsche-rijn-centrum-2026-10-22",
+      "url": "https://bibliotheekutrecht.op-shop.nl/8292/spelletjesmiddag-6-12-jaar/22-10-2026",
+      "title": "Spelletjesmiddag (6-12 jaar)",
+      "start": "2026-10-22T15:00",
+      "end": "2026-10-22T17:00",
+      "venueName": "Bibliotheek Leidsche Rijn Centrum",
+      "priceText": "Gratis",
+      "bookingText": "inloop",
+      "hints": [
+        "Jeugd"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "bieb|spelletjesmiddag"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-9253-neude-2026-10-22",
+      "url": "https://bibliotheekutrecht.op-shop.nl/9253/herfststukjes-ik-niet-op-jou-9/22-10-2026",
+      "title": "Herfststukjes: Ik niet op jou (9+)",
+      "start": "2026-10-22T19:30",
+      "end": "2026-10-22T20:30",
+      "venueName": "Bibliotheek Neude",
+      "priceText": "€ 10 kind / € 13 volwassene",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugd"
+      ],
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-9220-neude-2026-10-23",
+      "url": "https://bibliotheekutrecht.op-shop.nl/9220/herfststukjes-de-dinozoekers-triceratops-5/23-10-2026",
+      "title": "Herfststukjes: De dinozoekers-Triceratops (5+)",
+      "start": "2026-10-23T14:00",
+      "end": "2026-10-23T14:50",
+      "venueName": "Bibliotheek Neude",
+      "priceText": "€ 10 kind / € 13 volwassene",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Korte jeugdvoorstelling (50 minuten) over dinosaurussen, vanaf 5 jaar.",
+      "confidence": "hoog",
+      "durationMinutes": 50
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-9379-neude-2026-10-23",
+      "url": "https://bibliotheekutrecht.op-shop.nl/9379/winnie-de-poeh-is-jarig-4-8-jaar/23-10-2026",
+      "title": "Winnie de Poeh is jarig! (4-8 jaar)",
+      "start": "2026-10-23T15:30",
+      "end": "2026-10-23T16:30",
+      "venueName": "Bibliotheek Neude",
+      "priceText": "Gratis",
+      "bookingText": "inloop",
+      "hints": [
+        "Jeugd"
+      ],
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-398-leidsche-rijn-centrum-2026-10-23",
+      "url": "https://bibliotheekutrecht.op-shop.nl/398/voorlezen-in-het-engels-4-8-jaar/vanaf/23-10-2026",
+      "title": "Voorlezen in het Engels (4-8 jaar)",
+      "start": "2026-10-23T15:30",
+      "end": "2026-10-23T16:00",
+      "venueName": "Bibliotheek Leidsche Rijn Centrum",
+      "hints": [
+        "Jeugd"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "bieb|voorlezen-engels"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-11188-neude-2026-10-24",
+      "url": "https://bibliotheekutrecht.op-shop.nl/11188/boekpresentatie-limbusland-pieter-koolwijk-8/24-10-2026",
+      "title": "Boekpresentatie Limbusland - Pieter Koolwijk (8+)",
+      "start": "2026-10-24T15:00",
+      "end": "2026-10-24T16:30",
+      "venueName": "Bibliotheek Neude",
+      "priceText": "Gratis",
+      "bookingText": "wel reserveren",
+      "hints": [
+        "Jeugd"
+      ],
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-11036-leidsche-rijn-centrum-2026-10-25",
+      "url": "https://bibliotheekutrecht.op-shop.nl/11036/babyconcert-ik-droom-0-2-jaar/25-10-2026",
+      "title": "Babyconcert 'Ik droom' (0-2 jaar)",
+      "start": "2026-10-25T10:00",
+      "end": "2026-10-25T10:30",
+      "venueName": "Bibliotheek Leidsche Rijn Centrum",
+      "priceText": "€ 7 lid / € 10 niet-lid",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugd"
+      ],
+      "summary": "Kort concert van een half uur voor baby's en dreumesen tot en met 2 jaar, samen met een ouder.",
+      "confidence": "hoog",
+      "durationMinutes": 30
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-10286-neude-2026-10-25",
+      "url": "https://bibliotheekutrecht.op-shop.nl/10286/rondleiding-brullen-in-de-bieb-4-7-jaar/25-10-2026",
+      "title": "Rondleiding: Brullen in de Bieb (4-7 jaar)",
+      "start": "2026-10-25T10:30",
+      "end": "2026-10-25T11:15",
+      "venueName": "Bibliotheek Neude",
+      "priceText": "Gratis",
+      "bookingText": "wel reserveren",
+      "hints": [
+        "Jeugd"
+      ],
+      "confidence": "hoog",
+      "durationMinutes": 45
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-11060",
+      "url": "https://bibliotheekutrecht.op-shop.nl/11060/installatie-steentje-bij-steentje/17-10-2026",
+      "title": "Installatie: Steentje bij steentje",
+      "start": "2026-10-17",
+      "end": "2026-10-25",
+      "allDay": true,
+      "ongoing": true,
+      "venueName": "Bibliotheek Neude",
+      "priceText": "Gratis",
+      "bookingText": "inloop",
+      "hints": [
+        "Jeugd"
+      ],
+      "categories": [
+        "expositie"
+      ],
+      "audiences": [
+        "kinderen",
+        "gezin"
+      ],
+      "indoor": "binnen",
+      "extraUncertainties": [
+        "Openingstijden: zie de bibliotheek"
+      ],
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-8638-leidsche-rijn-centrum-2026-12-16",
+      "url": "https://bibliotheekutrecht.op-shop.nl/8638/workshop-songwriting-in-alle-talen-8-12-jaar/16-12-2026",
+      "title": "Workshop: Songwriting in alle talen (8-12 jaar)",
+      "start": "2026-12-16T16:00",
+      "end": "2026-12-16T17:15",
+      "venueName": "Bibliotheek Leidsche Rijn Centrum",
+      "priceText": "Gratis",
+      "bookingText": "wel reserveren",
+      "hints": [
+        "Jeugd"
+      ],
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-11141-leidsche-rijn-centrum-2026-12-13",
+      "url": "https://bibliotheekutrecht.op-shop.nl/11141/workshop-japanse-kalligrafie/13-12-2026",
+      "title": "Workshop: Japanse kalligrafie",
+      "start": "2026-12-13T15:00",
+      "end": "2026-12-13T16:30",
+      "venueName": "Bibliotheek Leidsche Rijn Centrum",
+      "priceText": "Gratis",
+      "bookingText": "wel reserveren",
+      "hints": [
+        "Volwassenen"
+      ],
+      "confidence": "hoog",
+      "audiences": [
+        "volwassenen"
+      ]
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-7286-neude-2026-12-14",
+      "url": "https://bibliotheekutrecht.op-shop.nl/7286/tegenlicht-meet-up/14-12-2026",
+      "title": "Tegenlicht Meet-Up",
+      "start": "2026-12-14T19:30",
+      "end": "2026-12-14T21:30",
+      "venueName": "Bibliotheek Neude",
+      "priceText": "Gratis",
+      "bookingText": "wel reserveren",
+      "hints": [
+        "Volwassenen"
+      ],
+      "confidence": "hoog",
+      "audiences": [
+        "volwassenen"
+      ]
+    },
+    {
+      "sourceName": "Bibliotheek Utrecht",
+      "sourceEventId": "bieb-11189-neude-2026-10-24",
+      "url": "https://bibliotheekutrecht.op-shop.nl/11189/wereldfietsercafe/24-10-2026",
+      "title": "WereldfietserCafé",
+      "start": "2026-10-24T15:00",
+      "end": "2026-10-24T16:30",
+      "venueName": "Bibliotheek Neude",
+      "priceText": "Gratis",
+      "bookingText": "wel reserveren",
+      "hints": [
+        "Volwassenen"
+      ],
+      "confidence": "hoog",
+      "audiences": [
+        "volwassenen"
+      ]
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-150082",
+      "url": "https://www.uitagendautrecht.nl/evenement/150082/kerstvakantie-in-de-bieb-feest-4",
+      "title": "Kerstvakantie in de Bieb: Feest (4+)",
+      "start": "2026-12-27T11:00",
+      "end": "2026-12-30",
+      "venueName": "Diverse vestigingen Bibliotheek Utrecht",
+      "locality": "Utrecht",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "extraUncertainties": [
+        "Welke vestigingen en welke dag precies: zie de bron"
+      ],
+      "confidence": "middel",
+      "special": true
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-133930-14:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/133930/winterkost-de-kersthaas-4",
+      "title": "Winterkost: De Kersthaas (4+)",
+      "start": "2026-12-23T14:00",
+      "venueName": "Bibliotheek Neude",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "special": true,
+      "seriesKey": "ua|kersthaas"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-133930-16:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/133930/winterkost-de-kersthaas-4",
+      "title": "Winterkost: De Kersthaas (4+)",
+      "start": "2026-12-23T16:00",
+      "venueName": "Bibliotheek Neude",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "special": true,
+      "seriesKey": "ua|kersthaas"
+    },
+    {
+      "sourceName": "Podium Hoge Woerd",
+      "sourceEventId": "phw-alle-kinderen-stinken-2026-10-21-15:00",
+      "url": "https://www.podiumhogewoerd.nl/agenda/alle-kinderen-stinken",
+      "title": "Alle kinderen stinken (6+)",
+      "start": "2026-10-21T15:00",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugd",
+        "Herfststukjes"
+      ],
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "Podium Hoge Woerd",
+      "sourceEventId": "phw-samar-en-de-bange-koning-2026-10-23-15:00",
+      "url": "https://www.podiumhogewoerd.nl/agenda/samar-en-de-bange-koning",
+      "title": "Samar en de bange koning (8+)",
+      "start": "2026-10-23T15:00",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugd",
+        "Herfststukjes"
+      ],
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "Podium Hoge Woerd",
+      "sourceEventId": "phw-the-new-gen-2026-10-24-20:30",
+      "url": "https://www.podiumhogewoerd.nl/agenda/the-new-gen",
+      "title": "UC-Crew: The New Gen",
+      "start": "2026-10-24T20:30",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Dans"
+      ],
+      "confidence": "hoog",
+      "audiences": [
+        "volwassenen"
+      ],
+      "categories": [
+        "theater"
+      ]
+    },
+    {
+      "sourceName": "Podium Hoge Woerd",
+      "sourceEventId": "phw-het-lammetje-dat-een-varken-is-4-2026-10-25-15:00",
+      "url": "https://www.podiumhogewoerd.nl/agenda/het-lammetje-dat-een-varken-is-4",
+      "title": "Het lammetje dat een varken is (4+)",
+      "start": "2026-10-25T15:00",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugd",
+        "Herfststukjes"
+      ],
+      "summary": "Jeugdvoorstelling van Het Filiaal theatermakers met boerderijverhalen, vanaf 4 jaar, in het theater in De Meern.",
+      "confidence": "hoog"
+    },
+    {
+      "sourceName": "Podium Hoge Woerd",
+      "sourceEventId": "phw-biotopia-2026-10-29-20:30",
+      "url": "https://www.podiumhogewoerd.nl/agenda/biotopia",
+      "title": "SHIFFT: Biotopia",
+      "start": "2026-10-29T20:30",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Dans"
+      ],
+      "confidence": "hoog",
+      "audiences": [
+        "volwassenen"
+      ],
+      "categories": [
+        "theater"
+      ]
+    },
+    {
+      "sourceName": "Podium Hoge Woerd",
+      "sourceEventId": "phw-heartbeats-2026-10-30-20:00",
+      "url": "https://www.podiumhogewoerd.nl/agenda/heartbeats",
+      "title": "Theater Rotterdam: Heartbeats",
+      "start": "2026-10-30T20:00",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Theater"
+      ],
+      "confidence": "hoog",
+      "audiences": [
+        "volwassenen"
+      ],
+      "categories": [
+        "theater"
+      ]
+    },
+    {
+      "sourceName": "Podium Hoge Woerd",
+      "sourceEventId": "phw-gelukkig-maar-2026-10-31-20:00",
+      "url": "https://www.podiumhogewoerd.nl/agenda/gelukkig-maar",
+      "title": "Myrte Siebinga: GELUKKIG MAAR",
+      "start": "2026-10-31T20:00",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Cabaret"
+      ],
+      "statusText": "Geannuleerd",
+      "confidence": "hoog",
+      "audiences": [
+        "volwassenen"
+      ],
+      "categories": [
+        "theater"
+      ]
+    },
+    {
+      "sourceName": "Podium Hoge Woerd",
+      "sourceEventId": "phw-integratieplan-2026-10-31-20:00",
+      "url": "https://www.podiumhogewoerd.nl/agenda/integratieplan",
+      "title": "Saman Amini: Integratieplan #2 — Alles is Perspectief",
+      "start": "2026-10-31T20:00",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Cabaret"
+      ],
+      "statusText": "Uitverkocht",
+      "confidence": "hoog",
+      "audiences": [
+        "volwassenen"
+      ],
+      "categories": [
+        "theater"
+      ]
+    },
+    {
+      "sourceName": "Podium Hoge Woerd",
+      "sourceEventId": "phw-revue-revanche-2026-11-03-20:00",
+      "url": "https://www.podiumhogewoerd.nl/agenda/revue-revanche",
+      "title": "Valentina Toth: Revue Revanche (try-out)",
+      "start": "2026-11-03T20:00",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Cabaret"
+      ],
+      "statusText": "Laatste tickets",
+      "confidence": "hoog",
+      "audiences": [
+        "volwassenen"
+      ],
+      "categories": [
+        "theater"
+      ]
+    },
+    {
+      "sourceName": "Podium Hoge Woerd",
+      "sourceEventId": "phw-adoptie-2026-11-04-19:30",
+      "url": "https://www.podiumhogewoerd.nl/agenda/adoptie",
+      "title": "Jeugdzorg onder de loep (talk)",
+      "start": "2026-11-04T19:30",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Talks"
+      ],
+      "confidence": "hoog",
+      "audiences": [
+        "volwassenen"
+      ],
+      "categories": [
+        "lezing"
+      ]
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149080-15:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/149080/het-kleine-theater-lady-en-de-vage-hond-4",
+      "title": "Het Kleine Theater: Lady en de Vage Hond (4+)",
+      "start": "2026-11-08T15:00",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|het-kleine-theater-lady-en-de-vage-hond-4"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149929-15:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/149929/mark-van-vliet-en-g-orkest-toetie-4",
+      "title": "Mark van Vliet en G-Orkest: Toetie (4+)",
+      "start": "2026-12-13T15:00",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|mark-van-vliet-en-g-orkest-toetie-4"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149932-14:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/149932/jaski-en-groenteman-de-musical-zonder-billen-4",
+      "title": "Jaski en Groenteman: De musical zonder billen (4+)",
+      "start": "2026-12-26T14:00",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|jaski-en-groenteman-de-musical-zonder-billen-4"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149933-13:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/149933/het-kleine-theater-robin-hood-4",
+      "title": "Het Kleine Theater: Robin Hood (4+)",
+      "start": "2026-12-30T13:00",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|het-kleine-theater-robin-hood-4"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149933-15:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/149933/het-kleine-theater-robin-hood-4",
+      "title": "Het Kleine Theater: Robin Hood (4+)",
+      "start": "2026-12-30T15:00",
+      "venueName": "Podium Hoge Woerd",
+      "locality": "De Meern",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|het-kleine-theater-robin-hood-4"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-86965",
+      "url": "https://www.uitagendautrecht.nl/evenement/86965/rondleiding-langs-het-unieke-romeinse-schip-en-door-het-castellum",
+      "title": "Rondleiding langs het Romeinse schip en door het Castellum",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "allDay": true,
+      "ongoing": true,
+      "openingNote": "Za en zo 14:00–15:00",
+      "venueName": "Museum Hoge Woerd",
+      "locality": "De Meern",
+      "extraUncertainties": [
+        "Doorlopend; einddatum niet vermeld",
+        "Prijs niet vermeld"
+      ],
+      "confidence": "middel",
+      "categories": [
+        "rondleiding",
+        "museum"
+      ],
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "indoor": "binnen",
+      "estimatedMinMonths": 48,
+      "summary": "Rondleiding in het weekend langs de Romeinse rivierboot De Meern 1 en het nagebouwde castellum.",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-64756",
+      "url": "https://www.uitagendautrecht.nl/evenement/64756/archeolab-1",
+      "title": "ArcheoLab in Museum Hoge Woerd",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "allDay": true,
+      "ongoing": true,
+      "openingNote": "Diverse tijden; zie museum",
+      "venueName": "Museum Hoge Woerd",
+      "locality": "De Meern",
+      "extraUncertainties": [
+        "Doorlopend; einddatum niet vermeld",
+        "Prijs en leeftijd niet vermeld"
+      ],
+      "confidence": "middel",
+      "categories": [
+        "museum",
+        "workshop"
+      ],
+      "audiences": [
+        "gezin",
+        "kinderen"
+      ],
+      "indoor": "binnen",
+      "estimatedMinMonths": 48,
+      "summary": "Doe-ruimte in het Romeinse museum in De Meern waar je als archeoloog zelf vondsten onderzoekt.",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-143265",
+      "url": "https://www.uitagendautrecht.nl/evenement/143265/weekendvaart-de-meern-1",
+      "title": "Weekendvaart De Meern 1",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "allDay": true,
+      "ongoing": true,
+      "openingNote": "Za en zo 14:00",
+      "venueName": "Museum Hoge Woerd",
+      "locality": "De Meern",
+      "extraUncertainties": [
+        "Doorlopend; einddatum en seizoen niet vermeld",
+        "Prijs niet vermeld"
+      ],
+      "confidence": "middel",
+      "categories": [
+        "rondleiding"
+      ],
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "indoor": "buiten",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-140161",
+      "url": "https://www.uitagendautrecht.nl/evenement/140161/doe-expo-het-klokkenhuis-6",
+      "title": "Doe-expo Het Klokkenhuis (6+)",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "allDay": true,
+      "ongoing": true,
+      "openingNote": "Zondag 12:00–17:00",
+      "venueName": "De Vrijstaat",
+      "locality": "Leidsche Rijn",
+      "hints": [
+        "Jeugd"
+      ],
+      "extraUncertainties": [
+        "Doorlopend; einddatum niet vermeld",
+        "Prijs niet vermeld",
+        "Exacte locatie niet in de bron; wijk volgens UITagenda"
+      ],
+      "confidence": "middel",
+      "categories": [
+        "expositie"
+      ],
+      "indoor": "binnen"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-140948",
+      "url": "https://www.uitagendautrecht.nl/evenement/140948/noet-noet-en-het-geheime-kasteelfeest",
+      "title": "Noet Noet en het geheime kasteelfeest",
+      "start": "2026-10-21",
+      "end": "2026-12-31",
+      "allDay": true,
+      "ongoing": true,
+      "openingNote": "Openingstijden kasteel",
+      "venueName": "Kasteel de Haar",
+      "locality": "Haarzuilens",
+      "hints": [
+        "Kinderen"
+      ],
+      "extraUncertainties": [
+        "Prijs en leeftijd niet vermeld in de agenda"
+      ],
+      "confidence": "middel",
+      "categories": [
+        "spel",
+        "museum"
+      ],
+      "audiences": [
+        "gezin",
+        "kinderen"
+      ],
+      "estimatedMinMonths": 36,
+      "special": false,
+      "summary": "Gezinsactiviteit in Kasteel de Haar rond het kasteelpersonage Noet Noet; loopt het hele jaar."
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-83585",
+      "url": "https://www.uitagendautrecht.nl/evenement/83585/kinderspeurtochten-kasteel-de-haar",
+      "title": "Kinderspeurtochten Kasteel de Haar",
+      "start": "2026-10-21",
+      "end": "2026-12-31",
+      "allDay": true,
+      "ongoing": true,
+      "openingNote": "Dagelijks 11:00–17:00 (volgens agenda)",
+      "venueName": "Kasteel de Haar",
+      "locality": "Haarzuilens",
+      "hints": [
+        "Kinderen"
+      ],
+      "extraUncertainties": [
+        "Prijs niet vermeld in de agenda"
+      ],
+      "confidence": "middel",
+      "categories": [
+        "spel"
+      ],
+      "audiences": [
+        "gezin",
+        "kinderen"
+      ],
+      "estimatedMinMonths": 48
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-147257",
+      "url": "https://www.uitagendautrecht.nl/evenement/147257/tuinen-vol-verhalen",
+      "title": "Tuinen vol verhalen (Kasteel de Haar)",
+      "start": "2026-10-21",
+      "end": "2026-10-31",
+      "allDay": true,
+      "ongoing": true,
+      "openingNote": "12:00–13:30 en 14:30–16:00",
+      "venueName": "Kasteel de Haar",
+      "locality": "Haarzuilens",
+      "extraUncertainties": [
+        "Prijs niet vermeld"
+      ],
+      "confidence": "middel",
+      "categories": [
+        "rondleiding",
+        "natuur"
+      ],
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "indoor": "buiten",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-88805",
+      "url": "https://www.uitagendautrecht.nl/evenement/88805/lumineuze-nachten-van-kasteel-de-haar",
+      "title": "Lumineuze Nachten Kasteel de Haar",
+      "start": "2026-12-04",
+      "end": "2027-01-03",
+      "allDay": true,
+      "ongoing": true,
+      "openingNote": "Avondprogramma; zie bron voor tijden en tickets",
+      "venueName": "Kasteel de Haar",
+      "locality": "Haarzuilens",
+      "hints": [
+        "Festivals"
+      ],
+      "categories": [
+        "feest",
+        "rondleiding"
+      ],
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "indoor": "buiten",
+      "bookingText": "tickets",
+      "extraUncertainties": [
+        "Tijden en prijs niet vermeld in de agenda"
+      ],
+      "confidence": "middel",
+      "special": true,
+      "summary": "Lichtroute door de kasteeltuinen van Kasteel de Haar in de donkere decembermaand."
+    },
+    {
+      "sourceName": "UITagenda Utrecht / Sint Maarten Parade",
+      "sourceEventId": "ua-51641",
+      "url": "https://www.uitagendautrecht.nl/evenement/51641/sint-maarten-parade",
+      "title": "Sint Maarten Parade: De Ronde van Sint Maarten",
+      "start": "2026-11-07T18:00",
+      "end": "2026-11-07T21:00",
+      "venueName": "Route door de binnenstad",
+      "locality": "Binnenstad",
+      "lat": 52.0907,
+      "lon": 5.1214,
+      "priceText": "Gratis",
+      "bookingStatus": "niet-nodig",
+      "hints": [
+        "Gezinnen",
+        "#kinderen",
+        "#0 10"
+      ],
+      "categories": [
+        "feest",
+        "festival"
+      ],
+      "audiences": [
+        "gezin",
+        "kinderen"
+      ],
+      "estimatedMinMonths": 0,
+      "estimatedMaxMonths": 120,
+      "indoor": "buiten",
+      "special": true,
+      "fitReasons": [
+        "Zelf tempo bepalen, overal aanhaken",
+        "Route geschikt voor kinderwagens"
+      ],
+      "cautions": [
+        "Begint na het avondeten",
+        "Druk en donker; neem een lampion of lampje mee"
+      ],
+      "summary": "Lichtjesroute van ca. 4 km door de binnenstad, langs o.a. Neude, Domkerk en Museum Speelklok. Je kunt overal aanhaken; tip van de organisatie: start uiterlijk 19:00.",
+      "extraUncertainties": [
+        "Coördinaten: middelpunt van de route (Domplein)"
+      ],
+      "confidence": "hoog",
+      "bookingUrl": "https://sintmaartenparade.nl/",
+      "geoPrecision": "approx"
+    },
+    {
+      "sourceName": "Kidsproof Utrecht (secundaire bron)",
+      "sourceEventId": "kp-intocht-utrecht-2026",
+      "url": "https://www.kidsproof.nl/utrecht/uitje/intocht-sinterklaas-utrecht-boot/",
+      "title": "Intocht Sinterklaas Utrecht (per boot)",
+      "start": "2026-11-15",
+      "allDay": true,
+      "venueName": "Weerdsluis / Domplein",
+      "locality": "Binnenstad",
+      "lat": 52.0985,
+      "lon": 5.1195,
+      "priceText": "Gratis",
+      "bookingStatus": "niet-nodig",
+      "categories": [
+        "feest"
+      ],
+      "audiences": [
+        "gezin",
+        "kinderen"
+      ],
+      "indoor": "buiten",
+      "special": true,
+      "estimatedMinMonths": 18,
+      "estimatedMaxMonths": 108,
+      "cautions": [
+        "Kan erg druk zijn"
+      ],
+      "summary": "Sinterklaas komt per boot aan in de binnenstad; te zien bij de Weerdsluis en op het Domplein.",
+      "extraUncertainties": [
+        "Tijd en route nog niet bekendgemaakt",
+        "Gemeld door een secundaire bron; controleer de gemeente of organisatie",
+        "Coördinaten benaderd"
+      ],
+      "confidence": "middel",
+      "hints": [],
+      "geoPrecision": "approx"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-67787",
+      "url": "https://www.uitagendautrecht.nl/evenement/67787/huis-van-sinterklaas",
+      "title": "Huis van Sinterklaas — Museum Catharijneconvent",
+      "start": "2026-11-14",
+      "end": "2026-12-04",
+      "allDay": true,
+      "ongoing": true,
+      "openingNote": "10:00–17:00",
+      "venueName": "Museum Catharijneconvent",
+      "categories": [
+        "feest",
+        "museum"
+      ],
+      "audiences": [
+        "gezin",
+        "kinderen"
+      ],
+      "indoor": "binnen",
+      "special": true,
+      "estimatedMinMonths": 24,
+      "estimatedMaxMonths": 96,
+      "summary": "Het museum verandert in het huis van Sinterklaas, met kamers om te ontdekken voor jonge kinderen.",
+      "extraUncertainties": [
+        "De agendatitel noemt 2025 terwijl de data in 2026 vallen; controleer bij het museum",
+        "Prijs en tijdsloten niet gecontroleerd"
+      ],
+      "confidence": "middel",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-133945",
+      "url": "https://www.uitagendautrecht.nl/evenement/133945/kerstlichtjesfestival",
+      "title": "Kerstlichtjesfestival",
+      "start": "2026-12-19T13:00",
+      "end": "2026-12-19T18:00",
+      "venueName": "Stadsklooster Utrecht",
+      "locality": "Utrecht",
+      "hints": [
+        "Festivals"
+      ],
+      "categories": [
+        "feest",
+        "festival"
+      ],
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "special": true,
+      "extraUncertainties": [
+        "Doelgroep en prijs niet gecontroleerd"
+      ],
+      "confidence": "middel"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-147259",
+      "url": "https://www.uitagendautrecht.nl/evenement/147259/luminiscence",
+      "title": "Luminiscence",
+      "start": "2026-10-07",
+      "end": "2027-01-03",
+      "allDay": true,
+      "ongoing": true,
+      "venueName": "Jacobikerk",
+      "hints": [
+        "Festivals"
+      ],
+      "categories": [
+        "expositie",
+        "feest"
+      ],
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "indoor": "binnen",
+      "special": true,
+      "extraUncertainties": [
+        "Tijden, prijs en leeftijd niet gecontroleerd"
+      ],
+      "confidence": "middel",
+      "summary": "Licht- en klankvoorstelling in de Jacobikerk, tot begin januari."
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149742",
+      "url": "https://www.uitagendautrecht.nl/evenement/149742/kleur-de-stad-2026",
+      "title": "Kleur de Stad 2026",
+      "start": "2026-12-16",
+      "end": "2027-01-03",
+      "allDay": true,
+      "ongoing": true,
+      "venueName": "Stadhuis Utrecht",
+      "hints": [
+        "Festivals"
+      ],
+      "categories": [
+        "feest",
+        "muziek"
+      ],
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "special": true,
+      "extraUncertainties": [
+        "Programma en tijden: zie bron"
+      ],
+      "confidence": "middel"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-123489-2026-10-21-10:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/123489/podium-sprits-blok-doos-2",
+      "title": "De Grote Haay: Blok & Doos (2+)",
+      "start": "2026-10-21T10:00",
+      "venueName": "ZIMIHC theater Zuilen",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "summary": "Peutervoorstelling vanaf 2 jaar over spelen met blokken en dozen; gemaakt voor de allerkleinsten.",
+      "confidence": "hoog",
+      "seriesKey": "ua|podium-sprits-blok-doos-2"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-123489-2026-10-21-11:30",
+      "url": "https://www.uitagendautrecht.nl/evenement/123489/podium-sprits-blok-doos-2",
+      "title": "De Grote Haay: Blok & Doos (2+)",
+      "start": "2026-10-21T11:30",
+      "venueName": "ZIMIHC theater Zuilen",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "summary": "Peutervoorstelling vanaf 2 jaar over spelen met blokken en dozen; gemaakt voor de allerkleinsten.",
+      "confidence": "hoog",
+      "seriesKey": "ua|podium-sprits-blok-doos-2"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-106964-2026-10-21-11:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/106964/het-lammetje-dat-een-varken-is-4",
+      "title": "Het lammetje dat een varken is en andere boerderijverhalen (4+)",
+      "start": "2026-10-21T11:00",
+      "venueName": "Filiaaltheater",
+      "locality": "Utrecht",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|het-lammetje-dat-een-varken-is-4"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-106964-2026-10-21-14:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/106964/het-lammetje-dat-een-varken-is-4",
+      "title": "Het lammetje dat een varken is en andere boerderijverhalen (4+)",
+      "start": "2026-10-21T14:00",
+      "venueName": "Filiaaltheater",
+      "locality": "Utrecht",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|het-lammetje-dat-een-varken-is-4"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-147502-2026-10-21-11:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/147502/de-horde-het-koffertje-4",
+      "title": "De Horde: Het Koffertje (4+)",
+      "start": "2026-10-21T11:00",
+      "venueName": "Theater Kikker",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|de-horde-het-koffertje-4"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-147502-2026-10-21-15:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/147502/de-horde-het-koffertje-4",
+      "title": "De Horde: Het Koffertje (4+)",
+      "start": "2026-10-21T15:00",
+      "venueName": "Theater Kikker",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|de-horde-het-koffertje-4"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-147503-2026-10-21-14:30",
+      "url": "https://www.uitagendautrecht.nl/evenement/147503/studio-figur-kakek-opa-en-ik-8",
+      "title": "Studio Figur: Kakek, Opa en ik (8+)",
+      "start": "2026-10-21T14:30",
+      "venueName": "Theater Kikker",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|studio-figur-kakek-opa-en-ik-8"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-147309-2026-10-21-15:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/147309/de-proefkeuken-en-de-wc-van-tijd-8-1",
+      "title": "De Proefkeuken en de WC van tijd (8+)",
+      "start": "2026-10-21T15:00",
+      "venueName": "Stadsschouwburg Utrecht",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|de-proefkeuken-en-de-wc-van-tijd-8-1"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-147411-2026-10-31-15:30",
+      "url": "https://www.uitagendautrecht.nl/evenement/147411/overleven-in-de-jungle-8-1",
+      "title": "Overleven in de jungle (8+)",
+      "start": "2026-10-31T15:30",
+      "venueName": "Stadsschouwburg Utrecht",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|overleven-in-de-jungle-8-1"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-148954-2026-11-04-10:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/148954/simone-de-jong-company-kluizelaar-2-1",
+      "title": "Simone de Jong Company: Kluizelaar (2+)",
+      "start": "2026-11-04T10:00",
+      "venueName": "ZIMIHC theater Zuilen",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "summary": "Ochtendvoorstelling voor peuters vanaf 2 jaar.",
+      "confidence": "hoog",
+      "seriesKey": "ua|simone-de-jong-company-kluizelaar-2-1"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149291-2026-11-08-14:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/149291/sally-woest-4",
+      "title": "SALLY: Woest (4+)",
+      "start": "2026-11-08T14:00",
+      "venueName": "Stadsschouwburg Utrecht",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|sally-woest-4"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149292-2026-11-08-15:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/149292/nu-is-het-nog-rustig-8",
+      "title": "Nu is het nog rustig (8+)",
+      "start": "2026-11-08T15:00",
+      "venueName": "Stadsschouwburg Utrecht",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|nu-is-het-nog-rustig-8"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149010-2026-11-13-16:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/149010/schweigman-en-bontehond-prikkels-8-1",
+      "title": "Schweigman & BonteHond: Prikkels (8+)",
+      "start": "2026-11-13T16:00",
+      "venueName": "ZIMIHC theater Stefanus",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|schweigman-en-bontehond-prikkels-8-1"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149721-2026-12-11-10:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/149721/rachel-schuit-door-weer-en-wind-2",
+      "title": "Rachel Schuit: Door weer en wind (2+)",
+      "start": "2026-12-11T10:00",
+      "venueName": "ZIMIHC theater Zuilen",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "summary": "Peutervoorstelling vanaf 2 jaar over het weer, met twee ochtendvoorstellingen.",
+      "confidence": "hoog",
+      "seriesKey": "ua|rachel-schuit-door-weer-en-wind-2"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149721-2026-12-11-11:15",
+      "url": "https://www.uitagendautrecht.nl/evenement/149721/rachel-schuit-door-weer-en-wind-2",
+      "title": "Rachel Schuit: Door weer en wind (2+)",
+      "start": "2026-12-11T11:15",
+      "venueName": "ZIMIHC theater Zuilen",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "summary": "Peutervoorstelling vanaf 2 jaar over het weer, met twee ochtendvoorstellingen.",
+      "confidence": "hoog",
+      "seriesKey": "ua|rachel-schuit-door-weer-en-wind-2"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149148-2026-12-13-11:30",
+      "url": "https://www.uitagendautrecht.nl/evenement/149148/de-vliegende-koffer-ollietrollie-3",
+      "title": "De vliegende koffer: OllieTrollie (3+)",
+      "start": "2026-12-13T11:30",
+      "venueName": "Kanaal30",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|de-vliegende-koffer-ollietrollie-3"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149722-2026-12-13-10:00",
+      "url": "https://www.uitagendautrecht.nl/evenement/149722/klein-amsterdam-producties-de-ridder-zonder-billen-3",
+      "title": "Klein Amsterdam Producties: De ridder zonder billen (3+)",
+      "start": "2026-12-13T10:00",
+      "venueName": "ZIMIHC theater Zuilen",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|klein-amsterdam-producties-de-ridder-zonder-billen-3"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149722-2026-12-13-11:15",
+      "url": "https://www.uitagendautrecht.nl/evenement/149722/klein-amsterdam-producties-de-ridder-zonder-billen-3",
+      "title": "Klein Amsterdam Producties: De ridder zonder billen (3+)",
+      "start": "2026-12-13T11:15",
+      "venueName": "ZIMIHC theater Zuilen",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|klein-amsterdam-producties-de-ridder-zonder-billen-3"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149723-2026-12-23-09:30",
+      "url": "https://www.uitagendautrecht.nl/evenement/149723/krulmuziek-kerstconcert-0-2",
+      "title": "Krulmuziek: Kerstconcert (0+/2+)",
+      "start": "2026-12-23T09:30",
+      "venueName": "ZIMIHC theater Zuilen",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "summary": "Kort kerstconcert voor baby's en peuters; meerdere ochtendvoorstellingen.",
+      "confidence": "hoog",
+      "seriesKey": "ua|krulmuziek-kerstconcert-0-2",
+      "special": true
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149723-2026-12-23-10:15",
+      "url": "https://www.uitagendautrecht.nl/evenement/149723/krulmuziek-kerstconcert-0-2",
+      "title": "Krulmuziek: Kerstconcert (0+/2+)",
+      "start": "2026-12-23T10:15",
+      "venueName": "ZIMIHC theater Zuilen",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "summary": "Kort kerstconcert voor baby's en peuters; meerdere ochtendvoorstellingen.",
+      "confidence": "hoog",
+      "seriesKey": "ua|krulmuziek-kerstconcert-0-2",
+      "special": true
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149723-2026-12-23-11:15",
+      "url": "https://www.uitagendautrecht.nl/evenement/149723/krulmuziek-kerstconcert-0-2",
+      "title": "Krulmuziek: Kerstconcert (0+/2+)",
+      "start": "2026-12-23T11:15",
+      "venueName": "ZIMIHC theater Zuilen",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "summary": "Kort kerstconcert voor baby's en peuters; meerdere ochtendvoorstellingen.",
+      "confidence": "hoog",
+      "seriesKey": "ua|krulmuziek-kerstconcert-0-2",
+      "special": true
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149725-2026-12-27-14:30",
+      "url": "https://www.uitagendautrecht.nl/evenement/149725/myrthe-van-der-vuurst-de-vries-als-ik-de-baas-was-6",
+      "title": "Myrthe van der Vuurst de Vries: Als ik de baas was... (6+)",
+      "start": "2026-12-27T14:30",
+      "venueName": "ZIMIHC theater Zuilen",
+      "bookingText": "tickets",
+      "hints": [
+        "Jeugdtheater"
+      ],
+      "confidence": "hoog",
+      "seriesKey": "ua|myrthe-van-der-vuurst-de-vries-als-ik-de-baas-was-6"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-147271",
+      "url": "https://www.uitagendautrecht.nl/evenement/147271/lego-r-world-2026",
+      "title": "LEGO® World 2026 (laatste dag)",
+      "start": "2026-10-21",
+      "venueName": "Jaarbeurs",
+      "hints": [
+        "Festivals"
+      ],
+      "extraUncertainties": [
+        "Tijden en prijs niet gecontroleerd"
+      ],
+      "confidence": "middel",
+      "allDay": true,
+      "categories": [
+        "spel",
+        "festival"
+      ],
+      "audiences": [
+        "gezin",
+        "kinderen"
+      ],
+      "indoor": "binnen",
+      "estimatedMinMonths": 48,
+      "bookingText": "tickets",
+      "special": true
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149661",
+      "url": "https://www.uitagendautrecht.nl/evenement/149661/herfststukjes-2026",
+      "title": "Herfststukjes 2026 (jeugdtheaterfestival)",
+      "start": "2026-10-17",
+      "end": "2026-10-25",
+      "venueName": "Diverse locaties Utrecht",
+      "hints": [
+        "Jeugdtheater",
+        "Festivals"
+      ],
+      "confidence": "hoog",
+      "locality": "Utrecht",
+      "allDay": true,
+      "ongoing": true,
+      "categories": [
+        "theater",
+        "festival"
+      ],
+      "audiences": [
+        "gezin",
+        "kinderen"
+      ],
+      "summary": "Herfstvakantiefestival met jeugdvoorstellingen op verschillende podia in de stad."
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-145682",
+      "url": "https://www.uitagendautrecht.nl/evenement/145682/domplein-200-jaar",
+      "title": "Puin tot Plein — Domplein 200 jaar",
+      "start": "2026-06-02",
+      "end": "2026-11-11",
+      "venueName": "Domplein",
+      "extraUncertainties": [
+        "Programma per dag: zie bron"
+      ],
+      "confidence": "middel",
+      "allDay": true,
+      "ongoing": true,
+      "categories": [
+        "expositie",
+        "festival"
+      ],
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "indoor": "buiten",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-146169",
+      "url": "https://www.uitagendautrecht.nl/evenement/146169/popronde-utrecht",
+      "title": "Popronde Utrecht",
+      "start": "2026-10-22T18:30",
+      "end": "2026-10-23T01:00",
+      "venueName": "Diverse locaties Utrecht",
+      "confidence": "hoog",
+      "locality": "Utrecht",
+      "categories": [
+        "muziek",
+        "festival"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-150030",
+      "url": "https://www.uitagendautrecht.nl/evenement/150030/panfest",
+      "title": "PANFest",
+      "start": "2026-10-31T11:00",
+      "end": "2026-10-31T16:00",
+      "venueName": "Waterliniemuseum Fort bij Vechten",
+      "hints": [
+        "Festivals"
+      ],
+      "extraUncertainties": [
+        "Doelgroep en prijs niet gecontroleerd"
+      ],
+      "confidence": "middel",
+      "categories": [
+        "festival"
+      ],
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ]
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-121791",
+      "url": "https://www.uitagendautrecht.nl/evenement/121791/warming-up-festival",
+      "title": "Warming Up Festival",
+      "start": "2026-10-31",
+      "end": "2026-11-01",
+      "venueName": "Stadsschouwburg Utrecht",
+      "extraUncertainties": [
+        "Tijden niet gecontroleerd"
+      ],
+      "confidence": "middel",
+      "allDay": true,
+      "categories": [
+        "festival",
+        "theater"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-49264",
+      "url": "https://www.uitagendautrecht.nl/evenement/49264/le-guess-who-1",
+      "title": "Le Guess Who?",
+      "start": "2026-11-05",
+      "end": "2026-11-08",
+      "venueName": "Diverse locaties Utrecht",
+      "extraUncertainties": [
+        "De agendatitel noemt nog de data van 2025; controleer het programma"
+      ],
+      "confidence": "middel",
+      "locality": "Utrecht",
+      "allDay": true,
+      "ongoing": true,
+      "categories": [
+        "muziek",
+        "festival"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "bookingText": "tickets",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-132855",
+      "url": "https://www.uitagendautrecht.nl/evenement/132855/u-festival-1",
+      "title": "U? Festival",
+      "start": "2026-11-07T12:00",
+      "end": "2026-11-07T20:30",
+      "venueName": "De Nijverheid",
+      "confidence": "hoog",
+      "locality": "Utrecht",
+      "categories": [
+        "festival"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-47200",
+      "url": "https://www.uitagendautrecht.nl/evenement/47200/smartlappenfestival-4",
+      "title": "Smartlappenfestival Utrecht",
+      "start": "2026-11-13",
+      "end": "2026-11-15",
+      "venueName": "Diverse locaties Utrecht",
+      "confidence": "hoog",
+      "locality": "Utrecht",
+      "allDay": true,
+      "categories": [
+        "muziek",
+        "festival"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-126732",
+      "url": "https://www.uitagendautrecht.nl/evenement/126732/heroes-dutch-comic-con-1",
+      "title": "Heroes Dutch Comic Con",
+      "start": "2026-11-21T10:00",
+      "end": "2026-11-22T18:00",
+      "venueName": "Jaarbeurs",
+      "confidence": "hoog",
+      "categories": [
+        "festival"
+      ],
+      "audiences": [
+        "volwassenen",
+        "gezin"
+      ],
+      "bookingText": "tickets",
+      "indoor": "binnen",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-77639",
+      "url": "https://www.uitagendautrecht.nl/evenement/77639/winterwinkelen-bij-de-makers-van-merwede-1",
+      "title": "Winterwinkelen bij de makers van Merwede",
+      "start": "2026-11-22T11:00",
+      "end": "2026-11-22T17:00",
+      "venueName": "Vechtclub XL",
+      "confidence": "hoog",
+      "locality": "Utrecht",
+      "categories": [
+        "markt"
+      ],
+      "audiences": [
+        "volwassenen",
+        "gezin"
+      ],
+      "special": true,
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-148637",
+      "url": "https://www.uitagendautrecht.nl/evenement/148637/fotoboekenweek",
+      "title": "Fotoboekenweek",
+      "start": "2026-11-25",
+      "end": "2026-12-12",
+      "venueName": "Diverse locaties Utrecht",
+      "confidence": "hoog",
+      "locality": "Utrecht",
+      "allDay": true,
+      "ongoing": true,
+      "categories": [
+        "expositie",
+        "festival"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149379",
+      "url": "https://www.uitagendautrecht.nl/evenement/149379/het-winterborrel-festival",
+      "title": "Hét Winterborrel Festival",
+      "start": "2026-12-18T15:00",
+      "end": "2026-12-19T01:00",
+      "venueName": "Werkspoorkathedraal",
+      "confidence": "hoog",
+      "categories": [
+        "festival"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "bookingText": "tickets",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149990",
+      "url": "https://www.uitagendautrecht.nl/evenement/149990/internationaal-kamermuziekfestival-utrecht-2026",
+      "title": "Internationaal Kamermuziekfestival Utrecht 2026",
+      "start": "2026-12-27",
+      "end": "2026-12-30",
+      "venueName": "Diverse locaties Utrecht",
+      "confidence": "hoog",
+      "locality": "Utrecht",
+      "allDay": true,
+      "categories": [
+        "muziek",
+        "festival"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "bookingText": "tickets",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-150077",
+      "url": "https://www.uitagendautrecht.nl/evenement/150077/poeziefestival",
+      "title": "Poëziefestival",
+      "start": "2027-01-30T13:00",
+      "end": "2027-01-30T22:00",
+      "venueName": "Bibliotheek Neude",
+      "confidence": "hoog",
+      "categories": [
+        "festival",
+        "lezing"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-147248",
+      "url": "https://www.uitagendautrecht.nl/evenement/147248/graffiti",
+      "title": "Graffiti — tentoonstelling",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "venueName": "Centraal Museum",
+      "extraUncertainties": [
+        "Einddatum van de tentoonstelling niet gecontroleerd"
+      ],
+      "confidence": "middel",
+      "allDay": true,
+      "ongoing": true,
+      "openingNote": "Di t/m zo 11:00–17:00",
+      "categories": [
+        "expositie",
+        "museum"
+      ],
+      "audiences": [
+        "volwassenen",
+        "gezin"
+      ],
+      "indoor": "binnen",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-148636",
+      "url": "https://www.uitagendautrecht.nl/evenement/148636/occupy-time",
+      "title": "OCCUPY TIME",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "venueName": "FOTODOK",
+      "extraUncertainties": [
+        "Einddatum niet gecontroleerd"
+      ],
+      "confidence": "middel",
+      "locality": "Utrecht",
+      "allDay": true,
+      "ongoing": true,
+      "openingNote": "Wo t/m zo 11:30–17:30",
+      "categories": [
+        "expositie"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "indoor": "binnen",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149091",
+      "url": "https://www.uitagendautrecht.nl/evenement/149091/tentoonstelling-een-bodem-vol-romeinse-vondsten-3",
+      "title": "Tentoonstelling 'Een bodem vol Romeinse vondsten'",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "venueName": "Domplein 4-5",
+      "hints": [
+        "Kinderen",
+        "Gezinnen"
+      ],
+      "extraUncertainties": [
+        "Einddatum niet gecontroleerd"
+      ],
+      "confidence": "middel",
+      "allDay": true,
+      "ongoing": true,
+      "openingNote": "Diverse tijden",
+      "categories": [
+        "expositie"
+      ],
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "indoor": "binnen"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-147314",
+      "url": "https://www.uitagendautrecht.nl/evenement/147314/connor-schumacher-asset-liability-equity",
+      "title": "Connor Schumacher: Asset, Liability & Equity",
+      "start": "2026-10-23T20:00",
+      "venueName": "Stadsschouwburg Utrecht",
+      "confidence": "hoog",
+      "categories": [
+        "theater"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "bookingText": "tickets",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-147412",
+      "url": "https://www.uitagendautrecht.nl/evenement/147412/seasession-regarde-bien",
+      "title": "Seasession: Regarde Bien",
+      "start": "2026-10-31T20:00",
+      "venueName": "Stadsschouwburg Utrecht",
+      "confidence": "hoog",
+      "categories": [
+        "theater",
+        "muziek"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "bookingText": "tickets",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-134798",
+      "url": "https://www.uitagendautrecht.nl/evenement/134798/lilian-hak-1",
+      "title": "Lilian Hak",
+      "start": "2026-11-14T20:30",
+      "venueName": "Schiller Theater Place Royale",
+      "confidence": "hoog",
+      "locality": "Utrecht",
+      "categories": [
+        "muziek"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "bookingText": "tickets",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-147577",
+      "url": "https://www.uitagendautrecht.nl/evenement/147577/freya-ridings",
+      "title": "Freya Ridings",
+      "start": "2026-10-21T20:15",
+      "venueName": "TivoliVredenburg",
+      "confidence": "hoog",
+      "categories": [
+        "muziek"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "bookingText": "tickets",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-104772",
+      "url": "https://www.uitagendautrecht.nl/evenement/104772/son-lux",
+      "title": "Son Lux",
+      "start": "2026-10-26T20:00",
+      "venueName": "TivoliVredenburg",
+      "confidence": "hoog",
+      "categories": [
+        "muziek"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "bookingText": "tickets",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-148484",
+      "url": "https://www.uitagendautrecht.nl/evenement/148484/studium-generale-hoe-zoek-je-naar-leven-op-andere-planeten",
+      "title": "Studium Generale: Hoe zoek je naar leven op andere planeten?",
+      "start": "2026-10-26T20:00",
+      "venueName": "Academiegebouw",
+      "confidence": "hoog",
+      "locality": "Binnenstad",
+      "lat": 52.0901,
+      "lon": 5.1225,
+      "categories": [
+        "lezing"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "hints": [],
+      "geoPrecision": "approx"
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-147518",
+      "url": "https://www.uitagendautrecht.nl/evenement/147518/fietstocht-langs-industrieel-erfgoed-en-nieuwe-bestemmingen",
+      "title": "Fietstocht langs industrieel erfgoed en nieuwe bestemmingen",
+      "start": "2026-10-21T11:00",
+      "venueName": "Het Utrechts Archief",
+      "confidence": "hoog",
+      "locality": "Utrecht",
+      "categories": [
+        "rondleiding"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "indoor": "buiten",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149859",
+      "url": "https://www.uitagendautrecht.nl/evenement/149859/good-grief-nicolaikerk",
+      "title": "Good Grief: Nicolaïkerk",
+      "start": "2026-10-31T10:00",
+      "end": "2026-10-31T18:00",
+      "venueName": "Nicolaïkerk",
+      "confidence": "hoog",
+      "categories": [
+        "festival"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-149066",
+      "url": "https://www.uitagendautrecht.nl/evenement/149066/nacht-van-de-wijn-festival",
+      "title": "Nacht van de Wijn",
+      "start": "2026-11-06",
+      "end": "2026-11-08",
+      "venueName": "Werkspoorkathedraal",
+      "confidence": "hoog",
+      "allDay": true,
+      "categories": [
+        "festival"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "bookingText": "tickets",
+      "hints": []
+    },
+    {
+      "sourceName": "UITagenda Utrecht",
+      "sourceEventId": "ua-101992",
+      "url": "https://www.uitagendautrecht.nl/evenement/101992/no-man-s-land",
+      "title": "No Man's Land",
+      "start": "2026-12-02T09:30",
+      "end": "2026-12-02T18:00",
+      "venueName": "TivoliVredenburg",
+      "confidence": "hoog",
+      "categories": [
+        "festival"
+      ],
+      "audiences": [
+        "volwassenen"
+      ],
+      "hints": []
+    }
+  ]
 }
