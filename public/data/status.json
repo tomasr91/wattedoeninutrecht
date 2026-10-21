@@ -1,6 +1,6 @@
 {
-  "lastSuccessfulRun": "2026-10-21T14:45:43.173Z",
-  "lastRun": "2026-10-21T14:45:43.173Z",
+  "lastSuccessfulRun": "2026-10-21T14:55:32.820Z",
+  "lastRun": "2026-10-21T14:55:32.820Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
@@ -43,9 +43,9 @@
       "sourceName": "Máximapark",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-21T13:02:47.272Z",
-      "lastSuccess": "2026-10-21T13:02:47.272Z",
-      "fetched": 5
+      "lastAttempt": "2026-10-21T14:55:31.626Z",
+      "lastSuccess": "2026-10-21T14:55:31.626Z",
+      "fetched": 4
     },
     {
       "sourceId": "pathe",
@@ -124,7 +124,7 @@
   ],
   "totals": {
     "active": 627,
-    "added": 5,
+    "added": 0,
     "updated": 0,
     "cancelled": 0,
     "expired": 0,
