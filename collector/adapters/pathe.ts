@@ -19,8 +19,17 @@ const BASE = 'https://www.pathe.nl';
 const ID = 'pathe';
 const NAME = 'Pathé';
 export const DEFAULT_CINEMAS = ['pathe-utrecht-leidsche-rijn'];
-/** Keuringen die we tonen: alle leeftijden en 6 jaar (jonger mag met begeleiding). */
-export const DEFAULT_RATINGS = ['al', '-6ans'];
+/** Keuringen die we ophalen; de app bepaalt per kind (op de dag zelf) of een film past. */
+export const DEFAULT_RATINGS = ['al', '-6ans', '-9ans', '-12ans'];
+/**
+ * Geschatte minimumleeftijd: Kijkwijzer-leeftijd min drie jaar (samen met een volwassene).
+ * 6 → vanaf 3 jaar, 9 → vanaf 6, 12 → vanaf 9. "Alle leeftijden" krijgt geen grens.
+ * Zo groeit het aanbod vanzelf mee met de leeftijd van de kinderen.
+ */
+export function estimatedMinFromRating(ref?: string): number | undefined {
+  const m = ref?.match(/^-(\d+)ans$/);
+  return m ? Math.max(0, Number(m[1]) - 3) * 12 : undefined;
+}
 
 interface DayInfo {
   tags?: string[];
@@ -115,7 +124,8 @@ export function patheToRaw(data: PatheData, today: string, until: string, nowIso
       indoor: 'binnen' as const,
       bookingText: 'tickets',
       durationMinutes: meta.duration || undefined,
-      ageLabel: r.ref === 'al' ? 'Alle leeftijden' : r.description ? `Keuring ${r.description} (jonger met begeleiding)` : undefined,
+      ageLabel: r.ref === 'al' ? 'Alle leeftijden' : r.ref ? `Kijkwijzer ${r.ref.replace(/\D/g, '')} (jonger met begeleiding)` : undefined,
+      estimatedMinMonths: estimatedMinFromRating(r.ref),
       checkedAt: nowIso,
     };
     const dutch = (d: string) => (show.days[d].versions ?? []).includes('nlnl');
@@ -159,7 +169,7 @@ export const pathe: SourceAdapter = {
   name: NAME,
   homepage: `${BASE}/nl/bioscopen/pathe-utrecht-leidsche-rijn`,
   method: 'html',
-  description: 'Kinderfilms (keuring AL en 6) en Kleuterbios in Pathé Utrecht Leidsche Rijn.',
+  description: 'Kinderfilms (keuring t/m 12, gefilterd op de leeftijd van de kinderen) en Kleuterbios in Pathé Utrecht Leidsche Rijn.',
   async run(ctx: AdapterContext): Promise<AdapterResult> {
     const cinemas = (ctx.options.cinemas as string[] | undefined) ?? DEFAULT_CINEMAS;
     const ratings = (ctx.options.ratings as string[] | undefined) ?? DEFAULT_RATINGS;

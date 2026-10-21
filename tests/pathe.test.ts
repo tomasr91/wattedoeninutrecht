@@ -1,6 +1,6 @@
 /** Pathé-adapter. De HTML hieronder is ⚠️ TESTDATA: nagebouwd naar de opbouw van pathe.nl op 21-10-2026, met verzonnen films. */
 import { describe, expect, it } from 'vitest';
-import { parsePathePage, patheToRaw } from '../collector/adapters/pathe';
+import { estimatedMinFromRating, parsePathePage, patheToRaw } from '../collector/adapters/pathe';
 
 const cinema = 'pathe-utrecht-leidsche-rijn';
 const state = {
@@ -23,8 +23,17 @@ const html = `<html><body><script id="ng-state" type="application/json">${JSON.s
 describe('Pathé', () => {
   const events = patheToRaw(parsePathePage(html, cinema), '2026-10-21', '2027-01-21', '2026-10-21T00:00:00Z');
 
-  it('alleen kinderfilms met keuring AL of 6, binnen het venster', () => {
-    expect(new Set(events.map((e) => e.title))).toEqual(new Set(['[TESTDATA] Kinderfilm', 'Kleuterbios: [TESTDATA] Kinderfilm']));
+  it('alleen kinderfilms binnen het venster; keuring wordt een geschatte minimumleeftijd', () => {
+    expect(new Set(events.map((e) => e.title))).toEqual(new Set(['[TESTDATA] Kinderfilm', 'Kleuterbios: [TESTDATA] Kinderfilm', '[TESTDATA] Negen']));
+    expect(events.find((e) => e.title === '[TESTDATA] Negen')!.estimatedMinMonths).toBe(72);
+    expect(events.find((e) => e.title === '[TESTDATA] Kinderfilm')!.estimatedMinMonths).toBeUndefined();
+  });
+  it('Kijkwijzer min drie jaar', () => {
+    expect([estimatedMinFromRating('al'), estimatedMinFromRating('-6ans'), estimatedMinFromRating('-9ans'), estimatedMinFromRating('-12ans')]).toEqual([undefined, 36, 72, 108]);
+  });
+  it('alleen de gekozen keuringen', () => {
+    const only = patheToRaw(parsePathePage(html, cinema), '2026-10-21', '2027-01-21', '2026-10-21T00:00:00Z', ['al']);
+    expect(only.some((e) => e.title === '[TESTDATA] Negen')).toBe(false);
   });
   it('Kleuterbios per dag, gewone voorstellingen als één doorlopende regel', () => {
     const k = events.filter((e) => e.kind === 'Kleuterbios');
