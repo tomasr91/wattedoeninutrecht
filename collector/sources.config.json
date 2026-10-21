@@ -96,7 +96,7 @@
       "id": "pathe",
       "enabled": true,
       "options": {
-        "$comment": "Kinderfilms en Kleuterbios. Voeg 'pathe-rembrandt-utrecht' toe voor de binnenstad. Keuringen die worden opgehaald; de app toont een film vanaf Kijkwijzer-leeftijd min 3 jaar (6 → 3 jaar, 9 → 6, 12 → 9).",
+        "$comment": "Kinderfilms en Kleuterbios. Voeg 'pathe-rembrandt-utrecht' toe voor de binnenstad. Keuringen die worden opgehaald; de app toont een film vanaf een geschatte leeftijd (Kijkwijzer 6 → 4 jaar, 9 → 6, 12 → 9; zie MIN_YEARS_BY_RATING in collector/adapters/pathe.ts).",
         "cinemas": ["pathe-utrecht-leidsche-rijn"],
         "ratings": ["al", "-6ans", "-9ans", "-12ans"]
       }

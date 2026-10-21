@@ -22,13 +22,14 @@ export const DEFAULT_CINEMAS = ['pathe-utrecht-leidsche-rijn'];
 /** Keuringen die we ophalen; de app bepaalt per kind (op de dag zelf) of een film past. */
 export const DEFAULT_RATINGS = ['al', '-6ans', '-9ans', '-12ans'];
 /**
- * Geschatte minimumleeftijd: Kijkwijzer-leeftijd min drie jaar (samen met een volwassene).
- * 6 → vanaf 3 jaar, 9 → vanaf 6, 12 → vanaf 9. "Alle leeftijden" krijgt geen grens.
+ * Geschatte minimumleeftijd per Kijkwijzer-keuring (samen met een volwassene).
+ * 6 → vanaf 4 jaar, 9 → vanaf 6, 12 → vanaf 9. "Alle leeftijden" krijgt geen grens.
  * Zo groeit het aanbod vanzelf mee met de leeftijd van de kinderen.
  */
+export const MIN_YEARS_BY_RATING: Record<string, number> = { '-6ans': 4, '-9ans': 6, '-12ans': 9, '-14ans': 11, '-16ans': 13 };
 export function estimatedMinFromRating(ref?: string): number | undefined {
-  const m = ref?.match(/^-(\d+)ans$/);
-  return m ? Math.max(0, Number(m[1]) - 3) * 12 : undefined;
+  const y = ref ? MIN_YEARS_BY_RATING[ref] : undefined;
+  return y !== undefined ? y * 12 : undefined;
 }
 
 interface DayInfo {

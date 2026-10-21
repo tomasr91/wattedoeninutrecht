@@ -28,8 +28,8 @@ describe('Pathé', () => {
     expect(events.find((e) => e.title === '[TESTDATA] Negen')!.estimatedMinMonths).toBe(72);
     expect(events.find((e) => e.title === '[TESTDATA] Kinderfilm')!.estimatedMinMonths).toBeUndefined();
   });
-  it('Kijkwijzer min drie jaar', () => {
-    expect([estimatedMinFromRating('al'), estimatedMinFromRating('-6ans'), estimatedMinFromRating('-9ans'), estimatedMinFromRating('-12ans')]).toEqual([undefined, 36, 72, 108]);
+  it('Kijkwijzer naar geschatte leeftijd (6 → 4 jaar)', () => {
+    expect([estimatedMinFromRating('al'), estimatedMinFromRating('-6ans'), estimatedMinFromRating('-9ans'), estimatedMinFromRating('-12ans')]).toEqual([undefined, 48, 72, 108]);
   });
   it('alleen de gekozen keuringen', () => {
     const only = patheToRaw(parsePathePage(html, cinema), '2026-10-21', '2027-01-21', '2026-10-21T00:00:00Z', ['al']);
