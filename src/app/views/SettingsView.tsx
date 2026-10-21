@@ -53,9 +53,9 @@ export function SettingsSheet({
         <div className="audience-tabs settings-tabs" role="tablist" aria-label="Instellingen">
           {(
             [
-              ['gezin', 'Kinderen & adres'],
-              ['soorten', 'Soorten'],
-              ['verversing', 'Verversing'],
+              ['gezin', 'Gezin'],
+              ['soorten', 'Interesses'],
+              ['verversing', 'Updates'],
             ] as const
           ).map(([id, label]) => (
             <button key={id} role="tab" aria-selected={tab === id} className={tab === id ? 'is-on' : ''} onClick={() => setTab(id)}>
