@@ -32,7 +32,9 @@ jobs:
         env:
           COLLECTOR_CONTACT: ${{ vars.COLLECTOR_CONTACT }}
           DIAG_SAVE: ${{ github.event.inputs.save }}
-        run: npx tsx collector/diagnose.ts ${{ github.event.inputs.urls }} > /tmp/diagnose.json; cat /tmp/diagnose.json
+          URLS: ${{ github.event.inputs.urls }}
+        # Via een variabele, zodat tekens als & in een URL niet door de shell worden uitgevoerd.
+        run: npx tsx collector/diagnose.ts $URLS > /tmp/diagnose.json; cat /tmp/diagnose.json
       - name: TLS en doorverwijzingen controleren
         run: |
           for h in www.uitagendautrecht.nl www.kasteeldehaar.nl www.jaarbeurs.nl jaarbeurs.nl; do
