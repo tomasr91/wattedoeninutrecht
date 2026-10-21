@@ -1,0 +1,135 @@
+{
+  "$comment": "Bronnen voor de wekelijkse update. Zet 'enabled' op false om een bron uit te schakelen. Generieke bronnen (type ical/jsonld) kun je hier zonder code toevoegen; zie collector/adapters/generic.ts.",
+  "windowMonths": 3,
+  "windowMarginDays": 14,
+  "maxDetailPagesPerSource": 400,
+  "pruneExpiredAfterDays": 60,
+  "sources": [
+    {
+      "id": "handmatig",
+      "enabled": true
+    },
+    {
+      "id": "uitagenda-utrecht",
+      "enabled": true,
+      "options": {
+        "genres": [
+          "jeugdtheater",
+          "festivals",
+          "musea",
+          "rondleidingen",
+          "diversen",
+          "klassieke-muziek"
+        ],
+        "wijken": [
+          "leidsche-rijn,vleuten-de-meern"
+        ],
+        "maxPagesPerQuery": 12
+      }
+    },
+    {
+      "id": "bibliotheek-utrecht",
+      "enabled": true,
+      "options": {
+        "maxPages": 40
+      }
+    },
+    {
+      "id": "podium-hoge-woerd",
+      "enabled": true
+    },
+    {
+      "id": "tivolivredenburg",
+      "enabled": true,
+      "options": {
+        "$comment": "Alleen deze Tivoli-genres (plus altijd familie). Pop & rock, club & elektronisch, comedy. Haal een slug weg of voeg er een toe; lijst staat op tivolivredenburg.nl/agenda.",
+        "genres": [
+          "pop",
+          "rock",
+          "indie",
+          "singer-songwriter",
+          "roots-blues-americana",
+          "metal-punk-heavy",
+          "classic-pop-60s-90s",
+          "nederlands",
+          "classics-80s-90s-00s",
+          "indie-pop-alternative",
+          "hiphop-rb-soul",
+          "global-1",
+          "house-techno",
+          "drum-n-bass-trap",
+          "electronic",
+          "electronic-1",
+          "comedy"
+        ],
+        "maxPages": 15,
+        "detailDays": 45
+      }
+    },
+    {
+      "id": "stadsschouwburg-utrecht",
+      "enabled": true,
+      "options": {
+        "$comment": "Kaarten waarvan álle genres hier staan worden overgeslagen.",
+        "excludeGenres": [
+          "Verdieping",
+          "Foodprogramma"
+        ],
+        "maxPages": 25
+      }
+    },
+    {
+      "id": "podium-sprits",
+      "enabled": true
+    },
+    {
+      "id": "utrecht-natuurlijk",
+      "enabled": true,
+      "options": {
+        "types": [
+          "onze-activiteiten",
+          "exposities"
+        ]
+      }
+    },
+    {
+      "id": "kasteel-de-haar",
+      "enabled": true
+    },
+    {
+      "id": "jaarbeurs",
+      "enabled": true,
+      "options": {
+        "$comment": "Alleen publieksevenementen met een van deze woorden (kinderen/gezin).",
+        "familyKeywords": [
+          "kind",
+          "kinderen",
+          "kids",
+          "familie",
+          "gezin",
+          "lego",
+          "disney",
+          "winterspektakel",
+          "circus",
+          "speelgoed",
+          "sinterklaas",
+          "kerst"
+        ]
+      }
+    },
+    {
+      "id": "voorbeeld-ical",
+      "type": "ical",
+      "name": "Voorbeeld iCal-bron",
+      "enabled": false,
+      "homepage": "https://example.org",
+      "options": {
+        "urls": [
+          "https://example.org/?ical=1"
+        ],
+        "venueName": "Naam locatie",
+        "locality": "Vleuten"
+      }
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+# Wekelijkse update + publicatie op GitHub Pages.
+#
+#  - Elke maandagochtend (05:17 UTC = 06:17 in de winter, 07:17 in de zomer):
+#    bronnen ophalen → SQLite bijwerken → JSON exporteren → committen → app bouwen → publiceren.
+#  - Handmatig starten kan via Actions → "Wekelijkse update" → Run workflow
+#    (optioneel met één bron, bv. "bibliotheek-utrecht").
+#  - Bij een push naar main wordt alleen getest, gebouwd en gepubliceerd (geen ophaalronde).
+#
+# Eenmalig instellen: Settings → Pages → Source: "GitHub Actions".
+# Optioneel: Settings → Secrets and variables → Actions → Variables:
+#   COLLECTOR_CONTACT  (e-mailadres in de User-Agent, aanbevolen)
+#   GEOCODER=nominatim en NOMINATIM_EMAIL (preciezere afstanden)
+name: Wekelijkse update
+
+on:
+  schedule:
+    - cron: '17 5 * * 1'
+  workflow_dispatch:
+    inputs:
+      source:
+        description: 'Alleen deze bron ophalen (leeg = alle ingeschakelde bronnen)'
+        required: false
+        default: ''
+  push:
+    branches: [main]
+    paths-ignore: ['**.md', 'docs/**']
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: weekly-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+      - name: Bronnen ophalen en database bijwerken
+        if: github.event_name != 'push'
+        env:
+          COLLECTOR_CONTACT: ${{ vars.COLLECTOR_CONTACT }}
+          GEOCODER: ${{ vars.GEOCODER }}
+          NOMINATIM_EMAIL: ${{ vars.NOMINATIM_EMAIL }}
+        run: |
+          if [ -n "${{ github.event.inputs.source }}" ]; then
+            npm run collect -- --source=${{ github.event.inputs.source }}
+          else
+            npm run collect
+          fi
+
+      - name: Bijgewerkte data committen
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "agenda-bot"
+          git config user.email "agenda-bot@users.noreply.github.com"
+          git add data/agenda.sqlite public/data/
+          if git diff --cached --quiet; then
+            echo "Geen wijzigingen in de data."
+          else
+            git commit -m "Wekelijkse update $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

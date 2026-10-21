@@ -1,0 +1,189 @@
+/**
+ * Wekelijkse update: bronnen ophalen → normaliseren → verwerken in SQLite →
+ * ontdubbelen → exporteren naar public/data/*.json voor de app.
+ *
+ * Gebruik:
+ *   npm run collect                 alle ingeschakelde bronnen
+ *   npm run collect -- --source=bibliotheek-utrecht
+ *   npm run collect:dry             ophalen en rapporteren, niets opslaan
+ *   npm run export                  alleen opnieuw exporteren uit de database
+ *
+ * Exitcode 0 als minstens één bron slaagt (de rest wordt gelogd), anders 1.
+ */
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import type { Dataset, UpdateStatus } from '../src/domain/types.ts';
+import { addDays, addMonths, todayInAmsterdam } from '../src/domain/dates.ts';
+import { reconcile, type SourceResult } from '../src/domain/reconcile.ts';
+import { normalize } from './normalize.ts';
+import { buildExport } from './export.ts';
+import { computeExpected, type RecurringMoment } from '../src/domain/expected.ts';
+import * as dbm from './db.ts';
+import { geocodeMissing, geocodingEnabled } from './geocode.ts';
+import type { SourceAdapter } from './adapters/types.ts';
+import { uitagendaUtrecht } from './adapters/uitagenda-utrecht.ts';
+import { bibliotheekUtrecht } from './adapters/bibliotheek-utrecht.ts';
+import { podiumHogeWoerd } from './adapters/podium-hoge-woerd.ts';
+import { curatedAdapter } from './adapters/curated.ts';
+import { tivoliVredenburg } from './adapters/tivolivredenburg.ts';
+import { stadsschouwburgUtrecht } from './adapters/stadsschouwburg-utrecht.ts';
+import { podiumSprits } from './adapters/podium-sprits.ts';
+import { utrechtNatuurlijk } from './adapters/utrecht-natuurlijk.ts';
+import { kasteelDeHaar } from './adapters/kasteel-de-haar.ts';
+import { jaarbeurs } from './adapters/jaarbeurs.ts';
+import { icalAdapter, jsonLdAdapter } from './adapters/generic.ts';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+const args = new Set(process.argv.slice(2));
+const only = process.argv.find((a) => a.startsWith('--source='))?.split('=')[1];
+const dryRun = args.has('--dry-run');
+const exportOnly = args.has('--export-only');
+
+interface SourceConfig {
+  id: string;
+  enabled: boolean;
+  type?: 'ical' | 'jsonld';
+  name?: string;
+  homepage?: string;
+  options?: Record<string, unknown>;
+}
+interface Config {
+  windowMonths: number;
+  windowMarginDays: number;
+  maxDetailPagesPerSource: number;
+  pruneExpiredAfterDays: number;
+  sources: SourceConfig[];
+}
+
+const BUILT_IN: Record<string, SourceAdapter> = {
+  'uitagenda-utrecht': uitagendaUtrecht,
+  'bibliotheek-utrecht': bibliotheekUtrecht,
+  'podium-hoge-woerd': podiumHogeWoerd,
+  tivolivredenburg: tivoliVredenburg,
+  'stadsschouwburg-utrecht': stadsschouwburgUtrecht,
+  'podium-sprits': podiumSprits,
+  'utrecht-natuurlijk': utrechtNatuurlijk,
+  'kasteel-de-haar': kasteelDeHaar,
+  jaarbeurs,
+  handmatig: curatedAdapter(join(ROOT, 'data', 'curated')),
+};
+
+function adapterFor(cfg: SourceConfig): SourceAdapter | undefined {
+  if (cfg.type === 'ical') return icalAdapter({ id: cfg.id, name: cfg.name ?? cfg.id, homepage: cfg.homepage, options: cfg.options });
+  if (cfg.type === 'jsonld') return jsonLdAdapter({ id: cfg.id, name: cfg.name ?? cfg.id, homepage: cfg.homepage, options: cfg.options });
+  return BUILT_IN[cfg.id];
+}
+
+const logLines: string[] = [];
+const log = (m: string) => {
+  logLines.push(m);
+  console.log(m);
+};
+
+function writeExport(db: dbm.Db, today: string, nowIso: string, totals: UpdateStatus['totals']) {
+  const { activities, merged } = buildExport(dbm.loadActivities(db), today);
+  const status: UpdateStatus = {
+    lastSuccessfulRun: dbm.lastSuccessfulRun(db),
+    lastRun: dbm.lastRun(db),
+    sources: dbm.sourceStatuses(db),
+    totals: { ...totals, active: activities.length, merged },
+  };
+  let expected: Dataset['expected'] = [];
+  try {
+    const cfg = JSON.parse(readFileSync(join(ROOT, 'data', 'vaste-momenten.json'), 'utf8')) as { horizonDays: number; moments: RecurringMoment[] };
+    expected = computeExpected(cfg.moments, activities, today, cfg.horizonDays);
+    for (const e of expected) log(`Komt eraan zonder datum in de agenda: ${e.name} (meestal ${e.whenText}, over ${e.inDays} dagen)`);
+  } catch (e) {
+    log(`! vaste-momenten.json niet te lezen: ${(e as Error).message}`);
+  }
+  const dataset: Dataset = { generatedAt: nowIso, activities, status, expected };
+  const outDir = join(ROOT, 'public', 'data');
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, 'activities.json'), JSON.stringify(dataset));
+  writeFileSync(join(outDir, 'status.json'), JSON.stringify(status, null, 2));
+  log(`Export: ${activities.length} activiteiten (${merged} dubbele samengevoegd) → public/data/activities.json`);
+}
+
+async function main() {
+  const config = JSON.parse(readFileSync(join(ROOT, 'collector', 'sources.config.json'), 'utf8')) as Config;
+  const nowIso = new Date().toISOString();
+  const today = process.env.TODAY_OVERRIDE ?? todayInAmsterdam();
+  const until = addDays(addMonths(today, config.windowMonths), config.windowMarginDays);
+  const db = dbm.openDb(process.env.DB_FILE ?? join(ROOT, 'data', 'agenda.sqlite'), join(ROOT, 'collector', 'migrations'));
+
+  const zeroTotals = { active: 0, added: 0, updated: 0, cancelled: 0, expired: 0, merged: 0 };
+  if (exportOnly) {
+    writeExport(db, today, nowIso, zeroTotals);
+    return 0;
+  }
+
+  log(`Update gestart ${nowIso} — venster ${today} t/m ${until}${dryRun ? ' (dry-run)' : ''}`);
+  const runId = dryRun ? -1 : dbm.startRun(db, nowIso);
+  const results: SourceResult[] = [];
+
+  for (const cfg of config.sources) {
+    const adapter = adapterFor(cfg);
+    if (!adapter) {
+      log(`! Onbekende bron "${cfg.id}" in sources.config.json — overgeslagen`);
+      continue;
+    }
+    if (!dryRun) {
+      dbm.upsertSource(db, { id: adapter.id, name: adapter.name, method: adapter.method, homepage: adapter.homepage, description: adapter.description, enabled: cfg.enabled });
+    }
+    if (!cfg.enabled || (only && only !== cfg.id)) continue;
+
+    log(`→ ${adapter.name} (${adapter.id})`);
+    const t0 = Date.now();
+    try {
+      const r = await adapter.run({
+        today,
+        until,
+        nowIso,
+        maxDetailPages: config.maxDetailPagesPerSource,
+        log,
+        options: cfg.options ?? {},
+      });
+      const activities = r.events.map(normalize);
+      results.push({ sourceId: adapter.id, ok: true, coverage: r.coverage, keepCheckedDates: r.keepCheckedDates, activities });
+      log(`  ✓ ${activities.length} activiteiten in ${Math.round((Date.now() - t0) / 1000)}s${r.notes ? ` — ${r.notes}` : ''}`);
+      if (!dryRun) dbm.recordSourceRun(db, adapter.id, { ok: true, at: nowIso, count: activities.length, notes: r.notes });
+    } catch (e) {
+      const msg = (e as Error).message ?? String(e);
+      results.push({ sourceId: adapter.id, ok: false, error: msg, activities: [] });
+      log(`  ✗ mislukt: ${msg} — eerder verzamelde gegevens blijven staan`);
+      if (!dryRun) dbm.recordSourceRun(db, adapter.id, { ok: false, at: nowIso, count: 0, error: msg });
+    }
+  }
+
+  const anyOk = results.some((r) => r.ok);
+  const existing = dbm.loadActivities(db);
+  const { activities, stats } = reconcile(existing, results, nowIso, today);
+  if (geocodingEnabled()) {
+    const n = await geocodeMissing(db, activities, log);
+    log(`Geocodering: ${n} locaties aangevuld`);
+  }
+  log(`Resultaat: +${stats.added} nieuw, ${stats.updated} gewijzigd, ${stats.unchanged} ongewijzigd, ${stats.cancelled} geannuleerd, ${stats.expired} verlopen, ${stats.missing} niet meer gevonden`);
+
+  if (dryRun) {
+    log('Dry-run: niets opgeslagen.');
+    return anyOk ? 0 : 1;
+  }
+  dbm.saveActivities(db, activities, nowIso);
+  const pruned = dbm.pruneExpired(db, addDays(today, -config.pruneExpiredAfterDays));
+  if (pruned) log(`Opgeruimd: ${pruned} lang verlopen activiteiten`);
+  dbm.finishRun(db, runId, { ok: anyOk, at: new Date().toISOString(), stats, log: logLines.join('\n') });
+  writeExport(db, today, nowIso, { ...zeroTotals, added: stats.added, updated: stats.updated, cancelled: stats.cancelled, expired: stats.expired });
+
+  const failed = results.filter((r) => !r.ok);
+  if (failed.length) log(`Let op: ${failed.length} bron(nen) mislukt: ${failed.map((f) => f.sourceId).join(', ')}`);
+  return anyOk ? 0 : 1;
+}
+
+main().then(
+  (code) => process.exit(code),
+  (e) => {
+    console.error(e);
+    process.exit(1);
+  },
+);
