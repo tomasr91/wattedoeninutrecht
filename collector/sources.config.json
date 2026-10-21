@@ -80,6 +80,15 @@
       }
     },
     {
+      "id": "pathe",
+      "enabled": true,
+      "options": {
+        "$comment": "Kinderfilms en Kleuterbios. Voeg 'pathe-rembrandt-utrecht' toe voor de binnenstad. Keuringen: al, -6ans, -9ans, -12ans.",
+        "cinemas": ["pathe-utrecht-leidsche-rijn"],
+        "ratings": ["al", "-6ans"]
+      }
+    },
+    {
       "id": "podium-sprits",
       "enabled": true
     },

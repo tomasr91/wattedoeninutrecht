@@ -32,6 +32,7 @@ import { podiumSprits } from './adapters/podium-sprits.ts';
 import { utrechtNatuurlijk } from './adapters/utrecht-natuurlijk.ts';
 import { kasteelDeHaar } from './adapters/kasteel-de-haar.ts';
 import { jaarbeurs } from './adapters/jaarbeurs.ts';
+import { pathe } from './adapters/pathe.ts';
 import { icalAdapter, jsonLdAdapter } from './adapters/generic.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -66,6 +67,7 @@ const BUILT_IN: Record<string, SourceAdapter> = {
   'utrecht-natuurlijk': utrechtNatuurlijk,
   'kasteel-de-haar': kasteelDeHaar,
   jaarbeurs,
+  pathe,
   handmatig: curatedAdapter(join(ROOT, 'data', 'curated')),
 };
 
