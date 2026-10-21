@@ -5,7 +5,10 @@
  *
  *   npx tsx collector/diagnose.ts [url ...]   (zonder argumenten: de standaardlijst hieronder)
  */
+import { writeFileSync } from 'node:fs';
 import { describeNetworkError, USER_AGENT } from './lib/http.ts';
+
+let saved = 0;
 
 const DEFAULT_URLS = [
   'https://www.tivolivredenburg.nl/agenda/',
@@ -32,6 +35,12 @@ async function probe(url: string) {
     out.length = body.length;
     out.title = body.match(/<title[^>]*>([^<]*)/i)?.[1]?.trim();
     out.start = body.replace(/\s+/g, ' ').slice(0, 400);
+    // DIAG_SAVE=1: volledige pagina bewaren (voor het schrijven van een nieuwe adapter).
+    if (process.env.DIAG_SAVE === '1' && !url.endsWith('/robots.txt')) {
+      const file = `/tmp/diag-${++saved}.html`;
+      writeFileSync(file, body);
+      out.savedAs = file.replace('/tmp/', '');
+    }
   } catch (e) {
     out.error = describeNetworkError(e);
   }

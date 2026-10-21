@@ -9,6 +9,10 @@ on:
         description: 'URL''s gescheiden door spaties (leeg = standaardlijst)'
         required: false
         default: ''
+      save:
+        description: 'Volledige pagina''s bewaren (1 = ja)'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -27,6 +31,7 @@ jobs:
       - name: Diagnose
         env:
           COLLECTOR_CONTACT: ${{ vars.COLLECTOR_CONTACT }}
+          DIAG_SAVE: ${{ github.event.inputs.save }}
         run: npx tsx collector/diagnose.ts ${{ github.event.inputs.urls }} > /tmp/diagnose.json; cat /tmp/diagnose.json
       - name: TLS en doorverwijzingen controleren
         run: |
@@ -43,7 +48,7 @@ jobs:
           git config user.email "agenda-bot@users.noreply.github.com"
           git checkout --orphan diagnose
           git rm -rq --cached .
-          cp /tmp/diagnose.json diagnose.json; cp /tmp/tls.txt tls.txt
-          git add diagnose.json tls.txt
+          cp /tmp/diagnose.json diagnose.json; cp /tmp/tls.txt tls.txt; cp /tmp/diag-*.html . 2>/dev/null || true
+          git add diagnose.json tls.txt diag-*.html 2>/dev/null || git add diagnose.json tls.txt
           git commit -qm "Diagnose $(date -u +%Y-%m-%dT%H:%M)"
           git push -f origin diagnose
