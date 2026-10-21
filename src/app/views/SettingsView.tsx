@@ -225,7 +225,7 @@ function HomeBlock({ home, onChange }: { home?: Home; onChange: (h?: Home) => vo
   );
 }
 
-/** "Handmatig verzameld" met een (i) die toont welke bronnen er via deze weg in de app komen. */
+/** "Alternatief verzameld" met een (i) die toont welke bronnen er via deze weg in de app komen. */
 function ManualSource({ activities, today }: { activities: Activity[]; today: string }) {
   const [open, setOpen] = useState(false);
   const groups = new Map<string, { n: number; last: string }>();
@@ -242,7 +242,7 @@ function ManualSource({ activities, today }: { activities: Activity[]; today: st
   return (
     <>
       <span className="source-name-row">
-        <strong>Handmatig verzameld</strong>
+        <strong>Alternatief verzameld</strong>
         <button className="info-btn" aria-expanded={open} aria-label="Welke bronnen?" onClick={() => setOpen(!open)}>
           <IconInfo size={18} />
         </button>

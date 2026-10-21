@@ -33,7 +33,7 @@ export function loadCurated(dir: string): CuratedFile[] {
 export function curatedAdapter(dir: string): SourceAdapter {
   return {
     id: 'handmatig',
-    name: 'Handmatig gecontroleerd',
+    name: 'Alternatief verzameld',
     homepage: '',
     method: 'handmatig',
     description:
