@@ -136,7 +136,7 @@ export function SettingsSheet({
               De agenda wordt elke nacht automatisch bijgewerkt.
             </p>
             {generatedAt && <p className="small muted">{status.totals.active} activiteiten in de dataset.</p>}
-            <p className="small muted">App-versie: {formatDateTime(__APP_BUILD__)}{__APP_COMMIT__ ? ` (${__APP_COMMIT__})` : ''}</p>
+            <p className="small muted">App-versie van {formatDateTime(__APP_BUILD__)}{__APP_COMMIT__ ? ` (${__APP_COMMIT__})` : ''}</p>
             <ul className="source-list">
               {status.sources
                 .filter((s) => s.enabled)

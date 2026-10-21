@@ -207,19 +207,7 @@ export function App() {
               <OngoingList lists={lists} onOpen={open} expected={expected} empty={`Geen doorlopend aanbod ${who} in deze periode.`} />
             )}
             <footer className="list-foot small muted">
-              {view.audience === 'kinderen' && lists.hiddenForAge > 0 && (
-                <p>
-                  {lists.hiddenForAge} activiteit{lists.hiddenForAge === 1 ? ' is' : 'en zijn'} verborgen omdat ze voor {profile.children.length === 1 ? 'je kind' : profile.children.length === 2 ? 'beide kinderen' : 'alle kinderen'} te jong of te oud zijn.
-                </p>
-              )}
-              {lastRun && (
-                <p>
-                  Bijgewerkt {formatDateTime(lastRun)}.{' '}
-                  <button className="text-btn small" onClick={() => setSettingsOpen('verversing')}>
-                    Bronnen
-                  </button>
-                </p>
-              )}
+              {lastRun && <p>Laatst ververst: {formatDateTime(lastRun)}</p>}
             </footer>
           </div>
         )}
