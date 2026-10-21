@@ -5,6 +5,7 @@ import { addMonths, formatDateTime } from '../../domain/dates';
 import { fmtChecked } from '../components/DetailSheet';
 import { Sheet } from '../components/Sheet';
 import { lookupAddress } from '../geocode';
+import { IconInfo } from '../components/Icons';
 import { useState } from 'react';
 
 /** Instellingen: alleen wat nu nodig is — de kinderen en de status van de bronnen. */
@@ -55,7 +56,7 @@ export function SettingsSheet({
             [
               ['gezin', 'Gezin'],
               ['soorten', 'Interesses'],
-              ['verversing', 'Updates'],
+              ['verversing', 'Bronnen'],
             ] as const
           ).map(([id, label]) => (
             <button key={id} role="tab" aria-selected={tab === id} className={tab === id ? 'is-on' : ''} onClick={() => setTab(id)}>
@@ -145,7 +146,11 @@ export function SettingsSheet({
                     <li key={s.sourceId} className={pending ? 'is-pending' : s.ok ? 'is-ok' : 'is-bad'}>
                       <span className="source-state" aria-hidden="true" />
                       <div>
-                        <strong>{s.sourceName}</strong>
+                        {s.sourceId === 'handmatig' ? (
+                          <ManualSource activities={activities} today={today} />
+                        ) : (
+                          <strong>{s.sourceName}</strong>
+                        )}
                         <div className="small">
                           {pending
                             ? 'Nog niet automatisch opgehaald; gebeurt bij de eerstvolgende nachtelijke update'
@@ -217,5 +222,46 @@ function HomeBlock({ home, onChange }: { home?: Home; onChange: (h?: Home) => vo
       {msg && <p className="small banner-warn">{msg}</p>}
       <p className="small muted">Het adres blijft op deze telefoon. Voor het opzoeken gaat het eenmalig naar PDOK (Kadaster).</p>
     </section>
+  );
+}
+
+/** "Handmatig verzameld" met een (i) die toont welke bronnen er via deze weg in de app komen. */
+function ManualSource({ activities, today }: { activities: Activity[]; today: string }) {
+  const [open, setOpen] = useState(false);
+  const groups = new Map<string, { n: number; last: string }>();
+  for (const a of activities) {
+    for (const s of a.sources) {
+      if (s.sourceId !== 'handmatig') continue;
+      const g = groups.get(s.sourceName) ?? { n: 0, last: '' };
+      g.n++;
+      if (s.lastChecked > g.last) g.last = s.lastChecked;
+      groups.set(s.sourceName, g);
+    }
+  }
+  const list = [...groups.entries()].sort((x, y) => y[1].n - x[1].n || x[0].localeCompare(y[0], 'nl'));
+  return (
+    <>
+      <span className="source-name-row">
+        <strong>Handmatig verzameld</strong>
+        <button className="info-btn" aria-expanded={open} aria-label="Welke bronnen?" onClick={() => setOpen(!open)}>
+          <IconInfo size={18} />
+        </button>
+      </span>
+      {open && (
+        <div className="small source-info">
+          <p>
+            Bronnen die de nachtelijke update niet zelf kan ophalen. Ze zijn bij de officiële bron opgezocht en vastgelegd; Tivoli en
+            Leidsche Rijn Centrum worden elke dinsdag opnieuw opgehaald.
+          </p>
+          <ul>
+            {list.map(([name, g]) => (
+              <li key={name}>
+                <strong>{name}</strong>: {g.n} activiteit{g.n === 1 ? '' : 'en'}, gecontroleerd {fmtChecked(g.last, today)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </>
   );
 }

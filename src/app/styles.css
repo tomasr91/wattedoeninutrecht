@@ -218,6 +218,8 @@ h3 {
   position: sticky;
   top: 0;
   z-index: 2;
+  /* Dekt de tekst af die eronder doorscrolt */
+  box-shadow: 0 0 0 10px var(--bg), 0 -24px 0 10px var(--bg);
 }
 .settings-tabs button {
   font-size: 0.88rem;
@@ -892,6 +894,32 @@ h3 {
 }
 .add-child {
   margin-top: 12px;
+}
+.source-name-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.info-btn {
+  border: 0;
+  background: none;
+  padding: 2px;
+  color: var(--brand);
+  display: inline-flex;
+}
+.source-info {
+  margin: 4px 0 6px;
+  color: var(--muted);
+}
+.source-info p {
+  margin: 0 0 4px;
+}
+.source-info ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.source-list .source-info li {
+  display: list-item;
 }
 .source-list {
   list-style: none;
