@@ -1,610 +1,342 @@
 {
- "meta": {
-  "collectedAt": "2026-10-21T12:40:00Z",
-  "collectedBy": "Claude (webonderzoek in opdracht van de gebruiker)",
-  "method": "Op 21-10-2026: marktenoverzicht gemeente Utrecht, DUIC-artikel over Utrecht Lumen (ontdek-utrecht.nl niet bereikbaar), agenda Kasteel de Haar, agendalijst Jaarbeurs (alleen publieksevenementen voor gezinnen; detailpagina's weigerden daarna door robots.txt).",
-  "note": "Uitfeest staat bij de vaste momenten (nog geen datum 2027)."
- },
- "events": [
-  {
-   "sourceName": "Gemeente Utrecht (marktenoverzicht)",
-   "sourceEventId": "markt-brusselplein",
-   "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
-   "title": "Weekmarkt Brusselplein",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "allDay": true,
-   "ongoing": true,
-   "venueName": "Brusselplein",
-   "locality": "Leidsche Rijn Centrum",
-   "openingNote": "Elke donderdag 9:00–18:00",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "categories": [
-    "markt"
-   ],
-   "kind": "Markt",
-   "indoor": "buiten",
-   "bookingStatus": "niet-nodig",
-   "extraUncertainties": [
-    "Doorlopend; einddatum niet vermeld",
-    "Wekelijkse markt; prijzen per kraam"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
+  "meta": {
+    "collectedAt": "2026-10-21T12:40:00Z",
+    "collectedBy": "Claude (webonderzoek in opdracht van de gebruiker)",
+    "method": "Op 21-10-2026: marktenoverzicht gemeente Utrecht, DUIC-artikel over Utrecht Lumen (ontdek-utrecht.nl niet bereikbaar), agenda Kasteel de Haar, agendalijst Jaarbeurs (alleen publieksevenementen voor gezinnen; detailpagina's weigerden daarna door robots.txt).",
+    "note": "Uitfeest staat bij de vaste momenten (nog geen datum 2027)."
   },
-  {
-   "sourceName": "Gemeente Utrecht (marktenoverzicht)",
-   "sourceEventId": "markt-houtrakgracht",
-   "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
-   "title": "Weekmarkt Verlengde Houtrakgracht",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "allDay": true,
-   "ongoing": true,
-   "venueName": "Verlengde Houtrakgracht",
-   "locality": "Leidsche Rijn",
-   "openingNote": "Elke vrijdag 9:00–16:00",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "categories": [
-    "markt"
-   ],
-   "kind": "Markt",
-   "indoor": "buiten",
-   "bookingStatus": "niet-nodig",
-   "extraUncertainties": [
-    "Doorlopend; einddatum niet vermeld",
-    "Wekelijkse markt; prijzen per kraam"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Gemeente Utrecht (marktenoverzicht)",
-   "sourceEventId": "markt-vleuten",
-   "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
-   "title": "Weekmarkt Vleuten",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "allDay": true,
-   "ongoing": true,
-   "venueName": "Hindersteinlaan",
-   "locality": "Vleuten",
-   "openingNote": "Elke dinsdag 12:00–17:00",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "categories": [
-    "markt"
-   ],
-   "kind": "Markt",
-   "indoor": "buiten",
-   "bookingStatus": "niet-nodig",
-   "extraUncertainties": [
-    "Doorlopend; einddatum niet vermeld",
-    "Wekelijkse markt; prijzen per kraam"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Gemeente Utrecht (marktenoverzicht)",
-   "sourceEventId": "markt-vredenburg",
-   "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
-   "title": "Markt Vredenburg",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "allDay": true,
-   "ongoing": true,
-   "venueName": "Vredenburg",
-   "locality": "Binnenstad",
-   "openingNote": "Woensdag en vrijdag 9:00–17:00, zaterdag 8:00–17:00",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "categories": [
-    "markt"
-   ],
-   "kind": "Markt",
-   "indoor": "buiten",
-   "bookingStatus": "niet-nodig",
-   "extraUncertainties": [
-    "Doorlopend; einddatum niet vermeld",
-    "Wekelijkse markt; prijzen per kraam"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Gemeente Utrecht (marktenoverzicht)",
-   "sourceEventId": "markt-boerenmarkt",
-   "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
-   "title": "Boerenmarkt Vredenburg",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "allDay": true,
-   "ongoing": true,
-   "venueName": "Vredenburg",
-   "locality": "Binnenstad",
-   "openingNote": "Elke vrijdag 9:00–17:00",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "categories": [
-    "markt"
-   ],
-   "kind": "Markt",
-   "indoor": "buiten",
-   "bookingStatus": "niet-nodig",
-   "extraUncertainties": [
-    "Doorlopend; einddatum niet vermeld",
-    "Wekelijkse markt; prijzen per kraam"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Gemeente Utrecht (marktenoverzicht)",
-   "sourceEventId": "markt-bloemenmarkt",
-   "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
-   "title": "Bloemenmarkt Janskerkhof en Oudegracht",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "allDay": true,
-   "ongoing": true,
-   "venueName": "Janskerkhof",
-   "locality": "Binnenstad",
-   "openingNote": "Elke zaterdag 8:00–17:00",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "categories": [
-    "markt"
-   ],
-   "kind": "Markt",
-   "indoor": "buiten",
-   "bookingStatus": "niet-nodig",
-   "extraUncertainties": [
-    "Doorlopend; einddatum niet vermeld",
-    "Wekelijkse markt; prijzen per kraam"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Gemeente Utrecht (marktenoverzicht)",
-   "sourceEventId": "markt-stoffenmarkt",
-   "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
-   "title": "Stoffenmarkt Breedstraat",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "allDay": true,
-   "ongoing": true,
-   "venueName": "Breedstraat",
-   "locality": "Binnenstad",
-   "openingNote": "Elke zaterdag 8:00–13:00",
-   "audiences": [
-    "volwassenen"
-   ],
-   "categories": [
-    "markt"
-   ],
-   "kind": "Markt",
-   "indoor": "buiten",
-   "bookingStatus": "niet-nodig",
-   "extraUncertainties": [
-    "Doorlopend; einddatum niet vermeld",
-    "Wekelijkse markt; prijzen per kraam"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Gemeente Utrecht (marktenoverzicht)",
-   "sourceEventId": "markt-vredenburg-zondag-2026-11-01",
-   "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
-   "title": "Zondagsmarkt Vredenburg",
-   "start": "2026-11-01T11:00",
-   "end": "2026-11-01T17:00",
-   "venueName": "Vredenburg",
-   "locality": "Binnenstad",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "categories": [
-    "markt"
-   ],
-   "kind": "Markt",
-   "indoor": "buiten",
-   "bookingStatus": "niet-nodig",
-   "priceText": "Gratis",
-   "summary": "De markt op Vredenburg is ook open op zondag (eerste zondag van de maand).",
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Gemeente Utrecht (marktenoverzicht)",
-   "sourceEventId": "markt-vredenburg-zondag-2026-11-29",
-   "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
-   "title": "Zondagsmarkt Vredenburg",
-   "start": "2026-11-29T11:00",
-   "end": "2026-11-29T17:00",
-   "venueName": "Vredenburg",
-   "locality": "Binnenstad",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "categories": [
-    "markt"
-   ],
-   "kind": "Markt",
-   "indoor": "buiten",
-   "bookingStatus": "niet-nodig",
-   "priceText": "Gratis",
-   "summary": "De markt op Vredenburg is ook open op zondag (laatste zondag voor 5 december).",
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Gemeente Utrecht (marktenoverzicht)",
-   "sourceEventId": "markt-vredenburg-zondag-2026-12-06",
-   "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
-   "title": "Zondagsmarkt Vredenburg",
-   "start": "2026-12-06T11:00",
-   "end": "2026-12-06T17:00",
-   "venueName": "Vredenburg",
-   "locality": "Binnenstad",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "categories": [
-    "markt"
-   ],
-   "kind": "Markt",
-   "indoor": "buiten",
-   "bookingStatus": "niet-nodig",
-   "priceText": "Gratis",
-   "summary": "De markt op Vredenburg is ook open op zondag (eerste zondag van de maand).",
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Gemeente Utrecht (marktenoverzicht)",
-   "sourceEventId": "markt-vredenburg-zondag-2026-12-20",
-   "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
-   "title": "Zondagsmarkt Vredenburg",
-   "start": "2026-12-20T11:00",
-   "end": "2026-12-20T17:00",
-   "venueName": "Vredenburg",
-   "locality": "Binnenstad",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "categories": [
-    "markt"
-   ],
-   "kind": "Markt",
-   "indoor": "buiten",
-   "bookingStatus": "niet-nodig",
-   "priceText": "Gratis",
-   "summary": "De markt op Vredenburg is ook open op zondag (laatste zondag voor kerst).",
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "DUIC / Ontdek Utrecht",
-   "sourceEventId": "utrecht-lumen",
-   "url": "https://www.ontdek-utrecht.nl/lumen",
-   "title": "Utrecht Lumen – lichtkunstroute door de stad",
-   "start": "2026-10-21",
-   "end": "2027-01-21",
-   "allDay": true,
-   "ongoing": true,
-   "venueName": "Binnenstad Utrecht",
-   "locality": "Binnenstad",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "categories": [
-    "expositie",
-    "rondleiding"
-   ],
-   "kind": "Lichtkunst",
-   "indoor": "buiten",
-   "openingNote": "'s Avonds en 's nachts; routes te downloaden via de website, ook rondleidingen via de VVV",
-   "fitReasons": [
-    "Avondwandeling in eigen tempo; met kinderen goed te doen in de vroege winteravond"
-   ],
-   "summary": "27 lichtkunstwerken in de stad, deels afkomstig van het eerdere Trajectum Lumen.",
-   "extraUncertainties": [
-    "Doorlopend; einddatum niet vermeld",
-    "Officiële site was niet bereikbaar; gegevens uit een DUIC-artikel",
-    "Prijs niet vermeld; de werken staan in de openbare ruimte"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Kasteel de Haar",
-   "venueName": "Kasteel de Haar",
-   "address": "Kasteellaan 1, 3455 RR Haarzuilens",
-   "locality": "Haarzuilens",
-   "extraUncertainties": [
-    "Tijden en prijs staan op de bronpagina"
-   ],
-   "sourceEventId": "haar-herfstvakantie2026",
-   "url": "https://www.kasteeldehaar.nl/2026/10/01/herfstvakantie2026/",
-   "title": "Herfstvakantie bij Kasteel de Haar",
-   "start": "2026-10-10",
-   "allDay": true,
-   "kind": "Kasteel",
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "end": "2026-10-25",
-   "categories": [
-    "feest"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Kasteel de Haar",
-   "venueName": "Kasteel de Haar",
-   "address": "Kasteellaan 1, 3455 RR Haarzuilens",
-   "locality": "Haarzuilens",
-   "extraUncertainties": [
-    "Tijden en prijs staan op de bronpagina"
-   ],
-   "sourceEventId": "haar-copijn",
-   "url": "https://www.kasteeldehaar.nl/2026/06/23/wandelroute-tuinen-copijn/",
-   "title": "Wandelroute: Door de ogen van Copijn",
-   "start": "2026-07-03",
-   "allDay": true,
-   "kind": "Rondleiding",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "end": "2026-10-31",
-   "ongoing": true,
-   "categories": [
-    "rondleiding",
-    "natuur"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Kasteel de Haar",
-   "venueName": "Kasteel de Haar",
-   "address": "Kasteellaan 1, 3455 RR Haarzuilens",
-   "locality": "Haarzuilens",
-   "extraUncertainties": [
-    "Tijden en prijs staan op de bronpagina"
-   ],
-   "sourceEventId": "haar-indienstvandeadel",
-   "url": "https://www.kasteeldehaar.nl/2025/12/19/indienstvandeadel/",
-   "title": "Rondleiding: In dienst van de adel",
-   "start": "2026-11-01",
-   "allDay": true,
-   "kind": "Rondleiding",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "end": "2027-01-03",
-   "ongoing": true,
-   "categories": [
-    "rondleiding"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Kasteel de Haar",
-   "venueName": "Kasteel de Haar",
-   "address": "Kasteellaan 1, 3455 RR Haarzuilens",
-   "locality": "Haarzuilens",
-   "extraUncertainties": [
-    "Tijden en prijs staan op de bronpagina"
-   ],
-   "sourceEventId": "haar-kapel",
-   "url": "https://www.kasteeldehaar.nl/2026/01/20/openstelling-kapel/",
-   "title": "Openstelling kapel Kasteel de Haar",
-   "start": "2026-11-02",
-   "allDay": true,
-   "kind": "Kasteel",
-   "audiences": [
-    "gezin",
-    "volwassenen"
-   ],
-   "end": "2026-11-27",
-   "ongoing": true,
-   "categories": [
-    "rondleiding"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Kasteel de Haar",
-   "venueName": "Kasteel de Haar",
-   "address": "Kasteellaan 1, 3455 RR Haarzuilens",
-   "locality": "Haarzuilens",
-   "extraUncertainties": [
-    "Tijden en prijs staan op de bronpagina"
-   ],
-   "sourceEventId": "haar-salons-2026-11-07",
-   "url": "https://www.kasteeldehaar.nl/2026/07/14/salons-2026/",
-   "title": "Salons Kasteel de Haar",
-   "start": "2026-11-07",
-   "allDay": true,
-   "kind": "Salon",
-   "audiences": [
-    "volwassenen"
-   ],
-   "categories": [
-    "lezing",
-    "muziek"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Kasteel de Haar",
-   "venueName": "Kasteel de Haar",
-   "address": "Kasteellaan 1, 3455 RR Haarzuilens",
-   "locality": "Haarzuilens",
-   "extraUncertainties": [
-    "Tijden en prijs staan op de bronpagina"
-   ],
-   "sourceEventId": "haar-salons-2026-11-14",
-   "url": "https://www.kasteeldehaar.nl/2026/07/14/salons-2026/",
-   "title": "Salons Kasteel de Haar",
-   "start": "2026-11-14",
-   "allDay": true,
-   "kind": "Salon",
-   "audiences": [
-    "volwassenen"
-   ],
-   "categories": [
-    "lezing",
-    "muziek"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Kasteel de Haar",
-   "venueName": "Kasteel de Haar",
-   "address": "Kasteellaan 1, 3455 RR Haarzuilens",
-   "locality": "Haarzuilens",
-   "extraUncertainties": [
-    "Doorlopend; einddatum niet vermeld",
-    "Tijden, prijs en leeftijd staan op de bronpagina"
-   ],
-   "sourceEventId": "haar-speurtocht-baron",
-   "url": "https://www.kasteeldehaar.nl/2026/04/16/speurtocht_baron_barones/",
-   "title": "Speurtocht: Op bezoek bij de baron en barones",
-   "start": "2026-10-21",
-   "allDay": true,
-   "kind": "Speurtocht",
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "end": "2027-01-21",
-   "ongoing": true,
-   "categories": [
-    "spel"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Kasteel de Haar",
-   "venueName": "Kasteel de Haar",
-   "address": "Kasteellaan 1, 3455 RR Haarzuilens",
-   "locality": "Haarzuilens",
-   "extraUncertainties": [
-    "Doorlopend; einddatum niet vermeld",
-    "Tijden, prijs en leeftijd staan op de bronpagina"
-   ],
-   "sourceEventId": "haar-tuinspeurtocht",
-   "url": "https://www.kasteeldehaar.nl/2026/06/25/tuinspeurtocht_ontsnaptedieren/",
-   "title": "Tuinspeurtocht: Ontsnapte dieren",
-   "start": "2026-10-21",
-   "allDay": true,
-   "kind": "Speurtocht",
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "end": "2027-01-21",
-   "ongoing": true,
-   "categories": [
-    "spel"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Jaarbeurs",
-   "venueName": "Jaarbeurs",
-   "address": "Jaarbeursplein 6, 3521 AL Utrecht",
-   "locality": "Jaarbeurs",
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "kind": "Jaarbeurs",
-   "indoor": "binnen",
-   "bookingText": "tickets",
-   "allDay": true,
-   "sourceEventId": "jb-het-utrechtse-winterspektakel",
-   "url": "https://www.jaarbeurs.nl/agenda-item/het-utrechtse-winterspektakel",
-   "title": "Het Utrechtse Winterspektakel",
-   "start": "2026-10-26",
-   "end": "2027-01-03",
-   "ongoing": true,
-   "special": true,
-   "categories": [
-    "feest",
-    "sport"
-   ],
-   "summary": "Wintervermaak voor het gezin met onder meer schaatsen en draaimolen.",
-   "extraUncertainties": [
-    "De lijst noemt 26 okt t/m 3 jan, de beschrijving noemt 11 december als start; check de bron",
-    "Tijden, prijs en leeftijd staan op de bronpagina"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  },
-  {
-   "sourceName": "Jaarbeurs",
-   "venueName": "Jaarbeurs",
-   "address": "Jaarbeursplein 6, 3521 AL Utrecht",
-   "locality": "Jaarbeurs",
-   "audiences": [
-    "gezin",
-    "kinderen"
-   ],
-   "kind": "Familievoorstelling",
-   "indoor": "binnen",
-   "bookingText": "tickets",
-   "allDay": true,
-   "sourceEventId": "jb-disney-on-ice",
-   "url": "https://www.jaarbeurs.nl/agenda-item/disney-on-ice-presenteert-road-trip-adventures",
-   "title": "Disney On Ice: Road Trip Adventures",
-   "start": "2026-12-18",
-   "end": "2026-12-30",
-   "special": true,
-   "categories": [
-    "theater",
-    "sport"
-   ],
-   "summary": "Familieshow op het ijs met Disney-figuren.",
-   "extraUncertainties": [
-    "Speeltijden, prijs en leeftijd staan op de bronpagina"
-   ],
-   "checkedAt": "2026-10-21T12:40:00Z",
-   "confidence": "middel"
-  }
- ]
+  "events": [
+    {
+      "sourceName": "Gemeente Utrecht (marktenoverzicht)",
+      "sourceEventId": "markt-brusselplein",
+      "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
+      "title": "Weekmarkt Brusselplein",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "allDay": true,
+      "ongoing": true,
+      "venueName": "Brusselplein",
+      "locality": "Leidsche Rijn Centrum",
+      "openingNote": "Elke donderdag 9:00–18:00",
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "categories": [
+        "markt"
+      ],
+      "kind": "Markt",
+      "indoor": "buiten",
+      "bookingStatus": "niet-nodig",
+      "extraUncertainties": [
+        "Doorlopend; einddatum niet vermeld",
+        "Wekelijkse markt; prijzen per kraam"
+      ],
+      "checkedAt": "2026-10-21T12:40:00Z",
+      "confidence": "middel"
+    },
+    {
+      "sourceName": "Gemeente Utrecht (marktenoverzicht)",
+      "sourceEventId": "markt-houtrakgracht",
+      "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
+      "title": "Weekmarkt Verlengde Houtrakgracht",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "allDay": true,
+      "ongoing": true,
+      "venueName": "Verlengde Houtrakgracht",
+      "locality": "Leidsche Rijn",
+      "openingNote": "Elke vrijdag 9:00–16:00",
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "categories": [
+        "markt"
+      ],
+      "kind": "Markt",
+      "indoor": "buiten",
+      "bookingStatus": "niet-nodig",
+      "extraUncertainties": [
+        "Doorlopend; einddatum niet vermeld",
+        "Wekelijkse markt; prijzen per kraam"
+      ],
+      "checkedAt": "2026-10-21T12:40:00Z",
+      "confidence": "middel"
+    },
+    {
+      "sourceName": "Gemeente Utrecht (marktenoverzicht)",
+      "sourceEventId": "markt-vleuten",
+      "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
+      "title": "Weekmarkt Vleuten",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "allDay": true,
+      "ongoing": true,
+      "venueName": "Hindersteinlaan",
+      "locality": "Vleuten",
+      "openingNote": "Elke dinsdag 12:00–17:00",
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "categories": [
+        "markt"
+      ],
+      "kind": "Markt",
+      "indoor": "buiten",
+      "bookingStatus": "niet-nodig",
+      "extraUncertainties": [
+        "Doorlopend; einddatum niet vermeld",
+        "Wekelijkse markt; prijzen per kraam"
+      ],
+      "checkedAt": "2026-10-21T12:40:00Z",
+      "confidence": "middel"
+    },
+    {
+      "sourceName": "Gemeente Utrecht (marktenoverzicht)",
+      "sourceEventId": "markt-vredenburg",
+      "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
+      "title": "Markt Vredenburg",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "allDay": true,
+      "ongoing": true,
+      "venueName": "Vredenburg",
+      "locality": "Binnenstad",
+      "openingNote": "Woensdag en vrijdag 9:00–17:00, zaterdag 8:00–17:00",
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "categories": [
+        "markt"
+      ],
+      "kind": "Markt",
+      "indoor": "buiten",
+      "bookingStatus": "niet-nodig",
+      "extraUncertainties": [
+        "Doorlopend; einddatum niet vermeld",
+        "Wekelijkse markt; prijzen per kraam"
+      ],
+      "checkedAt": "2026-10-21T12:40:00Z",
+      "confidence": "middel"
+    },
+    {
+      "sourceName": "Gemeente Utrecht (marktenoverzicht)",
+      "sourceEventId": "markt-boerenmarkt",
+      "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
+      "title": "Boerenmarkt Vredenburg",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "allDay": true,
+      "ongoing": true,
+      "venueName": "Vredenburg",
+      "locality": "Binnenstad",
+      "openingNote": "Elke vrijdag 9:00–17:00",
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "categories": [
+        "markt"
+      ],
+      "kind": "Markt",
+      "indoor": "buiten",
+      "bookingStatus": "niet-nodig",
+      "extraUncertainties": [
+        "Doorlopend; einddatum niet vermeld",
+        "Wekelijkse markt; prijzen per kraam"
+      ],
+      "checkedAt": "2026-10-21T12:40:00Z",
+      "confidence": "middel"
+    },
+    {
+      "sourceName": "Gemeente Utrecht (marktenoverzicht)",
+      "sourceEventId": "markt-bloemenmarkt",
+      "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
+      "title": "Bloemenmarkt Janskerkhof en Oudegracht",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "allDay": true,
+      "ongoing": true,
+      "venueName": "Janskerkhof",
+      "locality": "Binnenstad",
+      "openingNote": "Elke zaterdag 8:00–17:00",
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "categories": [
+        "markt"
+      ],
+      "kind": "Markt",
+      "indoor": "buiten",
+      "bookingStatus": "niet-nodig",
+      "extraUncertainties": [
+        "Doorlopend; einddatum niet vermeld",
+        "Wekelijkse markt; prijzen per kraam"
+      ],
+      "checkedAt": "2026-10-21T12:40:00Z",
+      "confidence": "middel"
+    },
+    {
+      "sourceName": "Gemeente Utrecht (marktenoverzicht)",
+      "sourceEventId": "markt-stoffenmarkt",
+      "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
+      "title": "Stoffenmarkt Breedstraat",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "allDay": true,
+      "ongoing": true,
+      "venueName": "Breedstraat",
+      "locality": "Binnenstad",
+      "openingNote": "Elke zaterdag 8:00–13:00",
+      "audiences": [
+        "volwassenen"
+      ],
+      "categories": [
+        "markt"
+      ],
+      "kind": "Markt",
+      "indoor": "buiten",
+      "bookingStatus": "niet-nodig",
+      "extraUncertainties": [
+        "Doorlopend; einddatum niet vermeld",
+        "Wekelijkse markt; prijzen per kraam"
+      ],
+      "checkedAt": "2026-10-21T12:40:00Z",
+      "confidence": "middel"
+    },
+    {
+      "sourceName": "Gemeente Utrecht (marktenoverzicht)",
+      "sourceEventId": "markt-vredenburg-zondag-2026-11-01",
+      "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
+      "title": "Zondagsmarkt Vredenburg",
+      "start": "2026-11-01T11:00",
+      "end": "2026-11-01T17:00",
+      "venueName": "Vredenburg",
+      "locality": "Binnenstad",
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "categories": [
+        "markt"
+      ],
+      "kind": "Markt",
+      "indoor": "buiten",
+      "bookingStatus": "niet-nodig",
+      "priceText": "Gratis",
+      "summary": "De markt op Vredenburg is ook open op zondag (eerste zondag van de maand).",
+      "checkedAt": "2026-10-21T12:40:00Z",
+      "confidence": "middel"
+    },
+    {
+      "sourceName": "Gemeente Utrecht (marktenoverzicht)",
+      "sourceEventId": "markt-vredenburg-zondag-2026-11-29",
+      "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
+      "title": "Zondagsmarkt Vredenburg",
+      "start": "2026-11-29T11:00",
+      "end": "2026-11-29T17:00",
+      "venueName": "Vredenburg",
+      "locality": "Binnenstad",
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "categories": [
+        "markt"
+      ],
+      "kind": "Markt",
+      "indoor": "buiten",
+      "bookingStatus": "niet-nodig",
+      "priceText": "Gratis",
+      "summary": "De markt op Vredenburg is ook open op zondag (laatste zondag voor 5 december).",
+      "checkedAt": "2026-10-21T12:40:00Z",
+      "confidence": "middel"
+    },
+    {
+      "sourceName": "Gemeente Utrecht (marktenoverzicht)",
+      "sourceEventId": "markt-vredenburg-zondag-2026-12-06",
+      "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
+      "title": "Zondagsmarkt Vredenburg",
+      "start": "2026-12-06T11:00",
+      "end": "2026-12-06T17:00",
+      "venueName": "Vredenburg",
+      "locality": "Binnenstad",
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "categories": [
+        "markt"
+      ],
+      "kind": "Markt",
+      "indoor": "buiten",
+      "bookingStatus": "niet-nodig",
+      "priceText": "Gratis",
+      "summary": "De markt op Vredenburg is ook open op zondag (eerste zondag van de maand).",
+      "checkedAt": "2026-10-21T12:40:00Z",
+      "confidence": "middel"
+    },
+    {
+      "sourceName": "Gemeente Utrecht (marktenoverzicht)",
+      "sourceEventId": "markt-vredenburg-zondag-2026-12-20",
+      "url": "https://www.utrecht.nl/wonen-en-leven/vrije-tijd/markten/",
+      "title": "Zondagsmarkt Vredenburg",
+      "start": "2026-12-20T11:00",
+      "end": "2026-12-20T17:00",
+      "venueName": "Vredenburg",
+      "locality": "Binnenstad",
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "categories": [
+        "markt"
+      ],
+      "kind": "Markt",
+      "indoor": "buiten",
+      "bookingStatus": "niet-nodig",
+      "priceText": "Gratis",
+      "summary": "De markt op Vredenburg is ook open op zondag (laatste zondag voor kerst).",
+      "checkedAt": "2026-10-21T12:40:00Z",
+      "confidence": "middel"
+    },
+    {
+      "sourceName": "DUIC / Ontdek Utrecht",
+      "sourceEventId": "utrecht-lumen",
+      "url": "https://www.ontdek-utrecht.nl/lumen",
+      "title": "Utrecht Lumen – lichtkunstroute door de stad",
+      "start": "2026-10-21",
+      "end": "2027-01-21",
+      "allDay": true,
+      "ongoing": true,
+      "venueName": "Binnenstad Utrecht",
+      "locality": "Binnenstad",
+      "audiences": [
+        "gezin",
+        "volwassenen"
+      ],
+      "categories": [
+        "expositie",
+        "rondleiding"
+      ],
+      "kind": "Lichtkunst",
+      "indoor": "buiten",
+      "openingNote": "'s Avonds en 's nachts; routes te downloaden via de website, ook rondleidingen via de VVV",
+      "fitReasons": [
+        "Avondwandeling in eigen tempo; met kinderen goed te doen in de vroege winteravond"
+      ],
+      "summary": "27 lichtkunstwerken in de stad, deels afkomstig van het eerdere Trajectum Lumen.",
+      "extraUncertainties": [
+        "Doorlopend; einddatum niet vermeld",
+        "Officiële site was niet bereikbaar; gegevens uit een DUIC-artikel",
+        "Prijs niet vermeld; de werken staan in de openbare ruimte"
+      ],
+      "checkedAt": "2026-10-21T12:40:00Z",
+      "confidence": "middel"
+    }
+  ]
 }
