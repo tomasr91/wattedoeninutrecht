@@ -4,7 +4,7 @@
  * Zonder netwerk valt de app terug op de laatst geladen data; de app toont dan
  * de datum van de laatste update, zodat oude informatie herkenbaar blijft.
  */
-const CACHE = 'ufa-v2';
+const CACHE = 'ufa-v3';
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './manifest.webmanifest'])).then(() => self.skipWaiting()));
