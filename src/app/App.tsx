@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState, type TouchEvent } from 'react';
 import type { Activity, Dataset, Profile } from '../domain/types';
 import { makePeriod } from '../domain/filters';
 import { defaultProfile } from '../domain/profile';
-import { addMonths, dateOf, diffDays, formatLongDate, formatShortDate, todayInAmsterdam, formatDateTime } from '../domain/dates';
+import { addDays, addMonths, dateOf, diffDays, formatLongDate, formatShortDate, todayInAmsterdam, formatDateTime } from '../domain/dates';
 import { buildLists, DEFAULT_LIST_OPTIONS, weekendWindow, type ListAudience, type ListItem, type WeekendChoice } from '../domain/views';
 import { loadDataset } from './data';
 import { load, save } from './storage';
@@ -10,11 +10,12 @@ import { DetailSheet } from './components/DetailSheet';
 import { IconUser } from './components/Icons';
 import { DomTower } from './components/DomTower';
 import { DayList, OngoingList } from './views/ListView';
+import { MapView } from './views/MapView';
 import { updateSeen, type SeenState } from '../domain/newness';
 import { NewContext } from './newContext';
 import { SettingsSheet } from './views/SettingsView';
 
-type Pane = 'agenda' | 'doorlopend';
+type Pane = 'agenda' | 'doorlopend' | 'kaart';
 interface ViewState {
   audience: ListAudience;
   weekend: WeekendChoice | null;
@@ -83,11 +84,25 @@ export function App() {
     [data, view, today, period, profile.children, profile.hiddenKinds, profile.home],
   );
   const datedCount = lists ? lists.days.reduce((n, d) => n + d.items.length, 0) : 0;
+  // Kaart: zonder gekozen weekend of datum de komende 7 dagen, anders hetzelfde als de lijst.
+  const mapItems = useMemo(() => {
+    if (!data || pane !== 'kaart') return [];
+    const l =
+      view.weekend || view.day
+        ? lists
+        : buildLists(
+            data.activities,
+            { ...DEFAULT_LIST_OPTIONS, audience: view.audience, weekend: null, onlyBike: false, hiddenKinds: profile.hiddenKinds?.[view.audience] ?? [] },
+            { today, period: { from: today, to: addDays(today, 6) }, children: profile.children, home: profile.home },
+          );
+    return l ? l.days.flatMap((d) => d.items) : [];
+  }, [data, pane, lists, view, today, profile.children, profile.hiddenKinds, profile.home]);
   const expected = (data?.expected ?? []).filter((e) => e.audience === 'beide' || e.audience === view.audience);
 
   const goTo = (p: Pane) => {
     if (p === pane) return;
-    setSlide(p === 'doorlopend' ? 'from-right' : 'from-left');
+    const order: Pane[] = ['agenda', 'doorlopend', 'kaart'];
+    setSlide(order.indexOf(p) > order.indexOf(pane) ? 'from-right' : 'from-left');
     setPane(p);
     window.scrollTo({ top: 0 });
   };
@@ -101,7 +116,7 @@ export function App() {
   const onTouchEnd = (e: TouchEvent) => {
     const s = touch.current;
     touch.current = null;
-    if (!s) return;
+    if (!s || pane === 'kaart') return; // op de kaart is vegen slepen
     const t = e.changedTouches[0];
     const dx = t.clientX - s.x;
     const dy = t.clientY - s.y;
@@ -207,6 +222,9 @@ export function App() {
             <button role="tab" aria-selected={pane === 'doorlopend'} className={pane === 'doorlopend' ? 'is-on' : ''} onClick={() => goTo('doorlopend')}>
               Doorlopend <span className="num count">{lists ? lists.ongoing.length + expected.length : ''}</span>
             </button>
+            <button role="tab" aria-selected={pane === 'kaart'} className={pane === 'kaart' ? 'is-on' : ''} onClick={() => goTo('kaart')}>
+              Kaart
+            </button>
           </div>
         </div>
       </div>
@@ -220,9 +238,11 @@ export function App() {
         {lists && (
           <div key={`${pane}-${view.audience}`} className={`pane ${slide}`}>
             <p className="scope small muted">
-              {who[0].toUpperCase() + who.slice(1)}, {scope}
+              {who[0].toUpperCase() + who.slice(1)}, {pane === 'kaart' && !view.weekend && !view.day ? 'komende 7 dagen' : scope}
             </p>
-            {pane === 'agenda' ? (
+            {pane === 'kaart' ? (
+              <MapView items={mapItems} home={profile.home} onOpen={open} empty={`Niets op de kaart ${who} in deze periode.`} />
+            ) : pane === 'agenda' ? (
               <DayList lists={lists} today={today} onOpen={open} empty={`Niets gevonden ${who} in deze periode.`} />
             ) : (
               <OngoingList lists={lists} onOpen={open} expected={expected} empty={`Geen doorlopend aanbod ${who} in deze periode.`} />
