@@ -107,7 +107,6 @@ export function SettingsSheet({
         {tab === 'soorten' && (['volwassenen', 'kinderen'] as const).map((aud) => (
           <section key={aud} className="settings-block" aria-labelledby={`set-kinds-${aud}`}>
             <h3 id={`set-kinds-${aud}`}>Wat wil je zien bij {aud === 'kinderen' ? 'Kinderen' : 'Volwassenen'}?</h3>
-            <p className="small muted">Tik om een soort te verbergen of weer te tonen. Doorgestreept = verborgen.</p>
             <div className="chip-wrap">
               {kindsFor(aud).map((k) => {
                 const off = hidden[aud].includes(k);

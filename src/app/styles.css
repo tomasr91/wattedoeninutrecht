@@ -1,6 +1,6 @@
 /* Layout: grachtenblauwe kopbalk met de Dom (scrolt weg); daaronder een wit blok met de bediening dat over de
    kopbalk heen schuift en blijft plakken; daaronder witte kaarten op koel lichtgrijs.
-   Kleur: één blauwe kleurfamilie. Blauw = gekozen/actief. Groen/oranje = geschiktheid, rood alleen voor waarschuwingen. */
+   Alleen een licht thema (geen donkere modus). Kleur: één blauwe kleurfamilie. Blauw = gekozen/actief. Groen/oranje = geschiktheid, rood alleen voor waarschuwingen. */
 :root {
   --bg: #ffffff;
   /* Achtergrond van de lijst, waar de kaarten op liggen */
@@ -35,69 +35,6 @@
   --radius: 10px;
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --bg: #131313;
-    --page: #0c0f12;
-    --card: #1a1e22;
-    --surface: #1f1f1f;
-    --surface-2: #2b2b2b;
-    --ink: #f0f0f0;
-    --muted: #a8a8a8;
-    --line: #353535;
-    --brand: #5b8db3;
-    --brand-ink: #9cc3e0;
-    --on-brand: #ffffff;
-    --brand-soft: #1c2b37;
-    --head-bg: #142734;
-    --head-ink: #ffffff;
-    --head-muted: #a9bccb;
-    --head-dom: #b9cfe0;
-    --head-art: rgb(255 255 255 / 10%);
-    --day-ink: #d6e3ee;
-    --good: #a9d18e;
-    --good-bg: #24301c;
-    --warn: #f2c46b;
-    --warn-bg: #3a2c10;
-    --bad: #ff8a80;
-    --bad-bg: #3d1a18;
-    --focus: #8fb3ff;
-    --link: #8fb3ff;
-    --shadow: 0 1px 2px rgb(0 0 0 / 40%);
-    color-scheme: dark;
-  }
-}
-:root[data-theme='dark'] {
-  --bg: #131313;
-  --page: #0c0f12;
-  --card: #1a1e22;
-  --surface: #1f1f1f;
-  --surface-2: #2b2b2b;
-  --ink: #f0f0f0;
-  --muted: #a8a8a8;
-  --line: #353535;
-  --brand: #5b8db3;
-  --brand-ink: #9cc3e0;
-  --on-brand: #ffffff;
-  --brand-soft: #1c2b37;
-  --head-bg: #142734;
-  --head-ink: #ffffff;
-  --head-muted: #a9bccb;
-  --head-dom: #b9cfe0;
-  --head-art: rgb(255 255 255 / 10%);
-  --day-ink: #d6e3ee;
-  --good: #a9d18e;
-  --good-bg: #24301c;
-  --warn: #f2c46b;
-  --warn-bg: #3a2c10;
-  --bad: #ff8a80;
-  --bad-bg: #3d1a18;
-  --focus: #8fb3ff;
-  --link: #8fb3ff;
-  --shadow: 0 1px 2px rgb(0 0 0 / 40%);
-  color-scheme: dark;
-}
-
 *,
 *::before,
 *::after {
