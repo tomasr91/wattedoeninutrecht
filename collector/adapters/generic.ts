@@ -141,3 +141,85 @@ export function jsonLdAdapter(cfg: GenericConfig): SourceAdapter {
     },
   };
 }
+
+/* ------------------------------------------------------------------------------------------ */
+/*  type "tribe": WordPress-sites met The Events Calendar (REST: /wp-json/tribe/events/v1).   */
+/* ------------------------------------------------------------------------------------------ */
+
+interface TribeVenue {
+  venue?: string;
+  address?: string;
+  city?: string;
+  zip?: string;
+  geo_lat?: number | string;
+  geo_lng?: number | string;
+}
+export interface TribeEvent {
+  id: number;
+  url: string;
+  title: string;
+  description?: string;
+  start_date: string;
+  end_date?: string;
+  all_day?: boolean;
+  cost?: string;
+  website?: string;
+  venue?: TribeVenue | unknown[];
+  categories?: { name: string }[];
+}
+
+const decode = (s?: string) => (s ? cleanText(cheerio.load(`<p>${s}</p>`).text()) : '');
+/** "2026-10-24 20:30:00" → "2026-10-24T20:30" */
+const tribeTime = (s: string) => s.replace(' ', 'T').slice(0, 16);
+
+export function tribeToRaw(e: TribeEvent, cfg: GenericConfig, ctx: Pick<AdapterContext, 'options' | 'nowIso'>): RawEvent {
+  const v = (Array.isArray(e.venue) ? undefined : e.venue) as TribeVenue | undefined;
+  const lat = v?.geo_lat !== undefined && v.geo_lat !== '' ? Number(v.geo_lat) : undefined;
+  const lon = v?.geo_lng !== undefined && v.geo_lng !== '' ? Number(v.geo_lng) : undefined;
+  const venueName = decode(v?.venue) || (ctx.options.venueName as string | undefined);
+  return {
+    sourceId: cfg.id,
+    sourceName: cfg.name,
+    sourceEventId: String(e.id),
+    url: e.url,
+    title: decode(e.title),
+    start: e.all_day ? e.start_date.slice(0, 10) : tribeTime(e.start_date),
+    end: e.end_date ? (e.all_day ? e.end_date.slice(0, 10) : tribeTime(e.end_date)) : undefined,
+    allDay: !!e.all_day,
+    venueName,
+    address: v?.address ? cleanText([v.address, v.zip, v.city].filter(Boolean).join(', ')) : undefined,
+    locality: (ctx.options.locality as string | undefined) ?? v?.city,
+    lat: Number.isFinite(lat) ? lat : undefined,
+    lon: Number.isFinite(lon) ? lon : undefined,
+    priceText: e.cost ? decode(e.cost) : undefined,
+    bookingUrl: e.website || undefined,
+    hints: [...(e.categories ?? []).map((c) => decode(c.name)), ...((ctx.options.hints as string[]) ?? [])],
+    descriptionForClassification: e.description ? cheerio.load(e.description).text() : undefined,
+    checkedAt: ctx.nowIso,
+  };
+}
+
+export function tribeAdapter(cfg: GenericConfig): SourceAdapter {
+  return {
+    id: cfg.id,
+    name: cfg.name,
+    homepage: cfg.homepage ?? '',
+    method: 'json',
+    description: `Evenementen van ${cfg.name} (The Events Calendar)`,
+    async run(ctx: AdapterContext): Promise<AdapterResult> {
+      const site = String(ctx.options.site ?? cfg.homepage ?? '').replace(/\/$/, '');
+      const exclude = ((ctx.options.excludeTitles as string[]) ?? []).map((p) => new RegExp(p, 'i'));
+      const events: RawEvent[] = [];
+      for (let page = 1; page <= 10; page++) {
+        const url = `${site}/wp-json/tribe/events/v1/events?per_page=50&page=${page}&start_date=${ctx.today}&end_date=${ctx.until}%2023:59:59`;
+        const body = JSON.parse(await fetchText(url)) as { events?: TribeEvent[]; total_pages?: number };
+        for (const e of body.events ?? []) {
+          const raw = tribeToRaw(e, cfg, ctx);
+          if (!exclude.some((re) => re.test(raw.title))) events.push(raw);
+        }
+        if (!body.total_pages || page >= body.total_pages) break;
+      }
+      return { events: events.filter((e) => inWindow(e, ctx)), coverage: { from: ctx.today, to: ctx.until } };
+    },
+  };
+}

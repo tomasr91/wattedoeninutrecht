@@ -36,7 +36,7 @@ Vereist: Node.js 22.13 of nieuwer.
 ```bash
 npm install
 npm run dev          # app op http://localhost:5173 (gebruikt public/data/activities.json)
-npm test             # 150 tests
+npm test             # 152 tests
 npm run typecheck    # TypeScript voor app én verzamellaag
 ```
 

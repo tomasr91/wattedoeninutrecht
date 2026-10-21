@@ -11,6 +11,7 @@ en per run een maximum aantal detailpagina's. Omschrijvingen van bronnen worden 
 |---|---|---|---|---|
 | **UITagenda Utrecht** (uitagendautrecht.nl) | `uitagenda-utrecht` | HTML-lijsten per genre en wijk + iCal/Google Agenda-link per evenement | Stadsbreed: jeugdtheater, festivals, musea, rondleidingen, klassiek, diversen; apart Leidsche Rijn / Vleuten-De Meern | Geen publieke API of feed gevonden. Prijs staat niet altijd vermeld. Leeftijd alleen als het in de titel staat (bv. "4+"). |
 | **Bibliotheek Utrecht** (bibliotheekutrecht.op-shop.nl) | `bibliotheek-utrecht` | HTML (OP-shop) | Alle vestigingen, waaronder Leidsche Rijn Centrum, Vleuterweide, Vleuten en De Meern | Geen feed of JSON-LD. Reeksen op meerdere vestigingen worden per vestiging uitgesplitst; in de app samengevoegd tot één kaart met "+ n andere locaties". |
+| **Máximapark** (maximapark.nl) | `maximapark` (type `tribe`) | REST-API van The Events Calendar (`/wp-json/tribe/events/v1/events`) | Evenementen in en rond het park (films, sportevenementen, exposities in Castellum, voorstellingen) | Wekelijkse vaste activiteiten (parkrun, schaken) staan niet in de API. Informatiemarkten van de gemeente worden overgeslagen (`excludeTitles`). Het type `tribe` werkt voor elke WordPress-site met The Events Calendar. |
 | **Pathé** (pathe.nl) | `pathe` | Paginadata (`ng-state`) van de bioscooppagina, één verzoek per bioscoop | Kinderfilms met keuring AL of 6 en Kleuterbios in Pathé Utrecht Leidsche Rijn (Rembrandt instelbaar) | Alleen speeldagen, geen aanvangstijden ('Tijd: zie bron'). Programma komt per week; een film staat onder Doorlopend, Kleuterbios per dag in de agenda. De losse API weigert servers en robots.txt verbiedt `language=`, die worden niet gebruikt. |
 | **Podium Hoge Woerd** (podiumhogewoerd.nl) | `podium-hoge-woerd` | HTML + JSON-LD indien aanwezig | Theater in De Meern, veel jeugdvoorstellingen | Toont maar een deel van het seizoen op de agendapagina. Levert status direct van het theater (uitverkocht, laatste tickets, geannuleerd). |
 | **TivoliVredenburg** (tivolivredenburg.nl) | `tivolivredenburg` | HTML: lijst + genrefilter `familie`, detailpagina's | Alle concerten, lezingen, clubavonden; familieaanbod apart gemarkeerd | Datum komt uit de URL (betrouwbaar). Aanvangstijd, zaal en prijs alleen als de detailpagina die toont; anders "tijd zie bron". Alleen gekozen genres (pop & rock, club & elektronisch, comedy) plus familie; instelbaar via `genres` in `sources.config.json`. Klassiek, jazz/wereld, kennis & debat en items zonder genre (podcasts, workshops) worden niet opgehaald. |
@@ -36,6 +37,8 @@ en per run een maximum aantal detailpagina's. Omschrijvingen van bronnen worden 
 | Jaarbeurs | 404 | Hele site gaf "Tijdelijk offline". Tijdelijk. |
 | UITagenda Utrecht | TLS-fout | Server gaf een standaardcertificaat ("Kubernetes Ingress Controller Fake Certificate"). Probleem bij de site. |
 | Kasteel de Haar | TLS-fout | Server gaf een verlopen certificaat van een andere domeinnaam. Probleem bij de site. |
+
+| Leidsche Rijn Centrum (leidscherijncentrum.nl) | time-out | Server reageerde niet vanaf GitHub (21-10, tijdens de PHP-storing). Nog niet gekoppeld; opnieuw proberen. |
 
 TLS-controle wordt nooit uitgezet. Diagnose opnieuw draaien: Actions → **Bronnen diagnose** → Run workflow;
 het resultaat staat op de branch `diagnose`.

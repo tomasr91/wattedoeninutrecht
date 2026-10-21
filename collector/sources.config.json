@@ -80,6 +80,19 @@
       }
     },
     {
+      "id": "maximapark",
+      "type": "tribe",
+      "name": "Máximapark",
+      "homepage": "https://maximapark.nl/agenda/",
+      "enabled": true,
+      "options": {
+        "$comment": "WordPress met The Events Calendar; REST-API /wp-json/tribe/events/v1. Wekelijks terugkerende activiteiten (parkrun, schaken) staan niet in de API.",
+        "site": "https://maximapark.nl",
+        "locality": "Leidsche Rijn",
+        "excludeTitles": ["^Informatiemarkt"]
+      }
+    },
+    {
       "id": "pathe",
       "enabled": true,
       "options": {

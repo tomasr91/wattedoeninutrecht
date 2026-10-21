@@ -33,7 +33,7 @@ import { utrechtNatuurlijk } from './adapters/utrecht-natuurlijk.ts';
 import { kasteelDeHaar } from './adapters/kasteel-de-haar.ts';
 import { jaarbeurs } from './adapters/jaarbeurs.ts';
 import { pathe } from './adapters/pathe.ts';
-import { icalAdapter, jsonLdAdapter } from './adapters/generic.ts';
+import { icalAdapter, jsonLdAdapter, tribeAdapter } from './adapters/generic.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = new Set(process.argv.slice(2));
@@ -44,7 +44,7 @@ const exportOnly = args.has('--export-only');
 interface SourceConfig {
   id: string;
   enabled: boolean;
-  type?: 'ical' | 'jsonld';
+  type?: 'ical' | 'jsonld' | 'tribe';
   name?: string;
   homepage?: string;
   options?: Record<string, unknown>;
@@ -73,6 +73,7 @@ const BUILT_IN: Record<string, SourceAdapter> = {
 
 function adapterFor(cfg: SourceConfig): SourceAdapter | undefined {
   if (cfg.type === 'ical') return icalAdapter({ id: cfg.id, name: cfg.name ?? cfg.id, homepage: cfg.homepage, options: cfg.options });
+  if (cfg.type === 'tribe') return tribeAdapter({ id: cfg.id, name: cfg.name ?? cfg.id, homepage: cfg.homepage, options: cfg.options });
   if (cfg.type === 'jsonld') return jsonLdAdapter({ id: cfg.id, name: cfg.name ?? cfg.id, homepage: cfg.homepage, options: cfg.options });
   return BUILT_IN[cfg.id];
 }

@@ -27,6 +27,6 @@ export interface SourceAdapter {
   /** Korte uitleg voor het bronnenoverzicht. */
   description: string;
   homepage: string;
-  method: 'html' | 'ical' | 'jsonld' | 'handmatig';
+  method: 'html' | 'ical' | 'jsonld' | 'json' | 'handmatig';
   run(ctx: AdapterContext): Promise<AdapterResult>;
 }
