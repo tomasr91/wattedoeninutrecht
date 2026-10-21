@@ -14,8 +14,6 @@ echte activiteiten met een link naar de bron.
 
 - Bovenaan kies je **Kinderen** of **Volwassenen**. Een gezinsactiviteit (bv. een markt) staat in allebei.
 - **Dit weekend** en **Volgend weekend** tonen zaterdag en zondag; bij Volwassenen ook de vrijdagavond (vanaf 18:00).
-- **Fietsafstand** toont alles in Leidsche Rijn en de stad Utrecht, plus wat buiten de stad binnen 8 km
-  van Leidsche Rijn Centrum ligt.
 - De app toont altijd de komende drie maanden.
 - **Agenda** is chronologisch per dag: eendaagse en meerdaagse activiteiten (een meerdaags festival staat
   één keer, op de eerste dag). **Doorlopend** bevat exposities, speurtochten en alles wat twee weken of langer
