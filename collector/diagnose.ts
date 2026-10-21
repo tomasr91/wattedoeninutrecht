@@ -31,14 +31,16 @@ async function probe(url: string) {
     out.status = res.status;
     out.finalUrl = res.url;
     out.headers = Object.fromEntries(HEADERS.map((h) => [h, res.headers.get(h)]).filter(([, v]) => v));
-    const body = await res.text();
+    const buf = Buffer.from(await res.arrayBuffer());
+    const body = buf.toString('utf8');
     out.length = body.length;
     out.title = body.match(/<title[^>]*>([^<]*)/i)?.[1]?.trim();
     out.start = body.replace(/\s+/g, ' ').slice(0, 400);
     // DIAG_SAVE=1: volledige pagina bewaren (voor het schrijven van een nieuwe adapter).
     if (process.env.DIAG_SAVE === '1' && !url.endsWith('/robots.txt')) {
-      const file = `/tmp/diag-${++saved}.html`;
-      writeFileSync(file, body);
+      const ext = (url.match(/\.(xlsx|xls|csv|json|ics)(\?|$)/i)?.[1] ?? 'html').toLowerCase();
+      const file = `/tmp/diag-${++saved}.${ext}`;
+      writeFileSync(file, buf);
       out.savedAs = file.replace('/tmp/', '');
     }
   } catch (e) {

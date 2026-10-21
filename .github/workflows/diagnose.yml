@@ -50,7 +50,7 @@ jobs:
           git config user.email "agenda-bot@users.noreply.github.com"
           git checkout --orphan diagnose
           git rm -rq --cached .
-          cp /tmp/diagnose.json diagnose.json; cp /tmp/tls.txt tls.txt; cp /tmp/diag-*.html . 2>/dev/null || true
-          git add diagnose.json tls.txt diag-*.html 2>/dev/null || git add diagnose.json tls.txt
+          cp /tmp/diagnose.json diagnose.json; cp /tmp/tls.txt tls.txt; cp /tmp/diag-* . 2>/dev/null || true
+          git add diagnose.json tls.txt diag-* 2>/dev/null || git add diagnose.json tls.txt
           git commit -qm "Diagnose $(date -u +%Y-%m-%dT%H:%M)"
           git push -f origin diagnose
