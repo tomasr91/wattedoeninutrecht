@@ -1,4 +1,4 @@
-# Uit met de kids — Utrecht Family Agenda
+# Op stap in 030 — gezinsagenda voor Leidsche Rijn en Utrecht
 
 Een persoonlijke, mobiele gezinsagenda voor Leidsche Rijn, de rest van Utrecht en de omgeving.
 De app laat direct zien wat er de komende maand te doen is, rekent per activiteit uit hoe oud

@@ -13,7 +13,7 @@ const css = readFileSync(join(assets, files.find((f) => f.endsWith('.css'))), 'u
 const js = readFileSync(join(assets, files.find((f) => f.endsWith('.js'))), 'utf8').replace(/<\/script/gi, '<\\/script');
 const data = readFileSync(join(root, 'public', 'data', 'activities.json'), 'utf8').replace(/<\//g, '<\\/');
 
-const html = `<title>Uit met de kids</title>
+const html = `<title>Op stap in 030</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Persoonlijke gezinsagenda voor Leidsche Rijn, Utrecht en omgeving.">
 <link rel="preconnect" href="https://fonts.googleapis.com">

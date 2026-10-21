@@ -132,7 +132,7 @@ export function App() {
           <div className="brand">
             <DomTower height={54} />
             <div>
-              <h1>Uit met de kids</h1>
+              <h1>Op stap in 030</h1>
               <p className="brand-sub">Leidsche Rijn · Utrecht</p>
             </div>
           </div>
