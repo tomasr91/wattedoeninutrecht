@@ -95,10 +95,10 @@ export function childFits(activity: Activity, children: Child[], onDate?: string
   const adultsOnly =
     activity.audiences.length > 0 && activity.audiences.every((a) => a === 'volwassenen');
   const day = onDate && onDate > dateOf(activity.start) ? onDate : activity.start;
-  return children.map((c) => {
+  return children.map((c, i) => {
     const age = ageOnDate(c.birthDate, day);
     const r = fitForAge(age.totalMonths, activity.age, adultsOnly);
-    return { childId: c.id, childName: c.name, age, ...r };
+    return { childId: c.id, childName: c.name.trim() || `Kind ${i + 1}`, age, ...r };
   });
 }
 

@@ -1,9 +1,7 @@
 import type { Activity, Child, Profile, UpdateStatus } from '../../domain/types';
 import { kindLabel } from '../../domain/kind';
 import type { ListAudience } from '../../domain/views';
-import { ageOnDate, birthDateFromAge, formatAge } from '../../domain/age';
 import { formatDateTime } from '../../domain/dates';
-import { BIKE_MAX_KM } from '../../domain/views';
 import { fmtChecked } from '../components/DetailSheet';
 import { Sheet } from '../components/Sheet';
 
@@ -47,12 +45,11 @@ export function SettingsSheet({
             Met een geboortedatum rekent de app de leeftijd uit op de dag van elke activiteit. Alles blijft op deze telefoon.
           </p>
           {p.children.map((c, i) => {
-            const age = ageOnDate(c.birthDate, today);
             return (
               <div key={c.id} className="child-row">
                 <label htmlFor={`child-name-${i}`}>
                   Naam
-                  <input id={`child-name-${i}`} type="text" value={c.name} maxLength={20} onChange={(e) => setChild(i, { name: e.target.value || `Kind ${i + 1}` })} />
+                  <input id={`child-name-${i}`} type="text" value={c.name} maxLength={20} placeholder={`Kind ${i + 1}`} onChange={(e) => setChild(i, { name: e.target.value })} />
                 </label>
                 <label htmlFor={`child-birth-${i}`}>
                   Geboortedatum
@@ -64,26 +61,6 @@ export function SettingsSheet({
                     onChange={(e) => e.target.value && setChild(i, { birthDate: e.target.value, birthDateEstimated: false })}
                   />
                 </label>
-                <label htmlFor={`child-age-${i}`}>
-                  Of leeftijd (jaar)
-                  <input
-                    id={`child-age-${i}`}
-                    type="number"
-                    inputMode="decimal"
-                    min={0}
-                    max={17}
-                    step={0.5}
-                    value={Math.round((age.totalMonths / 12) * 2) / 2}
-                    onChange={(e) => {
-                      const yrs = Number(e.target.value.replace(',', '.'));
-                      if (Number.isFinite(yrs) && yrs >= 0) setChild(i, { birthDate: birthDateFromAge(Math.round(yrs * 12), today), birthDateEstimated: true });
-                    }}
-                  />
-                </label>
-                <p className="small child-age">
-                  Nu {formatAge(age)}
-                  {c.birthDateEstimated && ' · geboortedatum geschat uit leeftijd'}
-                </p>
               </div>
             );
           })}
@@ -105,17 +82,6 @@ export function SettingsSheet({
             </div>
           </section>
         ))}
-
-        <section className="settings-block" aria-labelledby="set-rules">
-          <h3 id="set-rules">Hoe de lijst werkt</h3>
-          <ul className="plain-list small">
-            <li>Fietsafstand: alles in Leidsche Rijn en de stad Utrecht, plus wat binnen {BIKE_MAX_KM} km van Leidsche Rijn Centrum ligt.</li>
-            <li>Dit weekend en Volgend weekend: zaterdag en zondag. Bij Volwassenen telt ook de vrijdagavond mee (vanaf 18:00).</li>
-            <li>Bij Kinderen verdwijnt wat voor allebei te jong of te oud is. Voorlezen wordt niet getoond.</li>
-            <li>Komt eraan: jaarlijkse momenten (Koningsdag, intochten, kerst in Leidsche Rijn Centrum, festivals) die binnen acht weken vallen maar nog niet in de agenda staan.</li>
-            <li>Doorlopend: exposities, speurtochten en alles wat twee weken of langer loopt. Veeg opzij (of tik op "Doorlopend") om ze te zien.</li>
-          </ul>
-        </section>
 
         {status && (
           <section className="settings-block" aria-labelledby="set-status">

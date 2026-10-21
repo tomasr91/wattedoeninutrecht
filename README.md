@@ -16,7 +16,7 @@ echte activiteiten met een link naar de bron.
 - **Dit weekend** en **Volgend weekend** tonen zaterdag en zondag; bij Volwassenen ook de vrijdagavond (vanaf 18:00).
 - **Fietsafstand** toont alles in Leidsche Rijn en de stad Utrecht, plus wat buiten de stad binnen 8 km
   van Leidsche Rijn Centrum ligt.
-- De periode (week, maand, 3 maanden) staat rechts; standaard de komende maand.
+- De app toont altijd de komende drie maanden.
 - **Agenda** is chronologisch per dag: eendaagse en meerdaagse activiteiten (een meerdaags festival staat
   één keer, op de eerste dag). **Doorlopend** bevat exposities, speurtochten en alles wat twee weken of langer
   loopt. Wissel door opzij te vegen of op de kop te tikken.
@@ -24,7 +24,7 @@ echte activiteiten met een link naar de bron.
   Voorlezen wordt niet getoond (`excludeCategories` in `src/domain/views.ts`).
 - Onder Doorlopend staat bovenaan **Komt eraan**: jaarlijkse momenten (Koningsdag, kerst in Leidsche Rijn Centrum, festivals) die binnen acht weken vallen maar nog geen datum in de agenda hebben. Zie `data/vaste-momenten.json`.
 - Per lijst kun je soorten verbergen (Gezin → Soorten). Bij Volwassenen staan standaard uit: Indie, Metal & punk, Expositie, Dans, Roots & americana, Opera, Musical en Podcast.
-- Via het gezinsicoon rechtsboven vul je de geboortedata in en zie je de status van de bronnen, het tijdstip van de laatste update en de app-versie (bouwmoment).
+- Via het gezinsicoon rechtsboven vul je naam en geboortedatum van de kinderen in en zie je de status van de bronnen, het tijdstip van de laatste update en de app-versie (bouwmoment).
 
 Zie ook [docs/BRONNEN.md](docs/BRONNEN.md) voor de bronnen en hun beperkingen, en
 [docs/ARCHITECTUUR.md](docs/ARCHITECTUUR.md) voor de opbouw van de code.

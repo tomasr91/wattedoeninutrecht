@@ -13,16 +13,12 @@ import { DayList, OngoingList } from './views/ListView';
 import { SettingsSheet } from './views/SettingsView';
 
 type Pane = 'agenda' | 'doorlopend';
-type PeriodChoice = 'deze-week' | 'komende-maand' | 'drie-maanden';
-
 interface ViewState {
   audience: ListAudience;
   weekend: WeekendChoice | null;
-  onlyBike: boolean;
-  period: PeriodChoice;
 }
 
-const DEFAULT_VIEW: ViewState = { audience: 'kinderen', weekend: null, onlyBike: false, period: 'komende-maand' };
+const DEFAULT_VIEW: ViewState = { audience: 'kinderen', weekend: null };
 
 export function App() {
   const today = todayInAmsterdam();
@@ -34,10 +30,8 @@ export function App() {
     return { ...d, ...p, hiddenKinds: p.hiddenKinds ?? d.hiddenKinds };
   });
   const [view, setViewState] = useState<ViewState>(() => {
-    const v = { ...DEFAULT_VIEW, ...load<ViewState & { onlyWeekend?: boolean }>('view', DEFAULT_VIEW) };
-    if (v.onlyWeekend && !v.weekend) v.weekend = 'dit';
-    delete v.onlyWeekend;
-    return v;
+    const v = load<Partial<ViewState> & { onlyWeekend?: boolean }>('view', DEFAULT_VIEW);
+    return { audience: v.audience ?? DEFAULT_VIEW.audience, weekend: v.weekend ?? (v.onlyWeekend ? 'dit' : null) };
   });
   const [pane, setPane] = useState<Pane>('agenda');
   const [slide, setSlide] = useState<'' | 'from-left' | 'from-right'>('');
@@ -58,7 +52,8 @@ export function App() {
     save('profile', p);
   };
 
-  const period = useMemo(() => makePeriod(view.period, today), [view.period, today]);
+  // Altijd de komende drie maanden (zo ver kijken de bronnen vooruit).
+  const period = useMemo(() => makePeriod('drie-maanden', today), [today]);
   const lists = useMemo(
     () =>
       data
@@ -68,7 +63,7 @@ export function App() {
               ...DEFAULT_LIST_OPTIONS,
               audience: view.audience,
               weekend: view.weekend,
-              onlyBike: view.onlyBike,
+              onlyBike: false,
               hiddenKinds: profile.hiddenKinds?.[view.audience] ?? [],
             },
             { today, period, children: profile.children },
@@ -173,9 +168,6 @@ export function App() {
                 {label}
               </button>
             ))}
-            <button className={`toggle ${view.onlyBike ? 'is-on' : ''}`} aria-pressed={view.onlyBike} onClick={() => setView({ onlyBike: !view.onlyBike })}>
-              Fietsafstand
-            </button>
           </div>
 
           <div className="pane-tabs" role="tablist" aria-label="Weergave">
@@ -185,14 +177,6 @@ export function App() {
             <button role="tab" aria-selected={pane === 'doorlopend'} className={pane === 'doorlopend' ? 'is-on' : ''} onClick={() => goTo('doorlopend')}>
               Doorlopend <span className="num count">{lists ? lists.ongoing.length + expected.length : ''}</span>
             </button>
-              <label className="period-select" htmlFor="period">
-                <span className="sr-only">Periode</span>
-                <select id="period" value={view.period} disabled={!!view.weekend} onChange={(e) => setView({ period: e.target.value as PeriodChoice })}>
-                  <option value="deze-week">Week</option>
-                  <option value="komende-maand">Maand</option>
-                  <option value="drie-maanden">3 maanden</option>
-                </select>
-              </label>
           </div>
         </div>
       </div>
@@ -206,8 +190,7 @@ export function App() {
         {lists && (
           <div key={`${pane}-${view.audience}`} className={`pane ${slide}`}>
             <p className="scope small muted">
-              {view.onlyBike ? 'Op fietsafstand, ' : ''}
-              {who}, {scope}
+              {who[0].toUpperCase() + who.slice(1)}, {scope}
             </p>
             {pane === 'agenda' ? (
               <DayList lists={lists} today={today} onOpen={open} empty={`Niets gevonden ${who} in deze periode.`} />
