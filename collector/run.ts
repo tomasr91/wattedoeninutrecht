@@ -15,7 +15,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { Dataset, UpdateStatus } from '../src/domain/types.ts';
 import { addDays, addMonths, todayInAmsterdam } from '../src/domain/dates.ts';
-import { reconcile, type SourceResult } from '../src/domain/reconcile.ts';
+import { reconcile, sourceKey, type SourceResult } from '../src/domain/reconcile.ts';
 import { normalize } from './normalize.ts';
 import { buildExport } from './export.ts';
 import { computeExpected, type RecurringMoment } from '../src/domain/expected.ts';
@@ -125,6 +125,8 @@ async function main() {
   const runId = dryRun ? -1 : dbm.startRun(db, nowIso);
   const results: SourceResult[] = [];
   const okNames = new Map<string, { name: string; count: number }>();
+  /** Items die een bron wel noemt maar die we bewust niet tonen: uit de database halen. */
+  const dropKeys: string[] = [];
 
   for (const cfg of config.sources) {
     const adapter = adapterFor(cfg);
@@ -148,7 +150,14 @@ async function main() {
         log,
         options: cfg.options ?? {},
       });
-      const activities = r.events.map(normalize);
+      let activities = r.events.map(normalize);
+      // Optioneel per bron: alleen bepaalde doelgroepen (bv. de bibliotheek alleen voor kinderen).
+      const only = cfg.options?.onlyAudiences as string[] | undefined;
+      if (only?.length) {
+        const dropped = activities.filter((a) => !a.audiences.some((x) => only.includes(x)));
+        activities = activities.filter((a) => a.audiences.some((x) => only.includes(x)));
+        dropKeys.push(...dropped.map(sourceKey));
+      }
       results.push({ sourceId: adapter.id, ok: true, coverage: r.coverage, keepCheckedDates: r.keepCheckedDates, authoritative: r.authoritative, activities });
       okNames.set(adapter.id, { name: adapter.name, count: activities.length });
       log(`  ✓ ${activities.length} activiteiten in ${Math.round((Date.now() - t0) / 1000)}s${r.notes ? ` — ${r.notes}` : ''}`);
@@ -172,7 +181,10 @@ async function main() {
 
   const anyOk = results.some((r) => r.ok);
   const existing = dbm.loadActivities(db);
-  const { activities, stats, removed } = reconcile(existing, results, nowIso, today);
+  const { activities: reconciled, stats, removed } = reconcile(existing, results, nowIso, today);
+  const dropSet = new Set(dropKeys);
+  const activities = reconciled.filter((a) => !dropSet.has(sourceKey(a)));
+  removed.push(...dropKeys);
   if (geocodingEnabled()) {
     const n = await geocodeMissing(db, activities, log);
     log(`Geocodering: ${n} locaties aangevuld`);

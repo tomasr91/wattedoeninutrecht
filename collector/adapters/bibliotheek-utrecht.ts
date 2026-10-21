@@ -94,9 +94,19 @@ export function parseCard(text: string, link: Link, title: string, nowIso: strin
   };
 }
 
+/** "Titel Titel" (zelfde tekst twee keer in de link) → "Titel". */
+export function dedupeRepeated(t: string): string {
+  const half = Math.floor(t.length / 2);
+  const left = t.slice(0, half).trim();
+  const right = t.slice(half).trim();
+  return left && left === right ? left : t;
+}
+
 function titleFor($: cheerio.CheerioAPI, el: AnyNode, slug: string): string {
-  const own = cleanText($(el).text());
-  if (own && !/^(meer informatie|bekijk|bestel|reserveer|meer)$/i.test(own) && own.length > 3) return own;
+  const own = dedupeRepeated(cleanText($(el).text()));
+  // Een link met alleen de vestigingsnaam is geen titel.
+  const isBranch = /^bibliotheek\s/i.test(own) && branchesIn(own).length === 1 && own.split(' ').length <= 4;
+  if (own && !isBranch && !/^(meer informatie|bekijk|bestel|reserveer|meer)$/i.test(own) && own.length > 3) return own;
   const heading = cleanText($(el).closest('div,li,article').find('h2,h3,h4').first().text());
   if (heading) return heading;
   return slug.replace(/-/g, ' ').replace(/^./, (c) => c.toUpperCase());

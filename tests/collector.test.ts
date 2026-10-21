@@ -3,6 +3,7 @@
  * ze bootsen de structuur na die bij het bronnenonderzoek is waargenomen,
  * maar zijn geen kopie van de echte pagina's en bevatten fictieve gegevens.
  */
+import { dedupeRepeated } from '../collector/adapters/bibliotheek-utrecht';
 import { describe, expect, it } from 'vitest';
 import { inferYear, parseDutchDate, parseDutchDateRange, parseGoogleCalendarLink, parseTimes, extractJsonLdEvents } from '../collector/lib/parse';
 import { parseIcs } from '../collector/lib/ics';
@@ -220,5 +221,12 @@ describe('export', () => {
       testActivity({ start: '2026-10-28T11:00' }),
     ];
     expect(buildExport(items, TODAY).activities).toHaveLength(1);
+  });
+});
+
+describe('bibliotheek: titels', () => {
+  it('haalt een dubbele titel terug naar één keer', () => {
+    expect(dedupeRepeated('Boek & Yoga (4-8 jaar) Boek & Yoga (4-8 jaar)')).toBe('Boek & Yoga (4-8 jaar)');
+    expect(dedupeRepeated('Feest (4+)')).toBe('Feest (4+)');
   });
 });
