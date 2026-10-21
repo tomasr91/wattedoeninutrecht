@@ -38,7 +38,7 @@ export function App() {
   const [pane, setPane] = useState<Pane>('agenda');
   const [slide, setSlide] = useState<'' | 'from-left' | 'from-right'>('');
   const [detail, setDetail] = useState<{ a: Activity; others: Activity[] } | null>(null);
-  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState<false | 'gezin' | 'verversing'>(false);
 
   const [fresh, setFresh] = useState<Set<string>>(new Set());
   useEffect(() => {
@@ -136,7 +136,7 @@ export function App() {
               <p className="brand-sub">Ontdek. Kies. Ga.</p>
             </div>
           </div>
-          <button className="icon-btn on-brand" onClick={() => setSettingsOpen(true)} aria-label="Gezin en bronnen">
+          <button className="icon-btn on-brand" onClick={() => setSettingsOpen('gezin')} aria-label="Instellingen">
             <IconUser size={20} />
           </button>
         </div>
@@ -215,7 +215,7 @@ export function App() {
               {lastRun && (
                 <p>
                   Bijgewerkt {formatDateTime(lastRun)}.{' '}
-                  <button className="text-btn small" onClick={() => setSettingsOpen(true)}>
+                  <button className="text-btn small" onClick={() => setSettingsOpen('verversing')}>
                     Bronnen
                   </button>
                 </p>
@@ -233,6 +233,7 @@ export function App() {
           status={data?.status}
           generatedAt={data?.generatedAt}
           activities={data?.activities ?? []}
+          initialTab={settingsOpen}
           onClose={() => setSettingsOpen(false)}
         />
       )}

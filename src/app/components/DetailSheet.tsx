@@ -182,7 +182,7 @@ export function DetailSheet({
                   {a.venue.geoPrecision !== 'exact' && <div className="small muted">Locatie benaderd, afstand is indicatief</div>}
                 </>
               ) : (
-                <span className="muted">{profile.home ? 'Onbekend: de bron geeft geen precieze locatie' : 'Vul bij Gezin je adres in om afstanden te zien'}</span>
+                <span className="muted">{profile.home ? 'Onbekend: de bron geeft geen precieze locatie' : 'Vul bij Instellingen je adres in om afstanden te zien'}</span>
               )}
             </dd>
             <dt>Prijs</dt>

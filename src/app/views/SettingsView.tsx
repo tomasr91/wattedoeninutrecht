@@ -15,8 +15,10 @@ export function SettingsSheet({
   status,
   generatedAt,
   activities,
+  initialTab = 'gezin',
   onClose,
 }: {
+  initialTab?: 'gezin' | 'soorten' | 'verversing';
   activities: Activity[];
   profile: Profile;
   setProfile: (p: Profile) => void;
@@ -26,6 +28,7 @@ export function SettingsSheet({
   onClose: () => void;
 }) {
   const p = profile;
+  const [tab, setTab] = useState<'gezin' | 'soorten' | 'verversing'>(initialTab);
   const hidden = p.hiddenKinds ?? { kinderen: [], volwassenen: [] };
   const kindsFor = (aud: ListAudience) =>
     [...new Set(activities.filter((a) => (aud === 'kinderen' ? a.audiences.some((x) => x !== 'volwassenen') : a.audiences.includes('volwassenen'))).map(kindLabel))].sort((x, y) =>
@@ -45,8 +48,24 @@ export function SettingsSheet({
     setProfile({ ...p, children: p.children.map((c, j) => (j === i ? { ...c, ...patch } : c)) });
 
   return (
-    <Sheet title="Gezin en bronnen" onClose={onClose}>
+    <Sheet title="Instellingen" onClose={onClose}>
       <div className="settings">
+        <div className="audience-tabs settings-tabs" role="tablist" aria-label="Instellingen">
+          {(
+            [
+              ['gezin', 'Kinderen & adres'],
+              ['soorten', 'Soorten'],
+              ['verversing', 'Verversing'],
+            ] as const
+          ).map(([id, label]) => (
+            <button key={id} role="tab" aria-selected={tab === id} className={tab === id ? 'is-on' : ''} onClick={() => setTab(id)}>
+              {label}
+            </button>
+          ))}
+        </div>
+
+        {tab === 'gezin' && (
+          <>
         <section className="settings-block" aria-labelledby="set-kids">
           <h3 id="set-kids">Kinderen</h3>
           <p className="small muted">
@@ -82,8 +101,10 @@ export function SettingsSheet({
         </section>
 
         <HomeBlock home={p.home} onChange={(home) => setProfile({ ...p, home })} />
+          </>
+        )}
 
-        {(['volwassenen', 'kinderen'] as const).map((aud) => (
+        {tab === 'soorten' && (['volwassenen', 'kinderen'] as const).map((aud) => (
           <section key={aud} className="settings-block" aria-labelledby={`set-kinds-${aud}`}>
             <h3 id={`set-kinds-${aud}`}>Soorten bij {aud === 'kinderen' ? 'Kinderen' : 'Volwassenen'}</h3>
             <p className="small muted">Tik om een soort te verbergen of weer te tonen. Doorgestreept = verborgen.</p>
@@ -100,7 +121,8 @@ export function SettingsSheet({
           </section>
         ))}
 
-        {status && (
+        {tab === 'verversing' && !status && <p className="small muted">Nog geen informatie over de updates.</p>}
+        {tab === 'verversing' && status && (
           <section className="settings-block" aria-labelledby="set-status">
             <h3 id="set-status">Bronnen en updates</h3>
             <p>
@@ -127,7 +149,7 @@ export function SettingsSheet({
                         <strong>{s.sourceName}</strong>
                         <div className="small">
                           {pending
-                            ? 'Nog niet automatisch opgehaald; gebeurt bij de eerstvolgende wekelijkse update'
+                            ? 'Nog niet automatisch opgehaald; gebeurt bij de eerstvolgende nachtelijke update'
                             : s.ok
                               ? `${s.fetched} activiteiten, gelukt ${s.lastSuccess ? fmtChecked(s.lastSuccess, today) : ''}`
                               : `Mislukt bij laatste poging${s.lastSuccess ? `; gegevens van ${fmtChecked(s.lastSuccess, today)} blijven staan` : ''}${s.error ? ` (${s.error})` : ''}`}
