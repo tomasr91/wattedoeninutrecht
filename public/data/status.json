@@ -1,6 +1,6 @@
 {
-  "lastSuccessfulRun": "2026-10-21T12:30:47.376Z",
-  "lastRun": "2026-10-21T12:30:47.376Z",
+  "lastSuccessfulRun": "2026-10-21T12:46:22.849Z",
+  "lastRun": "2026-10-21T12:46:22.849Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
@@ -39,6 +39,16 @@
       "error": "fetch failed"
     },
     {
+      "sourceId": "pathe",
+      "sourceName": "Pathé",
+      "enabled": true,
+      "ok": true,
+      "lastAttempt": "2026-10-21T12:46:21.891Z",
+      "lastSuccess": "2026-10-21T12:46:21.891Z",
+      "fetched": 15,
+      "notes": "15 kinderfilms en Kleuterbios-dagen"
+    },
+    {
       "sourceId": "podium-hoge-woerd",
       "sourceName": "Podium Hoge Woerd",
       "enabled": true,
@@ -70,7 +80,7 @@
     {
       "sourceId": "tivolivredenburg",
       "sourceName": "TivoliVredenburg",
-      "enabled": true,
+      "enabled": false,
       "ok": false,
       "lastAttempt": "2026-10-21T12:24:45.061Z",
       "fetched": 0,
@@ -104,10 +114,10 @@
     }
   ],
   "totals": {
-    "active": 601,
-    "added": 344,
+    "active": 616,
+    "added": 15,
     "updated": 0,
-    "cancelled": 5,
+    "cancelled": 0,
     "expired": 0,
     "merged": 182
   }
