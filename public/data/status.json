@@ -1,14 +1,14 @@
 {
-  "lastSuccessfulRun": "2026-10-21T18:02:54.905Z",
-  "lastRun": "2026-10-21T18:02:54.905Z",
+  "lastSuccessfulRun": "2026-10-21T19:35:02.860Z",
+  "lastRun": "2026-10-21T19:35:02.860Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
       "sourceName": "Bibliotheek Utrecht",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-21T17:31:05.227Z",
-      "lastSuccess": "2026-10-21T17:31:05.227Z",
+      "lastAttempt": "2026-10-21T19:27:32.437Z",
+      "lastSuccess": "2026-10-21T19:27:32.437Z",
       "fetched": 379
     },
     {
@@ -16,24 +16,24 @@
       "sourceName": "Comedyhuis",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-21T18:02:53.052Z",
-      "lastSuccess": "2026-10-21T18:02:53.052Z",
-      "fetched": 120,
-      "notes": "120 shows van 324 in de agenda"
+      "lastAttempt": "2026-10-21T19:27:32.437Z",
+      "lastSuccess": "2026-10-21T19:27:32.437Z",
+      "fetched": 29,
+      "notes": "29 shows van 324 in de agenda"
     },
     {
       "sourceId": "handmatig",
       "sourceName": "Handmatig gecontroleerd",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-21T17:08:50.371Z",
-      "lastSuccess": "2026-10-21T17:08:50.371Z",
-      "fetched": 265
+      "lastAttempt": "2026-10-21T19:27:32.437Z",
+      "lastSuccess": "2026-10-21T19:27:32.437Z",
+      "fetched": 196
     },
     {
       "sourceId": "hofman",
       "sourceName": "Hofman",
-      "enabled": true,
+      "enabled": false,
       "ok": true,
       "lastAttempt": "2026-10-21T18:01:51.292Z",
       "lastSuccess": "2026-10-21T18:01:51.292Z",
@@ -45,8 +45,8 @@
       "sourceName": "Jaarbeurs",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-21T17:08:50.371Z",
-      "lastSuccess": "2026-10-21T17:08:50.371Z",
+      "lastAttempt": "2026-10-21T19:27:32.437Z",
+      "lastSuccess": "2026-10-21T19:27:32.437Z",
       "fetched": 4,
       "notes": "4 gezinsevenementen van 42"
     },
@@ -55,8 +55,8 @@
       "sourceName": "Kasteel de Haar",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-21T17:08:50.371Z",
-      "lastSuccess": "2026-10-21T17:08:50.371Z",
+      "lastAttempt": "2026-10-21T19:27:32.437Z",
+      "lastSuccess": "2026-10-21T19:27:32.437Z",
       "fetched": 15,
       "notes": "19 agenda-items"
     },
@@ -65,8 +65,8 @@
       "sourceName": "Máximapark",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-21T17:08:50.371Z",
-      "lastSuccess": "2026-10-21T17:08:50.371Z",
+      "lastAttempt": "2026-10-21T19:27:32.437Z",
+      "lastSuccess": "2026-10-21T19:27:32.437Z",
       "fetched": 4
     },
     {
@@ -74,8 +74,8 @@
       "sourceName": "Pathé",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-21T17:08:50.371Z",
-      "lastSuccess": "2026-10-21T17:08:50.371Z",
+      "lastAttempt": "2026-10-21T19:27:32.437Z",
+      "lastSuccess": "2026-10-21T19:27:32.437Z",
       "fetched": 16,
       "notes": "16 kinderfilms en Kleuterbios-dagen"
     },
@@ -84,8 +84,8 @@
       "sourceName": "Podium Hoge Woerd",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-21T17:08:50.371Z",
-      "lastSuccess": "2026-10-21T17:08:50.371Z",
+      "lastAttempt": "2026-10-21T19:27:32.437Z",
+      "lastSuccess": "2026-10-21T19:27:32.437Z",
       "fetched": 9
     },
     {
@@ -93,8 +93,8 @@
       "sourceName": "Podium Sprits",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-21T17:08:50.371Z",
-      "lastSuccess": "2026-10-21T17:08:50.371Z",
+      "lastAttempt": "2026-10-21T19:27:32.437Z",
+      "lastSuccess": "2026-10-21T19:27:32.437Z",
       "fetched": 30,
       "notes": "32 producties in het programma"
     },
@@ -103,8 +103,8 @@
       "sourceName": "Stadsschouwburg Utrecht",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-21T17:08:50.371Z",
-      "lastSuccess": "2026-10-21T17:08:50.371Z",
+      "lastAttempt": "2026-10-21T19:27:32.437Z",
+      "lastSuccess": "2026-10-21T19:27:32.437Z",
       "fetched": 239,
       "notes": "239 voorstellingen, 165 productiepagina's"
     },
@@ -122,7 +122,7 @@
       "sourceName": "UITagenda Utrecht",
       "enabled": true,
       "ok": false,
-      "lastAttempt": "2026-10-21T17:08:50.371Z",
+      "lastAttempt": "2026-10-21T19:27:32.437Z",
       "failingSince": "2026-10-21T17:08:50.371Z",
       "fetched": 0,
       "error": "fetch failed: DEPTH_ZERO_SELF_SIGNED_CERT (www.uitagendautrecht.nl/agenda/?vanaf=21-10-2026&tot=04-02-2027&genres=jeugdtheater)"
@@ -132,7 +132,7 @@
       "sourceName": "Utrecht Natuurlijk",
       "enabled": true,
       "ok": false,
-      "lastAttempt": "2026-10-21T17:08:50.371Z",
+      "lastAttempt": "2026-10-21T19:27:32.437Z",
       "lastSuccess": "2026-10-21T12:24:45.061Z",
       "failingSince": "2026-10-21T17:08:50.371Z",
       "fetched": 75,
@@ -147,9 +147,9 @@
     }
   ],
   "totals": {
-    "active": 1078,
-    "added": 120,
-    "updated": 0,
+    "active": 969,
+    "added": 0,
+    "updated": 2,
     "cancelled": 0,
     "expired": 0,
     "merged": 21
