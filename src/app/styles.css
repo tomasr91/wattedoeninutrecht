@@ -437,19 +437,21 @@ h3 {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 8px;
+}
+.card-list > li + li {
+  border-top: 1px solid var(--line);
 }
 
 /* — Activiteit — */
 .card {
   display: grid;
-  gap: 4px;
+  gap: 3px;
   width: 100%;
   text-align: left;
-  background: var(--surface);
+  background: transparent;
   border: 0;
-  border-radius: var(--radius);
-  padding: 12px 14px;
+  border-radius: 0;
+  padding: 12px 2px;
   min-width: 0;
 }
 .card:hover {
@@ -457,16 +459,36 @@ h3 {
 }
 .card-time {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 0 8px;
   align-items: center;
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 0.84rem;
+  font-weight: 600;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
 .card-time .kind {
+  font-weight: 400;
+}
+.card-new {
   color: var(--brand-ink);
-  font-weight: 600;
+  font-weight: 700;
+}
+.card-new::after {
+  content: '·';
+  color: var(--muted);
+  margin-left: 8px;
+  font-weight: 400;
+}
+.card-warn {
+  color: var(--bad);
+  font-weight: 700;
+}
+.card-warn::before {
+  content: '·';
+  color: var(--muted);
+  margin-right: 8px;
+  font-weight: 400;
 }
 .card-time .kind::before {
   content: '·';
@@ -481,11 +503,14 @@ h3 {
   overflow-wrap: anywhere;
 }
 .card-where {
-  display: flex;
-  gap: 7px;
-  align-items: baseline;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  color: var(--muted);
   min-width: 0;
+  overflow-wrap: anywhere;
+}
+.card-fit {
+  font-size: 0.84rem;
+  font-weight: 600;
 }
 .card-note {
   font-size: 0.85rem;

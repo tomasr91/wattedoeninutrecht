@@ -75,32 +75,27 @@ export function ActivityCard({
   const where = [a.venue.name, a.venue.locality && !a.venue.name.includes(a.venue.locality) ? a.venue.locality : undefined]
     .filter(Boolean)
     .join(', ');
+  const warn = cancelled
+    ? 'Gaat niet door'
+    : a.status === 'uitverkocht'
+      ? 'Uitverkocht'
+      : a.booking.availability?.label;
   return (
-    <button className={`card zone-${a.zone}${cancelled ? ' is-cancelled' : ''}`} onClick={() => onOpen(item)}>
+    <button className={`card${cancelled ? ' is-cancelled' : ''}`} onClick={() => onOpen(item)}>
       <span className="card-time">
+        {isNew && <span className="card-new">Nieuw</span>}
         <span>{timeLabel(item, ongoing)}</span>
         {kind && <span className="kind">{kind}</span>}
-        {cancelled && <span className="flag flag-bad">Gaat niet door</span>}
-        {a.status === 'uitverkocht' && <span className="flag flag-bad">Uitverkocht</span>}
+        {warn && <span className="card-warn">{warn}</span>}
       </span>
       <span className="card-title">{a.title}</span>
       <span className="card-where">
-        <span className="zone-dot" aria-hidden="true" />
-        <span>
-          {where}
-          {item.km !== undefined && <span className="muted num"> · {kmText(item.km)}</span>}
-          {item.others.length > 0 && <span className="muted"> · +{item.others.length} locatie{item.others.length > 1 ? 's' : ''}</span>}
-        </span>
+        {where}
+        {item.km !== undefined && <span className="num"> · {kmText(item.km)}</span>}
+        {item.others.length > 0 && <span> · +{item.others.length} locatie{item.others.length > 1 ? 's' : ''}</span>}
       </span>
       {ongoing && a.openingNote && <span className="card-note">{a.openingNote}</span>}
-      <span className="card-tags">
-        {isNew && <span className="tag tag-new">Nieuw</span>}
-        {fit && fit.label && <span className={`fit fit-${fit.tone}`}>{fit.label}</span>}
-        {a.price.kind === 'gratis' && <span className="tag tag-free">Gratis</span>}
-        {a.indoor === 'binnen' && <span className="tag">Binnen</span>}
-        {(a.booking.status === 'verplicht' || a.booking.status === 'aanbevolen') && !cancelled && <span className="tag">Reserveren</span>}
-        {a.booking.availability && a.status !== 'uitverkocht' && <span className="tag tag-warn">{a.booking.availability.label}</span>}
-      </span>
+      {fit && fit.label && <span className={`card-fit fit-${fit.tone}`}>{fit.label}</span>}
     </button>
   );
 }
