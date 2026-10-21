@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState, type TouchEvent } from 'react';
 import type { Activity, Dataset, Profile } from '../domain/types';
 import { makePeriod } from '../domain/filters';
 import { defaultProfile } from '../domain/profile';
-import { dateOf, diffDays, formatShortDate, todayInAmsterdam } from '../domain/dates';
+import { dateOf, diffDays, formatShortDate, todayInAmsterdam, formatDateTime } from '../domain/dates';
 import { buildLists, DEFAULT_LIST_OPTIONS, weekendWindow, type ListAudience, type ListItem, type WeekendChoice } from '../domain/views';
 import { loadDataset } from './data';
 import { load, save } from './storage';
@@ -200,7 +200,7 @@ export function App() {
       <main className="main" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
         {error && <p className="banner banner-bad">{error} Controleer je verbinding en herlaad de pagina.</p>}
         {!data && !error && <p className="loading">Activiteiten laden…</p>}
-        {staleDays !== undefined && staleDays > 8 && (
+        {staleDays !== undefined && staleDays > 3 && (
           <p className="banner banner-warn">De agenda is {staleDays} dagen niet bijgewerkt. Tijden en prijzen kunnen veranderd zijn; check de bron.</p>
         )}
         {lists && (
@@ -222,7 +222,7 @@ export function App() {
               )}
               {lastRun && (
                 <p>
-                  Bijgewerkt {formatShortDate(dateOf(lastRun))}.{' '}
+                  Bijgewerkt {formatDateTime(lastRun)}.{' '}
                   <button className="text-btn small" onClick={() => setSettingsOpen(true)}>
                     Bronnen
                   </button>

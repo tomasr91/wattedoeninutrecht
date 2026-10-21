@@ -107,6 +107,12 @@ export function formatShortDate(key: string): string {
   return `${DAY_NAMES[d.getUTCDay()]} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`;
 }
 
+/** UTC-moment (ISO) als Amsterdamse datum en tijd: 'wo 21 okt, 14:40'. */
+export function formatDateTime(iso: string): string {
+  const local = nowInAmsterdam(new Date(iso));
+  return `${formatShortDate(local.slice(0, 10))}, ${local.slice(11, 16)}`;
+}
+
 export function formatLongDate(key: string): string {
   const d = parseDateKey(key);
   return `${DAY_NAMES_LONG[d.getUTCDay()]} ${d.getUTCDate()} ${MONTHS_LONG[d.getUTCMonth()]}`;

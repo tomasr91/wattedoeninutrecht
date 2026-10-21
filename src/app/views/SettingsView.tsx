@@ -2,7 +2,7 @@ import type { Activity, Child, Profile, UpdateStatus } from '../../domain/types'
 import { kindLabel } from '../../domain/kind';
 import type { ListAudience } from '../../domain/views';
 import { ageOnDate, birthDateFromAge, formatAge } from '../../domain/age';
-import { formatLongDate } from '../../domain/dates';
+import { formatDateTime } from '../../domain/dates';
 import { BIKE_MAX_KM } from '../../domain/views';
 import { fmtChecked } from '../components/DetailSheet';
 import { Sheet } from '../components/Sheet';
@@ -123,14 +123,15 @@ export function SettingsSheet({
             <p>
               {status.lastSuccessfulRun ? (
                 <>
-                  Laatste geslaagde update: <strong>{formatLongDate(status.lastSuccessfulRun.slice(0, 10))}</strong> ({fmtChecked(status.lastSuccessfulRun, today)}).
+                  Laatste geslaagde update: <strong>{formatDateTime(status.lastSuccessfulRun)}</strong> ({fmtChecked(status.lastSuccessfulRun, today)}).
                 </>
               ) : (
                 'Nog geen geslaagde update.'
               )}{' '}
-              De agenda wordt elke maandagochtend automatisch bijgewerkt.
+              De agenda wordt elke nacht automatisch bijgewerkt.
             </p>
             {generatedAt && <p className="small muted">{status.totals.active} activiteiten in de dataset.</p>}
+            <p className="small muted">App-versie: {formatDateTime(__APP_BUILD__)}{__APP_COMMIT__ ? ` (${__APP_COMMIT__})` : ''}</p>
             <ul className="source-list">
               {status.sources
                 .filter((s) => s.enabled)

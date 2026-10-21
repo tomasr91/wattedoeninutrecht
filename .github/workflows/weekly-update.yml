@@ -1,8 +1,8 @@
-# Wekelijkse update + publicatie op GitHub Pages.
+# Dagelijkse update + publicatie op GitHub Pages.
 #
-#  - Elke maandagochtend (05:17 UTC = 06:17 in de winter, 07:17 in de zomer):
+#  - Elke nacht (02:17 UTC = 03:17 in de winter, 04:17 in de zomer):
 #    bronnen ophalen → SQLite bijwerken → JSON exporteren → committen → app bouwen → publiceren.
-#  - Handmatig starten kan via Actions → "Wekelijkse update" → Run workflow
+#  - Handmatig starten kan via Actions → "Dagelijkse update" → Run workflow
 #    (optioneel met één bron, bv. "bibliotheek-utrecht").
 #  - Bij een push naar main wordt alleen getest, gebouwd en gepubliceerd (geen ophaalronde).
 #
@@ -10,11 +10,11 @@
 # Optioneel: Settings → Secrets and variables → Actions → Variables:
 #   COLLECTOR_CONTACT  (e-mailadres in de User-Agent, aanbevolen)
 #   GEOCODER=nominatim en NOMINATIM_EMAIL (preciezere afstanden)
-name: Wekelijkse update
+name: Dagelijkse update
 
 on:
   schedule:
-    - cron: '17 5 * * 1'
+    - cron: '17 2 * * *'
   workflow_dispatch:
     inputs:
       source:
@@ -31,7 +31,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: weekly-update
+  group: agenda-update
   cancel-in-progress: false
 
 jobs:
@@ -69,7 +69,8 @@ jobs:
           if git diff --cached --quiet; then
             echo "Geen wijzigingen in de data."
           else
-            git commit -m "Wekelijkse update $(date -u +%Y-%m-%d)"
+            git commit -m "Dagelijkse update $(date -u +%Y-%m-%d)"
+            git pull --rebase
             git push
           fi
 

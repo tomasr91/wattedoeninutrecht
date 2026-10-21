@@ -34,7 +34,8 @@ export interface ReconcileStats {
 }
 
 /** Na zoveel gemiste runs gaan we uit van annulering of verplaatsing. */
-export const MISSING_THRESHOLD = 2;
+/** Aantal runs (dagelijks) dat een activiteit bij de bron mag ontbreken voordat hij als vermoedelijk geannuleerd geldt. */
+export const MISSING_THRESHOLD = 4;
 
 /** Velden die voor de gebruiker betekenis hebben; wijziging hierin telt als update. */
 export function contentHashOf(a: Activity): string {

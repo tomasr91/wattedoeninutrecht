@@ -5,6 +5,10 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   base: process.env.BASE_PATH ?? './',
   plugins: [react()],
+  define: {
+    __APP_BUILD__: JSON.stringify(new Date().toISOString()),
+    __APP_COMMIT__: JSON.stringify((process.env.GITHUB_SHA ?? '').slice(0, 7)),
+  },
   build: { outDir: 'dist', sourcemap: false, chunkSizeWarningLimit: 600 },
   test: {
     include: ['tests/**/*.test.ts'],
