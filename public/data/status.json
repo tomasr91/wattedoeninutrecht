@@ -1,6 +1,6 @@
 {
-  "lastSuccessfulRun": "2026-10-21T14:55:32.820Z",
-  "lastRun": "2026-10-21T14:55:32.820Z",
+  "lastSuccessfulRun": "2026-10-21T15:43:45.581Z",
+  "lastRun": "2026-10-21T15:43:45.581Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
@@ -52,10 +52,10 @@
       "sourceName": "Pathé",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-21T12:52:08.743Z",
-      "lastSuccess": "2026-10-21T12:52:08.743Z",
-      "fetched": 17,
-      "notes": "17 kinderfilms en Kleuterbios-dagen"
+      "lastAttempt": "2026-10-21T15:43:43.003Z",
+      "lastSuccess": "2026-10-21T15:43:43.003Z",
+      "fetched": 16,
+      "notes": "16 kinderfilms en Kleuterbios-dagen"
     },
     {
       "sourceId": "podium-hoge-woerd",
@@ -125,7 +125,7 @@
   "totals": {
     "active": 627,
     "added": 0,
-    "updated": 0,
+    "updated": 1,
     "cancelled": 0,
     "expired": 0,
     "merged": 183
