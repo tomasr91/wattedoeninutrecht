@@ -53,6 +53,12 @@ describe('doorlopend versus agenda', () => {
     expect(isLongRunning(act({ start: '2026-11-01', end: '2026-11-20', categories: ['feest'] }))).toBe(true);
     expect(isLongRunning(act({ start: '2026-11-01', endUnknown: true, ongoing: true }))).toBe(true);
   });
+  it('zonder einddatum wordt niet getoond', () => {
+    const open = act({ start: '2026-10-01', end: '2027-01-21', endUnknown: true, ongoing: true });
+    const vaag = act({ start: '2026-10-01', end: '2027-01-21', ongoing: true, uncertainties: ['Doorlopend; einddatum en seizoen niet vermeld'] });
+    const expo = act({ start: '2026-10-01', end: '2026-12-31', ongoing: true, categories: ['expositie'] });
+    expect(buildLists([open, vaag, expo], opts(), ctx).ongoing.map((i) => i.activity.id)).toEqual([expo.id]);
+  });
   it('splitst de lijst en zet doorlopend niet in de dagagenda', () => {
     const expo = act({ start: '2026-09-01', end: '2026-12-31', allDay: true, ongoing: true, categories: ['expositie'] });
     const show = act({ start: '2026-10-28T10:30', categories: ['theater'] });

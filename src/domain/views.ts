@@ -111,6 +111,11 @@ export const DEFAULT_LIST_OPTIONS: ListOptions = {
   excludeCategories: ['voorlezen'],
 };
 
+/** Geen bekende einddatum (de bron noemt hem niet). */
+export function hasNoEndDate(a: Activity): boolean {
+  return !!a.endUnknown || a.uncertainties.some((u) => /einddatum\b.*\bniet\b|einddatum onbekend/i.test(u));
+}
+
 export function buildLists(
   activities: Activity[],
   opts: ListOptions,
@@ -126,6 +131,8 @@ export function buildLists(
 
   for (const a of activities) {
     if (a.isTestData || a.status === 'verlopen') continue;
+    // Zonder einddatum zou iets voor altijd blijven staan: niet tonen.
+    if (hasNoEndDate(a)) continue;
     const friday = isFridayEvening(a);
     if (activityEndDate(a) < ctx.today || (!overlapsPeriod(a, window) && !friday)) continue;
     if (!matchesAudience(a, opts.audience)) continue;

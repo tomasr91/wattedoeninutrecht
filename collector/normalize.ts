@@ -156,7 +156,7 @@ export function normalize(raw: RawEvent): Activity {
     end: raw.end && raw.end !== raw.start ? raw.end : undefined,
     allDay: raw.allDay ?? !timeOf(raw.start),
     ongoing: raw.ongoing,
-    endUnknown: (raw.extraUncertainties ?? []).some((u) => /einddatum niet/i.test(u)) || undefined,
+    endUnknown: (raw.extraUncertainties ?? []).some((u) => /einddatum\b.*\bniet\b|einddatum onbekend/i.test(u)) || undefined,
     openingNote: raw.openingNote,
     seriesKey: raw.seriesKey ?? `${raw.sourceId}|${normalizeText(raw.title)}`,
     venue,
