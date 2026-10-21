@@ -3,7 +3,7 @@ import type { Activity } from '../../domain/types';
 import { NewContext } from '../newContext';
 import { fitSummary } from '../../domain/age';
 import { dateOf, formatShortDate, relativeDayLabel, timeOf } from '../../domain/dates';
-import { hasNoEndDate, type ListItem } from '../../domain/views';
+import type { ListItem } from '../../domain/views';
 import { kindLabel, NO_KIND } from '../../domain/kind';
 
 /** Volledige tijdsaanduiding (voor het detailblad). */
@@ -25,7 +25,7 @@ function timeLabel(item: ListItem, ongoing: boolean): string {
   const a = item.activity;
   const d = dateOf(a.start);
   if (ongoing) {
-    if (a.endUnknown || hasNoEndDate(a)) return 'Loopt door';
+    if (a.endUnknown) return 'Doorlopend, einddatum onbekend';
     return a.end ? `T/m ${formatShortDate(dateOf(a.end))}` : 'Doorlopend';
   }
   if (a.end && dateOf(a.end) !== d) {
