@@ -1,6 +1,6 @@
 {
-  "lastSuccessfulRun": "2026-10-21T17:32:46.687Z",
-  "lastRun": "2026-10-21T17:32:46.687Z",
+  "lastSuccessfulRun": "2026-10-21T18:01:57.008Z",
+  "lastRun": "2026-10-21T18:01:57.008Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
@@ -12,6 +12,13 @@
       "fetched": 379
     },
     {
+      "sourceId": "comedyhuis",
+      "sourceName": "Comedyhuis",
+      "enabled": true,
+      "ok": false,
+      "fetched": 0
+    },
+    {
       "sourceId": "handmatig",
       "sourceName": "Handmatig gecontroleerd",
       "enabled": true,
@@ -19,6 +26,16 @@
       "lastAttempt": "2026-10-21T17:08:50.371Z",
       "lastSuccess": "2026-10-21T17:08:50.371Z",
       "fetched": 265
+    },
+    {
+      "sourceId": "hofman",
+      "sourceName": "Hofman",
+      "enabled": true,
+      "ok": true,
+      "lastAttempt": "2026-10-21T18:01:51.292Z",
+      "lastSuccess": "2026-10-21T18:01:51.292Z",
+      "fetched": 16,
+      "notes": "16 woensdagavonden, aanvang 20:30"
     },
     {
       "sourceId": "jaarbeurs",
@@ -127,9 +144,9 @@
     }
   ],
   "totals": {
-    "active": 942,
-    "added": 0,
-    "updated": 155,
+    "active": 958,
+    "added": 16,
+    "updated": 0,
     "cancelled": 0,
     "expired": 0,
     "merged": 21
