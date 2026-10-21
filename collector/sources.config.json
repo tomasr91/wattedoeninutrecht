@@ -95,6 +95,18 @@
       }
     },
     {
+      "id": "comedyhuis",
+      "enabled": true,
+      "options": {
+        "$comment": "Titels met een van deze woorden worden overgeslagen (open mics, talentavonden, cursussen).",
+        "exclude": ["open mic", "talent", "masterclass", "cursus", "eindshow", "workshop"]
+      }
+    },
+    {
+      "id": "hofman",
+      "enabled": true
+    },
+    {
       "id": "pathe",
       "enabled": true,
       "options": {

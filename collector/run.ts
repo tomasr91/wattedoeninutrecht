@@ -33,6 +33,8 @@ import { utrechtNatuurlijk } from './adapters/utrecht-natuurlijk.ts';
 import { kasteelDeHaar } from './adapters/kasteel-de-haar.ts';
 import { jaarbeurs } from './adapters/jaarbeurs.ts';
 import { pathe } from './adapters/pathe.ts';
+import { comedyhuis } from './adapters/comedyhuis.ts';
+import { hofman } from './adapters/hofman.ts';
 import { icalAdapter, jsonLdAdapter, tribeAdapter } from './adapters/generic.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -68,6 +70,8 @@ const BUILT_IN: Record<string, SourceAdapter> = {
   'kasteel-de-haar': kasteelDeHaar,
   jaarbeurs,
   pathe,
+  comedyhuis,
+  hofman,
   handmatig: curatedAdapter(join(ROOT, 'data', 'curated')),
 };
 
