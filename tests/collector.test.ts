@@ -3,7 +3,7 @@
  * ze bootsen de structuur na die bij het bronnenonderzoek is waargenomen,
  * maar zijn geen kopie van de echte pagina's en bevatten fictieve gegevens.
  */
-import { dedupeRepeated } from '../collector/adapters/bibliotheek-utrecht';
+import { dedupeRepeated } from '../collector/lib/parse';
 import { describe, expect, it } from 'vitest';
 import { inferYear, parseDutchDate, parseDutchDateRange, parseGoogleCalendarLink, parseTimes, extractJsonLdEvents } from '../collector/lib/parse';
 import { parseIcs } from '../collector/lib/ics';

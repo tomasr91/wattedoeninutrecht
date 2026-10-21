@@ -12,7 +12,7 @@
 import * as cheerio from 'cheerio';
 import type { AnyNode } from 'domhandler';
 import { fetchText } from '../lib/http.ts';
-import { cleanText, parseTimes } from '../lib/parse.ts';
+import { cleanText, dedupeRepeated, parseTimes } from '../lib/parse.ts';
 import type { RawEvent } from '../normalize.ts';
 import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
 
@@ -92,14 +92,6 @@ export function parseCard(text: string, link: Link, title: string, nowIso: strin
     seriesKey: `${ID}|${link.slug}`,
     checkedAt: nowIso,
   };
-}
-
-/** "Titel Titel" (zelfde tekst twee keer in de link) → "Titel". */
-export function dedupeRepeated(t: string): string {
-  const half = Math.floor(t.length / 2);
-  const left = t.slice(0, half).trim();
-  const right = t.slice(half).trim();
-  return left && left === right ? left : t;
 }
 
 function titleFor($: cheerio.CheerioAPI, el: AnyNode, slug: string): string {
@@ -185,7 +177,7 @@ export const bibliotheekUtrecht: SourceAdapter = {
       try {
         const $ = cheerio.load(await fetchText(link.url));
         const text = cleanText($('main').text() || $('body').text());
-        const t = cleanText($('h1').first().text()) || title;
+        const t = dedupeRepeated(cleanText($('h1').first().text())) || title;
         const ev = parseCard(text, link, t, ctx.nowIso);
         if (ev) events.push(ev);
       } catch (e) {

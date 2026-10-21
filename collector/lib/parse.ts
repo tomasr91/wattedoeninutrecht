@@ -206,3 +206,12 @@ export function priceTextFrom(text: string): string | undefined {
   const fmt = (n: number) => `€ ${Number.isInteger(n) ? n : n.toFixed(2).replace('.', ',')}`;
   return p.length === 1 ? fmt(p[0]) : `${fmt(p[0])} – ${fmt(p[p.length - 1])}`;
 }
+
+/** "Titel Titel" (zelfde tekst twee keer, bv. zichtbaar + verborgen kopie) → "Titel". */
+export function dedupeRepeated(t: string): string {
+  const s = t.trim();
+  const half = Math.floor(s.length / 2);
+  const left = s.slice(0, half).trim();
+  const right = s.slice(half).trim();
+  return left && left === right ? left : s;
+}

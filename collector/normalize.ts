@@ -3,6 +3,7 @@
  * zegt, wordt als feit opgenomen; afgeleide velden (leeftijdsschatting,
  * categorie, binnen/buiten) zijn als schatting herkenbaar.
  */
+import { dedupeRepeated } from './lib/parse.ts';
 import type { Activity, Audience, BookingStatus, Category, Confidence, EventStatus, IndoorKind } from '../src/domain/types.ts';
 import { enrich, parsePrice } from '../src/domain/enrich.ts';
 import { classifyZone } from '../src/domain/geo.ts';
@@ -150,7 +151,7 @@ export function normalize(raw: RawEvent): Activity {
 
   const activity: Activity = {
     id: stableHash(idBasis),
-    title: raw.title.trim(),
+    title: dedupeRepeated(raw.title),
     start: raw.start,
     end: raw.end && raw.end !== raw.start ? raw.end : undefined,
     allDay: raw.allDay ?? !timeOf(raw.start),
