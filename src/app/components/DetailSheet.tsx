@@ -98,8 +98,8 @@ export function DetailSheet({
       onClose={onClose}
       footer={
         <div className="detail-actions">
-          <a className="btn btn-primary" href={a.booking.url ?? a.url} target="_blank" rel="noopener noreferrer">
-            <IconExternal size={18} /> {a.booking.url ? 'Tickets' : 'Naar de bron'}
+          <a className="btn btn-primary" href={a.url} target="_blank" rel="noopener noreferrer">
+            <IconExternal size={18} /> Naar de bron
           </a>
           <div className="action-row three">
             <a className="btn" href={routeUrl(a)} target="_blank" rel="noopener noreferrer">
