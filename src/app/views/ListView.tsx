@@ -1,7 +1,7 @@
 import { relativeDayLabel, weekday } from '../../domain/dates';
 import type { ListItem, Lists } from '../../domain/views';
 import type { ExpectedMoment } from '../../domain/expected';
-import { addMonths, formatShortDate } from '../../domain/dates';
+import { addMonths, dateOf, formatShortDate } from '../../domain/dates';
 import { activityEndDate } from '../../domain/filters';
 import { isWeeklySeries } from '../../domain/series';
 import { ActivityCard } from '../components/ActivityCard';
@@ -70,9 +70,13 @@ export const SEASON_MONTHS = 2;
 
 export function OngoingList({ lists, today, onOpen, empty, expected = [] }: { lists: Lists; today: string; onOpen: (i: ListItem) => void; empty: string; expected?: ExpectedMoment[] }) {
   if (lists.ongoing.length === 0 && expected.length === 0) return <p className="empty">{empty}</p>;
-  const cutoff = addMonths(today, SEASON_MONTHS);
-  // Vaste wekelijkse reeksen ("Elke woensdag") en wat langer dan de grens loopt: ingeklapt.
-  const isLater = (i: ListItem) => isWeeklySeries(i.activity) || activityEndDate(i.activity) > cutoff;
+  // Ingeklapt: vaste wekelijkse reeksen ("Elke woensdag") en wat vanaf nu (of vanaf de start, als die later is)
+  // nog langer dan SEASON_MONTHS loopt. Iets korts dat pas over een tijd begint (Disney on Ice) blijft in de lijst.
+  const isLater = (i: ListItem) => {
+    if (isWeeklySeries(i.activity)) return true;
+    const from = dateOf(i.activity.start) > today ? dateOf(i.activity.start) : today;
+    return activityEndDate(i.activity) > addMonths(from, SEASON_MONTHS);
+  };
   const soon = lists.ongoing.filter((i) => !isLater(i));
   const later = lists.ongoing.filter(isLater);
   const cards = (items: ListItem[]) => (

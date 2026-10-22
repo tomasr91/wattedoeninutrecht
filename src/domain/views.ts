@@ -160,7 +160,8 @@ export function buildLists(
   const grouped = all.filter((i) => !(opts.audience === 'kinderen' && kidHiddenForUnknownAge(i.activity)));
   const ongoing = grouped
     .filter((i) => isLongRunning(i.activity))
-    .sort((x, y) => (activityEndDate(x.activity) < activityEndDate(y.activity) ? -1 : 1));
+    // Eerst op begindatum, dan op einddatum (beide oplopend).
+    .sort((x, y) => dateOf(x.activity.start).localeCompare(dateOf(y.activity.start)) || activityEndDate(x.activity).localeCompare(activityEndDate(y.activity)));
   const dated = grouped.filter((i) => !isLongRunning(i.activity)).sort(chronological);
 
   const days = byDayList(dated);
