@@ -162,8 +162,8 @@ export function buildLists(
   const grouped = all.filter((i) => !(opts.audience === 'kinderen' && kidHiddenForUnknownAge(i.activity)));
   const ongoing = grouped
     .filter((i) => isLongRunning(i.activity))
-    // Eerst op begindatum, dan op einddatum (beide oplopend).
-    .sort((x, y) => dateOf(x.activity.start).localeCompare(dateOf(y.activity.start)) || activityEndDate(x.activity).localeCompare(activityEndDate(y.activity)));
+    // Wat het eerst afloopt bovenaan; bij dezelfde einddatum wat het eerst begint.
+    .sort((x, y) => activityEndDate(x.activity).localeCompare(activityEndDate(y.activity)) || dateOf(x.activity.start).localeCompare(dateOf(y.activity.start)));
   const dated = grouped.filter((i) => !isLongRunning(i.activity)).sort(chronological);
 
   const days = byDayList(dated);

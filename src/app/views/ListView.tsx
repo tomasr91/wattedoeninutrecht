@@ -79,7 +79,7 @@ export function OngoingList({ lists, today, onOpen, empty, expected = [] }: { li
   };
   const soon = lists.ongoing.filter((i) => !isLater(i));
   // Met een echte einddatum eerst; vaste wekelijkse reeksen ("Elke donderdag") daarna. Binnen elke groep blijft
-  // de volgorde begindatum → einddatum.
+  // de volgorde einddatum → begindatum.
   const later = lists.ongoing.filter(isLater).sort((x, y) => Number(isWeeklySeries(x.activity)) - Number(isWeeklySeries(y.activity)));
   const cards = (items: ListItem[]) => (
     <ul className="card-list">
