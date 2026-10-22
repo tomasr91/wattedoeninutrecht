@@ -1,6 +1,6 @@
 {
-  "lastSuccessfulRun": "2026-10-22T08:41:26.706Z",
-  "lastRun": "2026-10-22T08:41:26.706Z",
+  "lastSuccessfulRun": "2026-10-22T08:53:54.264Z",
+  "lastRun": "2026-10-22T08:53:54.264Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
@@ -103,8 +103,8 @@
       "sourceName": "Stadsschouwburg Utrecht",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-22T07:22:15.005Z",
-      "lastSuccess": "2026-10-22T07:22:15.005Z",
+      "lastAttempt": "2026-10-22T08:49:09.442Z",
+      "lastSuccess": "2026-10-22T08:49:09.442Z",
       "fetched": 239,
       "notes": "239 voorstellingen, 166 productiepagina's"
     },
@@ -147,7 +147,7 @@
   "totals": {
     "active": 1658,
     "added": 0,
-    "updated": 0,
+    "updated": 1,
     "cancelled": 0,
     "expired": 0,
     "merged": 132
