@@ -212,3 +212,20 @@ describe('vaste plekken', () => {
     expect(inspirationList([a], 'kinderen')).toHaveLength(1);
   });
 });
+
+import { openDays, openInPeriod } from '../src/domain/series';
+describe('open dagen', () => {
+  it.each([
+    ['dagelijks', [0, 1, 2, 3, 4, 5, 6]],
+    ['di–zo 10–17', [0, 2, 3, 4, 5, 6]],
+    ['di, wo, vr–zo', [0, 2, 3, 5, 6]],
+    ['vr–wo 10–16.30 (do dicht)', [0, 1, 2, 3, 5, 6]],
+    ['Elke vr en za · 20:30', [5, 6]],
+    ['wo, za, zo', [0, 3, 6]],
+    ['Vaste plek', undefined],
+  ])('%s', (t, days) => expect(openDays(t)).toEqual(days));
+  it('alleen op vrijdag: niet in een weekend zonder vrijdag', () => {
+    expect(openInPeriod('Elke vrijdag · 19:00', '2026-10-24', '2026-10-25')).toBe(false);
+    expect(openInPeriod('Elke vrijdag · 19:00', '2026-10-23', '2026-10-25')).toBe(true);
+  });
+});

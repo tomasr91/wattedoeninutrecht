@@ -183,3 +183,41 @@ export function seriesNote(a: Pick<Activity, 'rolling' | 'recurrenceNote' | 'occ
 export function noteListsDates(note: string): boolean {
   return !/^(elke|dagelijks|doorlopend)/i.test(note);
 }
+
+const DAY_INDEX: Record<string, number> = {
+  zo: 0, zondag: 0, ma: 1, maandag: 1, di: 2, dinsdag: 2, wo: 3, woensdag: 3, do: 4, donderdag: 4, vr: 5, vrijdag: 5, za: 6, zaterdag: 6,
+};
+
+/**
+ * Open dagen uit een korte tekst: "dagelijks", "di–zo 10–17", "di, wo, vr–zo", "vr–wo (do dicht)",
+ * "Elke vr en za · 20:30", "wo, za, zo". Onbekend (bv. "Vaste plek", "ochtenden") → undefined.
+ */
+export function openDays(text: string | undefined): number[] | undefined {
+  if (!text) return undefined;
+  const t = text.toLowerCase().split('·')[0].replace(/\(.*?\)/g, ' ');
+  if (/dagelijks|elke dag|iedere dag|7 dagen/.test(t)) return [0, 1, 2, 3, 4, 5, 6];
+  const word = '(zondag|maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zo|ma|di|wo|do|vr|za)';
+  const days = new Set<number>();
+  const re = new RegExp(`(?<![a-z])${word}(?![a-z])(?:\\s*(?:–|-|t\\/m|tot en met)\\s*${word}(?![a-z]))?`, 'g');
+  for (const m of t.matchAll(re)) {
+    const a = DAY_INDEX[m[1]];
+    if (m[2] === undefined) {
+      days.add(a);
+      continue;
+    }
+    const b = DAY_INDEX[m[2]];
+    for (let i = 0, d = a; i < 7; i++, d = (d + 1) % 7) {
+      days.add(d);
+      if (d === b) break;
+    }
+  }
+  return days.size ? [...days].sort() : undefined;
+}
+
+/** Is er in [from, to] een dag waarop dit open is / plaatsvindt? Onbekende dagen tellen als ja. */
+export function openInPeriod(text: string | undefined, from: string, to: string): boolean {
+  const days = openDays(text);
+  if (!days) return true;
+  for (let d = from, i = 0; d <= to && i < 8; d = addDays(d, 1), i++) if (days.includes(weekday(d))) return true;
+  return false;
+}

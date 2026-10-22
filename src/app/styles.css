@@ -512,6 +512,10 @@ h3 {
 .card-fit.card-fit.is-maybe {
   color: #a4501a;
 }
+/* Nog te jong: ingetogen donkerrood. */
+.card-fit.card-fit.is-young {
+  color: #8f2b2b;
+}
 .card-note {
   font-size: 0.85rem;
   color: var(--muted);

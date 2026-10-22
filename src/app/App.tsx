@@ -1,6 +1,7 @@
 import { canonicalKind, HIDDEN_KIND_MIGRATIONS, kindLabel } from '../domain/kind';
 import { childFits } from '../domain/age';
 import { distanceFromHome } from '../domain/geo';
+import { openInPeriod } from '../domain/series';
 import { DEFAULT_NEARBY_KM } from './views/SettingsView';
 import { useEffect, useMemo, useRef, useState, type TouchEvent } from 'react';
 import type { Activity, Dataset, Profile } from '../domain/types';
@@ -106,8 +107,11 @@ export function App() {
   const always = useMemo<ListItem[]>(() => {
     if (!data) return [];
     const hidden = new Set((profile.hiddenKinds?.[audience] ?? []).map(canonicalKind));
+    // Met een gekozen weekend of datum: alleen wat op een van die dagen open is of plaatsvindt.
+    const sel = view.day ? { from: view.day, to: view.day } : view.weekend ? weekendWindow(view.weekend, today, audience) : undefined;
     return inspirationList(data.activities, audience)
       .filter((a) => !hidden.has(kindLabel(a)))
+      .filter((a) => !sel || openInPeriod(a.recurrenceNote, sel.from, sel.to))
       .map((a) => ({
         activity: a,
         day: today,
@@ -115,7 +119,7 @@ export function App() {
         km: distanceFromHome(a.venue, profile.home),
         others: [],
       }));
-  }, [data, audience, today, profile.children, profile.hiddenKinds, profile.home]);
+  }, [data, audience, today, view.day, view.weekend, profile.children, profile.hiddenKinds, profile.home]);
   const expected = (data?.expected ?? []).filter((e) => e.audience === 'beide' || e.audience === audience);
 
   const goTo = (p: Pane) => {
@@ -260,7 +264,7 @@ export function App() {
         {lists && (
           <div key={`${pane}-${audience}`} className={`pane ${slide}`}>
             <p className="scope small muted">
-              {who[0].toUpperCase() + who.slice(1)}, {pane === 'altijd' ? 'kan altijd: vaste uitjes zonder einddatum' : scope}
+              {who[0].toUpperCase() + who.slice(1)}, {pane === 'altijd' ? (view.day || view.weekend ? `vaste uitjes, open ${scope}` : 'kan altijd: vaste uitjes zonder einddatum') : scope}
             </p>
             {pane === 'agenda' ? (
               <DayList lists={lists} today={today} onOpen={open} empty={`Niets gevonden ${who} in deze periode.`} />
