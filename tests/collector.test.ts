@@ -274,3 +274,17 @@ describe('Utrecht Natuurlijk: bereik met ― (U+2015)', () => {
     expect(unCardToRaw(c, '2026-10-22T00:00:00Z').sourceEventId).toBe('herfst-test|tm-2026-10-25');
   });
 });
+
+import { detailStillFresh } from '../collector/adapters/uitagenda-utrecht';
+describe('UITagenda detailopslag', () => {
+  const ev = { sourceId: 'x', sourceName: 'x', url: 'u', title: '[TESTDATA] X', start: '2026-11-01', checkedAt: '' };
+  it('vers binnen 5 dagen', () => {
+    expect(detailStillFresh({ fetchedAt: '2026-10-20T03:00:00Z', value: ev }, '123', '2026-10-22')).toBe(true);
+  });
+  it('na 9 dagen altijd opnieuw', () => {
+    expect(detailStillFresh({ fetchedAt: '2026-10-10T03:00:00Z', value: ev }, '123', '2026-10-22')).toBe(false);
+  });
+  it('doorlopende reeks waarvan de eerstvolgende keer voorbij is: opnieuw', () => {
+    expect(detailStillFresh({ fetchedAt: '2026-10-21T03:00:00Z', value: { ...ev, start: '2026-10-21', rolling: true } }, '123', '2026-10-22')).toBe(false);
+  });
+});

@@ -10,6 +10,13 @@ export interface AdapterContext {
   log: (msg: string) => void;
   /** Bronspecifieke instellingen uit sources.config.json */
   options: Record<string, unknown>;
+  /** Opslag van eerder uitgelezen detailpagina's (per bron). */
+  cache?: DetailCache;
+}
+
+export interface DetailCache {
+  get<T>(key: string): { fetchedAt: string; value: T } | undefined;
+  set(key: string, value: unknown): void;
 }
 
 export interface AdapterResult {

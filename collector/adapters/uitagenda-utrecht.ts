@@ -15,7 +15,7 @@ import { fetchText } from '../lib/http.ts';
 import { cleanText, combine, introFrom, parseDutchDate, parseDutchDateRange, parseGoogleCalendarLink, parseTimes } from '../lib/parse.ts';
 import { recurrenceLabel } from '../../src/domain/series.ts';
 import { parseIcs } from '../lib/ics.ts';
-import { dateOf } from '../../src/domain/dates.ts';
+import { dateOf, diffDays } from '../../src/domain/dates.ts';
 import { parseAgeLabel } from '../../src/domain/enrich.ts';
 import type { RawEvent } from '../normalize.ts';
 import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
@@ -118,6 +118,26 @@ export function parsePlaytimes(text: string, today: string): { rolling?: boolean
   const uniq = [...new Set(dates)].sort();
   if (uniq.length >= 2) return { occurrences: uniq, note: recurrenceLabel(uniq, times) };
   return {};
+}
+
+/**
+ * Versie van de uitleesregels. Ophogen als parseEventPage iets nieuws of anders uitleest:
+ * dan worden alle pagina's de volgende run opnieuw opgehaald.
+ */
+export const PARSER_VERSION = 'v6';
+
+/**
+ * Een opgeslagen detailpagina is 5–9 dagen geldig (verspreid per evenement, zodat niet alles
+ * op dezelfde nacht verloopt). Doorlopende reeksen waarvan de eerstvolgende keer voorbij is,
+ * worden opnieuw opgehaald.
+ */
+export function detailStillFresh(hit: { fetchedAt: string; value: RawEvent }, id: string, today: string): boolean {
+  let h = 0;
+  for (const ch of id) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const maxAge = 5 + (h % 5);
+  if (diffDays(dateOf(hit.fetchedAt), today) >= maxAge) return false;
+  if (hit.value.rolling && dateOf(hit.value.end ?? hit.value.start) < today) return false;
+  return true;
 }
 
 export function parseEventPage(html: string, url: string, sourceEventId: string, ctx: Pick<AdapterContext, 'today' | 'nowIso'>): RawEvent | undefined {
@@ -305,7 +325,17 @@ export const uitagendaUtrecht: SourceAdapter = {
 
     const events: RawEvent[] = [];
     let n = 0;
+    let reused = 0;
     for (const [id, url] of links) {
+      // Eerder uitgelezen en nog vers genoeg: niet opnieuw ophalen (de lijstpagina bevestigt dat hij er nog is).
+      const cacheKey = `${PARSER_VERSION}|${id}`;
+      const hit = ctx.cache?.get<RawEvent>(cacheKey);
+      if (hit && detailStillFresh(hit, id, ctx.today)) {
+        const ev = { ...hit.value, checkedAt: ctx.nowIso };
+        if (dateOf(ev.end ?? ev.start) >= ctx.today && dateOf(ev.start) <= ctx.until) events.push(ev);
+        reused++;
+        continue;
+      }
       if (n++ >= maxDetail) {
         ctx.log(`  limiet van ${maxDetail} detailpagina's bereikt`);
         complete = false;
@@ -334,6 +364,7 @@ export const uitagendaUtrecht: SourceAdapter = {
           complete = false;
           continue;
         }
+        ctx.cache?.set(cacheKey, ev);
         const last = dateOf(ev.end ?? ev.start);
         if (last < ctx.today || dateOf(ev.start) > ctx.until) continue;
         events.push(ev);
@@ -342,6 +373,7 @@ export const uitagendaUtrecht: SourceAdapter = {
         complete = false;
       }
     }
+    ctx.log(`  detailpagina's: ${n} opgehaald, ${reused} uit de opslag`);
     if (links.size > 0 && events.length === 0) {
       throw new Error('Wel links gevonden maar geen enkele evenementpagina kunnen lezen — is de opmaak van de site veranderd?');
     }

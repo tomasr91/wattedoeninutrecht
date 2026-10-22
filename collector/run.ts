@@ -21,6 +21,7 @@ import { buildExport } from './export.ts';
 import { computeExpected, type RecurringMoment } from '../src/domain/expected.ts';
 import * as dbm from './db.ts';
 import { notAnOuting } from './outings.ts';
+import type { DetailCache } from './adapters/types.ts';
 import { geocodeAddressesPdok, geocodeMissing, geocodingEnabled } from './geocode.ts';
 import type { SourceAdapter } from './adapters/types.ts';
 import { uitagendaUtrecht } from './adapters/uitagenda-utrecht.ts';
@@ -152,6 +153,7 @@ async function main() {
         until,
         nowIso,
         maxDetailPages: config.maxDetailPagesPerSource,
+        cache: dryRun ? undefined : detailCache(db, adapter.id, nowIso),
         log,
         options: cfg.options ?? {},
       });
@@ -218,6 +220,8 @@ async function main() {
     return anyOk ? 0 : 1;
   }
   dbm.saveActivities(db, activities, nowIso);
+  // Opgeslagen detailpagina's die al een maand niet meer gebruikt zijn: opruimen.
+  db.prepare('DELETE FROM detail_cache WHERE fetched_at < ?').run(new Date(Date.parse(nowIso) - 30 * 86400000).toISOString());
   if (live.size) {
     const n = pruneCuratedFiles(join(ROOT, 'data', 'curated'), live);
     if (n) log(`Handmatige bestanden opgeschoond: ${n} items van bronnen die zelf werken`);
@@ -240,3 +244,18 @@ main().then(
     process.exit(1);
   },
 );
+
+/** Detailpagina-cache in SQLite, per bron. */
+function detailCache(db: ReturnType<typeof dbm.openDb>, sourceId: string, nowIso: string): DetailCache {
+  const get = db.prepare('SELECT fetched_at, value FROM detail_cache WHERE key = ?');
+  const put = db.prepare('INSERT OR REPLACE INTO detail_cache (key, fetched_at, value) VALUES (?, ?, ?)');
+  return {
+    get<T>(key: string) {
+      const r = get.get(`${sourceId}|${key}`) as { fetched_at: string; value: string } | undefined;
+      return r ? { fetchedAt: r.fetched_at, value: JSON.parse(r.value) as T } : undefined;
+    },
+    set(key: string, value: unknown) {
+      put.run(`${sourceId}|${key}`, nowIso, JSON.stringify(value));
+    },
+  };
+}
