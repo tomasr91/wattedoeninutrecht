@@ -130,6 +130,7 @@ export function unCardToRaw(c: UnCard, nowIso: string, expo = false, detail?: Re
     officialMaxMonths: age?.officialMaxMonths,
     ageLabel: age?.label,
     descriptionForClassification: detail?.text.slice(0, 1500),
+    summary: detail?.intro,
     estimatedMinMonths: toddlers ? 18 : undefined,
     estimateReason: toddlers ? 'volgens de bron voor peuters' : undefined,
     fitReasons: toddlers ? ['Volgens de bron geschikt voor peuters'] : undefined,

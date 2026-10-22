@@ -1109,3 +1109,10 @@ h3 {
   height: 20px;
   accent-color: #4f8a2b;
 }
+
+/* Korte beschrijving van de bron, direct onder de titel in het detailscherm. */
+.detail-intro {
+  margin: 8px 0 12px;
+  color: var(--ink);
+  line-height: 1.45;
+}

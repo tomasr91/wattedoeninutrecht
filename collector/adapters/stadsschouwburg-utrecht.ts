@@ -11,7 +11,7 @@
  */
 import * as cheerio from 'cheerio';
 import { fetchText } from '../lib/http.ts';
-import { cardTextAround, cleanText, parseDutchDate, priceTextFrom, spacedText } from '../lib/parse.ts';
+import { cardTextAround, cleanText, introFrom, parseDutchDate, priceTextFrom, spacedText } from '../lib/parse.ts';
 import type { RawEvent } from '../normalize.ts';
 import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
 
@@ -92,7 +92,7 @@ export function ssuExcluded(c: Pick<SsuCard, 'genres'>, exclude: string[]): bool
   return c.genres.length > 0 && c.genres.every((g) => exclude.includes(g));
 }
 
-export function ssuCardToRaw(c: SsuCard, nowIso: string, priceText?: string): RawEvent {
+export function ssuCardToRaw(c: SsuCard, nowIso: string, priceText?: string, summary?: string): RawEvent {
   const showCompany = c.company && c.company !== NAME && !c.title.toLowerCase().includes(c.company.toLowerCase());
   return {
     sourceId: ID,
@@ -109,6 +109,7 @@ export function ssuCardToRaw(c: SsuCard, nowIso: string, priceText?: string): Ra
     // "Jeugd"/"Familie" komen soms uit de filtertekst rond een kaart; alleen geloven bij een kinderleeftijd in de titel ("4+").
     hints: /\b\d{1,2}(?:,\d)?\s*\+/.test(c.title) && !/\b1[2-8]\s*\+/.test(c.title) ? c.genres : c.genres.filter((g) => g !== 'Jeugd' && g !== 'Familie'),
     kind: ssuKind(c),
+    summary,
     statusText: c.cancelled ? 'geannuleerd' : c.soldOut ? 'uitverkocht' : undefined,
     extraUncertainties: c.multipleTimes ? ['Meerdere speeltijden; kies je tijd op de bronpagina'] : undefined,
     checkedAt: nowIso,
@@ -116,14 +117,16 @@ export function ssuCardToRaw(c: SsuCard, nowIso: string, priceText?: string): Ra
 }
 
 /** Prijs en zaal van een productiepagina ("€ 15,00 / t/m 18 jaar € 12,00"). */
-export function parseSsuDetail(html: string): { priceText?: string; room?: string } {
+export function parseSsuDetail(html: string): { priceText?: string; room?: string; intro?: string } {
   const $ = cheerio.load(html);
   $('script, style, nav, header, footer').remove();
+  const intro = introFrom($);
   const text = spacedText($, $('main').length ? $('main') : $('body'));
   const zone = text.match(/€\s*\d[^]{0,120}/)?.[0] ?? '';
   return {
     priceText: priceTextFrom(zone),
     room: text.match(/\b(Grote Zaal|Blauwe Zaal|Douwe Egberts Zaal|Theaterzaal|Foyer)\b/i)?.[1],
+    intro,
   };
 }
 
@@ -153,16 +156,19 @@ export const stadsschouwburgUtrecht: SourceAdapter = {
     const inWindow = cards.filter((c) => c.date >= ctx.today && c.date <= ctx.until && !ssuExcluded(c, exclude));
     // Prijs per productie (niet per voorstelling): één detailpagina per slug.
     const prices = new Map<string, string | undefined>();
+    const intros = new Map<string, string | undefined>();
     for (const slug of [...new Set(inWindow.map((c) => c.slug))].slice(0, ctx.maxDetailPages)) {
       const url = inWindow.find((c) => c.slug === slug)!.url;
       try {
-        prices.set(slug, parseSsuDetail(await fetchText(url)).priceText);
+        const d = parseSsuDetail(await fetchText(url));
+        prices.set(slug, d.priceText);
+        intros.set(slug, d.intro);
       } catch (e) {
         ctx.log(`  detail mislukt (${url}): ${(e as Error).message}`);
       }
     }
     return {
-      events: inWindow.map((c) => ssuCardToRaw(c, ctx.nowIso, prices.get(c.slug))),
+      events: inWindow.map((c) => ssuCardToRaw(c, ctx.nowIso, prices.get(c.slug), intros.get(c.slug))),
       coverage: complete ? { from: ctx.today, to: ctx.until } : undefined,
       notes: `${inWindow.length} voorstellingen, ${prices.size} productiepagina's`,
     };

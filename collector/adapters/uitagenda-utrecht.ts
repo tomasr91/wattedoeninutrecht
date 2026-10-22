@@ -12,7 +12,7 @@
  */
 import * as cheerio from 'cheerio';
 import { fetchText } from '../lib/http.ts';
-import { cleanText, combine, parseDutchDate, parseDutchDateRange, parseGoogleCalendarLink, parseTimes } from '../lib/parse.ts';
+import { cleanText, combine, introFrom, parseDutchDate, parseDutchDateRange, parseGoogleCalendarLink, parseTimes } from '../lib/parse.ts';
 import { recurrenceLabel } from '../../src/domain/series.ts';
 import { parseIcs } from '../lib/ics.ts';
 import { dateOf } from '../../src/domain/dates.ts';
@@ -255,6 +255,7 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
     estimatedMinMonths: ageTag ? Number(ageTag[1]) * 12 : undefined,
     estimatedMaxMonths: ageTag ? Number(ageTag[2]) * 12 : undefined,
     estimateReason: ageTag ? 'leeftijdslabel van UITagenda' : undefined,
+    summary: introFrom($, $('.post-content').first().length ? $('.post-content').first() : undefined),
     descriptionForClassification: (cleanText($('.post-content').first().text()).slice(0, 1500) || cleanText($('meta[name="description"]').attr('content'))) ?? undefined,
     statusText,
     checkedAt: ctx.nowIso,

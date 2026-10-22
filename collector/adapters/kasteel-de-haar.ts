@@ -78,6 +78,7 @@ function base(i: HaarItem, nowIso: string): Omit<RawEvent, 'start' | 'sourceEven
     officialMaxMonths: age?.officialMaxMonths,
     ageLabel: age?.label,
     descriptionForClassification: i.detail?.text.slice(0, 1500),
+    summary: i.detail?.intro,
     sourceId: ID,
     sourceName: NAME,
     url: i.url,

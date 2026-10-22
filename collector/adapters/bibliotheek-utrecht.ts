@@ -12,7 +12,7 @@
 import * as cheerio from 'cheerio';
 import type { AnyNode } from 'domhandler';
 import { fetchText } from '../lib/http.ts';
-import { cleanText, dedupeRepeated, parseTimes } from '../lib/parse.ts';
+import { cleanText, dedupeRepeated, introFrom, parseTimes } from '../lib/parse.ts';
 import type { RawEvent } from '../normalize.ts';
 import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
 
@@ -179,7 +179,7 @@ export const bibliotheekUtrecht: SourceAdapter = {
         const text = cleanText($('main').text() || $('body').text());
         const t = dedupeRepeated(cleanText($('h1').first().text())) || title;
         const ev = parseCard(text, link, t, ctx.nowIso);
-        if (ev) events.push(ev);
+        if (ev) events.push({ ...ev, summary: ev.summary ?? introFrom($) });
       } catch (e) {
         ctx.log(`  fout bij ${link.url}: ${(e as Error).message}`);
         complete = false;

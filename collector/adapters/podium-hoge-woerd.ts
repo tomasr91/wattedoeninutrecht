@@ -13,7 +13,7 @@
  */
 import * as cheerio from 'cheerio';
 import { fetchText } from '../lib/http.ts';
-import { cleanText, combine, extractJsonLdEvents, isoToLocal, parseDutchDate, parseTimes } from '../lib/parse.ts';
+import { cleanText, combine, extractJsonLdEvents, introFrom, isoToLocal, parseDutchDate, parseTimes } from '../lib/parse.ts';
 import type { RawEvent } from '../normalize.ts';
 import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
 
@@ -31,6 +31,7 @@ export function parseDetail(html: string, url: string, slug: string, ctx: Pick<A
     address: 'Hoge Woerdplein 1, 3454 PB Utrecht',
     locality: 'De Meern',
     checkedAt: ctx.nowIso,
+    summary: introFrom($),
     bookingText: 'tickets',
     bookingUrl: $('a[href*="koop-ticket"]').first().attr('href')
       ? new URL($('a[href*="koop-ticket"]').first().attr('href')!, BASE).toString()

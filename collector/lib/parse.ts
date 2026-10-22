@@ -236,10 +236,44 @@ export function ageFromText(text: string | undefined): ReturnType<typeof parseAg
 }
 
 /** Leesbare tekst en leeftijd van een detailpagina (zonder menu, kop- en voettekst). */
-export function detailInfo(html: string, contentSelector = 'main'): { text: string; age: ReturnType<typeof parseAgeLabel> } {
+export function detailInfo(html: string, contentSelector = 'main'): { text: string; age: ReturnType<typeof parseAgeLabel>; intro?: string } {
   const $ = cheerio.load(html);
   $('script, style, nav, header, footer').remove();
   const root = $(contentSelector).first();
   const text = cleanText((root.length ? root : $('body')).text());
-  return { text, age: ageFromText(text) };
+  return { text, age: ageFromText(text), intro: introFrom($, root) };
+}
+
+/** Kort de tekst in tot hele zinnen binnen `max` tekens; een te lange eerste zin wordt op een woordgrens afgekapt. */
+export function shortIntro(text: string | undefined, max = 220): string | undefined {
+  const t = cleanText(text ?? '');
+  if (t.length < 25) return undefined;
+  const sentences = t.match(/[^.!?]+[.!?]+(?=\s|$)|[^.!?]+$/g) ?? [t];
+  let out = '';
+  for (const s of sentences) {
+    const next = `${out} ${s.trim()}`.trim();
+    if (next.length > max) break;
+    out = next;
+  }
+  if (!out) out = `${t.slice(0, max).replace(/\s+\S*$/, '')}…`;
+  return out;
+}
+
+/**
+ * Introtekst van een activiteitspagina: de eerste alinea met echte tekst (≥ 50 tekens),
+ * zonder menu, cookiemelding of praktische regels. Letterlijk van de bron; niets verzonnen.
+ */
+export function introFrom($: cheerio.CheerioAPI, root?: cheerio.Cheerio<any>, max = 220): string | undefined {
+  const scope = root && root.length ? root : $('main').length ? $('main') : $('body');
+  let found: string | undefined;
+  scope.find('p').each((_, el) => {
+    if (found) return;
+    const $el = $(el);
+    if ($el.closest('nav, header, footer, form, aside, [class*="cookie"], [class*="related"], [class*="meer"]').length) return;
+    const t = cleanText($el.text());
+    if (t.length < 50 || /cookie|javascript|nieuwsbrief|inschrijven voor|©/i.test(t)) return;
+    if (/^(datum|tijd|locatie|prijs|kosten|duur|leeftijd|aanvang)\b/i.test(t)) return;
+    found = t;
+  });
+  return shortIntro(found, max);
 }

@@ -109,6 +109,7 @@ export function DetailSheet({
     >
       <div className="detail">
         {kind && <span className="detail-kind">{kind}</span>}
+        {a.summary && <p className="detail-intro">{a.summary}</p>}
         {a.status === 'geannuleerd' && <p className="banner banner-bad">Volgens de bron gaat deze activiteit niet door.</p>}
         {a.status === 'uitverkocht' && <p className="banner banner-warn">Volgens de bron is deze activiteit uitverkocht.</p>}
 
@@ -161,10 +162,9 @@ export function DetailSheet({
           )}
         </ul>
 
-        {(a.summary || a.openingNote) && (
+        {a.openingNote && (
           <div className="detail-text">
-            {a.summary && <p>{a.summary}</p>}
-            {a.openingNote && <p className="muted">{a.openingNote}</p>}
+            <p className="muted">{a.openingNote}</p>
           </div>
         )}
 
