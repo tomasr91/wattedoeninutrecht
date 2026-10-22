@@ -12,7 +12,7 @@ import { buildLists, DEFAULT_LIST_OPTIONS, inspirationList, weekendWindow, type 
 import { loadDataset } from './data';
 import { load, save } from './storage';
 import { DetailSheet } from './components/DetailSheet';
-import { IconUser } from './components/Icons';
+import { IconSettings } from './components/Icons';
 import { DomTower } from './components/DomTower';
 import { AlwaysList, DayList, OngoingList } from './views/ListView';
 import { updateSeen, type SeenState } from '../domain/newness';
@@ -194,7 +194,7 @@ export function App() {
             </div>
           </div>
           <button className="icon-btn on-brand" onClick={() => setSettingsOpen('gezin')} aria-label="Instellingen">
-            <IconUser size={20} />
+            <IconSettings size={22} />
           </button>
         </div>
       </header>
