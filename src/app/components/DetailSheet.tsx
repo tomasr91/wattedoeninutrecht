@@ -64,8 +64,6 @@ export function DetailSheet({
   today,
   onClose,
   onOpen,
-  archived,
-  onArchive,
 }: {
   activity: Activity;
   others: Activity[];
@@ -73,9 +71,6 @@ export function DetailSheet({
   today: string;
   onClose: () => void;
   onOpen: (a: Activity) => void;
-  /** Alleen bij vaste uitjes: staat het in "Weggezet"? */
-  archived?: boolean;
-  onArchive?: () => void;
 }) {
   const onDay = dateOf(a.start) < today ? today : dateOf(a.start);
   const fits = profile.children.length ? childFits(a, profile.children, onDay) : [];
@@ -109,11 +104,6 @@ export function DetailSheet({
             </a>
             <ShareButton a={a} today={today} />
           </div>
-          {onArchive && (
-            <button className="text-btn archive-btn" onClick={onArchive}>
-              {archived ? 'Terugzetten bij Vaste uitjes' : 'Niets voor ons, wegzetten'}
-            </button>
-          )}
         </div>
       }
     >

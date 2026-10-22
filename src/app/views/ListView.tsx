@@ -5,6 +5,7 @@ import { addMonths, dateOf, formatShortDate } from '../../domain/dates';
 import { activityEndDate } from '../../domain/filters';
 import { isWeeklySeries } from '../../domain/series';
 import { ActivityCard } from '../components/ActivityCard';
+import { IconClose } from '../components/Icons';
 import { kindLabel } from '../../domain/kind';
 
 /** Chronologische agenda: per dag, eendaags en meerdaags (op de eerste dag). */
@@ -114,12 +115,14 @@ export function AlwaysList({
   archived = [],
   onOpen,
   onRestore,
+  onArchive,
   empty,
 }: {
   items: ListItem[];
   archived?: ListItem[];
   onOpen: (i: ListItem) => void;
   onRestore?: (i: ListItem) => void;
+  onArchive?: (i: ListItem) => void;
   empty: string;
 }) {
   const groups = new Map<string, ListItem[]>();
@@ -141,8 +144,13 @@ export function AlwaysList({
           </h2>
           <ul className="card-list">
             {[...list].sort(byDistance).map((i) => (
-              <li key={i.activity.id}>
+              <li key={i.activity.id} className={onArchive ? 'has-dismiss' : undefined}>
                 <ActivityCard item={i} ongoing onOpen={onOpen} />
+                {onArchive && (
+                  <button className="card-dismiss" aria-label={`${i.activity.title} wegzetten`} title="Wegzetten" onClick={() => onArchive(i)}>
+                    <IconClose size={16} />
+                  </button>
+                )}
               </li>
             ))}
           </ul>

@@ -1133,10 +1133,28 @@ h3 {
   gap: 4px;
 }
 
-.archive-btn {
-  display: block;
-  margin: 10px auto 0;
-  color: var(--muted, #6b6b6b);
+.has-dismiss {
+  position: relative;
+}
+.has-dismiss .card {
+  padding-right: 44px;
+}
+.card-dismiss {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+}
+.card-dismiss:active {
+  background: var(--line);
 }
 .archived-list {
   list-style: none;
