@@ -249,8 +249,11 @@ function effectiveStart(a: Activity, today: string): string {
 /** Vaste uitjes zonder einddatum ("doorlopend" volgens de bron), voor een aparte inspiratielijst. */
 export function inspirationList(activities: Activity[], audience: ListAudience): Activity[] {
   const seen = new Set<string>();
+  // Vaste plekken eerst, zodat bij dezelfde naam (bv. "nijntje museum" ook uit UITagenda) de plek blijft.
+  const isPlace = (a: Activity) => a.sources[0]?.sourceId === 'vaste-plekken';
   return activities
     .filter((a) => a.rolling && !a.isTestData && a.status !== 'verlopen' && a.status !== 'geannuleerd' && matchesAudience(a, audience))
-    .filter((a) => !seen.has(a.title.toLowerCase()) && seen.add(a.title.toLowerCase()))
+    .sort((x, y) => Number(isPlace(y)) - Number(isPlace(x)))
+    .filter((a) => !seen.has(normalizeText(a.title)) && seen.add(normalizeText(a.title)))
     .sort((x, y) => x.title.localeCompare(y.title, 'nl'));
 }

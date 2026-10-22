@@ -199,3 +199,16 @@ describe('doorlopend zonder einddatum', () => {
     expect(inspirationList([rolling], 'volwassenen').map((a) => a.title)).toEqual(['[TESTDATA] Doolhof']);
   });
 });
+
+import { placeToRaw } from '../collector/adapters/places';
+import { normalize } from '../collector/normalize';
+describe('vaste plekken', () => {
+  const raw = placeToRaw({ id: 't', name: '[TESTDATA] Speeltuin', kind: 'Spelen buiten', audiences: ['kinderen', 'gezin'], indoor: 'buiten', price: 'gratis', open: 'dagelijks', locality: 'Vleuten', url: 'https://example.invalid' }, { today: '2026-10-22', until: '2027-01-31' }, '2026-10-22T12:00:00Z');
+  it('wordt een doorlopende plek zonder einddatum, alleen in Altijd', () => {
+    const a = { ...normalize(raw), isTestData: false };
+    expect(a).toMatchObject({ rolling: true, recurrenceNote: 'Dagelijks', kind: 'Spelen buiten' });
+    const l = buildLists([a], { ...DEFAULT_LIST_OPTIONS, audience: 'kinderen' }, { today: '2026-10-22', period: { from: '2026-10-22', to: '2027-01-21' }, children: [] });
+    expect(l.days.length + l.ongoing.length).toBe(0);
+    expect(inspirationList([a], 'kinderen')).toHaveLength(1);
+  });
+});

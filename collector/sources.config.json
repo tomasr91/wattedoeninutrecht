@@ -112,6 +112,10 @@
       "enabled": true
     },
     {
+      "id": "vaste-plekken",
+      "enabled": true
+    },
+    {
       "id": "jaarbeurs",
       "enabled": true,
       "options": {

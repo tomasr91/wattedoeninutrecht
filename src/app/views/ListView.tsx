@@ -5,6 +5,7 @@ import { addMonths, dateOf, formatShortDate } from '../../domain/dates';
 import { activityEndDate } from '../../domain/filters';
 import { isWeeklySeries } from '../../domain/series';
 import { ActivityCard } from '../components/ActivityCard';
+import { kindLabel } from '../../domain/kind';
 
 /** Chronologische agenda: per dag, eendaags en meerdaags (op de eerste dag). */
 export function DayList({ lists, today, onOpen, empty }: { lists: Lists; today: string; onOpen: (i: ListItem) => void; empty: string }) {
@@ -104,18 +105,37 @@ export function OngoingList({ lists, today, onOpen, empty, expected = [] }: { li
   );
 }
 
-/** Vaste uitjes zonder einddatum: kan altijd. Inspiratie, los van de agenda. */
+/** Volgorde van de groepen in Altijd; andere soorten volgen op alfabet. */
+const ALWAYS_ORDER = ['Spelen binnen', 'Spelen buiten', 'Natuur & dieren', 'Museum', 'Expositie', 'Zwemmen', 'Sport', 'Rondleiding'];
+
+/** Vaste uitjes zonder einddatum: kan altijd. Inspiratie, los van de agenda, per soort; dichtbij eerst. */
 export function AlwaysList({ items, onOpen, empty }: { items: ListItem[]; onOpen: (i: ListItem) => void; empty: string }) {
   if (!items.length) return <p className="empty">{empty}</p>;
+  const groups = new Map<string, ListItem[]>();
+  for (const i of items) {
+    const k = kindLabel(i.activity);
+    if (!groups.has(k)) groups.set(k, []);
+    groups.get(k)!.push(i);
+  }
+  const rank = (k: string) => (ALWAYS_ORDER.includes(k) ? ALWAYS_ORDER.indexOf(k) : ALWAYS_ORDER.length);
+  const ordered = [...groups].sort(([a], [b]) => rank(a) - rank(b) || a.localeCompare(b, 'nl'));
+  const byDistance = (x: ListItem, y: ListItem) => (x.km ?? 999) - (y.km ?? 999) || x.activity.title.localeCompare(y.activity.title, 'nl');
   return (
     <div className="day-list">
-      <ul className="card-list">
-        {items.map((i) => (
-          <li key={i.activity.id}>
-            <ActivityCard item={i} ongoing onOpen={onOpen} />
-          </li>
-        ))}
-      </ul>
+      {ordered.map(([kind, list]) => (
+        <section key={kind} className="day" aria-label={kind}>
+          <h2 className="day-head">
+            {kind} <span className="num count">{list.length}</span>
+          </h2>
+          <ul className="card-list">
+            {[...list].sort(byDistance).map((i) => (
+              <li key={i.activity.id}>
+                <ActivityCard item={i} ongoing onOpen={onOpen} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
     </div>
   );
 }

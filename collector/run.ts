@@ -33,6 +33,7 @@ import { stadsschouwburgUtrecht } from './adapters/stadsschouwburg-utrecht.ts';
 import { podiumSprits } from './adapters/podium-sprits.ts';
 import { utrechtNatuurlijk } from './adapters/utrecht-natuurlijk.ts';
 import { kasteelDeHaar } from './adapters/kasteel-de-haar.ts';
+import { placesAdapter } from './adapters/places.ts';
 import { jaarbeurs } from './adapters/jaarbeurs.ts';
 import { pathe } from './adapters/pathe.ts';
 import { comedyhuis } from './adapters/comedyhuis.ts';
@@ -75,6 +76,7 @@ const BUILT_IN: Record<string, SourceAdapter> = {
   comedyhuis,
   hofman,
   handmatig: curatedAdapter(join(ROOT, 'data', 'curated')),
+  'vaste-plekken': placesAdapter(join(ROOT, 'data', 'places.json')),
 };
 
 function adapterFor(cfg: SourceConfig): SourceAdapter | undefined {
