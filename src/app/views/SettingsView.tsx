@@ -107,6 +107,14 @@ export function SettingsSheet({
           </>
         )}
 
+        {tab === 'soorten' && (
+          <section className="settings-block">
+            <label className="check">
+              <input type="checkbox" checked={!!p.showAlways} onChange={(e) => setProfile({ ...p, showAlways: e.target.checked })} /> Vaste uitjes tonen
+            </label>
+            <p className="small muted">Een extra tabblad met plekken waar je altijd heen kunt: musea, kinderboerderijen, speeltuinen, zwembaden.</p>
+          </section>
+        )}
         {tab === 'soorten' && (['volwassenen', 'kinderen'] as const).map((aud) => (
           <section key={aud} className="settings-block" aria-labelledby={`set-kinds-${aud}`}>
             <h3 id={`set-kinds-${aud}`}>Wat wil je zien bij {aud === 'kinderen' ? 'Kinderen' : 'Volwassenen'}?</h3>

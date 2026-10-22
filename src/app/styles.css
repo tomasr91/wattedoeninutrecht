@@ -1101,14 +1101,16 @@ h3 {
   display: flex;
   justify-content: space-between;
 }
-.nearby-head .check {
+.nearby-head .check,
+.settings .check.check {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-weight: 600;
   min-height: 36px;
 }
-.nearby-head .check input {
+.nearby-head .check input,
+.settings .check.check input {
   width: 20px;
   height: 20px;
   accent-color: #4f8a2b;

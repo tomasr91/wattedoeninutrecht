@@ -188,6 +188,8 @@ export interface Profile {
   hiddenKindsVersion?: number;
   /** Vaste uitjes die je hebt weggezet (genormaliseerde titel). */
   archived?: string[];
+  /** Tabblad Vaste uitjes tonen (standaard uit). */
+  showAlways?: boolean;
 }
 
 export interface UpdateStatus {

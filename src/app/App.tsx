@@ -21,7 +21,7 @@ import { SettingsSheet } from './views/SettingsView';
 import { normalizeText } from '../domain/dedupe';
 
 type Pane = 'agenda' | 'doorlopend' | 'altijd';
-const PANES: Pane[] = ['agenda', 'doorlopend', 'altijd'];
+const ALL_PANES: Pane[] = ['agenda', 'doorlopend', 'altijd'];
 interface ViewState {
   audience: ListAudience;
   weekend: WeekendChoice | null;
@@ -57,6 +57,11 @@ export function App() {
     return { audience: v.audience ?? DEFAULT_VIEW.audience, weekend: day ? null : v.weekend ?? (v.onlyWeekend ? 'dit' : null), day };
   });
   const [pane, setPane] = useState<Pane>('agenda');
+  const PANES = profile.showAlways ? ALL_PANES : ALL_PANES.filter((p) => p !== 'altijd');
+  // Vaste uitjes uitgezet terwijl je erop stond: terug naar de agenda.
+  useEffect(() => {
+    if (!profile.showAlways && pane === 'altijd') setPane('agenda');
+  }, [profile.showAlways, pane]);
   const [slide, setSlide] = useState<'' | 'from-left' | 'from-right'>('');
   const [detail, setDetail] = useState<{ a: Activity; others: Activity[] } | null>(null);
   const [settingsOpen, setSettingsOpen] = useState<false | 'gezin' | 'verversing'>(false);
@@ -257,9 +262,11 @@ export function App() {
             <button role="tab" aria-selected={pane === 'doorlopend'} className={pane === 'doorlopend' ? 'is-on' : ''} onClick={() => goTo('doorlopend')}>
               Tijdelijk <span className="num count">{lists ? lists.ongoing.length + expected.length : ''}</span>
             </button>
-            <button role="tab" aria-selected={pane === 'altijd'} className={pane === 'altijd' ? 'is-on' : ''} onClick={() => goTo('altijd')}>
-              Vaste uitjes <span className="num count">{data ? always.length : ''}</span>
-            </button>
+            {profile.showAlways && (
+              <button role="tab" aria-selected={pane === 'altijd'} className={pane === 'altijd' ? 'is-on' : ''} onClick={() => goTo('altijd')}>
+                Vaste uitjes <span className="num count">{data ? always.length : ''}</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
