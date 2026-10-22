@@ -44,7 +44,10 @@ jobs:
     outputs:
       skip: ${{ steps.guard.outputs.skip }}
     steps:
+      # Altijd de nieuwste main: een run die in de wachtrij stond moet voortbouwen op de data van de vorige run.
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Reserve-run nodig?
         id: guard
