@@ -1,3 +1,4 @@
+import { HIDDEN_KIND_MIGRATIONS } from '../domain/kind';
 import { DEFAULT_NEARBY_KM } from './views/SettingsView';
 import { useEffect, useMemo, useRef, useState, type TouchEvent } from 'react';
 import type { Activity, Dataset, Profile } from '../domain/types';
@@ -32,7 +33,14 @@ export function App() {
   const [profile, setProfileState] = useState<Profile>(() => {
     const p = load<Profile>('profile', defaultProfile(today));
     const d = defaultProfile(today);
-    return { ...d, ...p, hiddenKinds: p.hiddenKinds ?? d.hiddenKinds };
+    const hiddenKinds = p.hiddenKinds ?? d.hiddenKinds!;
+    let version = p.hiddenKindsVersion ?? 1;
+    for (const m of HIDDEN_KIND_MIGRATIONS) {
+      if (m.version <= version) continue;
+      hiddenKinds.volwassenen = [...new Set([...hiddenKinds.volwassenen, ...m.volwassenen])];
+      version = m.version;
+    }
+    return { ...d, ...p, hiddenKinds, hiddenKindsVersion: version };
   });
   const [view, setViewState] = useState<ViewState>(() => {
     const v = load<Partial<ViewState> & { onlyWeekend?: boolean }>('view', DEFAULT_VIEW);

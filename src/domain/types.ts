@@ -182,6 +182,8 @@ export interface Profile {
   weights: ScoreWeights;
   /** Soorten (labels) die je niet wilt zien, per lijst. */
   hiddenKinds?: { kinderen: string[]; volwassenen: string[] };
+  /** Welke standaard-verborgen soorten dit profiel al heeft meegekregen (zie HIDDEN_KIND_MIGRATIONS). */
+  hiddenKindsVersion?: number;
 }
 
 export interface UpdateStatus {

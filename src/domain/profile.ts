@@ -44,5 +44,6 @@ export function defaultProfile(today: string): Profile {
     defaultPeriod: 'komende-maand',
     weights: { ...DEFAULT_WEIGHTS },
     hiddenKinds: { kinderen: [], volwassenen: [...DEFAULT_HIDDEN_ADULT_KINDS] },
+    hiddenKindsVersion: 2,
   };
 }

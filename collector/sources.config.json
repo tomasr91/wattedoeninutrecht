@@ -17,7 +17,9 @@
         "genres": [],
         "wijken": [],
         "maxPagesPerQuery": 80,
-        "maxDetailPages": 1500
+        "maxDetailPages": 1500,
+        "$excludeVenues": "Zaken die hun openingstijden of vaste aanbod als evenement invoeren (reguliere expressies, hoofdletters maken niet uit).",
+        "excludeVenues": ["salon van weleer", "^vogelfrei$"]
       }
     },
     {

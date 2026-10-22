@@ -16,6 +16,9 @@ export const NO_KIND = 'Overig';
 const TITLE_KIND: [RegExp, string][] = [
   [/nightlife|clubnacht|\bdj\b|dj-set|all night long|\bhouse\b|techno|silent disco|\bparty\b|fiesta|karaoke|dansavond|danceparty|\brave\b/, 'Uitgaan'],
   [/pub ?quiz|\bquiz\b|bingo|spelletjes|game night|bordspel|escape/, 'Speurtocht & spel'],
+  [/cursus|\bles\b|lessen|taalcaf|scheidingscaf|rouw|lotgenot|praatgroep|mannentafel|vrouwentafel|burn-?out|spreekuur|inloop|troost|alle talen|studium generale/, 'Cursus & ontmoeting'],
+  [/diner|proeverij|proeven|wijn|\bbier|beaujolais|tap ?takeover|voorproevers|food|brunch|high tea|spijs/, 'Eten & drinken'],
+  [/kitsch of kunst|wintermarkt|winter market|feestmarkt|kerstmarkt|vlooienmarkt|rommelmarkt/, 'Markt'],
   [/pechakucha|\btalk\b|lezing|debat|gesprek|mannentafel|vrouwentafel|filosof/, 'Lezing'],
   [/open mic|open podium|poetry|spoken word|storytelling|voordracht/, 'Voorstelling'],
   [/workshop|collage|craft|knutsel|schrijfcaf|schrijf|yoga|maak je|atelier|cursus|masterclass/, 'Workshop'],
@@ -35,4 +38,7 @@ export function kindLabel(a: Pick<Activity, 'kind' | 'categories'> & { title?: s
 }
 
 /** Standaard verborgen soorten bij Volwassenen (keuze van de gebruiker, 21-10-2026). */
-export const DEFAULT_HIDDEN_ADULT_KINDS = ['Indie', 'Metal & punk', 'Expositie', 'Dans', 'Roots & americana', 'Opera', 'Musical', 'Podcast'];
+export const DEFAULT_HIDDEN_ADULT_KINDS = ['Indie', 'Metal & punk', 'Expositie', 'Dans', 'Roots & americana', 'Opera', 'Musical', 'Podcast', 'Cursus & ontmoeting'];
+
+/** Soorten die later standaard verborgen werden; bestaande profielen krijgen ze één keer mee. */
+export const HIDDEN_KIND_MIGRATIONS: { version: number; volwassenen: string[] }[] = [{ version: 2, volwassenen: ['Cursus & ontmoeting'] }];

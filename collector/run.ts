@@ -20,6 +20,7 @@ import { normalize } from './normalize.ts';
 import { buildExport } from './export.ts';
 import { computeExpected, type RecurringMoment } from '../src/domain/expected.ts';
 import * as dbm from './db.ts';
+import { notAnOuting } from './outings.ts';
 import { geocodeAddressesPdok, geocodeMissing, geocodingEnabled } from './geocode.ts';
 import type { SourceAdapter } from './adapters/types.ts';
 import { uitagendaUtrecht } from './adapters/uitagenda-utrecht.ts';
@@ -161,6 +162,14 @@ async function main() {
         const dropped = activities.filter((a) => !a.audiences.some((x) => only.includes(x)));
         activities = activities.filter((a) => a.audiences.some((x) => only.includes(x)));
         dropKeys.push(...dropped.map(sourceKey));
+      }
+      // Geen uitjes (acties, campagnes, openingstijden van een zaak): bij elke run eruit.
+      const excludeVenues = (cfg.options?.excludeVenues as string[] | undefined) ?? [];
+      const notOutings = activities.filter((a) => notAnOuting(a, excludeVenues));
+      if (notOutings.length) {
+        log(`  ${notOutings.length} geen uitje: ${[...new Set(notOutings.map((a) => a.title))].slice(0, 8).join('; ')}`);
+        activities = activities.filter((a) => !notAnOuting(a, excludeVenues));
+        dropKeys.push(...notOutings.map(sourceKey));
       }
       results.push({ sourceId: adapter.id, ok: true, coverage: r.coverage, keepCheckedDates: r.keepCheckedDates, authoritative: r.authoritative, activities });
       okNames.set(adapter.id, { name: adapter.name, count: activities.length });

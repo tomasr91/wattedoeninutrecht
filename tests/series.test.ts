@@ -63,7 +63,8 @@ describe('soort uit de titel als de bron niets zegt', () => {
     ['[TESTDATA] Estella Boersma All Night Long', 'Uitgaan'],
     ['[TESTDATA] PowerPoint Karaoke', 'Uitgaan'],
     ['[TESTDATA] PechaKucha Night #50', 'Lezing'],
-    ['[TESTDATA] Open Mic: Rouw aan het Woord', 'Voorstelling'],
+    ['[TESTDATA] Open Mic: Rouw aan het Woord', 'Cursus & ontmoeting'],
+    ['[TESTDATA] Open podium', 'Voorstelling'],
     ['[TESTDATA] Boek & Yoga (4-8 jaar)', 'Workshop'],
     ['[TESTDATA] Slaapfeestje voor knuffels', 'Feest'],
     ['[TESTDATA] USP Night Run', 'Sport'],
@@ -94,5 +95,31 @@ describe('vaste dag en datumkeuze', () => {
     const [s] = collapseSeries(thu, '2026-10-22');
     expect(overlapsPeriod(s, { from: '2026-10-28', to: '2026-10-28' })).toBe(false);
     expect(overlapsPeriod(s, { from: '2026-10-29', to: '2026-10-29' })).toBe(true);
+  });
+});
+
+import { notAnOuting } from '../collector/outings';
+describe('geen uitje', () => {
+  it.each([
+    [{ title: '[TESTDATA] Spot de strik en win!' }, 'actie of campagne'],
+    [{ title: '[TESTDATA] Stem op het mooiste kasteel' }, 'actie of campagne'],
+    [{ title: '[TESTDATA] Leesbanken', venue: { name: 'Diverse locaties Utrecht', geoPrecision: 'unknown' }, allDay: true, start: '2026-10-01', end: '2026-11-30' }, 'campagne op diverse locaties'],
+  ])('%o', (o, why) => {
+    expect(notAnOuting(act(o as never))).toBe(why);
+  });
+  it('locatie uit de uitsluitlijst', () => {
+    expect(notAnOuting(act({ title: '[TESTDATA] Gezelligheid', venue: { name: 'Salon van Weleer', geoPrecision: 'unknown' } }), ['salon van weleer'])).toMatch(/locatie/);
+  });
+  it('gewone activiteit blijft', () => {
+    expect(notAnOuting(act({ title: '[TESTDATA] Winterconcert' }))).toBeUndefined();
+  });
+  it.each([
+    ['[TESTDATA] Gratis Japanse les', 'Cursus & ontmoeting'],
+    ['[TESTDATA] Scheidingscafé', 'Cursus & ontmoeting'],
+    ['[TESTDATA] Utrechtse Bierproeverij', 'Eten & drinken'],
+    ['[TESTDATA] Wijnmakersdiner', 'Eten & drinken'],
+    ['[TESTDATA] Wintermarkt Podium Oost', 'Markt'],
+  ])('%s', (title, kind) => {
+    expect(kindLabel({ title, categories: ['overig'] })).toBe(kind);
   });
 });
