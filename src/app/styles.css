@@ -508,6 +508,10 @@ h3 {
 .card-fit.card-fit {
   color: var(--good);
 }
+/* Misschien nog wat jong: donker oranje, warm naast het groen en het grachtenblauw. */
+.card-fit.card-fit.is-maybe {
+  color: #a4501a;
+}
 .card-note {
   font-size: 0.85rem;
   color: var(--muted);

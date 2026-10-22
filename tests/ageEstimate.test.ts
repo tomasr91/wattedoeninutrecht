@@ -104,3 +104,19 @@ describe('schatting met lage zekerheid verbergt niet', () => {
     expect(fitForAge(42, { officialMinMonths: 72 }, false).fit).toBe('te-jong');
   });
 });
+
+import { normalize } from '../collector/normalize';
+describe('studentenkorting', () => {
+  const raw = (o: Record<string, unknown>) => ({ sourceId: 'test-bron', sourceName: 'Test', sourceEventId: '1', url: 'https://example.invalid', title: '[TESTDATA] Familievoorstelling', start: '2026-11-01T15:00', checkedAt: '2026-10-22T08:00:00Z', hints: ['Kinderen'], ...o }) as Parameters<typeof normalize>[0];
+  it('studentenkorting: niet voor jonge kinderen', () => {
+    const a = normalize(raw({ priceText: '€ 15 / studenten € 10' }));
+    expect(a.audiences).toEqual(['volwassenen']);
+    expect(a.age.estimatedMinMonths).toBeUndefined();
+  });
+  it('CJP-tag telt ook', () => {
+    expect(normalize(raw({ hints: ['Kinderen', '#cjp'] })).audiences).toEqual(['volwassenen']);
+  });
+  it('met een kinderleeftijd van de bron blijft het voor kinderen', () => {
+    expect(normalize(raw({ priceText: 'studenten € 8', officialMinMonths: 48 })).audiences).not.toEqual(['volwassenen']);
+  });
+});

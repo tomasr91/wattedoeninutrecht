@@ -102,7 +102,7 @@ export function ActivityCard({
       </span>
       {ongoing && a.openingNote && <span className="card-note">{a.openingNote}</span>}
       {fit && fit.label && (
-        <span className={`card-fit fit-${fit.tone}`}>
+        <span className={`card-fit fit-${fit.tone}${fit.label === 'Misschien nog wat jong' ? ' is-maybe' : ''}`}>
           {fit.label}
           {ageShort && <span className="card-age"> · {ageShort}</span>}
         </span>

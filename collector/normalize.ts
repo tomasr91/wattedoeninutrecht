@@ -136,7 +136,13 @@ export function normalize(raw: RawEvent): Activity {
   if (venue.geoPrecision === 'unknown') uncertainties.push('Exacte locatie niet bekend; afstand onzeker');
   if (bookingStatus === 'onbekend') uncertainties.push('Onbekend of reserveren nodig is');
 
-  const audiences = raw.audiences ?? e.audiences;
+  let audiences = raw.audiences ?? e.audiences;
+  // Studentenkorting of CJP (jongerenpas) in prijs, tekst of tags: aanbod voor volwassenen/jongeren,
+  // niet voor jonge kinderen — tenzij de bron zelf een kinderleeftijd noemt.
+  const studentText = `${raw.title} ${raw.priceText ?? ''} ${raw.descriptionForClassification ?? ''} ${(raw.hints ?? []).join(' ')}`;
+  const kidAgeFromSource = (raw.officialMinMonths ?? e.age.officialMinMonths ?? 99 * 12) < 12 * 12;
+  const studentOffer = /\bstudent(en)?\b|studentenkorting|studententarief|\bcjp\b/i.test(studentText) && !kidAgeFromSource;
+  if (studentOffer) audiences = ['volwassenen'];
   const rawOfficial = raw.officialMinMonths !== undefined || raw.officialMaxMonths !== undefined;
   const rawEstimate = raw.estimatedMinMonths !== undefined || raw.estimatedMaxMonths !== undefined;
   const base = { ...e.age };
@@ -156,6 +162,12 @@ export function normalize(raw: RawEvent): Activity {
     delete base.estimateReason;
     delete base.estimateConfidence;
     if (rawOfficial) delete base.officialFromText;
+  }
+  if (studentOffer) {
+    delete base.estimatedMinMonths;
+    delete base.estimatedMaxMonths;
+    delete base.estimateReason;
+    delete base.estimateConfidence;
   }
   const age = {
     ...base,
