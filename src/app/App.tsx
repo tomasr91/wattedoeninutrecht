@@ -246,10 +246,10 @@ export function App() {
               Agenda <span className="num count">{lists ? datedCount : ''}</span>
             </button>
             <button role="tab" aria-selected={pane === 'doorlopend'} className={pane === 'doorlopend' ? 'is-on' : ''} onClick={() => goTo('doorlopend')}>
-              Doorlopend <span className="num count">{lists ? lists.ongoing.length + expected.length : ''}</span>
+              Tijdelijk <span className="num count">{lists ? lists.ongoing.length + expected.length : ''}</span>
             </button>
             <button role="tab" aria-selected={pane === 'altijd'} className={pane === 'altijd' ? 'is-on' : ''} onClick={() => goTo('altijd')}>
-              Altijd <span className="num count">{data ? always.length : ''}</span>
+              Vaste uitjes <span className="num count">{data ? always.length : ''}</span>
             </button>
           </div>
         </div>
@@ -264,14 +264,14 @@ export function App() {
         {lists && (
           <div key={`${pane}-${audience}`} className={`pane ${slide}`}>
             <p className="scope small muted">
-              {who[0].toUpperCase() + who.slice(1)}, {pane === 'altijd' ? (view.day || view.weekend ? `vaste uitjes, open ${scope}` : 'kan altijd: vaste uitjes zonder einddatum') : scope}
+              {who[0].toUpperCase() + who.slice(1)}, {pane === 'altijd' ? (view.day || view.weekend ? `vaste uitjes, open ${scope}` : 'kan altijd, zonder einddatum') : scope}
             </p>
             {pane === 'agenda' ? (
               <DayList lists={lists} today={today} onOpen={open} empty={`Niets gevonden ${who} in deze periode.`} />
             ) : pane === 'altijd' ? (
               <AlwaysList items={always} onOpen={open} empty={`Nog geen vaste uitjes ${who}.`} />
             ) : (
-              <OngoingList lists={lists} today={today} onOpen={open} expected={expected} empty={`Geen doorlopend aanbod ${who} in deze periode.`} />
+              <OngoingList lists={lists} today={today} onOpen={open} expected={expected} empty={`Geen tijdelijk aanbod ${who} in deze periode.`} />
             )}
             <footer className="list-foot small muted">
               {lastRun && <p>Laatst ververst: {formatDateTime(lastRun)}</p>}
