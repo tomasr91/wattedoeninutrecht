@@ -18,6 +18,7 @@ import { AlwaysList, DayList, OngoingList } from './views/ListView';
 import { updateSeen, type SeenState } from '../domain/newness';
 import { NearContext, NewContext } from './newContext';
 import { SettingsSheet } from './views/SettingsView';
+import { normalizeText } from '../domain/dedupe';
 
 type Pane = 'agenda' | 'doorlopend' | 'altijd';
 const PANES: Pane[] = ['agenda', 'doorlopend', 'altijd'];
@@ -104,7 +105,14 @@ export function App() {
   );
   const datedCount = lists ? lists.days.reduce((n, d) => n + d.items.length, 0) : 0;
   // Vaste uitjes zonder einddatum (museum, doolhof, vaste avonden): inspiratie, los van de agenda.
-  const always = useMemo<ListItem[]>(() => {
+  const archived = useMemo(() => new Set(profile.archived ?? []), [profile.archived]);
+  const isArchived = (a: Activity) => archived.has(normalizeText(a.title));
+  const toggleArchive = (a: Activity) => {
+    const key = normalizeText(a.title);
+    const list = profile.archived ?? [];
+    setProfile({ ...profile, archived: list.includes(key) ? list.filter((k) => k !== key) : [...list, key] });
+  };
+  const alwaysAll = useMemo<ListItem[]>(() => {
     if (!data) return [];
     const hidden = new Set((profile.hiddenKinds?.[audience] ?? []).map(canonicalKind));
     // Met een gekozen weekend of datum: alleen wat op een van die dagen open is of plaatsvindt.
@@ -120,6 +128,8 @@ export function App() {
         others: [],
       }));
   }, [data, audience, today, view.day, view.weekend, profile.children, profile.hiddenKinds, profile.home]);
+  const always = useMemo(() => alwaysAll.filter((i) => !archived.has(normalizeText(i.activity.title))), [alwaysAll, archived]);
+  const alwaysArchived = useMemo(() => alwaysAll.filter((i) => archived.has(normalizeText(i.activity.title))), [alwaysAll, archived]);
   const expected = (data?.expected ?? []).filter((e) => e.audience === 'beide' || e.audience === audience);
 
   const goTo = (p: Pane) => {
@@ -269,7 +279,7 @@ export function App() {
             {pane === 'agenda' ? (
               <DayList lists={lists} today={today} onOpen={open} empty={`Niets gevonden ${who} in deze periode.`} />
             ) : pane === 'altijd' ? (
-              <AlwaysList items={always} onOpen={open} empty={`Nog geen vaste uitjes ${who}.`} />
+              <AlwaysList items={always} archived={alwaysArchived} onOpen={open} onRestore={(i) => toggleArchive(i.activity)} empty={`Nog geen vaste uitjes ${who}.`} />
             ) : (
               <OngoingList lists={lists} today={today} onOpen={open} expected={expected} empty={`Geen tijdelijk aanbod ${who} in deze periode.`} />
             )}
@@ -299,6 +309,8 @@ export function App() {
           profile={profile}
           today={today}
           onClose={() => setDetail(null)}
+          archived={detail.a.rolling ? isArchived(detail.a) : undefined}
+          onArchive={detail.a.rolling ? () => { toggleArchive(detail.a); setDetail(null); } : undefined}
           onOpen={(a) => setDetail({ a, others: [detail.a, ...detail.others].filter((o) => o.id !== a.id) })}
         />
       )}

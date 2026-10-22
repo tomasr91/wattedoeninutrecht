@@ -1132,3 +1132,22 @@ h3 {
   display: grid;
   gap: 4px;
 }
+
+.archive-btn {
+  display: block;
+  margin: 10px auto 0;
+  color: var(--muted, #6b6b6b);
+}
+.archived-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.archived-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--line, #e5e5e5);
+}

@@ -109,8 +109,19 @@ export function OngoingList({ lists, today, onOpen, empty, expected = [] }: { li
 const ALWAYS_ORDER = ['Spelen binnen', 'Spelen buiten', 'Natuur & dieren', 'Museum', 'Doe-activiteit', 'Sterrenkijken', 'Belevenis', 'Expositie', 'Zwemmen', 'Sport', 'Rondleiding'];
 
 /** Vaste uitjes zonder einddatum: kan altijd. Inspiratie, los van de agenda, per soort; dichtbij eerst. */
-export function AlwaysList({ items, onOpen, empty }: { items: ListItem[]; onOpen: (i: ListItem) => void; empty: string }) {
-  if (!items.length) return <p className="empty">{empty}</p>;
+export function AlwaysList({
+  items,
+  archived = [],
+  onOpen,
+  onRestore,
+  empty,
+}: {
+  items: ListItem[];
+  archived?: ListItem[];
+  onOpen: (i: ListItem) => void;
+  onRestore?: (i: ListItem) => void;
+  empty: string;
+}) {
   const groups = new Map<string, ListItem[]>();
   for (const i of items) {
     const k = kindLabel(i.activity);
@@ -122,6 +133,7 @@ export function AlwaysList({ items, onOpen, empty }: { items: ListItem[]; onOpen
   const byDistance = (x: ListItem, y: ListItem) => (x.km ?? 999) - (y.km ?? 999) || x.activity.title.localeCompare(y.activity.title, 'nl');
   return (
     <div className="day-list">
+      {!items.length && <p className="empty">{empty}</p>}
       {ordered.map(([kind, list]) => (
         <section key={kind} className="day" aria-label={kind}>
           <h2 className="day-head">
@@ -136,6 +148,23 @@ export function AlwaysList({ items, onOpen, empty }: { items: ListItem[]; onOpen
           </ul>
         </section>
       ))}
+      {archived.length > 0 && (
+        <details className="season-more archived">
+          <summary>Weggezet ({archived.length})</summary>
+          <ul className="archived-list">
+            {[...archived]
+              .sort((x, y) => x.activity.title.localeCompare(y.activity.title, 'nl'))
+              .map((i) => (
+                <li key={i.activity.id}>
+                  <span>{i.activity.title}</span>
+                  <button className="text-btn" onClick={() => onRestore?.(i)}>
+                    Terugzetten
+                  </button>
+                </li>
+              ))}
+          </ul>
+        </details>
+      )}
     </div>
   );
 }

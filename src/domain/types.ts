@@ -186,6 +186,8 @@ export interface Profile {
   hiddenKinds?: { kinderen: string[]; volwassenen: string[] };
   /** Welke standaard-verborgen soorten dit profiel al heeft meegekregen (zie HIDDEN_KIND_MIGRATIONS). */
   hiddenKindsVersion?: number;
+  /** Vaste uitjes die je hebt weggezet (genormaliseerde titel). */
+  archived?: string[];
 }
 
 export interface UpdateStatus {
