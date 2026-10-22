@@ -1,9 +1,11 @@
+import * as cheerio from 'cheerio';
 /**
  * Parsers voor Nederlandstalige datum- en tijdnotaties zoals ze in
  * evenementenlijsten staan, plus generieke extractie van gestructureerde
  * data (JSON-LD, Google Agenda-links).
  */
 import { addDays, diffDays, utcToLocal } from '../../src/domain/dates.ts';
+import { parseAgeLabel } from '../../src/domain/enrich.ts';
 
 const MONTHS: Record<string, number> = {
   jan: 1, januari: 1, feb: 2, februari: 2, mrt: 3, maart: 3, apr: 4, april: 4, mei: 5,
@@ -214,4 +216,30 @@ export function dedupeRepeated(t: string): string {
   const left = s.slice(0, half).trim();
   const right = s.slice(half).trim();
   return left && left === right ? left : s;
+}
+
+/**
+ * Leeftijd uit lopende tekst van een activiteitspagina. Alleen zinnen die over
+ * leeftijd of doelgroep gaan tellen mee ("De verhalen zijn geschikt voor kinderen
+ * van 5 tot 8 jaar", "Geschikt voor kinderen van 6 jaar en ouder", "Leeftijd 2 t/m 5 jaar").
+ * Leeftijden van 16+ zijn geen kinderleeftijd en worden genegeerd.
+ */
+export function ageFromText(text: string | undefined): ReturnType<typeof parseAgeLabel> {
+  if (!text) return null;
+  const sentences = cleanText(text).split(/(?<=[.!?])\s+/);
+  for (const s of sentences) {
+    if (!/geschikt|kinderen|leeftijd|voor wie|jaar en ouder|vanaf \d|groep \d|\bjaar\b/i.test(s)) continue;
+    const r = parseAgeLabel(s);
+    if (r && (r.officialMinMonths ?? 0) < 16 * 12) return r;
+  }
+  return null;
+}
+
+/** Leesbare tekst en leeftijd van een detailpagina (zonder menu, kop- en voettekst). */
+export function detailInfo(html: string, contentSelector = 'main'): { text: string; age: ReturnType<typeof parseAgeLabel> } {
+  const $ = cheerio.load(html);
+  $('script, style, nav, header, footer').remove();
+  const root = $(contentSelector).first();
+  const text = cleanText((root.length ? root : $('body')).text());
+  return { text, age: ageFromText(text) };
 }

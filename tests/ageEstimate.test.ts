@@ -62,3 +62,25 @@ describe('weergave', () => {
     expect(ageDisplay({ estimatedMinMonths: 60, estimatedMaxMonths: 144, estimateReason: 'speurtocht' })).toMatchObject({ text: 'ca. 5–12 jaar', note: 'Geschat: speurtocht' });
   });
 });
+
+import { ageFromText } from '../collector/lib/parse';
+import { parseSpritsDetail } from '../collector/adapters/podium-sprits';
+describe('leeftijd uit de tekst van een activiteitspagina', () => {
+  it.each([
+    ['[TESTDATA] Kom luisteren. De verhalen zijn geschikt voor kinderen van 5 tot 8 jaar oud. Inschrijven is niet nodig.', 60, 96],
+    ['[TESTDATA] Haal een boekje. Geschikt voor kinderen van 6 jaar en ouder. Voor jongere kinderen is er een zoekkaart.', 72, undefined],
+  ])('%s', (text, min, max) => {
+    const r = ageFromText(text);
+    expect(r?.officialMinMonths).toBe(min);
+    expect(r?.officialMaxMonths).toBe(max);
+  });
+  it('negeert 18+', () => {
+    expect(ageFromText('[TESTDATA] Proeverij. Toegang vanaf 18 jaar.')).toBeNull();
+  });
+  it('Podium Sprits: het vaste veld Leeftijd, niet de andere voorstellingen', () => {
+    const html = `<main><h1><span>[TESTDATA] DE TESTVOORSTELLING (2+) | TESTGEZELSCHAP</span></h1><p>Duur 35 minuten Leeftijd 2 t/m 5 jaar Locatie Testzaal</p><h2>Meer</h2><p>Andere voorstelling (6+)</p></main>`;
+    const d = parseSpritsDetail(html);
+    expect(d.age).toMatchObject({ officialMinMonths: 24, officialMaxMonths: 60 });
+    expect(d.title).toBe('[TESTDATA] DE TESTVOORSTELLING (2+)');
+  });
+});

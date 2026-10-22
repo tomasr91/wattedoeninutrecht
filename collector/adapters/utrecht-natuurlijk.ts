@@ -12,7 +12,7 @@
  */
 import * as cheerio from 'cheerio';
 import { fetchText } from '../lib/http.ts';
-import { cardTextAround, cleanText, parseDutchDate, priceTextFrom } from '../lib/parse.ts';
+import { cardTextAround, cleanText, detailInfo, parseDutchDate, priceTextFrom } from '../lib/parse.ts';
 import type { RawEvent } from '../normalize.ts';
 import type { Audience } from '../../src/domain/types.ts';
 import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
@@ -106,8 +106,9 @@ export function unKind(c: Pick<UnCard, 'title' | 'location'>, expo = false): str
   return c.location && /steede/i.test(c.location.venueName) ? 'Kinderboerderij' : 'Natuur';
 }
 
-export function unCardToRaw(c: UnCard, nowIso: string, expo = false): RawEvent {
-  const toddlers = c.groups.includes('Peuters');
+export function unCardToRaw(c: UnCard, nowIso: string, expo = false, detail?: ReturnType<typeof detailInfo>): RawEvent {
+  const age = detail?.age ?? null;
+  const toddlers = c.groups.includes('Peuters') && !age;
   return {
     sourceId: ID,
     sourceName: NAME,
@@ -125,6 +126,10 @@ export function unCardToRaw(c: UnCard, nowIso: string, expo = false): RawEvent {
     address: c.location?.address,
     priceText: c.priceText,
     audiences: unAudiences(c.groups),
+    officialMinMonths: age?.officialMinMonths,
+    officialMaxMonths: age?.officialMaxMonths,
+    ageLabel: age?.label,
+    descriptionForClassification: detail?.text.slice(0, 1500),
     estimatedMinMonths: toddlers ? 18 : undefined,
     estimateReason: toddlers ? 'volgens de bron voor peuters' : undefined,
     fitReasons: toddlers ? ['Volgens de bron geschikt voor peuters'] : undefined,
@@ -144,11 +149,23 @@ export const utrechtNatuurlijk: SourceAdapter = {
   async run(ctx: AdapterContext): Promise<AdapterResult> {
     const types = (ctx.options.types as string[] | undefined) ?? ['onze-activiteiten', 'exposities'];
     const events: RawEvent[] = [];
+    // Activiteitspagina's één keer per activiteit (niet per datum): daar staat o.a. de leeftijd.
+    const details = new Map<string, ReturnType<typeof detailInfo> | undefined>();
+    let fetched = 0;
     for (const t of types) {
       const cards = parseUnList(await fetchText(`${BASE}/activiteit-type/${t}/?view=upcoming`, { minIntervalMs: 5000 }), ctx.today);
       for (const c of cards) {
         if (c.date > ctx.until || (c.end ?? c.date) < ctx.today) continue;
-        events.push(unCardToRaw(c, ctx.nowIso, t === 'exposities'));
+        if (!details.has(c.slug) && fetched < ctx.maxDetailPages) {
+          fetched++;
+          try {
+            details.set(c.slug, detailInfo(await fetchText(`${BASE}/activiteit/${c.slug}/`, { minIntervalMs: 3000 })));
+          } catch (e) {
+            details.set(c.slug, undefined);
+            ctx.log(`  detail mislukt (${c.slug}): ${(e as Error).message}`);
+          }
+        }
+        events.push(unCardToRaw(c, ctx.nowIso, t === 'exposities', details.get(c.slug)));
       }
     }
     return { events, coverage: { from: ctx.today, to: ctx.until }, notes: `${events.length} activiteiten` };

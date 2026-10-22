@@ -11,7 +11,7 @@
  */
 import * as cheerio from 'cheerio';
 import { fetchText } from '../lib/http.ts';
-import { cardTextAround, cleanText, parseDutchDate, parseDutchDateRange } from '../lib/parse.ts';
+import { cardTextAround, cleanText, detailInfo, parseDutchDate, parseDutchDateRange } from '../lib/parse.ts';
 import type { RawEvent } from '../normalize.ts';
 import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
 
@@ -31,6 +31,8 @@ export interface HaarItem {
   days?: string[];
   ongoing: boolean;
   kids: boolean;
+  /** Tekst en leeftijd van de detailpagina. */
+  detail?: ReturnType<typeof detailInfo>;
 }
 
 export function parseHaarList(html: string, today: string): HaarItem[] {
@@ -69,7 +71,13 @@ export function parseHaarList(html: string, today: string): HaarItem[] {
 }
 
 function base(i: HaarItem, nowIso: string): Omit<RawEvent, 'start' | 'sourceEventId'> {
+  const age = i.detail?.age ?? null;
+  const kids = i.kids || (age?.officialMinMonths ?? 99 * 12) < 12 * 12;
   return {
+    officialMinMonths: age?.officialMinMonths,
+    officialMaxMonths: age?.officialMaxMonths,
+    ageLabel: age?.label,
+    descriptionForClassification: i.detail?.text.slice(0, 1500),
     sourceId: ID,
     sourceName: NAME,
     url: i.url,
@@ -77,7 +85,7 @@ function base(i: HaarItem, nowIso: string): Omit<RawEvent, 'start' | 'sourceEven
     venueName: 'Kasteel de Haar',
     address: 'Kasteellaan 1, 3455 RR Haarzuilens',
     locality: 'Haarzuilens',
-    audiences: i.kids ? ['gezin', 'kinderen'] : ['gezin', 'volwassenen'],
+    audiences: kids ? ['gezin', 'kinderen'] : ['gezin', 'volwassenen'],
     kind: /speurtocht/i.test(i.title) ? 'Speurtocht' : /rondleiding|tour/i.test(i.title) ? 'Rondleiding' : /lumineu|licht/i.test(i.title) ? 'Lichtroute' : 'Kasteel',
     extraUncertainties: ['Tijden en prijs staan op de bronpagina (entree kasteelpark of kasteel)'],
     checkedAt: nowIso,
@@ -101,6 +109,14 @@ export const kasteelDeHaar: SourceAdapter = {
   description: 'Agenda van Kasteel de Haar: seizoensactiviteiten, rondleidingen, speurtochten en lichtroute.',
   async run(ctx: AdapterContext): Promise<AdapterResult> {
     const items = parseHaarList(await fetchText(`${BASE}/agenda`), ctx.today);
+    // Detailpagina's: daar staat o.a. "Geschikt voor kinderen van 6 jaar en ouder".
+    for (const i of items.slice(0, ctx.maxDetailPages)) {
+      try {
+        i.detail = detailInfo(await fetchText(i.url), '.entry-content');
+      } catch (e) {
+        ctx.log(`  detail mislukt (${i.url}): ${(e as Error).message}`);
+      }
+    }
     const events = items
       .flatMap((i) => haarToRaw(i, ctx.today, ctx.until, ctx.nowIso))
       .filter((e) => (e.end ?? e.start).slice(0, 10) >= ctx.today && e.start.slice(0, 10) <= ctx.until);

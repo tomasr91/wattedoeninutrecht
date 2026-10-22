@@ -12,6 +12,7 @@
  *  - Geen iCal, RSS of API gevonden. robots.txt staat alles toe.
  */
 import * as cheerio from 'cheerio';
+import { parseAgeLabel } from '../../src/domain/enrich.ts';
 import { fetchText } from '../lib/http.ts';
 import { cleanText, inferYear, priceTextFrom, spacedText } from '../lib/parse.ts';
 import type { RawEvent } from '../normalize.ts';
@@ -29,6 +30,8 @@ export interface SpritsShow {
   title: string;
   /** Sessies volgens het programmablok: datum + tijden. */
   sessions: { date: string; time?: string }[];
+  /** Tekst van het programmablok (voor de titel in gewone hoofdletters). */
+  blockText?: string;
 }
 
 /** Voorstellingen van /programma: elk blok met een "INFO & TICKETS"-link. */
@@ -60,7 +63,7 @@ export function parseSpritsProgram(html: string, today: string): SpritsShow[] {
       if (!times.length) sessions.push({ date });
       times.forEach((time) => sessions.push({ date, time }));
     }
-    shows.push({ slug, url: url.toString().replace(/\/$/, ''), title, sessions });
+    shows.push({ slug, url: url.toString().replace(/\/$/, ''), title, sessions, blockText: text });
   });
   return shows;
 }
@@ -69,8 +72,10 @@ const LONG_DATE = /\b(?:maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zond
 const LONG_MONTHS = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
 
 /** Volledige datums, duur, prijs en ticketlink van een productiepagina. */
-export function parseSpritsDetail(html: string): { dates: string[]; durationMinutes?: number; priceText?: string; bookingUrl?: string; company?: string } {
+export function parseSpritsDetail(html: string): { dates: string[]; durationMinutes?: number; priceText?: string; bookingUrl?: string; company?: string; title?: string; age?: ReturnType<typeof parseAgeLabel> } {
   const $ = cheerio.load(html);
+  // Kop: "PIM & POM OP NAAR PAKJESAVOND (2+) | PIM & POM PRODUCTIES"
+  const [heading, company] = cleanText($('h1').first().text()).split(/\s+\|\s+/);
   const bookingUrl = $('a[href*="weticket"], a[href*="tickets"]').first().attr('href');
   $('script, style, nav, header, footer').remove();
   const text = spacedText($, $('main').length ? $('main') : $('body'));
@@ -79,7 +84,20 @@ export function parseSpritsDetail(html: string): { dates: string[]; durationMinu
   );
   const dur = text.match(/(\d{2,3})\s*minuten/i);
   const priceZone = text.match(/€\s*\d[^]{0,60}/)?.[0] ?? '';
-  return { dates: [...new Set(dates)], durationMinutes: dur ? Number(dur[1]) : undefined, priceText: priceTextFrom(priceZone), bookingUrl };
+  // Vast veld "Leeftijd 2 t/m 5 jaar" (de pagina noemt ook andere voorstellingen met hun eigen leeftijd).
+  const ageField = text.match(/Leeftijd\s*:?\s*([^A-Z]{1,25}?jaar|\d{1,2}\s*\+)/)?.[1];
+  const age = ageField ? parseAgeLabel(ageField.replace(/(\d)\s*jaar en ouder/, '$1+')) : null;
+  return { dates: [...new Set(dates)], durationMinutes: dur ? Number(dur[1]) : undefined, priceText: priceTextFrom(priceZone), bookingUrl, company, title: heading || undefined, age };
+}
+
+/** Titel in gewone hoofdletters: de kop van de productiepagina staat in kapitalen; zoek hem terug in het programma. */
+export function spritsTitle(show: SpritsShow, detail?: { title?: string }): string {
+  const caps = detail?.title;
+  if (!caps) return show.title;
+  const i = show.blockText?.toLowerCase().indexOf(caps.toLowerCase()) ?? -1;
+  if (i >= 0) return show.blockText!.slice(i, i + caps.length);
+  if (!/[a-z]/.test(caps)) return caps.charAt(0) + caps.slice(1).toLowerCase();
+  return caps;
 }
 
 /** Combineer: alleen sessies waarvan de datum óók op de productiepagina staat (als die er is). */
@@ -90,7 +108,7 @@ export function spritsToRaw(show: SpritsShow, detail: ReturnType<typeof parseSpr
     sourceName: NAME,
     sourceEventId: `${show.slug}|${s.date}|${s.time ?? ''}`,
     url: show.url,
-    title: show.title,
+    title: spritsTitle(show, detail),
     start: s.time ? `${s.date}T${s.time}` : s.date,
     venueName: 'ZIMIHC theater Zuilen',
     address: 'Prinses Christinalaan 1, 3554 JL Utrecht',
@@ -99,6 +117,9 @@ export function spritsToRaw(show: SpritsShow, detail: ReturnType<typeof parseSpr
     bookingText: 'tickets',
     bookingUrl: detail?.bookingUrl,
     durationMinutes: detail?.durationMinutes,
+    officialMinMonths: detail?.age?.officialMinMonths,
+    officialMaxMonths: detail?.age?.officialMaxMonths,
+    ageLabel: detail?.age?.label,
     hints: ['Jeugd'],
     kind: /concert/i.test(show.title) ? 'Kinderconcert' : 'Jeugdtheater',
     categories: ['theater'],
