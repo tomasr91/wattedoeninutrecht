@@ -1,15 +1,15 @@
 {
   "meta": {
-    "collectedAt": "2026-10-21T12:40:00Z",
+    "collectedAt": "2026-10-22T12:18:00Z",
     "collectedBy": "Claude (webonderzoek in opdracht van de gebruiker)",
     "method": "Op 21-10-2026: marktenoverzicht gemeente Utrecht, DUIC-artikel over Utrecht Lumen (ontdek-utrecht.nl niet bereikbaar), agenda Kasteel de Haar, agendalijst Jaarbeurs (alleen publieksevenementen voor gezinnen; detailpagina's weigerden daarna door robots.txt).",
     "note": "Uitfeest staat bij de vaste momenten (nog geen datum 2027)."
   },
   "events": [
     {
-      "sourceName": "DUIC / Ontdek Utrecht",
+      "sourceName": "Ontdek Utrecht",
       "sourceEventId": "utrecht-lumen",
-      "url": "https://www.ontdek-utrecht.nl/lumen",
+      "url": "https://www.ontdek-utrecht.nl/collectie/lumen/",
       "title": "Utrecht Lumen – lichtkunstroute door de stad",
       "start": "2026-10-21",
       "end": "2027-01-21",
@@ -31,13 +31,12 @@
       "fitReasons": [
         "Avondwandeling in eigen tempo; met kinderen goed te doen in de vroege winteravond"
       ],
-      "summary": "27 lichtkunstwerken in de stad, deels afkomstig van het eerdere Trajectum Lumen.",
+      "summary": "Lichtkunstroute langs verlichte gebouwen en kunstwerken in de binnenstad; in de donkere maanden ook rondleidingen met een gids.",
       "extraUncertainties": [
-        "Doorlopend; einddatum niet vermeld",
-        "Officiële site was niet bereikbaar; gegevens uit een DUIC-artikel",
+        "Doorlopend; einddatum niet vermeld (rondleidingen volgens de site t/m 29 maart, zonder jaartal)",
         "Prijs niet vermeld; de werken staan in de openbare ruimte"
       ],
-      "checkedAt": "2026-10-21T12:40:00Z",
+      "checkedAt": "2026-10-22T12:18:00Z",
       "confidence": "middel"
     }
   ]

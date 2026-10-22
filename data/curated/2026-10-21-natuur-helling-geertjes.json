@@ -1,6 +1,6 @@
 {
   "meta": {
-    "collectedAt": "2026-10-21T11:40:00Z",
+    "collectedAt": "2026-10-22T12:18:00Z",
     "collectedBy": "Claude (webonderzoek in opdracht van de gebruiker)",
     "method": "Op 21-10-2026 nagelopen: Utrecht Natuurlijk (overzichten 'onze activiteiten' en 'exposities') en Geertjes Hoeve (agendapagina; alleen data die kloppen met 2026).",
     "note": "Samenvattingen zijn zelf geschreven. EKKO en Louis Hartlooper zijn niet opgenomen: hun robots.txt weert AI-crawlers. Pathé was niet bereikbaar."
@@ -32,7 +32,7 @@
       "allDay": true,
       "end": "2026-10-25",
       "summary": "Herfstvakantie-activiteiten op de boerderij, waaronder pompoen snijden.",
-      "checkedAt": "2026-10-21T11:40:00Z",
+      "checkedAt": "2026-10-22T12:18:00Z",
       "confidence": "middel"
     },
     {
@@ -65,7 +65,7 @@
       ],
       "special": true,
       "summary": "Intocht op groot scherm met kruidnoten bakken en een speurtocht.",
-      "checkedAt": "2026-10-21T11:40:00Z",
+      "checkedAt": "2026-10-22T12:18:00Z",
       "confidence": "middel"
     },
     {
@@ -96,7 +96,7 @@
       "ongoing": true,
       "special": true,
       "summary": "Speurtocht langs Sinterklaasborden op de boerderij.",
-      "checkedAt": "2026-10-21T11:40:00Z",
+      "checkedAt": "2026-10-22T12:18:00Z",
       "confidence": "middel"
     },
     {
@@ -113,10 +113,9 @@
       ],
       "kind": "Kinderboerderij",
       "estimatedMinMonths": 12,
-      "openingNote": "Wo t/m za 10:00–17:00, zo 11:00–17:00; van 26 okt t/m 20 feb op ma en di gesloten",
+      "openingNote": "Wo t/m za 10:00–17:00, zo 11:00–17:00; van 26 okt t/m 20 feb op ma en di gesloten. Pieten aanwezig 11:00–16:00; geen reservering nodig",
       "extraUncertainties": [
-        "De agenda van de hoeve bevat deels data van vorig jaar; alleen data die kloppen met de kalender van 2026 zijn overgenomen",
-        "Prijs niet vermeld"
+        "De agenda van de hoeve bevat deels data van vorig jaar; alleen data die kloppen met de kalender van 2026 zijn overgenomen"
       ],
       "sourceEventId": "geertjes-sintweekend-2026-11-21",
       "url": "https://geertjeshoeve.nl/info/agenda/sinterklaasweekenden/",
@@ -128,8 +127,9 @@
         "Klimmen in de pietenbaan, activiteiten en pietendiploma"
       ],
       "summary": "Sinterklaasactiviteiten met pietenbaan en pietendiploma.",
-      "checkedAt": "2026-10-21T11:40:00Z",
-      "confidence": "middel"
+      "checkedAt": "2026-10-22T12:18:00Z",
+      "confidence": "middel",
+      "priceText": "Pietendiploma € 7,50 per kind; Sinterklaasspeurtocht € 3,50; speculaaspop versieren € 4 p.p.; ponyrijden € 2"
     },
     {
       "sourceName": "Geertjes Hoeve",
@@ -145,10 +145,9 @@
       ],
       "kind": "Kinderboerderij",
       "estimatedMinMonths": 12,
-      "openingNote": "Wo t/m za 10:00–17:00, zo 11:00–17:00; van 26 okt t/m 20 feb op ma en di gesloten",
+      "openingNote": "Wo t/m za 10:00–17:00, zo 11:00–17:00; van 26 okt t/m 20 feb op ma en di gesloten. Pieten aanwezig 11:00–16:00; geen reservering nodig. Sinterklaas komt rond 13:30 in de geitenstal",
       "extraUncertainties": [
-        "De agenda van de hoeve bevat deels data van vorig jaar; alleen data die kloppen met de kalender van 2026 zijn overgenomen",
-        "Prijs niet vermeld"
+        "De agenda van de hoeve bevat deels data van vorig jaar; alleen data die kloppen met de kalender van 2026 zijn overgenomen"
       ],
       "sourceEventId": "geertjes-sintweekend-2026-11-22",
       "url": "https://geertjeshoeve.nl/info/agenda/sinterklaasweekenden/",
@@ -160,8 +159,9 @@
         "Klimmen in de pietenbaan, activiteiten en pietendiploma"
       ],
       "summary": "Sinterklaasactiviteiten met pietenbaan en pietendiploma.",
-      "checkedAt": "2026-10-21T11:40:00Z",
-      "confidence": "middel"
+      "checkedAt": "2026-10-22T12:18:00Z",
+      "confidence": "middel",
+      "priceText": "Pietendiploma € 7,50 per kind; Sinterklaasspeurtocht € 3,50; speculaaspop versieren € 4 p.p.; ponyrijden € 2"
     },
     {
       "sourceName": "Geertjes Hoeve",
@@ -177,10 +177,9 @@
       ],
       "kind": "Kinderboerderij",
       "estimatedMinMonths": 12,
-      "openingNote": "Wo t/m za 10:00–17:00, zo 11:00–17:00; van 26 okt t/m 20 feb op ma en di gesloten",
+      "openingNote": "Wo t/m za 10:00–17:00, zo 11:00–17:00; van 26 okt t/m 20 feb op ma en di gesloten. Pieten aanwezig 11:00–16:00; geen reservering nodig",
       "extraUncertainties": [
-        "De agenda van de hoeve bevat deels data van vorig jaar; alleen data die kloppen met de kalender van 2026 zijn overgenomen",
-        "Prijs niet vermeld"
+        "De agenda van de hoeve bevat deels data van vorig jaar; alleen data die kloppen met de kalender van 2026 zijn overgenomen"
       ],
       "sourceEventId": "geertjes-sintweekend-2026-11-28",
       "url": "https://geertjeshoeve.nl/info/agenda/sinterklaasweekenden/",
@@ -192,8 +191,9 @@
         "Klimmen in de pietenbaan, activiteiten en pietendiploma"
       ],
       "summary": "Sinterklaasactiviteiten met pietenbaan en pietendiploma.",
-      "checkedAt": "2026-10-21T11:40:00Z",
-      "confidence": "middel"
+      "checkedAt": "2026-10-22T12:18:00Z",
+      "confidence": "middel",
+      "priceText": "Pietendiploma € 7,50 per kind; Sinterklaasspeurtocht € 3,50; speculaaspop versieren € 4 p.p.; ponyrijden € 2"
     },
     {
       "sourceName": "Geertjes Hoeve",
@@ -209,10 +209,9 @@
       ],
       "kind": "Kinderboerderij",
       "estimatedMinMonths": 12,
-      "openingNote": "Wo t/m za 10:00–17:00, zo 11:00–17:00; van 26 okt t/m 20 feb op ma en di gesloten",
+      "openingNote": "Wo t/m za 10:00–17:00, zo 11:00–17:00; van 26 okt t/m 20 feb op ma en di gesloten. Pieten aanwezig 11:00–16:00; geen reservering nodig. Sinterklaas komt rond 13:30 in de geitenstal",
       "extraUncertainties": [
-        "De agenda van de hoeve bevat deels data van vorig jaar; alleen data die kloppen met de kalender van 2026 zijn overgenomen",
-        "Prijs niet vermeld"
+        "De agenda van de hoeve bevat deels data van vorig jaar; alleen data die kloppen met de kalender van 2026 zijn overgenomen"
       ],
       "sourceEventId": "geertjes-sintweekend-2026-11-29",
       "url": "https://geertjeshoeve.nl/info/agenda/sinterklaasweekenden/",
@@ -224,8 +223,9 @@
         "Klimmen in de pietenbaan, activiteiten en pietendiploma"
       ],
       "summary": "Sinterklaasactiviteiten met pietenbaan en pietendiploma.",
-      "checkedAt": "2026-10-21T11:40:00Z",
-      "confidence": "middel"
+      "checkedAt": "2026-10-22T12:18:00Z",
+      "confidence": "middel",
+      "priceText": "Pietendiploma € 7,50 per kind; Sinterklaasspeurtocht € 3,50; speculaaspop versieren € 4 p.p.; ponyrijden € 2"
     },
     {
       "sourceName": "Geertjes Hoeve",
@@ -253,7 +253,7 @@
       "allDay": true,
       "special": true,
       "summary": "Warme chocolademelk, winterknutsels en kerststukjes maken.",
-      "checkedAt": "2026-10-21T11:40:00Z",
+      "checkedAt": "2026-10-22T12:18:00Z",
       "confidence": "middel"
     },
     {
@@ -282,7 +282,7 @@
       "allDay": true,
       "special": true,
       "summary": "Warme chocolademelk, winterknutsels en kerststukjes maken.",
-      "checkedAt": "2026-10-21T11:40:00Z",
+      "checkedAt": "2026-10-22T12:18:00Z",
       "confidence": "middel"
     },
     {
@@ -299,10 +299,9 @@
       ],
       "kind": "Kinderboerderij",
       "estimatedMinMonths": 12,
-      "openingNote": "Wo t/m za 10:00–17:00, zo 11:00–17:00; van 26 okt t/m 20 feb op ma en di gesloten",
+      "openingNote": "Elke dag open (ook ma en di), meestal 10:00–17:00 en zo 11:00–17:00; 25 dec en 1 jan gesloten, 31 dec tot 16:00",
       "extraUncertainties": [
-        "De agenda van de hoeve bevat deels data van vorig jaar; alleen data die kloppen met de kalender van 2026 zijn overgenomen",
-        "Prijs niet vermeld"
+        "De agenda van de hoeve bevat deels data van vorig jaar; alleen data die kloppen met de kalender van 2026 zijn overgenomen"
       ],
       "sourceEventId": "geertjes-kerstvakantie-2026",
       "url": "https://geertjeshoeve.nl/info/agenda/kerstvakantie/",
@@ -313,8 +312,9 @@
       "ongoing": true,
       "special": true,
       "summary": "In de kerstvakantie dagelijks open met winterspeurtocht, marshmallows en speelhoek.",
-      "checkedAt": "2026-10-21T11:40:00Z",
-      "confidence": "middel"
+      "checkedAt": "2026-10-22T12:18:00Z",
+      "confidence": "middel",
+      "priceText": "Winterspeurtocht € 3 p.p.; ponyrijden en geitjes voeren € 2 p.p.; marshmallows € 1,50; varkens borstelen en strobaan gratis"
     }
   ]
 }

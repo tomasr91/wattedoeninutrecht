@@ -1,6 +1,6 @@
 {
   "meta": {
-    "collectedAt": "2026-10-21T07:15:00Z",
+    "collectedAt": "2026-10-22T12:18:00Z",
     "collectedBy": "Claude (webonderzoek in opdracht van de gebruiker)",
     "method": "Handmatig nagelopen op 21-10-2026 via de officiële agenda's: Bibliotheek Utrecht (OP-shop), UITagenda Utrecht, Podium Hoge Woerd; twee Sinterklaasintochten via Kidsproof (secundair). Alleen gegevens die op de bronpagina's stonden; ontbrekende informatie staat als onzekerheid vermeld.",
     "note": "Samenvattingen zijn zelf geschreven, geen brontekst."
@@ -50,7 +50,8 @@
       ],
       "confidence": "hoog",
       "bookingUrl": "https://sintmaartenparade.nl/",
-      "geoPrecision": "approx"
+      "geoPrecision": "approx",
+      "checkedAt": "2026-10-22T12:18:00Z"
     },
     {
       "sourceName": "Kidsproof Utrecht (secundaire bron)",
@@ -87,7 +88,8 @@
       ],
       "confidence": "middel",
       "hints": [],
-      "geoPrecision": "approx"
+      "geoPrecision": "approx",
+      "checkedAt": "2026-10-22T12:18:00Z"
     }
   ]
 }
