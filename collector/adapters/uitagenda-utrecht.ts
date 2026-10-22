@@ -15,6 +15,7 @@ import { fetchText } from '../lib/http.ts';
 import { cleanText, combine, parseDutchDateRange, parseGoogleCalendarLink, parseTimes } from '../lib/parse.ts';
 import { parseIcs } from '../lib/ics.ts';
 import { dateOf } from '../../src/domain/dates.ts';
+import { parseAgeLabel } from '../../src/domain/enrich.ts';
 import type { RawEvent } from '../normalize.ts';
 import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
 
@@ -38,6 +39,42 @@ export function extractEventLinks(html: string): Map<string, string> {
 function titleFromSlug(slug: string): string {
   const t = slug.replace(/-/g, ' ').trim();
   return t.charAt(0).toUpperCase() + t.slice(1);
+}
+
+/** UITagenda-genre (slug in /genre/<slug>/) → soortlabel in de app. */
+export const GENRE_KIND: Record<string, string> = {
+  musea: 'Expositie',
+  exposities: 'Expositie',
+  rondleidingen: 'Rondleiding',
+  jeugd: 'Jeugdtheater',
+  kids: 'Jeugdtheater',
+  theater: 'Theater',
+  cabaret: 'Cabaret',
+  comedy: 'Comedy',
+  muziek: 'Concert',
+  klassiek: 'Klassiek',
+  film: 'Film',
+  festivals: 'Festival',
+  dans: 'Dans',
+  lezingen: 'Lezing',
+  literatuur: 'Lezing',
+  markten: 'Markt',
+  sport: 'Sport',
+  workshops: 'Workshop',
+};
+
+function jsonLdPlace($: cheerio.CheerioAPI): string | undefined {
+  let name: string | undefined;
+  $('script[type="application/ld+json"]').each((_, el) => {
+    if (name) return;
+    try {
+      const d = JSON.parse($(el).text());
+      if (d?.['@type'] === 'Event' && typeof d.location?.name === 'string') name = cleanText(d.location.name);
+    } catch {
+      /* ongeldige JSON-LD negeren */
+    }
+  });
+  return name;
 }
 
 export function parseEventPage(html: string, url: string, sourceEventId: string, ctx: Pick<AdapterContext, 'today' | 'nowIso'>): RawEvent | undefined {
@@ -79,15 +116,51 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
   }
   if (!start) return undefined;
 
-  // Locatienaam: linktekst naar de locatiepagina, maar niet knoppen als "Bekijk locatie".
+  // Plek uit "Praktische informatie": <span>Naam<br>Straat 1<br>1234 AB Plaats <a>Bekijk locatie</a></span>
+  const addr = $('address.post-location span').first().clone();
+  addr.find('a').remove();
+  const addrLines = (addr.html() ?? '')
+    .split(/<br\s*\/?>/i)
+    .map((l) => cleanText(cheerio.load(`<p>${l}</p>`).text()))
+    .filter(Boolean);
+  const ld = jsonLdPlace($);
   const GENERIC_LINK = /^(bekijk|toon|naar|meer|route|kaart|locatie\b)/i;
   const venueLinks = $('a[href*="/locatie/"]').toArray();
   const named = venueLinks.map((el) => cleanText($(el).text())).find((t) => t && !GENERIC_LINK.test(t));
   const slug = venueLinks.map((el) => $(el).attr('href')?.match(/\/locatie\/(?:\d+\/)?([a-z0-9-]+)/i)?.[1]).find(Boolean);
-  const fromSlug = slug ? titleFromSlug(slug) : undefined;
-  const venueName = named || location?.split(',')[0]?.trim() || fromSlug;
-  // Volledig adres uit de agendalink (bv. "Domplein, 3512 JC Utrecht"), zodat wijk en afstand kloppen.
-  const address = location && location.includes(',') ? cleanText(location) : undefined;
+  const venueName = addrLines[0] || ld || named || location?.split(',')[0]?.trim() || (slug ? titleFromSlug(slug) : undefined);
+  const street = addrLines.length >= 3 ? addrLines[1] : undefined;
+  const postcodeCity = addrLines.at(-1)?.match(/^(\d{4}\s?[A-Z]{2})\s+(.+)$/);
+  // Adres uit de praktische informatie; anders uit de agendalink (bv. "Domplein, 3512 JC Utrecht").
+  const address = street && postcodeCity ? `${street}, ${postcodeCity[1]} ${postcodeCity[2]}` : location && location.includes(',') ? cleanText(location) : undefined;
+  const city = postcodeCity?.[2];
+
+  // Genres bovenaan de pagina (links naar /genre/<slug>/) en doelgroeplabels
+  const genreSlugs = $('.post-genres a[href*="/genre/"]')
+    .map((_, el) => ($(el).attr('href') ?? '').match(/\/genre\/([a-z0-9-]+)/)?.[1] ?? '')
+    .get()
+    .filter(Boolean);
+  const genreLabels = $('.post-genres .genre-label').map((_, el) => cleanText($(el).text())).get().filter(Boolean);
+  const kind = genreSlugs.map((g) => GENRE_KIND[g]).find(Boolean);
+
+  // Velden in de tekst: "Leeftijd: vanaf 6 jaar", "Duur: ± 40–55 minuten", "Kosten: …"
+  const fields = new Map<string, string>();
+  $('strong, b').each((_, el) => {
+    const key = cleanText($(el).text()).replace(/:$/, '').toLowerCase();
+    let val = '';
+    for (let n = el.nextSibling; n && !(n.type === 'tag' && /^(br|strong|b|p|div)$/.test((n as { name?: string }).name ?? '')); n = n.nextSibling) {
+      val += $(n).text();
+    }
+    val = cleanText(val.replace(/^\s*:\s*/, ''));
+    if (key && val && !fields.has(key)) fields.set(key, val.slice(0, 120));
+  });
+  const field = (k: string) => fields.get(k.toLowerCase());
+  const ageField = field('Leeftijd');
+  const age = ageField ? parseAgeLabel(/^\d/.test(ageField) && !/jaar|\+/.test(ageField) ? `${ageField}+` : ageField.replace(/vanaf\s+(\d{1,2})\s*jaar/i, '$1+')) : null;
+  const durField = field('Duur');
+  const dur = durField?.match(/(\d{1,3})\s*(?:[–-]\s*\d{1,3}\s*)?(min|minuten|uur)/i);
+  const durationMinutes = dur ? Number(dur[1]) * (/uur/i.test(dur[2]) ? 60 : 1) : undefined;
+  const costField = field('Kosten') ?? field('Prijs');
 
   const entree = bodyText.match(/Entree\s*:?\s*(gratis|€\s*[\d.,]+(?:\s*[-/–]\s*€?\s*[\d.,]+)?[^.#]{0,40})/i);
   const hints = [
@@ -95,6 +168,7 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
       [
         ...(bodyText.match(/#[a-z][\w-]*(?:\s\d{1,2}\s\d{1,2})?/gi) ?? []),
         ...(bodyText.match(/\b(Gezinnen|Kinderen|Jeugdtheater|Jeugd|Familie|Regulier \/ volwassenen)\b/g) ?? []),
+        ...genreLabels.filter((g) => !/€/.test(g)),
       ].map((h) => h.trim()),
     ),
   ];
@@ -119,8 +193,13 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
     ongoing: isRange && allDay,
     venueName,
     address,
-    locality: /diverse locaties/i.test(venueName ?? '') ? 'Utrecht' : undefined,
-    priceText: entree?.[1],
+    locality: /diverse locaties/i.test(venueName ?? '') ? 'Utrecht' : city && !/^utrecht$/i.test(city) ? city : undefined,
+    priceText: entree?.[1] ?? (costField && /gratis|€|\d/.test(costField) ? costField : undefined),
+    kind,
+    durationMinutes,
+    officialMinMonths: age?.officialMinMonths,
+    officialMaxMonths: age?.officialMaxMonths,
+    ageLabel: age?.label,
     bookingText: /reserveren (is )?(verplicht|noodzakelijk)|aanmelden verplicht/i.test(bodyText) ? 'reserveren verplicht' : undefined,
     bookingUrl: ticketHref && /^https?:/.test(ticketHref) ? ticketHref : undefined,
     hints,

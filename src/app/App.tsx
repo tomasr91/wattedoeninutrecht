@@ -225,7 +225,7 @@ export function App() {
             {pane === 'agenda' ? (
               <DayList lists={lists} today={today} onOpen={open} empty={`Niets gevonden ${who} in deze periode.`} />
             ) : (
-              <OngoingList lists={lists} onOpen={open} expected={expected} empty={`Geen doorlopend aanbod ${who} in deze periode.`} />
+              <OngoingList lists={lists} today={today} onOpen={open} expected={expected} empty={`Geen doorlopend aanbod ${who} in deze periode.`} />
             )}
             <footer className="list-foot small muted">
               {lastRun && <p>Laatst ververst: {formatDateTime(lastRun)}</p>}

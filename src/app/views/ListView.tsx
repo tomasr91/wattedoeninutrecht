@@ -1,7 +1,8 @@
 import { relativeDayLabel, weekday } from '../../domain/dates';
 import type { ListItem, Lists } from '../../domain/views';
 import type { ExpectedMoment } from '../../domain/expected';
-import { formatShortDate } from '../../domain/dates';
+import { addMonths, formatShortDate } from '../../domain/dates';
+import { activityEndDate } from '../../domain/filters';
 import { ActivityCard } from '../components/ActivityCard';
 
 /** Chronologische agenda: per dag, eendaags en meerdaags (op de eerste dag). */
@@ -55,18 +56,33 @@ export function ExpectedBlock({ items }: { items: ExpectedMoment[] }) {
 }
 
 /** Doorlopend aanbod, gesorteerd op wat het eerst afloopt. */
-export function OngoingList({ lists, onOpen, empty, expected = [] }: { lists: Lists; onOpen: (i: ListItem) => void; empty: string; expected?: ExpectedMoment[] }) {
+/** Aanbod dat langer dan dit doorloopt staat standaard ingeklapt onderaan. */
+export const SEASON_MONTHS = 2;
+
+export function OngoingList({ lists, today, onOpen, empty, expected = [] }: { lists: Lists; today: string; onOpen: (i: ListItem) => void; empty: string; expected?: ExpectedMoment[] }) {
   if (lists.ongoing.length === 0 && expected.length === 0) return <p className="empty">{empty}</p>;
+  const cutoff = addMonths(today, SEASON_MONTHS);
+  const soon = lists.ongoing.filter((i) => activityEndDate(i.activity) <= cutoff);
+  const later = lists.ongoing.filter((i) => activityEndDate(i.activity) > cutoff);
+  const cards = (items: ListItem[]) => (
+    <ul className="card-list">
+      {items.map((i) => (
+        <li key={i.activity.id}>
+          <ActivityCard item={i} ongoing onOpen={onOpen} />
+        </li>
+      ))}
+    </ul>
+  );
   return (
     <div className="day-list">
       <ExpectedBlock items={expected} />
-      <ul className="card-list">
-        {lists.ongoing.map((i) => (
-          <li key={i.activity.id}>
-            <ActivityCard item={i} ongoing onOpen={onOpen} />
-          </li>
-        ))}
-      </ul>
+      {soon.length > 0 ? cards(soon) : later.length > 0 && <p className="empty">Niets dat binnenkort afloopt.</p>}
+      {later.length > 0 && (
+        <details className="season-more">
+          <summary>Langer te zien ({later.length})</summary>
+          {cards(later)}
+        </details>
+      )}
     </div>
   );
 }

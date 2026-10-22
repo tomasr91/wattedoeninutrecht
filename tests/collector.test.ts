@@ -173,6 +173,27 @@ describe('UITagenda Utrecht — synthetische pagina', () => {
     expect(ev?.start).toBe('2026-11-07T18:00');
     expect(ev?.extraUncertainties?.[0]).toMatch(/paginatekst/);
   });
+
+  it('leest plek, adres, genre, leeftijd en duur uit de praktische informatie', () => {
+    const rich = `<html><body><main>
+      <div class="post-genres"><a href="https://www.uitagendautrecht.nl/genre/musea/" class="genre-label">Musea &amp; exposities</a> <span class="genre-label">Kinderen</span></div>
+      <h1 class="post-title">[TESTDATA] Speurtocht in het testkasteel</h1>
+      <div class="post-content"><p><strong>Duur</strong>: ± 40–55 minuten<br /><strong>Leeftijd</strong>: vanaf 6 jaar<br /><strong>Kosten</strong>: € 5,-</p></div>
+      <address class="post-location"><span>Testkasteel<br />Testlaan 1<br/>1234 AB Testdorp <a class="more-btn" href="/locatie/1/x">Bekijk locatie</a></span></address>
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;dates=20261107T110000/20261107T160000">Google</a>
+    </main></body></html>`;
+    const ev = parseEventPage(rich, 'u', '2', { today: TODAY, nowIso: NOW });
+    expect(ev).toMatchObject({
+      venueName: 'Testkasteel',
+      address: 'Testlaan 1, 1234 AB Testdorp',
+      locality: 'Testdorp',
+      kind: 'Expositie',
+      durationMinutes: 40,
+      officialMinMonths: 72,
+      priceText: '€ 5,-',
+    });
+    expect(ev?.hints).toContain('Musea & exposities');
+  });
 });
 
 describe('JSON-LD', () => {
