@@ -504,6 +504,10 @@ h3 {
   font-size: 0.84rem;
   font-weight: 600;
 }
+/* Voor wie: op de kaart altijd in dezelfde rustige kleur, wat de uitkomst ook is. */
+.card-fit.card-fit {
+  color: var(--good);
+}
 .card-note {
   font-size: 0.85rem;
   color: var(--muted);
@@ -1045,19 +1049,15 @@ h3 {
   color: var(--muted);
 }
 
-/* Dichtbij: terracotta streep links + het woord "Dichtbij" bovenaan. De afstand zelf blijft gewoon grijs. */
-.card.is-near {
-  box-shadow: inset 4px 0 0 #d0602f, 0 1px 3px rgb(0 0 0 / 8%);
-  padding-left: 16px;
-}
+/* Dichtbij: groen labeltje "Dichtbij" bovenaan. De afstand zelf blijft gewoon grijs. */
 .near-tag {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   padding: 0 7px 0 6px;
   border-radius: 6px;
-  background: #fbede5;
-  color: #8f3b1b;
+  background: var(--good-bg);
+  color: var(--good);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -1066,7 +1066,7 @@ h3 {
   width: 7px;
   height: 7px;
   border-radius: 2px;
-  background: #d0602f;
+  background: #4f8a2b;
 }
 .nearby-set {
   margin-top: 14px;
@@ -1082,11 +1082,11 @@ h3 {
 .nearby-value {
   font-size: 1.15rem;
   font-weight: 700;
-  color: #8f3b1b;
+  color: var(--good);
 }
 .nearby-set input[type='range'] {
   width: 100%;
-  accent-color: #d0602f;
+  accent-color: #4f8a2b;
   min-height: 32px;
 }
 .nearby-scale {
@@ -1103,5 +1103,5 @@ h3 {
 .nearby-head .check input {
   width: 20px;
   height: 20px;
-  accent-color: #d0602f;
+  accent-color: #4f8a2b;
 }

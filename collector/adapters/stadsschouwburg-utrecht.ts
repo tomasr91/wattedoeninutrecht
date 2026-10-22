@@ -106,7 +106,8 @@ export function ssuCardToRaw(c: SsuCard, nowIso: string, priceText?: string): Ra
     locality: 'Binnenstad',
     priceText: c.freeEntry ? 'Gratis' : priceText,
     bookingText: c.freeEntry ? 'vrije inloop' : 'kaarten',
-    hints: c.genres,
+    // "Jeugd"/"Familie" komen soms uit de filtertekst rond een kaart; alleen geloven bij een kinderleeftijd in de titel ("4+").
+    hints: /\b\d{1,2}(?:,\d)?\s*\+/.test(c.title) && !/\b1[2-8]\s*\+/.test(c.title) ? c.genres : c.genres.filter((g) => g !== 'Jeugd' && g !== 'Familie'),
     kind: ssuKind(c),
     statusText: c.cancelled ? 'geannuleerd' : c.soldOut ? 'uitverkocht' : undefined,
     extraUncertainties: c.multipleTimes ? ['Meerdere speeltijden; kies je tijd op de bronpagina'] : undefined,
