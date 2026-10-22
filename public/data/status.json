@@ -1,6 +1,6 @@
 {
-  "lastSuccessfulRun": "2026-10-22T08:34:09.279Z",
-  "lastRun": "2026-10-22T08:34:09.279Z",
+  "lastSuccessfulRun": "2026-10-22T08:38:55.108Z",
+  "lastRun": "2026-10-22T08:38:55.108Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
@@ -131,8 +131,8 @@
       "sourceName": "Utrecht Natuurlijk",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-22T07:22:15.005Z",
-      "lastSuccess": "2026-10-22T07:22:15.005Z",
+      "lastAttempt": "2026-10-22T08:37:18.974Z",
+      "lastSuccess": "2026-10-22T08:37:18.974Z",
       "fetched": 73,
       "notes": "73 activiteiten"
     },
@@ -146,8 +146,8 @@
   ],
   "totals": {
     "active": 1670,
-    "added": 3,
-    "updated": 11,
+    "added": 0,
+    "updated": 68,
     "cancelled": 0,
     "expired": 0,
     "merged": 131
