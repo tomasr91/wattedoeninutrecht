@@ -149,3 +149,11 @@ describe('korte periode is geen wekelijkse reeks', () => {
     expect(recurrenceLabel(['2026-10-22', '2026-10-23', '2026-10-29'], ['10:00', '10:00', '10:00'])).not.toMatch(/^Elke/);
   });
 });
+
+import { seriesNote } from '../src/domain/series';
+describe('oude "Elke …" over een korte periode', () => {
+  it('Varende Kerstverhalen: de data zelf, met begindatum', () => {
+    const a = act({ title: '[TESTDATA] Varende verhalen', start: '2026-12-20T20:00', end: '2026-12-29', recurrenceNote: 'Elke di en zo', occurrences: ['2026-12-20', '2026-12-27', '2026-12-29'] });
+    expect(seriesNote(a)).toBe('20 dec, 27 dec en 29 dec · 20:00');
+  });
+});

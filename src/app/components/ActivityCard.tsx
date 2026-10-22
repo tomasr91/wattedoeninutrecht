@@ -1,3 +1,4 @@
+import { noteListsDates, seriesNote } from '../../domain/series';
 import { useContext } from 'react';
 import type { Activity } from '../../domain/types';
 import { NearContext, NewContext } from '../newContext';
@@ -11,7 +12,8 @@ export function whenLabel(a: Activity, today: string): string {
   const d = dateOf(a.start);
   const t = timeOf(a.start);
   const tEnd = a.end ? timeOf(a.end) : undefined;
-  if (a.recurrenceNote) return a.rolling || !a.end ? a.recurrenceNote : `${a.recurrenceNote}, t/m ${formatShortDate(dateOf(a.end))}`;
+  const note = seriesNote(a);
+  if (note) return a.rolling || !a.end || noteListsDates(note) ? note : `${note}, t/m ${formatShortDate(dateOf(a.end))}`;
   if (a.ongoing || (a.end && dateOf(a.end) !== d)) {
     if (a.endUnknown) return d <= today ? 'Doorlopend' : `Vanaf ${formatShortDate(d)}`;
     const from = d <= today ? 'Nu' : formatShortDate(d);
@@ -26,7 +28,8 @@ function timeLabel(item: ListItem, ongoing: boolean): string {
   const a = item.activity;
   const d = dateOf(a.start);
   if (ongoing) {
-    if (a.recurrenceNote) return a.rolling || !a.end ? a.recurrenceNote : `${a.recurrenceNote} · t/m ${formatShortDate(dateOf(a.end))}`;
+    const note = seriesNote(a);
+    if (note) return a.rolling || !a.end || noteListsDates(note) ? note : `${note} · t/m ${formatShortDate(dateOf(a.end))}`;
     if (a.endUnknown) return 'Doorlopend, einddatum onbekend';
     // Nog niet begonnen: begindatum erbij ("vr 18 dec t/m wo 30 dec").
     if (a.end && d > todayInAmsterdam()) return `${formatShortDate(d)} t/m ${formatShortDate(dateOf(a.end))}`;

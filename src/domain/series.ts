@@ -140,8 +140,8 @@ export function weekdaysFromNote(note: string | undefined): number[] | undefined
 }
 
 /** Vaste wekelijkse reeks ("Elke woensdag", "Dagelijks", of "doorlopend" volgens de bron). */
-export function isWeeklySeries(a: Pick<Activity, 'rolling' | 'recurrenceNote'>): boolean {
-  return !!a.rolling || !!weekdaysFromNote(a.recurrenceNote);
+export function isWeeklySeries(a: Pick<Activity, 'rolling' | 'recurrenceNote' | 'occurrences' | 'start'>): boolean {
+  return !!a.rolling || !!weekdaysFromNote(seriesNote(a));
 }
 
 const FULL_DAYS = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
@@ -162,4 +162,24 @@ export function recurrenceHintFromText(text: string | undefined): string | undef
 function withTime(note: string, times: string[]): string {
   const uniq = [...new Set(times.filter(Boolean))];
   return uniq.length === 1 ? `${note} · ${uniq[0]}` : note;
+}
+
+/**
+ * Tekst voor een reeks zoals de app hem toont. Een opgeslagen "Elke …" over minder dan twee weken
+ * (van vóór de huidige uitleesregel) wordt de lijst met data zelf, bv. "20 dec, 27 dec en 29 dec · 20:00".
+ */
+export function seriesNote(a: Pick<Activity, 'rolling' | 'recurrenceNote' | 'occurrences' | 'start'>): string | undefined {
+  if (!a.recurrenceNote) return undefined;
+  if (a.rolling || !a.occurrences?.length) return a.recurrenceNote;
+  const occ = [...a.occurrences].sort();
+  if (/^elke/i.test(a.recurrenceNote) && diffDays(occ[0], occ.at(-1)!) < SERIES_MIN_SPAN_DAYS) {
+    const t = timeOf(a.start) ?? a.recurrenceNote.split('·')[1]?.trim();
+    return recurrenceLabel(occ, t ? occ.map(() => t) : []);
+  }
+  return a.recurrenceNote;
+}
+
+/** Noemt de tekst zelf al de data (geen "Elke …"/"Dagelijks"/"Doorlopend")? Dan geen "t/m" erachter. */
+export function noteListsDates(note: string): boolean {
+  return !/^(elke|dagelijks|doorlopend)/i.test(note);
 }
