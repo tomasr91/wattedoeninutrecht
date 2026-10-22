@@ -71,6 +71,8 @@ const MUSIC_GENRES: Record<string, string> = {
   'Singer-songwriter': 'Singer-songwriter',
   'Roots & americana': 'Roots & americana',
   'Metal & punk': 'Metal & punk',
+  Metal: 'Metal & punk',
+  Punk: 'Metal & punk',
   'Classic pop': 'Classic pop',
   Nederlandstalig: 'Nederlandstalig',
   Elektronisch: 'Elektronisch',
@@ -82,10 +84,15 @@ const MUSIC_GENRES: Record<string, string> = {
   Wereldmuziek: 'Wereldmuziek',
 };
 
+const NOT_MUSIC: Record<string, string> = { Jeugdtheater: 'Kindertheater', Culinair: 'Eten & drinken', Theater: 'Theater', Comedy: 'Comedy' };
+
 /** Label na samenvoegen (zie KIND_ALIASES en MUSIC_GENRES). */
 export function canonicalKind(k: string): string {
   if (k.startsWith('Concert · ')) {
     const g = k.slice('Concert · '.length);
+    // Subgenres van UITagenda die geen muziekgenre zijn.
+    if (NOT_MUSIC[g]) return NOT_MUSIC[g];
+    if (/^overige/i.test(g)) return 'Concert';
     return `Concert · ${MUSIC_GENRES[g] ?? g}`;
   }
   if (MUSIC_GENRES[k]) return `Concert · ${MUSIC_GENRES[k]}`;
