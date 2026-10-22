@@ -125,7 +125,7 @@ export function formatMonthYear(key: string): string {
 
 export function relativeDayLabel(key: string, today: string): string {
   const diff = diffDays(today, key);
-  if (diff === 0) return 'Vandaag';
+  if (diff === 0) return `Vandaag, ${formatLongDate(key)}`;
   if (diff === 1) return `Morgen, ${formatLongDate(key)}`;
   if (diff === 2) return `Overmorgen, ${formatLongDate(key)}`;
   return formatLongDate(key).replace(/^./, (c) => c.toUpperCase());
