@@ -53,7 +53,10 @@ export const GENRE_KIND: Record<string, string> = {
   cabaret: 'Cabaret',
   comedy: 'Comedy',
   muziek: 'Concert',
-  klassiek: 'Klassiek',
+  klassiek: 'Concert',
+  'klassieke-muziek': 'Concert',
+  show: 'Voorstelling',
+  nightlife: 'Uitgaan',
   film: 'Film',
   festivals: 'Festival',
   dans: 'Dans',
@@ -187,7 +190,8 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
     .get()
     .filter(Boolean);
   const genreLabels = $('.post-genres .genre-label').map((_, el) => cleanText($(el).text())).get().filter(Boolean);
-  const kind = genreSlugs.map((g) => GENRE_KIND[g]).find(Boolean);
+  // Nightlife gaat voor: een clubavond met ook het label Muziek is uitgaan, geen concert.
+  const kind = (genreSlugs.includes('nightlife') ? 'Uitgaan' : undefined) ?? genreSlugs.map((g) => GENRE_KIND[g]).find(Boolean);
 
   // Velden in de tekst: "Leeftijd: vanaf 6 jaar", "Duur: ± 40–55 minuten", "Kosten: …"
   const fields = new Map<string, string>();

@@ -56,3 +56,20 @@ describe('vaste reeksen samenvoegen', () => {
     expect(recurrenceLabel(['2026-10-23', '2026-10-24', '2026-10-30'], ['20:30', '20:30', '20:30'])).toBe('Elke vr en za · 20:30');
   });
 });
+
+import { kindLabel } from '../src/domain/kind';
+describe('soort uit de titel als de bron niets zegt', () => {
+  it.each([
+    ['[TESTDATA] Estella Boersma All Night Long', 'Uitgaan'],
+    ['[TESTDATA] PowerPoint Karaoke', 'Uitgaan'],
+    ['[TESTDATA] PechaKucha Night #50', 'Lezing'],
+    ['[TESTDATA] Open Mic: Rouw aan het Woord', 'Voorstelling'],
+    ['[TESTDATA] Boek & Yoga (4-8 jaar)', 'Workshop'],
+    ['[TESTDATA] Slaapfeestje voor knuffels', 'Feest'],
+    ['[TESTDATA] USP Night Run', 'Sport'],
+    ['[TESTDATA] Langs de muurschilderingen van Utrecht Noord', 'Rondleiding'],
+    ['[TESTDATA] Jeremy Pelt Quintet', 'Overig'],
+  ])('%s', (title, kind) => {
+    expect(kindLabel({ title, categories: ['overig'] })).toBe(kind);
+  });
+});

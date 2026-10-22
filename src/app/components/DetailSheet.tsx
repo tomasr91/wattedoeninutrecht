@@ -1,8 +1,8 @@
+import { kindLabel, NO_KIND } from '../../domain/kind';
 import type { Activity, Profile } from '../../domain/types';
 import { ageDisplay, childFits, type Fit } from '../../domain/age';
 import { dateOf, diffDays, formatLongDate, timeOf } from '../../domain/dates';
 import { distanceFromHome, travelEstimate } from '../../domain/geo';
-import { categoryLabel } from '../../domain/profile';
 import { Sheet } from './Sheet';
 import { priceLabel, whenLabel } from './ActivityCard';
 import { IconCalendarPlus, IconExternal, IconRoute, IconShare } from './Icons';
@@ -82,7 +82,8 @@ export function DetailSheet({
   const ageText = a.age.label && /kijkwijzer/i.test(a.age.label) ? a.age.label : shownAge ? capital(shownAge.text) : undefined;
   const price = a.price.text ?? (a.price.kind !== 'onbekend' ? priceLabel(a) : undefined);
   const where = [a.venue.name, a.venue.locality && !a.venue.name.includes(a.venue.locality) ? a.venue.locality : undefined].filter(Boolean).join(', ');
-  const kind = a.kind ?? (a.categories[0] ? categoryLabel(a.categories[0]) : undefined);
+  const k = kindLabel(a);
+  const kind = k === NO_KIND ? undefined : k;
   const needsBooking = a.booking.status === 'verplicht' || a.booking.status === 'aanbevolen';
 
   return (
