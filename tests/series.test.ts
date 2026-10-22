@@ -175,7 +175,8 @@ describe('losse speeldata in de agenda', () => {
 import { canonicalKind } from '../src/domain/kind';
 describe('samengevoegde labels', () => {
   it.each([
-    ['Cabaret', 'Comedy & cabaret'],
+    ['Cabaret', 'Comedy'],
+    ['Comedy & cabaret', 'Comedy'],
     ['Toneel', 'Theater'],
     ['Familievoorstelling', 'Kindertheater'],
     ['Kleuterbios', 'Film'],

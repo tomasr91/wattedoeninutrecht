@@ -33,9 +33,9 @@ const TITLE_KIND: [RegExp, string][] = [
  * Zo kun je bij Interesses één keer kiezen.
  */
 export const KIND_ALIASES: Record<string, string> = {
-  Comedy: 'Comedy & cabaret',
-  Cabaret: 'Comedy & cabaret',
-  'Stand-up': 'Comedy & cabaret',
+  Cabaret: 'Comedy',
+  'Stand-up': 'Comedy',
+  'Comedy & cabaret': 'Comedy',
   Toneel: 'Theater',
   Voorstelling: 'Theater',
   Show: 'Theater',
