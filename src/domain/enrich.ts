@@ -120,6 +120,7 @@ const RULES: Rule[] = [
   { test: /voorlez|voorleesochtend|leesfeest|prentenboek/, categories: ['voorlezen'], audiences: ['kinderen'], fit: ['Korte duur (circa 30 min)', 'Rustig en interactief'], indoor: 'binnen', durationMinutes: 30 },
   { test: /knutsel|kleuren|maak je eigen|creatief/, categories: ['workshop'], audiences: ['kinderen'], fit: ['Zelf iets maken (met hulp van een ouder)'], indoor: 'binnen' },
   { test: /peuter|dreumes|kleuter/, audiences: ['kinderen'], fit: ['Speciaal voor jonge kinderen'] },
+  { test: /nijntje|bumba|peppa|kleuterbios|kindermuseum|speelparadijs|speeltuin/, audiences: ['kinderen', 'gezin'], fit: ['Speciaal voor jonge kinderen'] },
   { test: /sint[\s-]?maarten|lampion/, categories: ['feest'], audiences: ['gezin', 'kinderen'], fit: ['Lichtjes en muziek, zelf tempo bepalen'], cautions: ['Begint na het avondeten'], indoor: 'buiten', special: true },
   { test: /sinterklaas|intocht|pietenhuis|huis van sinterklaas/, categories: ['feest'], audiences: ['gezin', 'kinderen'], fit: ['Sinterklaasfeest voor jonge kinderen'], cautions: ['Kan druk zijn'], special: true },
   { test: /kerst|winter\s?kost|lichtjes|lumineu|kerstmarkt|winterfair/, categories: ['feest'], special: true },
