@@ -175,15 +175,6 @@ export function SettingsSheet({
         {peek &&
           (() => {
             const list = examplesFor(peek.aud, peek.kinds);
-            const off = peek.kinds.every((k) => hidden[peek.aud].includes(k));
-            const toggle = () =>
-              setProfile({
-                ...p,
-                hiddenKinds: {
-                  ...hidden,
-                  [peek.aud]: off ? hidden[peek.aud].filter((x) => !peek.kinds.includes(x)) : [...new Set([...hidden[peek.aud], ...peek.kinds])],
-                },
-              });
             return (
               <div className="peek-backdrop" onClick={() => setPeek(null)}>
                 <div className="peek" role="dialog" aria-label={`Voorbeelden ${peek.label}`} onClick={(e) => e.stopPropagation()}>
@@ -204,9 +195,6 @@ export function SettingsSheet({
                     {!list.length && <li className="small muted">Op dit moment niets.</li>}
                   </ul>
                   <div className="peek-actions">
-                    <button className={`btn ${off ? 'btn-primary' : ''}`} onClick={toggle}>
-                      {off ? 'Weer tonen' : 'Niet tonen'}
-                    </button>
                     <button className="btn" onClick={() => setPeek(null)}>
                       Sluiten
                     </button>
