@@ -71,7 +71,52 @@ export function isDuplicate(x: Activity, y: Activity): boolean {
   const tx = timeOf(x.start);
   const ty = timeOf(y.start);
   if (tx && ty && tx !== ty) return false;
-  return titleSimilar(x.title, y.title) && venueSimilar(x, y);
+  if (titleSimilar(x.title, y.title) && venueSimilar(x, y)) return true;
+  // Zelfde plek en precies dezelfde begintijd is een sterk signaal. Dan is één gedeeld, onderscheidend woord
+  // in de titel genoeg ("Kluizelaar (2+)" ≈ "Simone de Jong Company: Kluizelaar (2+)", ook bij een tikfout).
+  return !!tx && tx === ty && venueSimilar(x, y) && sharesDistinctWord(x.title, y.title);
+}
+
+/** Woorden die op dezelfde avond in één zaal vaak in verschillende titels staan. */
+const GENERIC = new Set([
+  'utrecht', 'tivolivredenburg', 'live', 'night', 'nacht', 'show', 'orkest', 'concert', 'theater', 'voorstelling', 'festival',
+  'halloween', 'edition', 'special', 'presents', 'tour', 'workshop', 'rondleiding', 'opening', 'tentoonstelling', 'muziek',
+  'with', 'feat', 'and', 'from', 'jubileum', 'kerst', 'sint', 'club', 'party', 'comedy', 'stadsschouwburg',
+]);
+
+function sharesDistinctWord(a: string, b: string): boolean {
+  // Zelfde reeksnaam vóór de dubbele punt ("Cinekid: …") zegt niets: haal die weg.
+  const pa = a.split(':');
+  const pb = b.split(':');
+  if (pa.length > 1 && pb.length > 1 && normalizeText(pa[0]) === normalizeText(pb[0])) {
+    a = pa.slice(1).join(':');
+    b = pb.slice(1).join(':');
+  }
+  const A = [...tokens(a)].filter((t) => t.length >= 4 && !GENERIC.has(t) && !/^\d+$/.test(t));
+  const B = [...tokens(b)].filter((t) => t.length >= 4 && !GENERIC.has(t) && !/^\d+$/.test(t));
+  return A.some((t) => B.some((u) => t === u || (t.length >= 5 && u.length >= 5 && editDistanceAtMostOne(t, u))));
+}
+
+function editDistanceAtMostOne(a: string, b: string): boolean {
+  if (Math.abs(a.length - b.length) > 1) return false;
+  let i = 0;
+  let j = 0;
+  let edits = 0;
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) {
+      i++;
+      j++;
+      continue;
+    }
+    if (++edits > 1) return false;
+    if (a.length > b.length) i++;
+    else if (b.length > a.length) j++;
+    else {
+      i++;
+      j++;
+    }
+  }
+  return edits + (a.length - i) + (b.length - j) <= 1;
 }
 
 const CONF_RANK: Record<Confidence, number> = { hoog: 3, middel: 2, laag: 1 };

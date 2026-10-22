@@ -332,3 +332,19 @@ describe('UITagenda: eigen datum bovenaan gaat voor', () => {
     expect(ev?.end).toBe('2026-10-23T22:00');
   });
 });
+
+import { isDuplicate } from '../src/domain/dedupe';
+describe('dubbel: zelfde zaal, zelfde begintijd', () => {
+  const act = (title: string, start = '2026-11-04T10:00', venue = 'ZIMIHC theater Zuilen') => testActivity({ title, start, venue: { name: venue, geoPrecision: 'unknown' } } as never);
+  it.each([
+    ['Kluizelaar (2+)', 'Simone de Jong Company: Kluizelaar (2+)'],
+    ['PERNILLE HAALAND (Engelstalig)', 'Pernille Haalland'],
+    ['Krulmuziek: Kerstconcert (0+/2+)', 'Kerstconcert (0+/2+)'],
+  ])('%s ≈ %s', (a, b) => expect(isDuplicate(act(a), act(b))).toBe(true));
+  it('verschillende voorstellingen in dezelfde reeks niet', () => {
+    expect(isDuplicate(act('Cinekid: MediaLab'), act('Cinekid: Stitch Head (8+)'))).toBe(false);
+  });
+  it('andere begintijd niet', () => {
+    expect(isDuplicate(act('Kluizelaar (2+)'), act('Simone de Jong Company: Kluizelaar (2+)', '2026-11-04T11:30'))).toBe(false);
+  });
+});
