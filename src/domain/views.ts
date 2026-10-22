@@ -10,7 +10,7 @@ import { childFits, type ChildFit } from './age';
 import { activityEndDate, firstDateInPeriod, overlapsPeriod } from './filters';
 import { DEFAULT_HOME, distanceFromHome } from './geo';
 import { normalizeText } from './dedupe';
-import { canonicalKind, kindLabel } from './kind';
+import { canonicalKind, isVoorlezen, kindLabel } from './kind';
 
 export type ListAudience = 'kinderen' | 'volwassenen';
 
@@ -143,7 +143,9 @@ export function buildLists(
     const friday = isFridayEvening(a);
     if (activityEndDate(a) < ctx.today || (!overlapsPeriod(a, window) && !friday)) continue;
     if (!matchesAudience(a, opts.audience)) continue;
-    if (a.categories.some((c) => opts.excludeCategories.includes(c))) continue;
+    // Voorlezen herkennen we aan het label, niet aan de categorie: een voorstelling op het Prentenboekenfestival blijft zichtbaar.
+    if (opts.excludeCategories.includes('voorlezen') && isVoorlezen(a)) continue;
+    if (a.categories.some((c) => c !== 'voorlezen' && opts.excludeCategories.includes(c))) continue;
     if (hidden.size && hidden.has(kindLabel(a))) continue;
     if (opts.onlyBike && !isBikeDistance(a, home)) continue;
 
@@ -254,7 +256,7 @@ export function inspirationList(activities: Activity[], audience: ListAudience):
   return activities
     .filter((a) => a.rolling && !a.isTestData && a.status !== 'verlopen' && a.status !== 'geannuleerd' && matchesAudience(a, audience))
     // Voorlezen wil je niet zien (net als in de agenda).
-    .filter((a) => !a.categories.includes('voorlezen') && !/voorlez|voorleesuur/i.test(a.title))
+    .filter((a) => !isVoorlezen(a))
     .sort((x, y) => Number(isPlace(y)) - Number(isPlace(x)))
     .filter((a) => !seen.has(normalizeText(a.title)) && seen.add(normalizeText(a.title)))
     .sort((x, y) => x.title.localeCompare(y.title, 'nl'));

@@ -148,7 +148,6 @@ export function canonicalKind(k: string): string {
  * "Musea & exposities", ook een doolhof, een sterrenkijkavond of een rondleiding.
  */
 const REFINE: { from: RegExp; test: RegExp; to: string }[] = [
-  { from: /./, test: /voorlez|voorleesuur|prentenboek/, to: 'Voorlezen' },
   { from: /^(expositie|museum|lezing|festival|theater)$/i, test: /rondleiding|\btour\b|podwalk|stadswandeling|wandelroute|puzzeltocht|speurtocht/, to: 'Rondleiding' },
   { from: /^(expositie|museum)$/i, test: /familiespel|doe-expo|archeolab|weekendactiviteit|kunstlokaal|verjaardagsfeest|mysterybox|voetzoekertjes|spoordieren|kinderactiviteit|workshop/, to: 'Doe-activiteit' },
   { from: /^(expositie|museum)$/i, test: /kijkavond|sterrenkijk|zon op zondag|sonnenborgh by night/, to: 'Sterrenkijken' },
@@ -166,10 +165,49 @@ type KindInput = Pick<Activity, 'kind' | 'categories'> & {
 
 /** Wat is het? Precies één label uit KINDS (of Concert · genre). */
 export function kindLabel(a: KindInput): string {
-  const k = canonicalKind(fineKindLabel(a));
+  let k = canonicalKind(fineKindLabel(a));
+  if (k === 'Feest & festival') k = festivalKind(a) ?? k;
   // Voorstelling of concert voor kinderen: Kindervoorstelling, zodat je Theater bij volwassenen los kunt uitzetten.
   if ((k === 'Theater' || k === 'Dans' || k.startsWith('Concert')) && forKids(a)) return 'Kindervoorstelling';
   return k;
+}
+
+/**
+ * "Festival" zegt weinig over wat je gaat doen: een wijnfestival is eten en drinken, een poëziefestival een lezing,
+ * Le Guess Who? een concert. Feest & festival blijft voor feestdagen (Halloween, Sint, kerst, Sint-Maarten),
+ * lichtroutes en brede stadsfestivals.
+ */
+const FESTIVAL_KIND: [RegExp, string][] = [
+  [/voorlees|voorlez/, 'Voorlezen'],
+  [/workshop|knutsel|maak je/, 'Workshop'],
+  [/grief|rouw|verlies/, 'Ontmoeting'],
+  [/wijn|borrel|bier|food|proef|culinair|diner/, 'Eten & drinken'],
+  [/winterwinkel|markt|fair\b|braderie/, 'Markt'],
+  [/po[eë]zie|literatuur|boeken|lezing|debat/, 'Lezing'],
+  [/comic ?con|beurs|challenge|spektakel/, 'Feest & festival'],
+  [/smartlap|guess who|no man.s land|jazz|muziekfestival|concert|\bdj\b|music/, 'Concert'],
+];
+
+function festivalKind(a: KindInput): string | undefined {
+  const t = a.title?.toLowerCase() ?? '';
+  // Voorstellingen en workshops in een feestreeks (Winterkost, Herfststukjes, Sint Maarten) zijn gewoon voorstellingen en workshops.
+  if (/workshop|knutsel|maak je/.test(t) || (a.categories.includes('workshop') && !a.categories.includes('theater'))) return 'Workshop';
+  if (a.categories.includes('theater') && /\(\d{1,2}\s*\+\)|\b\d\+\s*[–-]|voorstelling|theater/.test(t + ' ' + (a.kind ?? '').toLowerCase())) return forKids(a) ? 'Kindervoorstelling' : 'Theater';
+  if (/sint|piet|halloween|kerst|lampion|maarten|licht|lumen|lumine|oud ?en ?nieuw|carnaval|koningsdag/.test(t)) return undefined;
+  for (const [re, k] of FESTIVAL_KIND) if (re.test(t)) return k === 'Concert' && forKids(a) ? 'Kindervoorstelling' : k;
+  if (a.categories.includes('theater')) return forKids(a) ? 'Kindervoorstelling' : 'Theater';
+  return undefined;
+}
+
+/**
+ * Voorlezen (wil je niet zien). Een voorstelling of tekenworkshop op het Prentenboekenfestival is géén voorlezen.
+ */
+export function isVoorlezen(a: Pick<Activity, 'kind' | 'categories'> & { title?: string }): boolean {
+  const t = a.title?.toLowerCase() ?? '';
+  if (/voorlez|voorleesuur|voorleesochtend|voorleesmiddag|voorleesfestival/.test(t)) return true;
+  if (!/prentenboek/.test(t) && !a.categories.includes('voorlezen')) return false;
+  const show = /theater|voorstelling/i.test(a.kind ?? '') || a.categories.includes('theater') || a.categories.includes('workshop') || /teken|speel|maak/.test(t);
+  return !show;
 }
 
 function forKids(a: KindInput): boolean {
@@ -183,6 +221,7 @@ function forKids(a: KindInput): boolean {
 function fineKindLabel(a: KindInput): string {
   const base = baseKindLabel(a);
   const t = a.title?.toLowerCase() ?? '';
+  if (isVoorlezen(a)) return 'Voorlezen';
   for (const r of REFINE) if (r.from.test(base) && r.test.test(t)) return r.to;
   // Een "expositie" die pas om 22:00 begint, is een clubavond (bv. Canvas in Tivoli).
   if (base === 'Expositie' && a.start && a.start.slice(11, 13) >= '22') return 'Uitgaan';
@@ -192,7 +231,7 @@ function fineKindLabel(a: KindInput): string {
 function baseKindLabel(a: KindInput): string {
   const t = a.title?.toLowerCase();
   if (a.kind && a.kind !== 'Overig' && a.kind !== 'Diversen') return aliasKind(a.kind);
-  for (const c of a.categories) if (CATEGORY_KIND[c]) return aliasKind(CATEGORY_KIND[c]!);
+  for (const c of a.categories) if (CATEGORY_KIND[c] && c !== 'voorlezen') return aliasKind(CATEGORY_KIND[c]!);
   if (t) for (const [re, k] of TITLE_KIND) if (re.test(t)) return aliasKind(k);
   // Laatste redmiddel: de korte beschrijving van de bron.
   const s = a.summary?.toLowerCase() ?? '';

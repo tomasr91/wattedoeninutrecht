@@ -245,3 +245,20 @@ describe('één label uit de vaste lijst', () => {
     expect(kindLabel({ title: 'Lumen', kind: 'Lichtroute', categories: [] })).toBe('Feest & festival');
   });
 });
+
+describe('festival: label naar wat je gaat doen', () => {
+  it.each([
+    ['Good Grief: Nicolaïkerk', [], 'Ontmoeting'],
+    ['Nacht van de Wijn festival', [], 'Eten & drinken'],
+    ['Poëziefestival', [], 'Lezing'],
+    ['Le Guess Who?', ['muziek'], 'Concert'],
+    ['Winterkost: Rapunzel (3+)', ['feest', 'theater'], 'Kindervoorstelling'],
+    ['Workshop: Een lichtje voor Sint Maarten (6+)', ['feest', 'workshop'], 'Workshop'],
+    ['Intocht Sinterklaas in Leidsche Rijn Centrum', ['feest'], 'Feest & festival'],
+  ] as const)('%s', (title, categories, kind) => {
+    expect(kindLabel({ title, kind: 'Festival', categories: [...categories] as never, audiences: ['volwassenen', 'kinderen'] })).toBe(kind);
+  });
+  it('voorstelling op het Prentenboekenfestival is geen voorlezen', () => {
+    expect(kindLabel({ title: 'nijntje op de fiets 2+ – Klein Amsterdam Producties | Prentenboekjesfestival', kind: 'Jeugdtheater', categories: ['voorlezen', 'theater'] })).toBe('Kindervoorstelling');
+  });
+});
