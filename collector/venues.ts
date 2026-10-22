@@ -61,6 +61,19 @@ export const VENUES: KnownVenue[] = [
   { name: 'Nicolaïkerk', aliases: /nicola[iï]kerk/i, locality: 'Binnenstad', lat: 52.0855, lon: 5.1232, indoor: 'binnen' },
   { name: 'Werkspoorkathedraal', aliases: /werkspoorkathedraal/i, locality: 'Zuilen', lat: 52.106, lon: 5.084, indoor: 'binnen' },
 
+  // — Utrecht Natuurlijk (adressen van utrechtnatuurlijk.nl/locaties; coördinaten via PDOK) —
+  { name: 'Stadsboerderij Eilandsteede', aliases: /eilandsteede/i, locality: 'Kanaleneiland', address: 'Vreugdenhillaan 31, Utrecht', indoor: 'beide' },
+  { name: 'Stadstuin Food for Good', aliases: /food for good/i, locality: 'Kanaleneiland', address: 'Vreugdenhillaan 48, Utrecht', indoor: 'buiten' },
+  { name: 'Stadsboerderij Gagelsteede', aliases: /gagelsteede/i, locality: 'Overvecht', address: 'Gangesdreef 7a, 3564 SN Utrecht', indoor: 'beide' },
+  { name: 'Stadsboerderij Koppelsteede', aliases: /koppelsteede/i, locality: 'Noordwest', address: 'Koppeldijk 115, Utrecht', indoor: 'beide' },
+  { name: 'Stadsboerderij Griftsteede', aliases: /griftsteede/i, locality: 'Noordoost', address: 'Van Swindenstraat 129, Utrecht', indoor: 'beide' },
+  { name: 'Steede Hoge Woerd', aliases: /steede hoge woerd|stadsboerderij hoge woerd/i, locality: 'De Meern', address: 'Hoge Woerdplein 1, 3454 PB Utrecht', lat: 52.0838, lon: 5.0413, indoor: 'beide' },
+  { name: 'Stadstuin Zuilen', aliases: /stadstuin zuilen/i, locality: 'Zuilen', address: 'Daalseweg 150, 3555 SV Utrecht', indoor: 'buiten' },
+  { name: 'Stadstuin Plutodreef', aliases: /plutodreef/i, locality: 'Overvecht', address: 'Plutodreef 9, Utrecht', indoor: 'buiten' },
+  { name: 'Stadstuin Klopvaart', aliases: /klopvaart/i, locality: 'Overvecht', address: 'Vancouverdreef 70, Utrecht', indoor: 'buiten' },
+  { name: 'Stadstuin Kanaalweg', aliases: /stadstuin kanaalweg/i, locality: 'Oog in Al', address: 'Kanaalweg 172a, Utrecht', indoor: 'buiten' },
+  { name: 'Kasteeltuin Nijevelt', aliases: /nijevelt/i, locality: 'De Meern', address: 'Haarlerberg, 3453 RG Utrecht', indoor: 'buiten' },
+
   // — Omgeving —
   { name: 'Waterliniemuseum Fort bij Vechten', aliases: /fort bij vechten|waterliniemuseum/i, locality: 'Bunnik', lat: 52.059, lon: 5.1685, indoor: 'beide' },
 ];

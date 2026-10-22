@@ -20,7 +20,7 @@ import { normalize } from './normalize.ts';
 import { buildExport } from './export.ts';
 import { computeExpected, type RecurringMoment } from '../src/domain/expected.ts';
 import * as dbm from './db.ts';
-import { geocodeMissing, geocodingEnabled } from './geocode.ts';
+import { geocodeAddressesPdok, geocodeMissing, geocodingEnabled } from './geocode.ts';
 import type { SourceAdapter } from './adapters/types.ts';
 import { uitagendaUtrecht } from './adapters/uitagenda-utrecht.ts';
 import { bibliotheekUtrecht } from './adapters/bibliotheek-utrecht.ts';
@@ -194,6 +194,10 @@ async function main() {
   const dropSet = new Set(dropKeys);
   const activities = reconciled.filter((a) => !dropSet.has(sourceKey(a)));
   removed.push(...dropKeys);
+  {
+    const n = await geocodeAddressesPdok(db, activities, log);
+    log(`Adressen (PDOK): ${n} locaties aangevuld`);
+  }
   if (geocodingEnabled()) {
     const n = await geocodeMissing(db, activities, log);
     log(`Geocodering: ${n} locaties aangevuld`);

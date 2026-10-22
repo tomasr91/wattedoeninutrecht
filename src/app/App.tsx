@@ -1,3 +1,4 @@
+import { DEFAULT_NEARBY_KM } from './views/SettingsView';
 import { useEffect, useMemo, useRef, useState, type TouchEvent } from 'react';
 import type { Activity, Dataset, Profile } from '../domain/types';
 import { makePeriod } from '../domain/filters';
@@ -11,7 +12,7 @@ import { IconUser } from './components/Icons';
 import { DomTower } from './components/DomTower';
 import { DayList, OngoingList } from './views/ListView';
 import { updateSeen, type SeenState } from '../domain/newness';
-import { NewContext } from './newContext';
+import { NearContext, NewContext } from './newContext';
 import { SettingsSheet } from './views/SettingsView';
 
 type Pane = 'agenda' | 'doorlopend';
@@ -128,6 +129,7 @@ export function App() {
 
   return (
     <NewContext.Provider value={fresh}>
+    <NearContext.Provider value={profile.home ? profile.nearbyKm ?? DEFAULT_NEARBY_KM : 0}>
     <div className="app">
       <header className="masthead">
         <span className="masthead-art" aria-hidden="true">
@@ -257,6 +259,7 @@ export function App() {
         />
       )}
     </div>
+    </NearContext.Provider>
     </NewContext.Provider>
   );
 }

@@ -101,7 +101,7 @@ export function SettingsSheet({
           </button>
         </section>
 
-        <HomeBlock home={p.home} onChange={(home) => setProfile({ ...p, home })} />
+        <HomeBlock home={p.home} onChange={(home) => setProfile({ ...p, home })} nearbyKm={p.nearbyKm ?? DEFAULT_NEARBY_KM} onNearby={(nearbyKm) => setProfile({ ...p, nearbyKm })} />
           </>
         )}
 
@@ -171,7 +171,10 @@ export function SettingsSheet({
 }
 
 /** Thuisadres voor de afstanden in de lijst. */
-function HomeBlock({ home, onChange }: { home?: Home; onChange: (h?: Home) => void }) {
+export const DEFAULT_NEARBY_KM = 5;
+const NEARBY_OPTIONS = [0, 2, 3, 5, 8, 10];
+
+function HomeBlock({ home, onChange, nearbyKm, onNearby }: { home?: Home; onChange: (h?: Home) => void; nearbyKm: number; onNearby: (km: number) => void }) {
   const [q, setQ] = useState('');
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
@@ -220,6 +223,20 @@ function HomeBlock({ home, onChange }: { home?: Home; onChange: (h?: Home) => vo
         </button>
       </form>
       {msg && <p className="small banner-warn">{msg}</p>}
+      {home && (
+        <div className="nearby-set">
+          <p className="small">
+            Markeer dichtbij tot <span className="near-km num">{nearbyKm ? `${nearbyKm} km` : 'uit'}</span>
+          </p>
+          <div className="chip-wrap" role="group" aria-label="Dichtbij markeren tot">
+            {NEARBY_OPTIONS.map((km) => (
+              <button key={km} className={`kind-chip ${nearbyKm === km ? '' : 'is-off is-plain'}`} aria-pressed={nearbyKm === km} onClick={() => onNearby(km)}>
+                {km ? `${km} km` : 'Uit'}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <p className="small muted">Het adres blijft op deze telefoon. Voor het opzoeken gaat het eenmalig naar PDOK (Kadaster).</p>
     </section>
   );

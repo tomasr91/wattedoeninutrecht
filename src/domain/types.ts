@@ -170,6 +170,8 @@ export interface Profile {
   children: Child[];
   /** Thuisadres voor afstanden; leeg = geen afstanden tonen. */
   home?: Home;
+  /** Activiteiten tot deze afstand (km) krijgen een markering op de kaart; 0 = uit. Standaard 5. */
+  nearbyKm?: number;
   /** Maximale afstand in km voor de standaardweergave. */
   maxDistanceKm: number;
   /** 0 = geen voorkeur, 1 = normaal, 2 = sterk. */

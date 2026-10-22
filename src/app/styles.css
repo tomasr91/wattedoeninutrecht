@@ -1044,3 +1044,29 @@ h3 {
   font-weight: 400;
   color: var(--muted);
 }
+
+/* Dichtbij: zacht terracotta labeltje met een klein vierkantje, valt op zonder te schreeuwen. */
+.near-km {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 7px 1px 6px;
+  border-radius: 6px;
+  background: #fbede5;
+  color: #8f3b1b;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.near-km::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: #d0602f;
+}
+.nearby-set {
+  margin-top: 12px;
+}
+.kind-chip.is-plain {
+  text-decoration: none;
+}

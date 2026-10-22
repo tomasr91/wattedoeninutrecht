@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import type { Activity } from '../../domain/types';
-import { NewContext } from '../newContext';
+import { NearContext, NewContext } from '../newContext';
 import { ageDisplay, fitSummary } from '../../domain/age';
 import { dateOf, formatShortDate, relativeDayLabel, timeOf } from '../../domain/dates';
 import type { ListItem } from '../../domain/views';
@@ -70,6 +70,8 @@ export function ActivityCard({
 }) {
   const a = item.activity;
   const isNew = useContext(NewContext).has(a.id);
+  const nearKm = useContext(NearContext);
+  const near = item.km !== undefined && nearKm > 0 && item.km <= nearKm;
   const fit = item.fits ? fitSummary(item.fits) : undefined;
   const ageShort = fit && fit.label !== 'Leeftijd onbekend' ? ageDisplay(a.age)?.short : undefined;
   const k = kindLabel(a);
@@ -94,7 +96,7 @@ export function ActivityCard({
       <span className="card-title">{a.title}</span>
       <span className="card-where">
         {where}
-        {item.km !== undefined && <span className="num"> · {kmText(item.km)}</span>}
+        {item.km !== undefined && (near ? <> <span className="near-km num" title={`Binnen ${nearKm} km`}>{kmText(item.km)}</span></> : <span className="num"> · {kmText(item.km)}</span>)}
         {item.others.length > 0 && <span> · +{item.others.length} locatie{item.others.length > 1 ? 's' : ''}</span>}
       </span>
       {ongoing && a.openingNote && <span className="card-note">{a.openingNote}</span>}
