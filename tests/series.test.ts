@@ -184,6 +184,7 @@ describe('samengevoegde labels', () => {
     ['Indie', 'Concert · Indie'],
     ['Pop', 'Concert · Pop & rock'],
     ['Concert · Rock', 'Concert · Pop & rock'],
+    ['Opera', 'Concert · Opera'],
     ['Club', 'Uitgaan'],
   ])('%s → %s', (k, out) => expect(canonicalKind(k)).toBe(out));
 });

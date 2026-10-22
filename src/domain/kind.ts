@@ -82,6 +82,7 @@ const MUSIC_GENRES: Record<string, string> = {
   'Klassieke muziek': 'Klassiek',
   Wereld: 'Wereldmuziek',
   Wereldmuziek: 'Wereldmuziek',
+  Opera: 'Opera',
 };
 
 const NOT_MUSIC: Record<string, string> = { Jeugdtheater: 'Kindertheater', Culinair: 'Eten & drinken', Theater: 'Theater', Comedy: 'Comedy' };
