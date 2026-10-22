@@ -16,8 +16,8 @@ echte activiteiten met een link naar de bron.
 - **Dit weekend** en **Volgend weekend** tonen zaterdag en zondag; bij Volwassenen ook de vrijdagavond (vanaf 18:00). Met **Datum** kies je zelf één dag (× om te wissen).
 - De app toont altijd de komende drie maanden.
 - **Agenda** is chronologisch per dag: eendaagse en meerdaagse activiteiten (een meerdaags festival staat
-  één keer, op de eerste dag). **Tijdelijk** (voorheen Doorlopend) bevat alles wat zeven dagen of langer
-  loopt (alleen de duur telt). Wissel door opzij te vegen of op de kop te tikken.
+  één keer, op de eerste dag). **Lopend** (voorheen Doorlopend/Tijdelijk) bevat alles wat zeven dagen of langer
+  loopt, en wekelijkse reeksen; wat nog meer dan twee maanden loopt staat ingeklapt onder "Loopt nog lang". Wissel door opzij te vegen of op de kop te tikken.
 - Bij Kinderen verdwijnt wat voor beide kinderen te jong of te oud is op de dag zelf; onderaan staat hoeveel.
   Voorlezen wordt niet getoond (`excludeCategories` in `src/domain/views.ts`).
 - Per lijst kun je soorten verbergen (Gezin → Soorten). Bij Volwassenen staan standaard uit: Indie, Metal & punk, Expositie, Dans, Roots & americana, Opera, Musical en Podcast.

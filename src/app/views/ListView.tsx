@@ -78,10 +78,10 @@ export function OngoingList({
 }) {
   if (lists.ongoing.length === 0)
     return <p className="empty">{empty}</p>;
-  // Ingeklapt: vaste wekelijkse reeksen ("Elke woensdag") en wat vanaf nu (of vanaf de start, als die later is)
-  // nog langer dan SEASON_MONTHS loopt. Iets korts dat pas over een tijd begint (Disney on Ice) blijft in de lijst.
+  // Ingeklapt: wat vanaf nu (of vanaf de start, als die later is) nog langer dan SEASON_MONTHS loopt.
+  // Wekelijkse reeksen tellen net zo: een korte reeks staat bovenaan. Iets korts dat pas over een tijd
+  // begint (Disney on Ice) blijft in de lijst.
   const isLater = (i: ListItem) => {
-    if (isWeeklySeries(i.activity)) return true;
     const from =
       dateOf(i.activity.start) > today ? dateOf(i.activity.start) : today;
     return activityEndDate(i.activity) > addMonths(from, SEASON_MONTHS);
@@ -113,7 +113,7 @@ export function OngoingList({
           )}
       {later.length > 0 && (
         <details className="season-more">
-          <summary>Langer te zien ({later.length})</summary>
+          <summary>Loopt nog lang ({later.length})</summary>
           {cards(later)}
         </details>
       )}

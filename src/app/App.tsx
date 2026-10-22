@@ -259,7 +259,7 @@ export function App() {
               Agenda <span className="num count">{lists ? datedCount : ''}</span>
             </button>
             <button role="tab" aria-selected={pane === 'doorlopend'} className={pane === 'doorlopend' ? 'is-on' : ''} onClick={() => goTo('doorlopend')}>
-              Tijdelijk <span className="num count">{lists ? lists.ongoing.length : ''}</span>
+              Lopend <span className="num count">{lists ? lists.ongoing.length : ''}</span>
             </button>
             {profile.showAlways && (
               <button role="tab" aria-selected={pane === 'altijd'} className={pane === 'altijd' ? 'is-on' : ''} onClick={() => goTo('altijd')}>
@@ -286,7 +286,7 @@ export function App() {
             ) : pane === 'altijd' ? (
               <AlwaysList items={always} archived={alwaysArchived} onOpen={open} onRestore={(i) => toggleArchive(i.activity)} onArchive={(i) => toggleArchive(i.activity)} empty={`Nog geen vaste uitjes ${who}.`} />
             ) : (
-              <OngoingList lists={lists} today={today} onOpen={open} empty={`Geen tijdelijk aanbod ${who} in deze periode.`} />
+              <OngoingList lists={lists} today={today} onOpen={open} empty={`Niets lopends ${who} in deze periode.`} />
             )}
             <footer className="list-foot small muted">
               {lastRun && <p>Laatst ververst: {formatDateTime(lastRun)}</p>}
