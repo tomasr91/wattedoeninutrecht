@@ -1,3 +1,4 @@
+import { addDays } from '../src/domain/dates';
 import { describe, expect, it } from 'vitest';
 import { dedupe, isDuplicate, stableHash } from '../src/domain/dedupe';
 import { contentHashOf, MISSING_THRESHOLD, reconcile, sourceKey, type StoredActivity } from '../src/domain/reconcile';
@@ -131,11 +132,23 @@ describe('wekelijkse update (reconcile)', () => {
     expect(r.activities[0].status).toBe('gepland');
     expect(r.activities[0].uncertainties.join(' ')).toMatch(/Niet meer vermeld/);
     expect(r.activities[0].confidence).toBe('middel');
+    // Meerdere runs op dezelfde dag tellen één keer.
+    for (let i = 0; i < 5; i++) r = reconcile(r.activities, [{ sourceId: 'bieb', ok: true, coverage, activities: [] }], NOW, TODAY);
+    expect(r.activities[0].status).toBe('gepland');
     for (let i = 1; i < MISSING_THRESHOLD; i++) {
       items = r.activities;
-      r = reconcile(items, [{ sourceId: 'bieb', ok: true, coverage, activities: [] }], NOW, TODAY);
+      const day = addDays(TODAY, i);
+      r = reconcile(items, [{ sourceId: 'bieb', ok: true, coverage, activities: [] }], `${day}T03:00:00Z`, day);
     }
     expect(r.activities[0].status).toBe('geannuleerd');
+  });
+
+  it('zelfde activiteit onder een nieuwe sleutel: oude weg, geen annulering', () => {
+    const old = store(testActivity({ title: '[TESTDATA] Hutten bouwen', start: '2026-11-20T10:30', sources: [src('bieb', 'hutten|2026-11-20')] }));
+    const renamed = testActivity({ title: '[TESTDATA] Hutten bouwen', start: '2026-11-20', end: '2026-11-21', sources: [src('bieb', 'hutten|tm-2026-11-21')] });
+    const r = reconcile([old], [{ sourceId: 'bieb', ok: true, coverage, activities: [renamed] }], NOW, TODAY);
+    expect(r.activities).toHaveLength(1);
+    expect(r.removed).toContain('bieb::hutten|2026-11-20');
   });
 
   it('buiten het opgehaalde venster niet als verdwenen markeren', () => {

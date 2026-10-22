@@ -195,7 +195,15 @@ async function main() {
   }
 
   const anyOk = results.some((r) => r.ok);
-  const existing = dbm.loadActivities(db);
+  const existing = dbm.loadActivities(db).map((a) => {
+    // Eenmalig (22-10-2026): annuleringen die vóór de telling-per-dag zijn ontstaan door veel runs op één dag
+    // terugzetten; ze worden vanaf nu per dag opnieuw geteld.
+    const suspected = 'Vermoedelijk geannuleerd of verplaatst — controleer de bron';
+    if (a.status === 'geannuleerd' && a.uncertainties.includes(suspected) && !a.missingDay) {
+      return { ...a, status: 'gepland' as const, missingCount: 1, missingDay: today, uncertainties: a.uncertainties.filter((u) => u !== suspected) };
+    }
+    return a;
+  });
   const { activities: reconciled, stats, removed } = reconcile(existing, results, nowIso, today);
   // Bronnen die uit staan: hun activiteiten uit de app halen (alleen bij een volledige run).
   if (!only) {

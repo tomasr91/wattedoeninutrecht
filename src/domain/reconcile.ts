@@ -1,13 +1,15 @@
 import type { Activity, Confidence } from './types';
 import { dateOf } from './dates';
-import { stableHash } from './dedupe';
+import { normalizeText, stableHash } from './dedupe';
 import { activityEndDate } from './filters';
 
 /** Activiteit zoals opgeslagen, met administratie voor het bijhouden van wijzigingen. */
 export interface StoredActivity extends Activity {
   contentHash: string;
-  /** Aantal opeenvolgende geslaagde runs waarin de bron dit item niet meer noemde. */
+  /** Aantal dagen (niet runs) waarop de bron dit item bij een geslaagde run niet meer noemde. */
   missingCount: number;
+  /** Laatste dag waarop missingCount is opgehoogd; meerdere runs op één dag tellen één keer. */
+  missingDay?: string;
 }
 
 export interface SourceResult {
@@ -40,7 +42,7 @@ export interface ReconcileStats {
 
 /** Na zoveel gemiste runs gaan we uit van annulering of verplaatsing. */
 /** Aantal runs (dagelijks) dat een activiteit bij de bron mag ontbreken voordat hij als vermoedelijk geannuleerd geldt. */
-export const MISSING_THRESHOLD = 4;
+export const MISSING_THRESHOLD = 3;
 
 /** Velden die voor de gebruiker betekenis hebben; wijziging hierin telt als update. */
 export function contentHashOf(a: Activity): string {
@@ -128,7 +130,24 @@ export function reconcile(
     removed.push(key);
   }
 
-  // Niet meer gevonden bij een geslaagde bron
+  // Zelfde activiteit onder een nieuwe sleutel (de bron of onze koppeling veranderde de ID):
+  // het oude exemplaar is geen annulering maar een dubbele; weghalen.
+  const incomingBySource = new Map<string, Activity[]>();
+  for (const r of results) if (r.ok) incomingBySource.set(r.sourceId, r.activities);
+  const SUSPECTED = 'Vermoedelijk geannuleerd of verplaatst — controleer de bron';
+  for (const [key, a] of byKey) {
+    if (seen.has(key)) continue;
+    if (a.status === 'geannuleerd' && !a.uncertainties.includes(SUSPECTED)) continue; // door de bron zelf geannuleerd
+    const same = incomingBySource.get(a.sources[0].sourceId)?.some(
+      (b) => normalizeText(b.title) === normalizeText(a.title) && dateOf(b.start) <= activityEndDate(a) && activityEndDate(b) >= dateOf(a.start),
+    );
+    if (same) {
+      byKey.delete(key);
+      removed.push(key);
+    }
+  }
+
+  // Niet meer gevonden bij een geslaagde bron (geteld in dagen, niet in runs)
   for (const [key, a] of byKey) {
     if (seen.has(key)) continue;
     const src = okSources.get(a.sources[0].sourceId);
@@ -136,17 +155,19 @@ export function reconcile(
     const d = dateOf(a.start);
     const inWindow = d >= src.coverage.from && d <= src.coverage.to;
     if (!inWindow || a.status === 'geannuleerd' || activityEndDate(a) < today) continue;
-    const missingCount = a.missingCount + 1;
+    const newDay = a.missingDay !== today;
+    const missingCount = a.missingCount + (newDay ? 1 : 0);
     const note = 'Niet meer vermeld bij de bron bij de laatste controle';
     const next: StoredActivity = {
       ...a,
       missingCount,
+      missingDay: today,
       confidence: lowerConfidence(a.confidence),
       uncertainties: a.uncertainties.includes(note) ? a.uncertainties : [...a.uncertainties, note],
     };
     if (missingCount >= MISSING_THRESHOLD) {
       next.status = 'geannuleerd';
-      const n2 = 'Vermoedelijk geannuleerd of verplaatst — controleer de bron';
+      const n2 = SUSPECTED;
       if (!next.uncertainties.includes(n2)) next.uncertainties = [...next.uncertainties, n2];
       stats.cancelled++;
     } else {
