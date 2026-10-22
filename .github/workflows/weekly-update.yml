@@ -4,7 +4,7 @@
 #    bronnen ophalen → SQLite bijwerken → JSON exporteren → committen → app bouwen → publiceren.
 #  - Handmatig starten kan via Actions → "Dagelijkse update" → Run workflow
 #    (optioneel met één bron, bv. "bibliotheek-utrecht").
-#  - Bij een push naar main wordt alleen getest, gebouwd en gepubliceerd (geen ophaalronde).
+#  - Codewijzigingen worden apart en direct gepubliceerd door publish.yml ("Publiceren").
 #
 # Eenmalig instellen: Settings → Pages → Source: "GitHub Actions".
 # Optioneel: Settings → Secrets and variables → Actions → Variables:
@@ -23,9 +23,6 @@ on:
         description: 'Alleen deze bron ophalen (leeg = alle ingeschakelde bronnen)'
         required: false
         default: ''
-  push:
-    branches: [main]
-    paths-ignore: ['**.md', 'docs/**']
 
 permissions:
   contents: write
@@ -73,7 +70,7 @@ jobs:
         if: steps.guard.outputs.skip != 'true'
 
       - name: Bronnen ophalen en database bijwerken
-        if: github.event_name != 'push' && steps.guard.outputs.skip != 'true'
+        if: steps.guard.outputs.skip != 'true'
         env:
           COLLECTOR_CONTACT: ${{ vars.COLLECTOR_CONTACT }}
           GEOCODER: ${{ vars.GEOCODER }}
@@ -86,7 +83,7 @@ jobs:
           fi
 
       - name: Bijgewerkte data committen
-        if: github.event_name != 'push' && steps.guard.outputs.skip != 'true'
+        if: steps.guard.outputs.skip != 'true'
         run: |
           git config user.name "agenda-bot"
           git config user.email "agenda-bot@users.noreply.github.com"
@@ -100,7 +97,7 @@ jobs:
           fi
 
       - name: Melding bij bronnen die al dagen mislukken
-        if: github.event_name != 'push' && steps.guard.outputs.skip != 'true'
+        if: steps.guard.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -114,7 +111,11 @@ jobs:
             gh issue close "$nr" --comment "Alle bronnen werken weer."
           fi
 
-      - run: npm run build
+      # Code kan tijdens het ophalen gewijzigd zijn: bouw met de nieuwste versie, zodat deze run nooit een oudere app terugzet.
+      - name: Nieuwste code ophalen
+        if: steps.guard.outputs.skip != 'true'
+        run: git pull --rebase origin main
+      - run: npm ci && npm run build
         if: steps.guard.outputs.skip != 'true'
       - uses: actions/configure-pages@v5
         if: steps.guard.outputs.skip != 'true'
@@ -127,6 +128,9 @@ jobs:
     needs: update
     if: needs.update.outputs.skip != 'true'
     runs-on: ubuntu-latest
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
