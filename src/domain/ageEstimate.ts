@@ -108,7 +108,9 @@ export function estimateAge(input: { title: string; hints?: string[]; descriptio
   const strong = `${input.title} ${(input.hints ?? []).join(' ')}`.toLowerCase();
   const desc = (input.description ?? '').toLowerCase();
 
-  const stageStrong = stageEstimate(strong);
+  // Levensfase-woorden alleen uit de titel: doelgroeplabels van een bron ("Kinderen", "Jongeren")
+  // staan vaak samen op één activiteit en zeggen dan niets over de leeftijd.
+  const stageStrong = stageEstimate(input.title.toLowerCase());
   if (stageStrong) return stageStrong;
 
   const type = TYPES.find((r) => r.test.test(strong) && (!r.needsKidContext || input.kidContext) && !(r.unless && r.unless.test(strong)));

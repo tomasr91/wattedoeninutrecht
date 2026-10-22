@@ -84,3 +84,10 @@ describe('leeftijd uit de tekst van een activiteitspagina', () => {
     expect(d.title).toBe('[TESTDATA] DE TESTVOORSTELLING (2+)');
   });
 });
+
+describe('doelgroeplabels zijn geen leeftijd', () => {
+  it('het label Jongeren naast Kinderen maakt geen 12–18', () => {
+    const e = enrich({ title: '[TESTDATA] Kosmische Kindercolleges', sourceHints: ['Kinderen', 'Jongeren'] });
+    expect(e.age.estimatedMinMonths).toBeUndefined();
+  });
+});
