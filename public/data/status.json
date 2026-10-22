@@ -1,6 +1,6 @@
 {
-  "lastSuccessfulRun": "2026-10-22T08:53:54.264Z",
-  "lastRun": "2026-10-22T08:53:54.264Z",
+  "lastSuccessfulRun": "2026-10-22T09:32:52.050Z",
+  "lastRun": "2026-10-22T09:32:52.050Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
@@ -122,8 +122,8 @@
       "sourceName": "UITagenda Utrecht",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-22T08:02:31.581Z",
-      "lastSuccess": "2026-10-22T08:02:31.581Z",
+      "lastAttempt": "2026-10-22T08:56:33.305Z",
+      "lastSuccess": "2026-10-22T08:56:33.305Z",
       "fetched": 884
     },
     {
