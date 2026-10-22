@@ -78,7 +78,9 @@ export function OngoingList({ lists, today, onOpen, empty, expected = [] }: { li
     return activityEndDate(i.activity) > addMonths(from, SEASON_MONTHS);
   };
   const soon = lists.ongoing.filter((i) => !isLater(i));
-  const later = lists.ongoing.filter(isLater);
+  // Met een echte einddatum eerst; vaste wekelijkse reeksen ("Elke donderdag") daarna. Binnen elke groep blijft
+  // de volgorde begindatum → einddatum.
+  const later = lists.ongoing.filter(isLater).sort((x, y) => Number(isWeeklySeries(x.activity)) - Number(isWeeklySeries(y.activity)));
   const cards = (items: ListItem[]) => (
     <ul className="card-list">
       {items.map((i) => (
