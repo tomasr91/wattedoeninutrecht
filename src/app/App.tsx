@@ -1,4 +1,4 @@
-import { HIDDEN_KIND_MIGRATIONS } from '../domain/kind';
+import { canonicalKind, HIDDEN_KIND_MIGRATIONS } from '../domain/kind';
 import { DEFAULT_NEARBY_KM } from './views/SettingsView';
 import { useEffect, useMemo, useRef, useState, type TouchEvent } from 'react';
 import type { Activity, Dataset, Profile } from '../domain/types';
@@ -40,6 +40,9 @@ export function App() {
       hiddenKinds.volwassenen = [...new Set([...hiddenKinds.volwassenen, ...m.volwassenen])];
       version = m.version;
     }
+    // Verborgen labels die inmiddels zijn samengevoegd, omzetten naar het nieuwe label.
+    hiddenKinds.kinderen = [...new Set(hiddenKinds.kinderen.map(canonicalKind))];
+    hiddenKinds.volwassenen = [...new Set(hiddenKinds.volwassenen.map(canonicalKind))];
     return { ...d, ...p, hiddenKinds, hiddenKindsVersion: version };
   });
   const [view, setViewState] = useState<ViewState>(() => {

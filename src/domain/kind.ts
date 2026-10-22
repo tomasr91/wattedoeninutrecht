@@ -28,9 +28,24 @@ const TITLE_KIND: [RegExp, string][] = [
   [/markt|braderie|fair\b/, 'Markt'],
 ];
 
+/**
+ * Labels die verschillende bronnen anders noemen maar hetzelfde bedoelen, samengevoegd tot één label.
+ * Zo kun je bij Interesses één keer kiezen.
+ */
+export const KIND_ALIASES: Record<string, string> = {
+  Comedy: 'Comedy & cabaret',
+  Cabaret: 'Comedy & cabaret',
+  'Stand-up': 'Comedy & cabaret',
+};
+
+/** Label na samenvoegen (zie KIND_ALIASES). */
+export function canonicalKind(k: string): string {
+  return KIND_ALIASES[k] ?? k;
+}
+
 /** Wat is het? Eerst het label van de bron, dan de categorie, dan woorden in de titel. */
 export function kindLabel(a: Pick<Activity, 'kind' | 'categories'> & { title?: string }): string {
-  if (a.kind) return a.kind;
+  if (a.kind) return canonicalKind(a.kind);
   for (const c of a.categories) if (CATEGORY_KIND[c]) return CATEGORY_KIND[c]!;
   const t = a.title?.toLowerCase();
   if (t) for (const [re, k] of TITLE_KIND) if (re.test(t)) return k;
@@ -41,4 +56,7 @@ export function kindLabel(a: Pick<Activity, 'kind' | 'categories'> & { title?: s
 export const DEFAULT_HIDDEN_ADULT_KINDS = ['Indie', 'Metal & punk', 'Expositie', 'Dans', 'Roots & americana', 'Opera', 'Musical', 'Podcast', 'Cursus & ontmoeting'];
 
 /** Soorten die later standaard verborgen werden; bestaande profielen krijgen ze één keer mee. */
-export const HIDDEN_KIND_MIGRATIONS: { version: number; volwassenen: string[] }[] = [{ version: 2, volwassenen: ['Cursus & ontmoeting'] }];
+export const HIDDEN_KIND_MIGRATIONS: { version: number; volwassenen: string[] }[] = [
+  { version: 2, volwassenen: ['Cursus & ontmoeting'] },
+  { version: 3, volwassenen: [] }, // labels samengevoegd (KIND_ALIASES): verborgen labels omzetten
+];
