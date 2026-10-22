@@ -230,3 +230,13 @@ describe('bibliotheek: titels', () => {
     expect(dedupeRepeated('Feest (4+)')).toBe('Feest (4+)');
   });
 });
+
+describe('Utrecht Natuurlijk: bereik met ― (U+2015)', () => {
+  it('leest de einddatum en geeft een stabiele ID', async () => {
+    const { parseUnList, unCardToRaw } = await import('../collector/adapters/utrecht-natuurlijk');
+    const html = `<article class="activity-card"><h2>[TESTDATA] Herfstvakantie</h2><p class="font-bold">donderdag 22 oktober 2026 &#8213; zondag 25 oktober 2026</p><div>Eilandsteede</div><a href="https://www.utrechtnatuurlijk.nl/activiteit/herfst-test/?date=2026-10-22">x</a></article>`;
+    const [c] = parseUnList(html, '2026-10-22');
+    expect([c.date, c.end]).toEqual(['2026-10-22', '2026-10-25']);
+    expect(unCardToRaw(c, '2026-10-22T00:00:00Z').sourceEventId).toBe('herfst-test|tm-2026-10-25');
+  });
+});
