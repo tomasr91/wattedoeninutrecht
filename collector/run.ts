@@ -4,7 +4,7 @@
  *
  * Gebruik:
  *   npm run collect                 alle ingeschakelde bronnen
- *   npm run collect -- --source=bibliotheek-utrecht
+ *   npm run collect -- --source=bibliotheek-utrecht   (meerdere: --source=a,b)
  *   npm run collect:dry             ophalen en rapporteren, niets opslaan
  *   npm run export                  alleen opnieuw exporteren uit de database
  *
@@ -141,7 +141,7 @@ async function main() {
     if (!dryRun) {
       dbm.upsertSource(db, { id: adapter.id, name: adapter.name, method: adapter.method, homepage: adapter.homepage, description: adapter.description, enabled: cfg.enabled });
     }
-    if (!cfg.enabled || (only && only !== cfg.id)) continue;
+    if (!cfg.enabled || (only && !only.split(',').includes(cfg.id))) continue;
 
     log(`→ ${adapter.name} (${adapter.id})`);
     const t0 = Date.now();
