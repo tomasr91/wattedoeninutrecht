@@ -1,3 +1,5 @@
+import { dateOf } from '../../domain/dates';
+import { kidHiddenForUnknownAge } from '../../domain/views';
 import type { Activity, Child, Home, Profile, UpdateStatus } from '../../domain/types';
 import { kindLabel } from '../../domain/kind';
 import type { ListAudience } from '../../domain/views';
@@ -163,6 +165,7 @@ export function SettingsSheet({
                   );
                 })}
             </ul>
+            <KidsHidden activities={activities} today={today} />
           </section>
         )}
       </div>
@@ -305,5 +308,40 @@ function ManualSource({ activities, today }: { activities: Activity[]; today: st
         </div>
       )}
     </>
+  );
+}
+
+/** Controlelijst: wat bij Kinderen niet getoond wordt omdat de leeftijd ontbreekt (en de bron ook volwassenen noemt). */
+function KidsHidden({ activities, today }: { activities: Activity[]; today: string }) {
+  const [open, setOpen] = useState(false);
+  const seen = new Set<string>();
+  const list = activities
+    .filter((a) => !a.isTestData && dateOf(a.end ?? a.start) >= today && kidHiddenForUnknownAge(a))
+    .sort((x, y) => (x.start < y.start ? -1 : 1))
+    .filter((a) => !seen.has(a.title.toLowerCase()) && seen.add(a.title.toLowerCase()));
+  if (!list.length) return null;
+  return (
+    <div className="kids-hidden small">
+      <span className="source-name-row">
+        <span>
+          Niet getoond bij Kinderen (geen leeftijd): <strong className="num">{list.length}</strong>
+        </span>
+        <button className="info-btn" aria-expanded={open} aria-label="Toon de lijst" onClick={() => setOpen(!open)}>
+          <IconInfo size={18} />
+        </button>
+      </span>
+      {open && (
+        <ul className="kids-hidden-list">
+          {list.map((a) => (
+            <li key={a.id}>
+              <a href={a.url} target="_blank" rel="noopener noreferrer">
+                {a.title}
+              </a>{' '}
+              <span className="muted">· {a.sources[0].sourceName}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }

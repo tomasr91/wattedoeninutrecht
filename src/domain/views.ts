@@ -157,7 +157,7 @@ export function buildLists(
   const all = groupSameSession(items);
   // Bij Kinderen: geen leeftijd én geen schatting, terwijl de bron ook volwassenen noemt → niet tonen.
   // Zegt de bron alleen kinderen of gezin, dan blijft hij staan ("Leeftijd niet vermeld").
-  const grouped = all.filter((i) => !(opts.audience === 'kinderen' && ageUnknown(i.activity) && i.activity.audiences.includes('volwassenen')));
+  const grouped = all.filter((i) => !(opts.audience === 'kinderen' && kidHiddenForUnknownAge(i.activity)));
   const ongoing = grouped
     .filter((i) => isLongRunning(i.activity))
     .sort((x, y) => (activityEndDate(x.activity) < activityEndDate(y.activity) ? -1 : 1));
@@ -208,3 +208,8 @@ export function groupSameSession(items: ListItem[]): ListItem[] {
 
 /** Is een dag zaterdag of zondag? (voor opmaak van dagkoppen) */
 export const isWeekendDay = isWeekend;
+
+/** Bij Kinderen niet getoond: geen leeftijd en geen schatting, en de bron noemt ook volwassenen. */
+export function kidHiddenForUnknownAge(a: Activity): boolean {
+  return matchesAudience(a, 'kinderen') && ageUnknown(a) && a.audiences.includes('volwassenen');
+}
