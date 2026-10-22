@@ -12,7 +12,8 @@
  */
 import * as cheerio from 'cheerio';
 import { fetchText } from '../lib/http.ts';
-import { cleanText, combine, parseDutchDateRange, parseGoogleCalendarLink, parseTimes } from '../lib/parse.ts';
+import { cleanText, combine, parseDutchDate, parseDutchDateRange, parseGoogleCalendarLink, parseTimes } from '../lib/parse.ts';
+import { recurrenceLabel } from '../../src/domain/series.ts';
 import { parseIcs } from '../lib/ics.ts';
 import { dateOf } from '../../src/domain/dates.ts';
 import { parseAgeLabel } from '../../src/domain/enrich.ts';
@@ -77,6 +78,45 @@ function jsonLdPlace($: cheerio.CheerioAPI): string | undefined {
   return name;
 }
 
+const WD = ['ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'];
+
+/**
+ * Speeltijden-blok: "Datum doorlopend · Tijd vr t/m za: 20:30" (vaste reeks zonder einddatum)
+ * of "Tijd zo 25 okt: 15:00 zo 22 nov: 15:00 …" (losse data binnen een periode).
+ */
+export function parsePlaytimes(text: string, today: string): { rolling?: boolean; note?: string; occurrences?: string[] } {
+  const t = cleanText(text).toLowerCase();
+  const datum = t.match(/datum\s+(.*?)(?=\s+tijd\b|$)/)?.[1] ?? '';
+  const tijd = t.match(/\btijd\s+(.*?)(?=voeg toe|$)/)?.[1] ?? '';
+  if (/doorlopend/.test(datum)) {
+    const days = new Set<number>();
+    const times = new Set<string>();
+    for (const m of tijd.matchAll(/(?<![a-z])(ma|di|wo|do|vr|za|zo)(?:\s*(?:t\/m|-|–)\s*(ma|di|wo|do|vr|za|zo))?(?:\s*(?:,|en)\s*(ma|di|wo|do|vr|za|zo))?\s*:\s*(\d{1,2}[:.]\d{2})/g)) {
+      const a = WD.indexOf(m[1]);
+      const b = m[2] ? WD.indexOf(m[2]) : a;
+      for (let i = a; i <= (b >= a ? b : b + 7); i++) days.add(i % 7);
+      if (m[3]) days.add(WD.indexOf(m[3]));
+      times.add(m[4].replace('.', ':'));
+    }
+    if (!days.size) return { rolling: true, note: 'Doorlopend' };
+    const order = [...days].sort((x, y) => x - y);
+    const dayText = order.length >= 6 ? 'Dagelijks' : order.length === 1 ? `Elke ${['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'][order[0]]}` : `Elke ${order.slice(0, -1).map((d) => WD[d]).join(', ')} en ${WD[order.at(-1)!]}`;
+    return { rolling: true, note: times.size === 1 ? `${dayText} · ${[...times][0]}` : dayText };
+  }
+  const dates: string[] = [];
+  const times: string[] = [];
+  for (const m of tijd.matchAll(/(?<![a-z])(?:ma|di|wo|do|vr|za|zo)\s+(\d{1,2}\s+[a-z]{3,9})\s*:\s*(\d{1,2}[:.]\d{2})/g)) {
+    const d = parseDutchDate(m[1], today);
+    if (d) {
+      dates.push(d);
+      times.push(m[2].replace('.', ':'));
+    }
+  }
+  const uniq = [...new Set(dates)].sort();
+  if (uniq.length >= 2) return { occurrences: uniq, note: recurrenceLabel(uniq, times) };
+  return {};
+}
+
 export function parseEventPage(html: string, url: string, sourceEventId: string, ctx: Pick<AdapterContext, 'today' | 'nowIso'>): RawEvent | undefined {
   const $ = cheerio.load(html);
   const title =
@@ -115,6 +155,12 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
     }
   }
   if (!start) return undefined;
+  const play = parsePlaytimes($('.post-playtimes').first().text() || '', ctx.today);
+  if (play.occurrences) {
+    // Losse data binnen een periode: eerste t/m laatste datum, met de data erbij.
+    start = combine(play.occurrences[0], start.length > 10 ? start.slice(11) : undefined);
+    end = play.occurrences.at(-1);
+  }
 
   // Plek uit "Praktische informatie": <span>Naam<br>Straat 1<br>1234 AB Plaats <a>Bekijk locatie</a></span>
   const addr = $('address.post-location span').first().clone();
@@ -190,7 +236,10 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
     start,
     end,
     allDay,
-    ongoing: isRange && allDay,
+    ongoing: (isRange && allDay) || !!play.rolling || undefined,
+    recurrenceNote: play.note,
+    rolling: play.rolling,
+    occurrences: play.occurrences,
     venueName,
     address,
     locality: /diverse locaties/i.test(venueName ?? '') ? 'Utrecht' : city && !/^utrecht$/i.test(city) ? city : undefined,

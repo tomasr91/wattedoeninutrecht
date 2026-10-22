@@ -23,6 +23,12 @@ export interface RawEvent {
   allDay?: boolean;
   ongoing?: boolean;
   openingNote?: string;
+  /** Vaste reeks volgens de bron ("Elke vr en za", "doorlopend"). */
+  recurrenceNote?: string;
+  /** "Doorlopend" zonder einddatum: de datum is de eerstvolgende keer en schuift elke nacht op. */
+  rolling?: boolean;
+  /** Losse data van een reeks binnen de periode. */
+  occurrences?: string[];
   venueName?: string;
   address?: string;
   locality?: string;
@@ -183,6 +189,9 @@ export function normalize(raw: RawEvent): Activity {
     ongoing: raw.ongoing,
     endUnknown: (raw.extraUncertainties ?? []).some((u) => /einddatum\b.*\bniet\b|einddatum onbekend/i.test(u)) || undefined,
     openingNote: raw.openingNote,
+    ...(raw.recurrenceNote ? { recurrenceNote: raw.recurrenceNote } : {}),
+    ...(raw.rolling ? { rolling: true } : {}),
+    ...(raw.occurrences?.length ? { occurrences: raw.occurrences } : {}),
     seriesKey: raw.seriesKey ?? `${raw.sourceId}|${normalizeText(raw.title)}`,
     venue,
     zone: classifyZone(venue),

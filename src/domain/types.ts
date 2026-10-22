@@ -107,6 +107,12 @@ export interface Activity {
   /** True als de bron geen einddatum noemt; `end` is dan alleen het zoekvenster. */
   endUnknown?: boolean;
   openingNote?: string;
+  /** De bron noemt dit een vaste reeks: "Elke vr en za", "doorlopend", "wekelijks". */
+  recurrenceNote?: string;
+  /** Bij een reeks: de bekende data. */
+  occurrences?: string[];
+  /** De bron noemt het "doorlopend" zonder einddatum; `end` is de eerstvolgende keer en schuift elke nacht op. */
+  rolling?: boolean;
   /** Sleutel waarmee herhalende sessies van dezelfde reeks herkend worden. */
   seriesKey?: string;
   venue: Venue;

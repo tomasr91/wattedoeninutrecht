@@ -47,11 +47,13 @@ export function activityEndDate(a: Activity): string {
 
 /** Overlapt de activiteit met de periode? (ook voor meerdaagse/doorlopende activiteiten) */
 export function overlapsPeriod(a: Activity, p: { from: string; to: string }): boolean {
+  if (a.occurrences) return a.occurrences.some((d) => d >= p.from && d <= p.to);
   return dateOf(a.start) <= p.to && activityEndDate(a) >= p.from;
 }
 
 /** Eerste datum binnen de periode waarop de activiteit plaatsvindt (voor sorteren/groeperen). */
 export function firstDateInPeriod(a: Activity, p: { from: string; to: string }): string {
+  if (a.occurrences) return a.occurrences.find((d) => d >= p.from) ?? p.from;
   const s = dateOf(a.start);
   return s >= p.from ? s : p.from;
 }

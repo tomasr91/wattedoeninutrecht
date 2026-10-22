@@ -3,6 +3,7 @@
  * een chronologische agenda (eendaags t/m meerdaags) en een lijst doorlopend aanbod.
  * Pure logica, los van de UI, zodat het testbaar is.
  */
+import { collapseSeries } from './series';
 import type { Activity, Category, Child, Home } from './types';
 import { addDays, dateOf, diffDays, isWeekend, timeOf, weekday } from './dates';
 import { childFits, type ChildFit } from './age';
@@ -66,7 +67,7 @@ export const LONG_RUNNING_MIN_DAYS = 7;
  * niet hoe de bron het noemt; korter staat in de gewone agenda.
  */
 export function isLongRunning(a: Activity): boolean {
-  if (a.endUnknown) return true;
+  if (a.endUnknown || a.occurrences || a.recurrenceNote) return true;
   return diffDays(dateOf(a.start), activityEndDate(a)) + 1 >= LONG_RUNNING_MIN_DAYS;
 }
 
@@ -132,7 +133,7 @@ export function buildLists(
   let hiddenForAge = 0;
   const items: ListItem[] = [];
 
-  for (const a of activities) {
+  for (const a of collapseSeries(activities, ctx.today)) {
     if (a.isTestData || a.status === 'verlopen') continue;
     // Zonder einddatum zou iets voor altijd blijven staan: niet tonen.
     if (hasNoEndDate(a)) continue;
