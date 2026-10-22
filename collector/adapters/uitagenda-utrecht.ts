@@ -128,7 +128,7 @@ export function parsePlaytimes(text: string, today: string): { rolling?: boolean
  * Versie van de uitleesregels. Ophogen als parseEventPage iets nieuws of anders uitleest:
  * dan worden alle pagina's de volgende run opnieuw opgehaald.
  */
-export const PARSER_VERSION = 'v8';
+export const PARSER_VERSION = 'v9';
 
 /**
  * Een opgeslagen detailpagina is 5–9 dagen geldig (verspreid per evenement, zodat niet alles
@@ -168,6 +168,29 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
     }
   });
   const extra: string[] = [];
+  // De eigen datum staat bovenaan voluit ("maandag 2 november 2026 - maandag 30 november 2026").
+  // Korte datums ("di 2 jun") kunnen ook bij andere activiteiten op de pagina horen, dus die alleen als laatste redmiddel.
+  if (!start) {
+    const DAY = '(?:maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag)';
+    const header = bodyText.match(new RegExp(`(${DAY}\\s+\\d{1,2}\\s+[a-z]+\\s+\\d{4}(?:\\s+(?:-|–|t\\/m)\\s+${DAY}\\s+\\d{1,2}\\s+[a-z]+\\s+\\d{4})?)`, 'i'));
+    const range = header ? parseDutchDateRange(header[1], ctx.today) : undefined;
+    if (range) {
+      // Tijd uit het veld "Tijd" ("ma: 19:30 - 21:00"), anders uit een korte datumregel met dezelfde datum.
+      const tijd = bodyText.match(/\bTijd\s+(.{0,200}?)(?:Voeg toe|Locatie|Prijs|$)/);
+      let times = tijd ? parseTimes(tijd[1]) : { all: [] as string[] } as ReturnType<typeof parseTimes>;
+      if (!times.start) {
+        const short = bodyText.match(/((?:ma|di|wo|do|vr|za|zo)\s+\d{1,2}\s+[a-z]{3,9})\b/i);
+        if (short && parseDutchDate(short[1], ctx.today) === range.start) {
+          const i = bodyText.indexOf(short[1]);
+          times = parseTimes(bodyText.slice(i, i + 120));
+        }
+      }
+      start = combine(range.start, times.start);
+      end = range.end ?? (times.end ? combine(range.start, times.end) : undefined);
+      allDay = !times.start;
+      extra.push('Datum/tijd uit paginatekst gehaald; controleer bij de bron');
+    }
+  }
   if (!start) {
     const dateLine = bodyText.match(/((?:ma|di|wo|do|vr|za|zo)\s+\d{1,2}\s+[a-z]{3,9}(?:\s+(?:t\/m|-)\s+(?:ma|di|wo|do|vr|za|zo)\s+\d{1,2}\s+[a-z]{3,9})?)/i);
     if (dateLine) {

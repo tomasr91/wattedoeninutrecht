@@ -313,3 +313,22 @@ describe('UITagenda muziek-subgenre', () => {
     expect(ev?.kind).toBe('Concert');
   });
 });
+
+describe('UITagenda: eigen datum bovenaan gaat voor', () => {
+  const page = (dates: string, tijd: string) => `<html><body><main>
+    <h1>[TESTDATA] Prikkel workshopreeks</h1>
+    <p>Diversen Workshops ${dates} [TESTDATA] Prikkel workshopreeks</p>
+    <p>Tijd ${tijd} Voeg toe aan je agenda</p>
+    <div class="related"><p>Ook leuk: di 2 jun t/m wo 11 nov Iets anders 10:00</p></div>
+  </main></body></html>`;
+  it('periode uit de kop, tijd uit het veld Tijd', () => {
+    const ev = parseEventPage(page('maandag 2 november 2026 - maandag 30 november 2026', 'ma: 19:30 - 21:00'), 'u', '1', { today: TODAY, nowIso: NOW });
+    expect(ev?.start).toBe('2026-11-02T19:30');
+    expect(ev?.end).toBe('2026-11-30');
+  });
+  it('losse dag met tijd', () => {
+    const ev = parseEventPage(page('vrijdag 23 oktober 2026', '20:00 - 22:00'), 'u', '2', { today: TODAY, nowIso: NOW });
+    expect(ev?.start).toBe('2026-10-23T20:00');
+    expect(ev?.end).toBe('2026-10-23T22:00');
+  });
+});

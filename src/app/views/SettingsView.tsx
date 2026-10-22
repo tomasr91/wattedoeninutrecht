@@ -131,12 +131,20 @@ export function SettingsSheet({
                 })}
             </div>
             {(() => {
-              // Concerten: alleen de genres, onder een kopje.
+              // Concerten: één chip voor alles, met de genres eronder.
               const concerts = kindsFor(aud).filter((k) => k.startsWith('Concert'));
               if (!concerts.length) return null;
+              const allOff = concerts.every((k) => hidden[aud].includes(k));
+              const setAll = (off: boolean) =>
+                setProfile({
+                  ...p,
+                  hiddenKinds: { ...hidden, [aud]: off ? [...new Set([...hidden[aud], ...concerts])] : hidden[aud].filter((x) => !concerts.includes(x)) },
+                });
               return (
                 <div className="concert-set">
-                  <span className="small muted">Concerten per genre</span>
+                  <button className={`kind-chip ${allOff ? 'is-off' : ''}`} aria-pressed={!allOff} onClick={() => setAll(!allOff)}>
+                    Concert
+                  </button>
                   <div className="chip-wrap genre-wrap">
                     {concerts.map((k) => {
                       const off = hidden[aud].includes(k);
