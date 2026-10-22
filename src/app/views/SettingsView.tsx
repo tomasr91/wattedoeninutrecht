@@ -8,7 +8,8 @@ import { fmtChecked } from '../components/DetailSheet';
 import { Sheet } from '../components/Sheet';
 import { lookupAddress } from '../geocode';
 import { IconInfo } from '../components/Icons';
-import { useState } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
+import { formatShortDate } from '../../domain/dates';
 
 /** Instellingen: alleen wat nu nodig is — de kinderen en de status van de bronnen. */
 export function SettingsSheet({
@@ -37,6 +38,15 @@ export function SettingsSheet({
     [...new Set(activities.filter((a) => (aud === 'kinderen' ? a.audiences.some((x) => x !== 'volwassenen') : a.audiences.includes('volwassenen'))).map(kindLabel))].filter((k) => k !== 'Voorlezen' && k !== NO_KIND).sort((x, y) =>
       x.localeCompare(y, 'nl'),
     );
+  const [peek, setPeek] = useState<{ aud: ListAudience; label: string; kinds: string[] } | null>(null);
+  const examplesFor = (aud: ListAudience, kinds: string[]) => {
+    const seen = new Set<string>();
+    return activities
+      .filter((a) => !a.isTestData && dateOf(a.end ?? a.start) >= today && (aud === 'kinderen' ? a.audiences.some((x) => x !== 'volwassenen') : a.audiences.includes('volwassenen')))
+      .filter((a) => kinds.includes(kindLabel(a)))
+      .sort((x, y) => (x.start < y.start ? -1 : 1))
+      .filter((a) => !seen.has(a.title) && seen.add(a.title));
+  };
   const toggleKind = (aud: ListAudience, k: string) => {
     const cur = hidden[aud];
     setProfile({ ...p, hiddenKinds: { ...hidden, [aud]: cur.includes(k) ? cur.filter((x) => x !== k) : [...cur, k] } });
@@ -118,15 +128,16 @@ export function SettingsSheet({
         {tab === 'soorten' && (['volwassenen', 'kinderen'] as const).map((aud) => (
           <section key={aud} className="settings-block" aria-labelledby={`set-kinds-${aud}`}>
             <h3 id={`set-kinds-${aud}`}>Wat wil je zien bij {aud === 'kinderen' ? 'Kinderen' : 'Volwassenen'}?</h3>
+            <p className="small muted">Tik om aan of uit te zetten. Houd een label ingedrukt voor voorbeelden.</p>
             <div className="chip-wrap">
               {kindsFor(aud)
                 .filter((k) => !k.startsWith('Concert'))
                 .map((k) => {
                   const off = hidden[aud].includes(k);
                   return (
-                    <button key={k} className={`kind-chip ${off ? 'is-off' : ''}`} aria-pressed={!off} onClick={() => toggleKind(aud, k)}>
+                    <PressChip key={k} off={off} onTap={() => toggleKind(aud, k)} onHold={() => setPeek({ aud, label: k, kinds: [k] })}>
                       {k}
-                    </button>
+                    </PressChip>
                   );
                 })}
             </div>
@@ -142,16 +153,16 @@ export function SettingsSheet({
                 });
               return (
                 <div className="concert-set">
-                  <button className={`kind-chip ${allOff ? 'is-off' : ''}`} aria-pressed={!allOff} onClick={() => setAll(!allOff)}>
+                  <PressChip off={allOff} onTap={() => setAll(!allOff)} onHold={() => setPeek({ aud, label: 'Concert', kinds: concerts })}>
                     Concert
-                  </button>
+                  </PressChip>
                   <div className="chip-wrap genre-wrap">
                     {concerts.map((k) => {
                       const off = hidden[aud].includes(k);
                       return (
-                        <button key={k} className={`kind-chip genre-chip ${off ? 'is-off' : ''}`} aria-pressed={!off} onClick={() => toggleKind(aud, k)}>
+                        <PressChip key={k} className="genre-chip" off={off} onTap={() => toggleKind(aud, k)} onHold={() => setPeek({ aud, label: k, kinds: [k] })}>
                           {k === 'Concert' ? 'Zonder genre' : k.slice('Concert · '.length)}
-                        </button>
+                        </PressChip>
                       );
                     })}
                   </div>
@@ -160,6 +171,50 @@ export function SettingsSheet({
             })()}
           </section>
         ))}
+
+        {peek &&
+          (() => {
+            const list = examplesFor(peek.aud, peek.kinds);
+            const off = peek.kinds.every((k) => hidden[peek.aud].includes(k));
+            const toggle = () =>
+              setProfile({
+                ...p,
+                hiddenKinds: {
+                  ...hidden,
+                  [peek.aud]: off ? hidden[peek.aud].filter((x) => !peek.kinds.includes(x)) : [...new Set([...hidden[peek.aud], ...peek.kinds])],
+                },
+              });
+            return (
+              <div className="peek-backdrop" onClick={() => setPeek(null)}>
+                <div className="peek" role="dialog" aria-label={`Voorbeelden ${peek.label}`} onClick={(e) => e.stopPropagation()}>
+                  <h3>
+                    {peek.label} <span className="num count">{list.length}</span>
+                  </h3>
+                  <p className="small muted">Voorbeelden bij {peek.aud === 'kinderen' ? 'Kinderen' : 'Volwassenen'}</p>
+                  <ul>
+                    {list.slice(0, 6).map((a) => (
+                      <li key={a.id}>
+                        <strong>{a.title}</strong>
+                        <span className="small muted">
+                          {a.venue.name}
+                          {!a.rolling && ` · ${formatShortDate(dateOf(a.start) < today ? today : dateOf(a.start))}`}
+                        </span>
+                      </li>
+                    ))}
+                    {!list.length && <li className="small muted">Op dit moment niets.</li>}
+                  </ul>
+                  <div className="peek-actions">
+                    <button className={`btn ${off ? 'btn-primary' : ''}`} onClick={toggle}>
+                      {off ? 'Weer tonen' : 'Niet tonen'}
+                    </button>
+                    <button className="btn" onClick={() => setPeek(null)}>
+                      Sluiten
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
 
         {tab === 'verversing' && !status && <p className="small muted">Nog geen informatie over de updates.</p>}
         {tab === 'verversing' && status && (
@@ -381,5 +436,36 @@ function KidsHidden({ activities, today }: { activities: Activity[]; today: stri
         </ul>
       )}
     </div>
+  );
+}
+
+/** Label-chip: tikken zet aan of uit, ingedrukt houden toont voorbeelden. */
+function PressChip({ off, onTap, onHold, className = '', children }: { off: boolean; onTap: () => void; onHold: () => void; className?: string; children: ReactNode }) {
+  const timer = useRef<number | undefined>(undefined);
+  const held = useRef(false);
+  const start = () => {
+    held.current = false;
+    timer.current = window.setTimeout(() => {
+      held.current = true;
+      onHold();
+    }, 450);
+  };
+  const stop = () => window.clearTimeout(timer.current);
+  return (
+    <button
+      className={`kind-chip ${className} ${off ? 'is-off' : ''}`}
+      aria-pressed={!off}
+      onPointerDown={start}
+      onPointerUp={stop}
+      onPointerLeave={stop}
+      onPointerCancel={stop}
+      onContextMenu={(e) => e.preventDefault()}
+      onClick={() => {
+        if (held.current) held.current = false;
+        else onTap();
+      }}
+    >
+      {children}
+    </button>
   );
 }

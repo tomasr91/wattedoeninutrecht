@@ -1185,3 +1185,50 @@ h3 {
   min-height: 30px;
   padding: 4px 10px;
 }
+
+.kind-chip {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.peek-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgb(0 0 0 / 35%);
+  display: grid;
+  align-items: end;
+  padding: 16px;
+}
+.peek {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 16px;
+  display: grid;
+  gap: 8px;
+  box-shadow: 0 8px 30px rgb(0 0 0 / 25%);
+}
+.peek h3 {
+  margin: 0;
+}
+.peek ul {
+  max-height: 50vh;
+  overflow: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.peek li {
+  display: grid;
+  gap: 1px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.peek-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 4px;
+}
