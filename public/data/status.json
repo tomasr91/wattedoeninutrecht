@@ -1,6 +1,6 @@
 {
-  "lastSuccessfulRun": "2026-10-22T08:38:55.108Z",
-  "lastRun": "2026-10-22T08:38:55.108Z",
+  "lastSuccessfulRun": "2026-10-22T08:40:29.065Z",
+  "lastRun": "2026-10-22T08:40:29.065Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
@@ -55,8 +55,8 @@
       "sourceName": "Kasteel de Haar",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-22T07:22:15.005Z",
-      "lastSuccess": "2026-10-22T07:22:15.005Z",
+      "lastAttempt": "2026-10-22T08:39:36.389Z",
+      "lastSuccess": "2026-10-22T08:39:36.389Z",
       "fetched": 15,
       "notes": "19 agenda-items"
     },
@@ -93,8 +93,8 @@
       "sourceName": "Podium Sprits",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-22T07:22:15.005Z",
-      "lastSuccess": "2026-10-22T07:22:15.005Z",
+      "lastAttempt": "2026-10-22T08:39:36.389Z",
+      "lastSuccess": "2026-10-22T08:39:36.389Z",
       "fetched": 30,
       "notes": "32 producties in het programma"
     },
@@ -145,11 +145,11 @@
     }
   ],
   "totals": {
-    "active": 1670,
+    "active": 1669,
     "added": 0,
-    "updated": 68,
+    "updated": 28,
     "cancelled": 0,
     "expired": 0,
-    "merged": 131
+    "merged": 132
   }
 }
