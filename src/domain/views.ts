@@ -137,6 +137,9 @@ export function buildLists(
     if (a.isTestData || a.status === 'verlopen') continue;
     // Zonder einddatum zou iets voor altijd blijven staan: niet tonen.
     if (hasNoEndDate(a)) continue;
+    // "Doorlopend" volgens de bron, zonder einddatum (museum, doolhof, vaste avond): kan altijd → niet in deze
+    // lijsten, maar in de inspiratielijst met vaste uitjes (zie inspirationList).
+    if (a.rolling) continue;
     const friday = isFridayEvening(a);
     if (activityEndDate(a) < ctx.today || (!overlapsPeriod(a, window) && !friday)) continue;
     if (!matchesAudience(a, opts.audience)) continue;
@@ -241,4 +244,13 @@ export function expandOccurrences(list: Activity[]): Activity[] {
 function effectiveStart(a: Activity, today: string): string {
   const d = dateOf(a.start);
   return d < today ? today : d;
+}
+
+/** Vaste uitjes zonder einddatum ("doorlopend" volgens de bron), voor een aparte inspiratielijst. */
+export function inspirationList(activities: Activity[], audience: ListAudience): Activity[] {
+  const seen = new Set<string>();
+  return activities
+    .filter((a) => a.rolling && !a.isTestData && a.status !== 'verlopen' && a.status !== 'geannuleerd' && matchesAudience(a, audience))
+    .filter((a) => !seen.has(a.title.toLowerCase()) && seen.add(a.title.toLowerCase()))
+    .sort((x, y) => x.title.localeCompare(y.title, 'nl'));
 }

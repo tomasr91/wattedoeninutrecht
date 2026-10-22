@@ -187,3 +187,15 @@ describe('samengevoegde labels', () => {
     ['Club', 'Uitgaan'],
   ])('%s → %s', (k, out) => expect(canonicalKind(k)).toBe(out));
 });
+
+import { inspirationList } from '../src/domain/views';
+describe('doorlopend zonder einddatum', () => {
+  const rolling = act({ title: '[TESTDATA] Doolhof', start: '2026-10-23', end: '2026-10-23', rolling: true, recurrenceNote: 'Doorlopend' });
+  it('staat niet in de lijsten', () => {
+    const l = buildLists([rolling], { ...DEFAULT_LIST_OPTIONS, audience: 'volwassenen' }, { today: '2026-10-22', period: { from: '2026-10-22', to: '2026-12-31' }, children: [] });
+    expect(l.days.length + l.ongoing.length).toBe(0);
+  });
+  it('wel in de inspiratielijst', () => {
+    expect(inspirationList([rolling], 'volwassenen').map((a) => a.title)).toEqual(['[TESTDATA] Doolhof']);
+  });
+});
