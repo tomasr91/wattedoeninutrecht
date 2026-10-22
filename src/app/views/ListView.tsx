@@ -103,3 +103,19 @@ export function OngoingList({ lists, today, onOpen, empty, expected = [] }: { li
     </div>
   );
 }
+
+/** Vaste uitjes zonder einddatum: kan altijd. Inspiratie, los van de agenda. */
+export function AlwaysList({ items, onOpen, empty }: { items: ListItem[]; onOpen: (i: ListItem) => void; empty: string }) {
+  if (!items.length) return <p className="empty">{empty}</p>;
+  return (
+    <div className="day-list">
+      <ul className="card-list">
+        {items.map((i) => (
+          <li key={i.activity.id}>
+            <ActivityCard item={i} ongoing onOpen={onOpen} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}

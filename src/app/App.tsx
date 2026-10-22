@@ -1,22 +1,25 @@
-import { canonicalKind, HIDDEN_KIND_MIGRATIONS } from '../domain/kind';
+import { canonicalKind, HIDDEN_KIND_MIGRATIONS, kindLabel } from '../domain/kind';
+import { childFits } from '../domain/age';
+import { distanceFromHome } from '../domain/geo';
 import { DEFAULT_NEARBY_KM } from './views/SettingsView';
 import { useEffect, useMemo, useRef, useState, type TouchEvent } from 'react';
 import type { Activity, Dataset, Profile } from '../domain/types';
 import { makePeriod } from '../domain/filters';
 import { defaultProfile } from '../domain/profile';
 import { addMonths, dateOf, diffDays, formatLongDate, formatShortDate, todayInAmsterdam, formatDateTime } from '../domain/dates';
-import { buildLists, DEFAULT_LIST_OPTIONS, weekendWindow, type ListAudience, type ListItem, type WeekendChoice } from '../domain/views';
+import { buildLists, DEFAULT_LIST_OPTIONS, inspirationList, weekendWindow, type ListAudience, type ListItem, type WeekendChoice } from '../domain/views';
 import { loadDataset } from './data';
 import { load, save } from './storage';
 import { DetailSheet } from './components/DetailSheet';
 import { IconUser } from './components/Icons';
 import { DomTower } from './components/DomTower';
-import { DayList, OngoingList } from './views/ListView';
+import { AlwaysList, DayList, OngoingList } from './views/ListView';
 import { updateSeen, type SeenState } from '../domain/newness';
 import { NearContext, NewContext } from './newContext';
 import { SettingsSheet } from './views/SettingsView';
 
-type Pane = 'agenda' | 'doorlopend';
+type Pane = 'agenda' | 'doorlopend' | 'altijd';
+const PANES: Pane[] = ['agenda', 'doorlopend', 'altijd'];
 interface ViewState {
   audience: ListAudience;
   weekend: WeekendChoice | null;
@@ -96,11 +99,25 @@ export function App() {
     [data, view, today, period, profile.children, profile.hiddenKinds, profile.home],
   );
   const datedCount = lists ? lists.days.reduce((n, d) => n + d.items.length, 0) : 0;
+  // Vaste uitjes zonder einddatum (museum, doolhof, vaste avonden): inspiratie, los van de agenda.
+  const always = useMemo<ListItem[]>(() => {
+    if (!data) return [];
+    const hidden = new Set((profile.hiddenKinds?.[view.audience] ?? []).map(canonicalKind));
+    return inspirationList(data.activities, view.audience)
+      .filter((a) => !hidden.has(kindLabel(a)))
+      .map((a) => ({
+        activity: a,
+        day: today,
+        fits: view.audience === 'kinderen' && profile.children.length ? childFits(a, profile.children, today) : undefined,
+        km: distanceFromHome(a.venue, profile.home),
+        others: [],
+      }));
+  }, [data, view.audience, today, profile.children, profile.hiddenKinds, profile.home]);
   const expected = (data?.expected ?? []).filter((e) => e.audience === 'beide' || e.audience === view.audience);
 
   const goTo = (p: Pane) => {
     if (p === pane) return;
-    setSlide(p === 'doorlopend' ? 'from-right' : 'from-left');
+    setSlide(PANES.indexOf(p) > PANES.indexOf(pane) ? 'from-right' : 'from-left');
     setPane(p);
     window.scrollTo({ top: 0 });
   };
@@ -119,7 +136,8 @@ export function App() {
     const dx = t.clientX - s.x;
     const dy = t.clientY - s.y;
     if (Math.abs(dx) > 60 && Math.abs(dx) > 1.6 * Math.abs(dy) && Date.now() - s.t < 800) {
-      goTo(pane === 'agenda' ? 'doorlopend' : 'agenda');
+      const i = PANES.indexOf(pane) + (dx < 0 ? 1 : -1);
+      if (i >= 0 && i < PANES.length) goTo(PANES[i]);
     }
   };
 
@@ -221,6 +239,9 @@ export function App() {
             <button role="tab" aria-selected={pane === 'doorlopend'} className={pane === 'doorlopend' ? 'is-on' : ''} onClick={() => goTo('doorlopend')}>
               Doorlopend <span className="num count">{lists ? lists.ongoing.length + expected.length : ''}</span>
             </button>
+            <button role="tab" aria-selected={pane === 'altijd'} className={pane === 'altijd' ? 'is-on' : ''} onClick={() => goTo('altijd')}>
+              Altijd <span className="num count">{data ? always.length : ''}</span>
+            </button>
           </div>
         </div>
       </div>
@@ -234,10 +255,12 @@ export function App() {
         {lists && (
           <div key={`${pane}-${view.audience}`} className={`pane ${slide}`}>
             <p className="scope small muted">
-              {who[0].toUpperCase() + who.slice(1)}, {scope}
+              {who[0].toUpperCase() + who.slice(1)}, {pane === 'altijd' ? 'kan altijd: vaste uitjes zonder einddatum' : scope}
             </p>
             {pane === 'agenda' ? (
               <DayList lists={lists} today={today} onOpen={open} empty={`Niets gevonden ${who} in deze periode.`} />
+            ) : pane === 'altijd' ? (
+              <AlwaysList items={always} onOpen={open} empty={`Nog geen vaste uitjes ${who}.`} />
             ) : (
               <OngoingList lists={lists} today={today} onOpen={open} expected={expected} empty={`Geen doorlopend aanbod ${who} in deze periode.`} />
             )}
