@@ -213,18 +213,14 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
   const costField = field('Kosten') ?? field('Prijs');
 
   const entree = bodyText.match(/Entree\s*:?\s*(gratis|€\s*[\d.,]+(?:\s*[-/–]\s*€?\s*[\d.,]+)?[^.#]{0,40})/i);
-  const hints = [
-    ...new Set(
-      [
-        ...(bodyText.match(/#[a-z][\w-]*(?:\s\d{1,2}\s\d{1,2})?/gi) ?? []),
-        ...(bodyText.match(/\b(Gezinnen|Kinderen|Jeugdtheater|Jeugd|Familie|Regulier \/ volwassenen)\b/g) ?? []),
-        ...genreLabels.filter((g) => !/€/.test(g)),
-      ].map((h) => h.trim()),
-    ),
-  ];
+  // Alleen labels en tags van dít evenement: onderaan staan "Meer inspiratie"-blokken van andere
+  // evenementen met hun eigen labels (Kinderen, Jeugdtheater, 4+), die hier niet mogen meetellen.
+  const tags = $('.post-tags-list').first().find('a').map((_, el) => cleanText($(el).text())).get().filter((t) => t.startsWith('#'));
+  const hints = [...new Set([...tags, ...genreLabels.filter((g) => !/€/.test(g))].map((h) => h.trim()))];
+  const ownText = cleanText([$('.post-header').first().text(), $('.post-playtimes').first().text(), $('.post-content').first().text()].join(' ')) || bodyText;
   // "#0 10" = leeftijd 0 t/m 10 jaar volgens de agenda
-  const ageTag = bodyText.match(/#0?(\d{1,2})\s(\d{1,2})\b/);
-  const statusText = /\bGeannuleerd\b/i.test(bodyText) ? 'Geannuleerd' : /\bUitverkocht\b/i.test(bodyText) ? 'Uitverkocht' : undefined;
+  const ageTag = tags.join(' ').match(/#0?(\d{1,2})\s(\d{1,2})\b/);
+  const statusText = /\bGeannuleerd\b/i.test(ownText) ? 'Geannuleerd' : /\bUitverkocht\b/i.test(ownText) ? 'Uitverkocht' : undefined;
   const ticketHref = $('a')
     .filter((_, el) => /tickets?|reserveren|bestellen/i.test($(el).text()))
     .first()

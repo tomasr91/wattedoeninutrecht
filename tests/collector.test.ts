@@ -139,7 +139,9 @@ describe('UITagenda Utrecht — synthetische pagina', () => {
     <h1>[TESTDATA] Lampionnenoptocht</h1>
     <a href="/locatie/testplein/">Testplein</a>
     <p>Datum za 7 nov Tijd 18:00 - 21:00</p><p>Entree gratis</p>
-    <span>Gezinnen</span> <span>#kinderen</span> <span>#0 10</span>
+    <div class="post-genres"><span class="genre-label">Gezinnen</span></div>
+    <div class="post-tags-list"><a class="tag-label">#kinderen</a> <a class="tag-label">#0 10</a></div>
+    <div class="related"><span class="genre-label">Jeugdtheater</span> <a class="tag-label">#4+</a></div>
     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=x&amp;dates=20261107T180000/20261107T210000&amp;location=Utrecht">Google</a>
     <a href="https://example.invalid/info">Info &amp; tickets</a>
   </main></body></html>`;
@@ -156,6 +158,7 @@ describe('UITagenda Utrecht — synthetische pagina', () => {
       bookingUrl: 'https://example.invalid/info',
     });
     expect(ev?.hints).toContain('Gezinnen');
+    expect(ev?.hints).not.toContain('Jeugdtheater');
   });
   it('gebruikt geen knoptekst als "Bekijk locatie" als locatienaam', () => {
     const knop = detail
