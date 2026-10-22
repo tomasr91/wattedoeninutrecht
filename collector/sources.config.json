@@ -13,18 +13,11 @@
       "id": "uitagenda-utrecht",
       "enabled": true,
       "options": {
-        "genres": [
-          "jeugdtheater",
-          "festivals",
-          "musea",
-          "rondleidingen",
-          "diversen",
-          "klassieke-muziek"
-        ],
-        "wijken": [
-          "leidsche-rijn,vleuten-de-meern"
-        ],
-        "maxPagesPerQuery": 12
+        "$comment": "Hele stad, alle genres: lege 'genres' en 'wijken' = de complete agenda (± 850 activiteiten per drie maanden). Wil je toch beperken, vul dan genre-slugs (bv. jeugdtheater) of wijk-slugs (bv. leidsche-rijn,vleuten-de-meern) in.",
+        "genres": [],
+        "wijken": [],
+        "maxPagesPerQuery": 80,
+        "maxDetailPages": 1500
       }
     },
     {
@@ -46,27 +39,8 @@
       "$why": "Uit: Cloudflare weigert servers van GitHub. Tivoli komt via data/curated/tivoli.json, dat een geplande Claude-taak elke dinsdag 00:00 vernieuwt.",
       "enabled": false,
       "options": {
-        "$comment": "Alleen deze Tivoli-genres (plus altijd familie). Pop & rock, club & elektronisch, comedy. Haal een slug weg of voeg er een toe; lijst staat op tivolivredenburg.nl/agenda.",
-        "genres": [
-          "pop",
-          "rock",
-          "indie",
-          "singer-songwriter",
-          "roots-blues-americana",
-          "metal-punk-heavy",
-          "classic-pop-60s-90s",
-          "nederlands",
-          "classics-80s-90s-00s",
-          "indie-pop-alternative",
-          "hiphop-rb-soul",
-          "global-1",
-          "house-techno",
-          "drum-n-bass-trap",
-          "electronic",
-          "electronic-1",
-          "comedy"
-        ],
-        "maxPages": 15,
+        "$comment": "Alle genres van de hele agenda; wat je niet wilt zien filter je in de app (Instellingen → soorten).",
+        "maxPages": 40,
         "detailDays": 45
       }
     },

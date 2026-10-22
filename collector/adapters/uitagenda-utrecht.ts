@@ -8,6 +8,7 @@
  *  - Elke evenementpagina bevat een iCal- en Google Agenda-link met exacte
  *    tijden en locatie; die gebruiken we als primaire bron voor datum/tijd.
  *  - Geen publieke API of feed gevonden.
+ *  - Zonder genres en wijken haalt de adapter de complete agenda van de hele stad op.
  */
 import * as cheerio from 'cheerio';
 import { fetchText } from '../lib/http.ts';
@@ -130,17 +131,20 @@ export const uitagendaUtrecht: SourceAdapter = {
     const genres = (ctx.options.genres as string[] | undefined) ?? ['jeugdtheater', 'festivals', 'musea'];
     const wijken = (ctx.options.wijken as string[] | undefined) ?? ['leidsche-rijn,vleuten-de-meern'];
     const maxPages = (ctx.options.maxPagesPerQuery as number | undefined) ?? 10;
-    const queries = [
+    const maxDetail = (ctx.options.maxDetailPages as number | undefined) ?? ctx.maxDetailPages;
+    const filtered = [
       ...genres.map((g) => `genres=${encodeURIComponent(g)}`),
       ...wijken.map((w) => `wijk=${w}`),
     ];
+    // Geen genres en geen wijken: de complete agenda van de hele stad in één lijst.
+    const queries = filtered.length ? filtered : [''];
 
     const links = new Map<string, string>();
     // Alleen als alles volledig is opgehaald, mogen ontbrekende items als "verdwenen" gelden.
     let complete = true;
     for (const q of queries) {
       for (let page = 1; page <= maxPages; page++) {
-        const url = `${BASE}/agenda/?vanaf=${dmy(ctx.today)}&tot=${dmy(ctx.until)}&${q}${page > 1 ? `&page=${page}` : ''}`;
+        const url = `${BASE}/agenda/?vanaf=${dmy(ctx.today)}&tot=${dmy(ctx.until)}${q ? `&${q}` : ''}${page > 1 ? `&page=${page}` : ''}`;
         const html = await fetchText(url);
         const found = extractEventLinks(html);
         let added = 0;
@@ -150,7 +154,7 @@ export const uitagendaUtrecht: SourceAdapter = {
             added++;
           }
         }
-        ctx.log(`  ${q} p${page}: ${found.size} links, ${added} nieuw`);
+        ctx.log(`  ${q || 'hele agenda'} p${page}: ${found.size} links, ${added} nieuw`);
         if (added === 0) break;
         if (page === maxPages) complete = false;
       }
@@ -159,8 +163,8 @@ export const uitagendaUtrecht: SourceAdapter = {
     const events: RawEvent[] = [];
     let n = 0;
     for (const [id, url] of links) {
-      if (n++ >= ctx.maxDetailPages) {
-        ctx.log(`  limiet van ${ctx.maxDetailPages} detailpagina's bereikt`);
+      if (n++ >= maxDetail) {
+        ctx.log(`  limiet van ${maxDetail} detailpagina's bereikt`);
         complete = false;
         break;
       }
