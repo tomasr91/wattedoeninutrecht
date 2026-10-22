@@ -276,6 +276,15 @@ describe('Utrecht Natuurlijk: bereik met ― (U+2015)', () => {
 });
 
 import { detailStillFresh } from '../collector/adapters/uitagenda-utrecht';
+describe('Utrecht Natuurlijk: doelgroep', () => {
+  it('"Alle leeftijden" alleen is voor volwassenen, niet voor kinderen', async () => {
+    const { unAudiences } = await import('../collector/adapters/utrecht-natuurlijk');
+    expect(unAudiences(['Alle leeftijden'])).toEqual(['volwassenen']);
+    expect(unAudiences(['Alle leeftijden', 'Gezinnen']).sort()).toEqual(['gezin', 'volwassenen']);
+    expect(unAudiences(['Peuters'])).toEqual(['kinderen']);
+  });
+});
+
 describe('UITagenda detailopslag', () => {
   const ev = { sourceId: 'x', sourceName: 'x', url: 'u', title: '[TESTDATA] X', start: '2026-11-01', checkedAt: '' };
   it('vers binnen 5 dagen', () => {

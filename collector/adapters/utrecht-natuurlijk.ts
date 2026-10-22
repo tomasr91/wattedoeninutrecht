@@ -93,7 +93,9 @@ export function parseUnList(html: string, today: string): UnCard[] {
 export function unAudiences(groups: string[]): Audience[] {
   const a = new Set<Audience>();
   if (groups.some((g) => /peuters|kinderen/i.test(g))) a.add('kinderen');
-  if (groups.some((g) => /gezinnen|alle leeftijden/i.test(g))) a.add('gezin');
+  // "Alle leeftijden" alleen telt als volwassenen: zo komt bv. een kunstexpositie niet bij Kinderen.
+  // Pas als de bron ook Peuters, Kinderen of Gezinnen noemt, staat het bij Kinderen.
+  if (groups.some((g) => /gezinnen/i.test(g))) a.add('gezin');
   if (groups.some((g) => /volwassenen|jongeren|alle leeftijden/i.test(g))) a.add('volwassenen');
   return a.size ? [...a] : ['gezin'];
 }
