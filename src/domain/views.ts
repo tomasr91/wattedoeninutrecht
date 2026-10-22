@@ -3,7 +3,7 @@
  * een chronologische agenda (eendaags t/m meerdaags) en een lijst doorlopend aanbod.
  * Pure logica, los van de UI, zodat het testbaar is.
  */
-import { collapseSeries } from './series';
+import { collapseSeries, isWeeklySeries } from './series';
 import type { Activity, Category, Child, Home } from './types';
 import { addDays, dateOf, diffDays, isWeekend, timeOf, weekday } from './dates';
 import { childFits, type ChildFit } from './age';
@@ -67,7 +67,7 @@ export const LONG_RUNNING_MIN_DAYS = 7;
  * niet hoe de bron het noemt; korter staat in de gewone agenda.
  */
 export function isLongRunning(a: Activity): boolean {
-  if (a.endUnknown || a.occurrences || a.recurrenceNote) return true;
+  if (a.endUnknown || a.rolling || isWeeklySeries(a)) return true;
   return diffDays(dateOf(a.start), activityEndDate(a)) + 1 >= LONG_RUNNING_MIN_DAYS;
 }
 
@@ -131,7 +131,7 @@ export function buildLists(
   let hiddenForAge = 0;
   const items: ListItem[] = [];
 
-  for (const a of collapseSeries(activities, ctx.today)) {
+  for (const a of expandOccurrences(collapseSeries(activities, ctx.today))) {
     if (a.isTestData || a.status === 'verlopen') continue;
     // Zonder einddatum zou iets voor altijd blijven staan: niet tonen.
     if (hasNoEndDate(a)) continue;
@@ -213,4 +213,24 @@ export const isWeekendDay = isWeekend;
 /** Bij Kinderen niet getoond: geen leeftijd en geen schatting, en de bron noemt ook volwassenen. */
 export function kidHiddenForUnknownAge(a: Activity): boolean {
   return matchesAudience(a, 'kinderen') && ageUnknown(a) && a.audiences.includes('volwassenen');
+}
+
+/**
+ * Losse speeldata (bv. een voorstelling op 22 en 23 okt, of een pubquiz op 25 okt en 29 nov) zijn geen
+ * doorlopend aanbod: elke datum wordt een eigen regel in de agenda. Alleen vaste wekelijkse reeksen blijven één regel.
+ */
+export function expandOccurrences(list: Activity[]): Activity[] {
+  return list.flatMap((a) => {
+    if (!a.occurrences?.length || a.rolling || isWeeklySeries(a)) return [a];
+    const t = timeOf(a.start);
+    return a.occurrences.map((d) => ({
+      ...a,
+      start: t ? `${d}T${t}` : d,
+      end: undefined,
+      allDay: !t,
+      ongoing: undefined,
+      occurrences: undefined,
+      recurrenceNote: undefined,
+    }));
+  });
 }

@@ -157,3 +157,17 @@ describe('oude "Elke …" over een korte periode', () => {
     expect(seriesNote(a)).toBe('20 dec, 27 dec en 29 dec · 20:00');
   });
 });
+
+import { expandOccurrences } from '../src/domain/views';
+describe('losse speeldata in de agenda', () => {
+  it('voorstelling op 22 en 23 okt: twee agendaregels, niet doorlopend', () => {
+    const a = act({ title: '[TESTDATA] Voorstelling', start: '2026-10-22T19:30', end: '2026-10-23', recurrenceNote: '22 okt en 23 okt · 19:30', occurrences: ['2026-10-22', '2026-10-23'] });
+    const out = expandOccurrences([a]);
+    expect(out.map((x) => x.start)).toEqual(['2026-10-22T19:30', '2026-10-23T19:30']);
+    expect(out[0].recurrenceNote).toBeUndefined();
+  });
+  it('wekelijkse reeks blijft één regel', () => {
+    const a = act({ title: '[TESTDATA] Quiz', start: '2026-10-22', end: '2026-11-12', recurrenceNote: 'Elke donderdag · 20:00', occurrences: ['2026-10-22', '2026-10-29', '2026-11-05', '2026-11-12'] });
+    expect(expandOccurrences([a])).toHaveLength(1);
+  });
+});
