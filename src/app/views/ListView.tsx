@@ -2,8 +2,7 @@ import { useState } from "react";
 import { loadArray, save } from "../storage";
 import { relativeDayLabel, weekday } from "../../domain/dates";
 import type { ListItem, Lists } from "../../domain/views";
-import type { ExpectedMoment } from "../../domain/expected";
-import { addMonths, dateOf, formatShortDate } from "../../domain/dates";
+import { addMonths, dateOf } from "../../domain/dates";
 import { activityEndDate } from "../../domain/filters";
 import { isWeeklySeries } from "../../domain/series";
 import { ActivityCard } from "../components/ActivityCard";
@@ -62,41 +61,6 @@ function Days({
   );
 }
 
-/** Jaarlijkse momenten die eraan komen, maar nog niet in de agenda staan. */
-export function ExpectedBlock({ items }: { items: ExpectedMoment[] }) {
-  if (!items.length) return null;
-  return (
-    <section className="expected" aria-labelledby="h-expected">
-      <h2 id="h-expected">Komt eraan</h2>
-      <p className="section-hint">
-        Jaarlijkse momenten waarvoor nog geen datum of programma in de agenda
-        staat.
-      </p>
-      <ul className="expected-list">
-        {items.map((e) => (
-          <li key={e.id}>
-            <strong>{e.name}</strong>
-            <span className="small muted">
-              Meestal {e.whenText}
-              {e.inDays > 0 ? `, rond ${formatShortDate(e.from)}` : ""}
-            </span>
-            {e.checkUrl && (
-              <a
-                className="small"
-                href={e.checkUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {e.checkName ?? "Bekijk de bron"}
-              </a>
-            )}
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
 /** Doorlopend aanbod, gesorteerd op wat het eerst afloopt. */
 /** Aanbod dat langer dan dit doorloopt staat standaard ingeklapt onderaan. */
 export const SEASON_MONTHS = 2;
@@ -106,15 +70,13 @@ export function OngoingList({
   today,
   onOpen,
   empty,
-  expected = [],
 }: {
   lists: Lists;
   today: string;
   onOpen: (i: ListItem) => void;
   empty: string;
-  expected?: ExpectedMoment[];
 }) {
-  if (lists.ongoing.length === 0 && expected.length === 0)
+  if (lists.ongoing.length === 0)
     return <p className="empty">{empty}</p>;
   // Ingeklapt: vaste wekelijkse reeksen ("Elke woensdag") en wat vanaf nu (of vanaf de start, als die later is)
   // nog langer dan SEASON_MONTHS loopt. Iets korts dat pas over een tijd begint (Disney on Ice) blijft in de lijst.
@@ -144,7 +106,6 @@ export function OngoingList({
   );
   return (
     <div className="day-list">
-      <ExpectedBlock items={expected} />
       {soon.length > 0
         ? cards(soon)
         : later.length > 0 && (

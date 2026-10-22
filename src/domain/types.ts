@@ -218,6 +218,4 @@ export interface Dataset {
   generatedAt: string;
   activities: Activity[];
   status: UpdateStatus;
-  /** Jaarlijkse momenten die eraan komen maar nog niet in de agenda staan. */
-  expected?: import('./expected').ExpectedMoment[];
 }

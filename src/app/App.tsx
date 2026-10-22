@@ -134,7 +134,6 @@ export function App() {
   }, [data, audience, today, view.day, view.weekend, profile.children, profile.hiddenKinds, profile.home]);
   const always = useMemo(() => alwaysAll.filter((i) => !archived.has(normalizeText(i.activity.title))), [alwaysAll, archived]);
   const alwaysArchived = useMemo(() => alwaysAll.filter((i) => archived.has(normalizeText(i.activity.title))), [alwaysAll, archived]);
-  const expected = (data?.expected ?? []).filter((e) => e.audience === 'beide' || e.audience === audience);
 
   const goTo = (p: Pane) => {
     if (p === pane) return;
@@ -260,7 +259,7 @@ export function App() {
               Agenda <span className="num count">{lists ? datedCount : ''}</span>
             </button>
             <button role="tab" aria-selected={pane === 'doorlopend'} className={pane === 'doorlopend' ? 'is-on' : ''} onClick={() => goTo('doorlopend')}>
-              Tijdelijk <span className="num count">{lists ? lists.ongoing.length + expected.length : ''}</span>
+              Tijdelijk <span className="num count">{lists ? lists.ongoing.length : ''}</span>
             </button>
             {profile.showAlways && (
               <button role="tab" aria-selected={pane === 'altijd'} className={pane === 'altijd' ? 'is-on' : ''} onClick={() => goTo('altijd')}>
@@ -287,7 +286,7 @@ export function App() {
             ) : pane === 'altijd' ? (
               <AlwaysList items={always} archived={alwaysArchived} onOpen={open} onRestore={(i) => toggleArchive(i.activity)} onArchive={(i) => toggleArchive(i.activity)} empty={`Nog geen vaste uitjes ${who}.`} />
             ) : (
-              <OngoingList lists={lists} today={today} onOpen={open} expected={expected} empty={`Geen tijdelijk aanbod ${who} in deze periode.`} />
+              <OngoingList lists={lists} today={today} onOpen={open} empty={`Geen tijdelijk aanbod ${who} in deze periode.`} />
             )}
             <footer className="list-foot small muted">
               {lastRun && <p>Laatst ververst: {formatDateTime(lastRun)}</p>}

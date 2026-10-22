@@ -18,7 +18,6 @@ import { addDays, addMonths, todayInAmsterdam } from '../src/domain/dates.ts';
 import { reconcile, sourceKey, type SourceResult } from '../src/domain/reconcile.ts';
 import { normalize } from './normalize.ts';
 import { buildExport } from './export.ts';
-import { computeExpected, type RecurringMoment } from '../src/domain/expected.ts';
 import * as dbm from './db.ts';
 import { notAnOuting } from './outings.ts';
 import type { DetailCache } from './adapters/types.ts';
@@ -100,15 +99,7 @@ function writeExport(db: dbm.Db, today: string, nowIso: string, totals: UpdateSt
     sources: dbm.sourceStatuses(db),
     totals: { ...totals, active: activities.length, merged },
   };
-  let expected: Dataset['expected'] = [];
-  try {
-    const cfg = JSON.parse(readFileSync(join(ROOT, 'data', 'vaste-momenten.json'), 'utf8')) as { horizonDays: number; moments: RecurringMoment[] };
-    expected = computeExpected(cfg.moments, activities, today, cfg.horizonDays);
-    for (const e of expected) log(`Komt eraan zonder datum in de agenda: ${e.name} (meestal ${e.whenText}, over ${e.inDays} dagen)`);
-  } catch (e) {
-    log(`! vaste-momenten.json niet te lezen: ${(e as Error).message}`);
-  }
-  const dataset: Dataset = { generatedAt: nowIso, activities, status, expected };
+  const dataset: Dataset = { generatedAt: nowIso, activities, status };
   const outDir = join(ROOT, 'public', 'data');
   mkdirSync(outDir, { recursive: true });
   writeFileSync(join(outDir, 'activities.json'), JSON.stringify(dataset));

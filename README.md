@@ -20,7 +20,6 @@ echte activiteiten met een link naar de bron.
   loopt (alleen de duur telt). Wissel door opzij te vegen of op de kop te tikken.
 - Bij Kinderen verdwijnt wat voor beide kinderen te jong of te oud is op de dag zelf; onderaan staat hoeveel.
   Voorlezen wordt niet getoond (`excludeCategories` in `src/domain/views.ts`).
-- Onder Tijdelijk staat bovenaan **Komt eraan**: jaarlijkse momenten (Koningsdag, kerst in Leidsche Rijn Centrum, festivals) die binnen acht weken vallen maar nog geen datum in de agenda hebben. Zie `data/vaste-momenten.json`.
 - Per lijst kun je soorten verbergen (Gezin → Soorten). Bij Volwassenen staan standaard uit: Indie, Metal & punk, Expositie, Dans, Roots & americana, Opera, Musical en Podcast.
 - Nieuw toegevoegde activiteiten krijgen een week lang het label **Nieuw** (per toestel bijgehouden). **Gratis** en **Binnen** staan als label op de kaart; bij een activiteit kun je hem **delen** (WhatsApp e.d.).
 - Via het gezinsicoon rechtsboven vul je naam en geboortedatum van de kinderen in (kinderen toevoegen of verwijderen kan daar ook) en zie je de status van de bronnen, het tijdstip van de laatste update en de app-versie (bouwmoment).

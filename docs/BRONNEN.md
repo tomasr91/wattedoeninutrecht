@@ -102,10 +102,3 @@ Tivoli-genres (Pop, Rock, Indie, Singer-songwriter, Club, Comedy, Familievoorste
 (Cabaret, Toneel, Dans, Concert, Jeugdtheater) en Podium Sprits (Jeugdtheater, Kinderconcert). Voor de overige
 bronnen leidt de app het af van de categorie (Voorstelling, Concert, Museum, Workshop …).
 
-## Vaste momenten ("Komt eraan")
-
-`data/vaste-momenten.json` bevat jaarlijkse momenten: Koningsdag in Leidsche Rijn/Vleuten-De Meern, Sint Maarten,
-de Sinterklaasintocht, kerst in Leidsche Rijn Centrum, Uitfeest, TREK, Lepeltje Lepeltje, De Parade, Soenda en Soenda NYE.
-Valt zo'n moment binnen acht weken en staat er nog niets passends in de agenda (trefwoord in de titel, eventueel
-op de juiste locatie), dan toont de app het onder Doorlopend als "Komt eraan", en staat het in de log van de update.
-De periodes zijn indicaties ("meestal december"), geen bevestigde data. Een moment toevoegen = één regel in dat bestand.
