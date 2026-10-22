@@ -7,6 +7,7 @@ import { dedupeRepeated } from './lib/parse.ts';
 import type { Activity, Audience, BookingStatus, Category, Confidence, EventStatus, IndoorKind } from '../src/domain/types.ts';
 import { enrich, parsePrice } from '../src/domain/enrich.ts';
 import { ageConflict } from '../src/domain/ageEstimate.ts';
+import { recurrenceHintFromText } from '../src/domain/series.ts';
 import { classifyZone } from '../src/domain/geo.ts';
 import { stableHash, normalizeText } from '../src/domain/dedupe.ts';
 import { dateOf, formatShortDate, timeOf } from '../src/domain/dates.ts';
@@ -202,6 +203,7 @@ export function normalize(raw: RawEvent): Activity {
     endUnknown: (raw.extraUncertainties ?? []).some((u) => /einddatum\b.*\bniet\b|einddatum onbekend/i.test(u)) || undefined,
     openingNote: raw.openingNote,
     ...(raw.recurrenceNote ? { recurrenceNote: raw.recurrenceNote } : {}),
+    ...(recurrenceHintFromText(`${raw.title} ${raw.descriptionForClassification ?? ''}`) ? { recurrenceHint: recurrenceHintFromText(`${raw.title} ${raw.descriptionForClassification ?? ''}`) } : {}),
     ...(raw.rolling ? { rolling: true } : {}),
     ...(raw.occurrences?.length ? { occurrences: raw.occurrences } : {}),
     seriesKey: raw.seriesKey ?? `${raw.sourceId}|${normalizeText(raw.title)}`,

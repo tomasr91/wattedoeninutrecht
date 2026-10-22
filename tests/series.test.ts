@@ -123,3 +123,19 @@ describe('geen uitje', () => {
     expect(kindLabel({ title, categories: ['overig'] })).toBe(kind);
   });
 });
+
+import { recurrenceHintFromText } from '../src/domain/series';
+describe('vaste dagen in de omschrijving', () => {
+  it('elke maandag … en elke donderdag', () => {
+    expect(recurrenceHintFromText('Elke maandag van 10.00 tot 12.30 uur en elke donderdag van 10.00 tot 13.00 uur kun je in de oogstkraam')).toBe('Elke ma en do');
+  });
+  it('twee data plus de hint: één doorlopende reeks', () => {
+    const ms = ['2026-10-22', '2026-10-26', '2026-10-29'].map((d, i) => act({ id: `o${i}`, title: '[TESTDATA] Oogstkraam', start: `${d}T10:00`, recurrenceHint: 'Elke ma en do' }));
+    const out = collapseSeries(ms, '2026-10-22');
+    expect(out).toHaveLength(1);
+    expect(out[0].recurrenceNote).toBe('Elke ma en do · 10:00');
+  });
+  it('één datum met de hint blijft een losse activiteit', () => {
+    expect(collapseSeries([act({ title: '[TESTDATA] Rondleiding', start: '2026-10-25T14:00', recurrenceHint: 'Elke zondag' })], '2026-10-22')[0].id).not.toMatch(/^reeks-/);
+  });
+});

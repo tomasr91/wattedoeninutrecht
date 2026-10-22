@@ -109,6 +109,8 @@ export interface Activity {
   openingNote?: string;
   /** De bron noemt dit een vaste reeks: "Elke vr en za", "doorlopend", "wekelijks". */
   recurrenceNote?: string;
+  /** De omschrijving noemt vaste dagen ("elke maandag en elke donderdag"); telt bij minstens 2 data als reeks. */
+  recurrenceHint?: string;
   /** Bij een reeks: de bekende data. */
   occurrences?: string[];
   /** De bron noemt het "doorlopend" zonder einddatum; `end` is de eerstvolgende keer en schuift elke nacht op. */

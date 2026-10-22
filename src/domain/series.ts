@@ -84,15 +84,17 @@ export function collapseSeries(activities: Activity[], today: string): Activity[
     const dates = [...new Set(live.flatMap(memberDates))].filter((d) => d >= today).sort();
     const weekdays = new Set(dates.map(weekday));
     const fromText = members.find((m) => m.recurrenceNote)?.recurrenceNote;
+    // Omschrijving noemt vaste dagen ("elke maandag en elke donderdag") én er zijn minstens 2 data.
+    const hint = dates.length >= 2 ? members.find((m) => m.recurrenceHint)?.recurrenceHint : undefined;
     const byPattern = dates.length >= SERIES_MIN_DATES && diffDays(dates[0], dates.at(-1)!) >= SERIES_MIN_SPAN_DAYS && weekdays.size <= MAX_WEEKDAYS;
-    if ((!fromText && !byPattern) || dates.length === 0) {
+    if ((!fromText && !hint && !byPattern) || dates.length === 0) {
       out.push(...members);
       continue;
     }
     const sorted = [...live].sort((x, y) => (x.start < y.start ? -1 : 1));
     const first = sorted.find((m) => activityEndDate(m) >= today) ?? sorted[0];
     const times = live.map((m) => timeOf(m.start) ?? '');
-    const note = fromText ?? recurrenceLabel(dates, times);
+    const note = fromText ?? (hint && !byPattern ? withTime(hint, times) : recurrenceLabel(dates, times));
     out.push({
       ...first,
       id: `reeks-${stableHash(key)}`,
@@ -139,4 +141,24 @@ export function weekdaysFromNote(note: string | undefined): number[] | undefined
 /** Vaste wekelijkse reeks ("Elke woensdag", "Dagelijks", of "doorlopend" volgens de bron). */
 export function isWeeklySeries(a: Pick<Activity, 'rolling' | 'recurrenceNote'>): boolean {
   return !!a.rolling || !!weekdaysFromNote(a.recurrenceNote);
+}
+
+const FULL_DAYS = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
+
+/** "Elke maandag … en elke donderdag …" in een omschrijving → "Elke ma en do"; anders undefined. */
+export function recurrenceHintFromText(text: string | undefined): string | undefined {
+  if (!text) return undefined;
+  const t = text.toLowerCase();
+  const days = new Set<number>();
+  for (const m of t.matchAll(/\b(?:elke|iedere)\s+((?:maan|dins|woens|donder|vrij|zater|zon)dag)(?:\s*(?:,|en|of|&)\s*((?:maan|dins|woens|donder|vrij|zater|zon)dag))*/g)) {
+    for (const d of m[0].match(/(?:maan|dins|woens|donder|vrij|zater|zon)dag/g) ?? []) days.add(FULL_DAYS.indexOf(d));
+  }
+  if (!days.size) return undefined;
+  const order = [...days].sort((a, b) => ((a + 6) % 7) - ((b + 6) % 7));
+  return order.length === 1 ? `Elke ${FULL_DAYS[order[0]]}` : `Elke ${order.slice(0, -1).map((d) => WD_SHORT[d]).join(', ')} en ${WD_SHORT[order.at(-1)!]}`;
+}
+
+function withTime(note: string, times: string[]): string {
+  const uniq = [...new Set(times.filter(Boolean))];
+  return uniq.length === 1 ? `${note} · ${uniq[0]}` : note;
 }
