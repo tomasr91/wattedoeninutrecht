@@ -9,7 +9,7 @@ import { dateOf, diffDays } from '../src/domain/dates.ts';
  * - Wekenlang op "Diverse locaties" zonder tijd: een campagne, geen moment om heen te gaan.
  * - Locaties uit `excludeVenues` (per bron instelbaar): zaken die hun openingstijden als evenement invoeren.
  */
-const CAMPAIGN = /\b(win|winnen|maak kans|stem op|stemmen op|loterij|winactie|spaaractie)\b|^spot de\b/i;
+const CAMPAIGN = /\b(win|winnen|maak kans|stem op|stemmen op|winactie|spaaractie)\b|loterij|^spot de\b/i;
 
 export function notAnOuting(a: Activity, excludeVenues: string[] = []): string | undefined {
   if (CAMPAIGN.test(a.title)) return 'actie of campagne';

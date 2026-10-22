@@ -103,6 +103,7 @@ describe('geen uitje', () => {
   it.each([
     [{ title: '[TESTDATA] Spot de strik en win!' }, 'actie of campagne'],
     [{ title: '[TESTDATA] Stem op het mooiste kasteel' }, 'actie of campagne'],
+    [{ title: '[TESTDATA] VriendenLoterij Museummaand' }, 'actie of campagne'],
     [{ title: '[TESTDATA] Leesbanken', venue: { name: 'Diverse locaties Utrecht', geoPrecision: 'unknown' }, allDay: true, start: '2026-10-01', end: '2026-11-30' }, 'campagne op diverse locaties'],
   ])('%o', (o, why) => {
     expect(notAnOuting(act(o as never))).toBe(why);
