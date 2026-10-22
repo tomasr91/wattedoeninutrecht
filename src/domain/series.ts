@@ -120,3 +120,23 @@ function dedupeSources(members: Activity[]): Activity['sources'] {
   }
   return out;
 }
+
+const DAY_WORDS: [RegExp, number][] = [
+  [/\b(zo|zondag)\b/, 0], [/\b(ma|maandag)\b/, 1], [/\b(di|dinsdag)\b/, 2], [/\b(wo|woensdag)\b/, 3],
+  [/\b(do|donderdag)\b/, 4], [/\b(vr|vrijdag)\b/, 5], [/\b(za|zaterdag)\b/, 6],
+];
+
+/** Weekdagen (0 = zondag) uit "Elke vr en za · 20:30", "Elke woensdag" of "Dagelijks"; anders undefined. */
+export function weekdaysFromNote(note: string | undefined): number[] | undefined {
+  if (!note) return undefined;
+  const t = note.toLowerCase().split('·')[0];
+  if (/^dagelijks/.test(t.trim())) return [0, 1, 2, 3, 4, 5, 6];
+  if (!/^\s*elke\b/.test(t)) return undefined;
+  const days = DAY_WORDS.filter(([re]) => re.test(t)).map(([, d]) => d);
+  return days.length ? days : undefined;
+}
+
+/** Vaste wekelijkse reeks ("Elke woensdag", "Dagelijks", of "doorlopend" volgens de bron). */
+export function isWeeklySeries(a: Pick<Activity, 'rolling' | 'recurrenceNote'>): boolean {
+  return !!a.rolling || !!weekdaysFromNote(a.recurrenceNote);
+}

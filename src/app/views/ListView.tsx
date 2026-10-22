@@ -3,6 +3,7 @@ import type { ListItem, Lists } from '../../domain/views';
 import type { ExpectedMoment } from '../../domain/expected';
 import { addMonths, formatShortDate } from '../../domain/dates';
 import { activityEndDate } from '../../domain/filters';
+import { isWeeklySeries } from '../../domain/series';
 import { ActivityCard } from '../components/ActivityCard';
 
 /** Chronologische agenda: per dag, eendaags en meerdaags (op de eerste dag). */
@@ -79,8 +80,10 @@ export function OngoingList({ lists, today, onOpen, empty, expected = [] }: { li
   const unknown = lists.unknownAge.ongoing;
   if (lists.ongoing.length === 0 && expected.length === 0 && unknown.length === 0) return <p className="empty">{empty}</p>;
   const cutoff = addMonths(today, SEASON_MONTHS);
-  const soon = lists.ongoing.filter((i) => activityEndDate(i.activity) <= cutoff);
-  const later = lists.ongoing.filter((i) => activityEndDate(i.activity) > cutoff);
+  // Vaste wekelijkse reeksen ("Elke woensdag") en wat langer dan de grens loopt: ingeklapt.
+  const isLater = (i: ListItem) => isWeeklySeries(i.activity) || activityEndDate(i.activity) > cutoff;
+  const soon = lists.ongoing.filter((i) => !isLater(i));
+  const later = lists.ongoing.filter(isLater);
   const cards = (items: ListItem[]) => (
     <ul className="card-list">
       {items.map((i) => (

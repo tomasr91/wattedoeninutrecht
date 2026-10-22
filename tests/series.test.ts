@@ -73,3 +73,26 @@ describe('soort uit de titel als de bron niets zegt', () => {
     expect(kindLabel({ title, categories: ['overig'] })).toBe(kind);
   });
 });
+
+import { overlapsPeriod } from '../src/domain/filters';
+import { weekdaysFromNote } from '../src/domain/series';
+describe('vaste dag en datumkeuze', () => {
+  it('weekdagen uit de notitie', () => {
+    expect(weekdaysFromNote('Elke vr en za · 20:30')).toEqual([5, 6]);
+    expect(weekdaysFromNote('Elke woensdag')).toEqual([3]);
+    expect(weekdaysFromNote('Zo 25 okt, 22 nov en 27 dec · 15:00')).toBeUndefined();
+  });
+  const rolling = act({ title: '[TESTDATA] Comedy', start: '2026-10-23T20:30', end: '2026-10-24', rolling: true, recurrenceNote: 'Elke vr en za · 20:30' });
+  it('doorlopend op vr en za: niet op een woensdag', () => {
+    expect(overlapsPeriod(rolling, { from: '2026-10-28', to: '2026-10-28' })).toBe(false);
+  });
+  it('wel op een latere vrijdag, ook na de eerstvolgende bekende datum', () => {
+    expect(overlapsPeriod(rolling, { from: '2026-11-06', to: '2026-11-06' })).toBe(true);
+  });
+  it('samengevoegde reeks op donderdag: niet op woensdag, wel op donderdag', () => {
+    const thu = ['2026-10-22', '2026-10-29', '2026-11-05', '2026-11-12'].map((d, i) => act({ id: `t${i}`, title: '[TESTDATA] Spelletjesmiddag', start: `${d}T15:00` }));
+    const [s] = collapseSeries(thu, '2026-10-22');
+    expect(overlapsPeriod(s, { from: '2026-10-28', to: '2026-10-28' })).toBe(false);
+    expect(overlapsPeriod(s, { from: '2026-10-29', to: '2026-10-29' })).toBe(true);
+  });
+});

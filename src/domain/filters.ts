@@ -1,3 +1,4 @@
+import { weekdaysFromNote } from './series';
 import type { Activity, Audience, BookingStatus, Category, Child, IndoorKind, PeriodPreset, PriceKind, Zone } from './types';
 import { addDays, addMonths, dateOf, dayPartOf, isWeekend, startOfWeek, weekday, type DayPart } from './dates';
 import { childFits } from './age';
@@ -47,12 +48,16 @@ export function activityEndDate(a: Activity): string {
 
 /** Overlapt de activiteit met de periode? (ook voor meerdaagse/doorlopende activiteiten) */
 export function overlapsPeriod(a: Activity, p: { from: string; to: string }): boolean {
+  const wd = a.rolling ? weekdaysFromNote(a.recurrenceNote) : undefined;
+  if (wd) return firstWeekdayIn(wd, dateOf(a.start) > p.from ? dateOf(a.start) : p.from, p.to) !== undefined;
   if (a.occurrences) return a.occurrences.some((d) => d >= p.from && d <= p.to);
   return dateOf(a.start) <= p.to && activityEndDate(a) >= p.from;
 }
 
 /** Eerste datum binnen de periode waarop de activiteit plaatsvindt (voor sorteren/groeperen). */
 export function firstDateInPeriod(a: Activity, p: { from: string; to: string }): string {
+  const wd = a.rolling ? weekdaysFromNote(a.recurrenceNote) : undefined;
+  if (wd) return firstWeekdayIn(wd, dateOf(a.start) > p.from ? dateOf(a.start) : p.from, p.to) ?? p.from;
   if (a.occurrences) return a.occurrences.find((d) => d >= p.from) ?? p.from;
   const s = dateOf(a.start);
   return s >= p.from ? s : p.from;
@@ -204,4 +209,10 @@ export function applyFilters(activities: Activity[], f: Filters, ctx: FilterCont
     }
     return true;
   });
+}
+
+/** Eerste dag in [from, to] op een van deze weekdagen (0 = zondag). */
+function firstWeekdayIn(days: number[], from: string, to: string): string | undefined {
+  for (let d = from, i = 0; d <= to && i < 400; d = addDays(d, 1), i++) if (days.includes(weekday(d))) return d;
+  return undefined;
 }
