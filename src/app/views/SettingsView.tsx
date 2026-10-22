@@ -172,7 +172,45 @@ export function SettingsSheet({
 
 /** Thuisadres voor de afstanden in de lijst. */
 export const DEFAULT_NEARBY_KM = 5;
-const NEARBY_OPTIONS = [0, 2, 3, 5, 8, 10];
+
+const kmLabel = (km: number) => `${String(km).replace('.', ',')} km`;
+
+/** Schuifbalk 0,5–10 km in stappen van 0,5, met een schakelaar om het uit te zetten. */
+function NearbySetting({ km, onChange }: { km: number; onChange: (km: number) => void }) {
+  const [last, setLast] = useState(km || DEFAULT_NEARBY_KM);
+  const on = km > 0;
+  return (
+    <div className="nearby-set">
+      <div className="nearby-head">
+        <label className="check">
+          <input type="checkbox" checked={on} onChange={(e) => onChange(e.target.checked ? last : 0)} /> Dichtbij markeren
+        </label>
+        {on && <span className="nearby-value num">tot {kmLabel(km)}</span>}
+      </div>
+      {on && (
+        <>
+          <input
+            type="range"
+            min={0.5}
+            max={10}
+            step={0.5}
+            value={km}
+            aria-label="Dichtbij tot (km)"
+            onChange={(e) => {
+              const v = Number(e.target.value);
+              setLast(v);
+              onChange(v);
+            }}
+          />
+          <div className="nearby-scale small muted num">
+            <span>0,5 km</span>
+            <span>10 km</span>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
 
 function HomeBlock({ home, onChange, nearbyKm, onNearby }: { home?: Home; onChange: (h?: Home) => void; nearbyKm: number; onNearby: (km: number) => void }) {
   const [q, setQ] = useState('');
@@ -223,20 +261,7 @@ function HomeBlock({ home, onChange, nearbyKm, onNearby }: { home?: Home; onChan
         </button>
       </form>
       {msg && <p className="small banner-warn">{msg}</p>}
-      {home && (
-        <div className="nearby-set">
-          <p className="small">
-            Markeer dichtbij tot <span className="near-km num">{nearbyKm ? `${nearbyKm} km` : 'uit'}</span>
-          </p>
-          <div className="chip-wrap" role="group" aria-label="Dichtbij markeren tot">
-            {NEARBY_OPTIONS.map((km) => (
-              <button key={km} className={`kind-chip ${nearbyKm === km ? '' : 'is-off is-plain'}`} aria-pressed={nearbyKm === km} onClick={() => onNearby(km)}>
-                {km ? `${km} km` : 'Uit'}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      {home && <NearbySetting km={nearbyKm} onChange={onNearby} />}
       <p className="small muted">Het adres blijft op deze telefoon. Voor het opzoeken gaat het eenmalig naar PDOK (Kadaster).</p>
     </section>
   );

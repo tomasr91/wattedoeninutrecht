@@ -86,17 +86,18 @@ export function ActivityCard({
       ? 'Uitverkocht'
       : a.booking.availability?.label;
   return (
-    <button className={`card${cancelled ? ' is-cancelled' : ''}`} onClick={() => onOpen(item)}>
+    <button className={`card${cancelled ? ' is-cancelled' : ''}${near ? ' is-near' : ''}`} onClick={() => onOpen(item)}>
       <span className="card-time">
         {isNew && <span className="card-new">Nieuw</span>}
         <span>{timeLabel(item, ongoing)}</span>
+        {near && <span className="near-tag">Dichtbij</span>}
         {kind && <span className="kind">{kind}</span>}
         {warn && <span className="card-warn">{warn}</span>}
       </span>
       <span className="card-title">{a.title}</span>
       <span className="card-where">
         {where}
-        {item.km !== undefined && (near ? <> <span className="near-km num" title={`Binnen ${nearKm} km`}>{kmText(item.km)}</span></> : <span className="num"> · {kmText(item.km)}</span>)}
+        {item.km !== undefined && <span className="num"> · {kmText(item.km)}</span>}
         {item.others.length > 0 && <span> · +{item.others.length} locatie{item.others.length > 1 ? 's' : ''}</span>}
       </span>
       {ongoing && a.openingNote && <span className="card-note">{a.openingNote}</span>}

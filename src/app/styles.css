@@ -1045,19 +1045,23 @@ h3 {
   color: var(--muted);
 }
 
-/* Dichtbij: zacht terracotta labeltje met een klein vierkantje, valt op zonder te schreeuwen. */
-.near-km {
+/* Dichtbij: terracotta streep links + het woord "Dichtbij" bovenaan. De afstand zelf blijft gewoon grijs. */
+.card.is-near {
+  box-shadow: inset 4px 0 0 #d0602f, 0 1px 3px rgb(0 0 0 / 8%);
+  padding-left: 16px;
+}
+.near-tag {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 1px 7px 1px 6px;
+  padding: 0 7px 0 6px;
   border-radius: 6px;
   background: #fbede5;
   color: #8f3b1b;
   font-weight: 600;
   white-space: nowrap;
 }
-.near-km::before {
+.near-tag::before {
   content: '';
   width: 7px;
   height: 7px;
@@ -1065,8 +1069,39 @@ h3 {
   background: #d0602f;
 }
 .nearby-set {
-  margin-top: 12px;
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
 }
-.kind-chip.is-plain {
-  text-decoration: none;
+.nearby-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.nearby-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #8f3b1b;
+}
+.nearby-set input[type='range'] {
+  width: 100%;
+  accent-color: #d0602f;
+  min-height: 32px;
+}
+.nearby-scale {
+  display: flex;
+  justify-content: space-between;
+}
+.nearby-head .check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  min-height: 36px;
+}
+.nearby-head .check input {
+  width: 20px;
+  height: 20px;
+  accent-color: #d0602f;
 }
