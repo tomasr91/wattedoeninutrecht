@@ -1,6 +1,6 @@
 {
-  "lastSuccessfulRun": "2026-10-22T08:01:19.651Z",
-  "lastRun": "2026-10-22T08:01:19.651Z",
+  "lastSuccessfulRun": "2026-10-22T08:34:09.279Z",
+  "lastRun": "2026-10-22T08:34:09.279Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
@@ -122,9 +122,9 @@
       "sourceName": "UITagenda Utrecht",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-22T07:22:15.005Z",
-      "lastSuccess": "2026-10-22T07:22:15.005Z",
-      "fetched": 881
+      "lastAttempt": "2026-10-22T08:02:31.581Z",
+      "lastSuccess": "2026-10-22T08:02:31.581Z",
+      "fetched": 884
     },
     {
       "sourceId": "utrecht-natuurlijk",
@@ -145,9 +145,9 @@
     }
   ],
   "totals": {
-    "active": 1667,
-    "added": 0,
-    "updated": 1127,
+    "active": 1670,
+    "added": 3,
+    "updated": 11,
     "cancelled": 0,
     "expired": 0,
     "merged": 131
