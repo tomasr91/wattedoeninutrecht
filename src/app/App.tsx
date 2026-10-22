@@ -69,6 +69,9 @@ export function App() {
     }, (e: Error) => setError(e.message));
   }, []);
 
+  // Zonder kinderen in de instellingen is de app alleen voor volwassenen: geen keuze Kinderen/Volwassenen.
+  const hasKids = profile.children.length > 0;
+  const audience: ListAudience = hasKids ? view.audience : 'volwassenen';
   const setView = (patch: Partial<ViewState>) => {
     const next = { ...view, ...patch };
     setViewState(next);
@@ -88,10 +91,10 @@ export function App() {
             data.activities,
             {
               ...DEFAULT_LIST_OPTIONS,
-              audience: view.audience,
+              audience: audience,
               weekend: view.weekend,
               onlyBike: false,
-              hiddenKinds: profile.hiddenKinds?.[view.audience] ?? [],
+              hiddenKinds: profile.hiddenKinds?.[audience] ?? [],
             },
             { today, period, children: profile.children, home: profile.home },
           )
@@ -102,18 +105,18 @@ export function App() {
   // Vaste uitjes zonder einddatum (museum, doolhof, vaste avonden): inspiratie, los van de agenda.
   const always = useMemo<ListItem[]>(() => {
     if (!data) return [];
-    const hidden = new Set((profile.hiddenKinds?.[view.audience] ?? []).map(canonicalKind));
-    return inspirationList(data.activities, view.audience)
+    const hidden = new Set((profile.hiddenKinds?.[audience] ?? []).map(canonicalKind));
+    return inspirationList(data.activities, audience)
       .filter((a) => !hidden.has(kindLabel(a)))
       .map((a) => ({
         activity: a,
         day: today,
-        fits: view.audience === 'kinderen' && profile.children.length ? childFits(a, profile.children, today) : undefined,
+        fits: audience === 'kinderen' && profile.children.length ? childFits(a, profile.children, today) : undefined,
         km: distanceFromHome(a.venue, profile.home),
         others: [],
       }));
-  }, [data, view.audience, today, profile.children, profile.hiddenKinds, profile.home]);
-  const expected = (data?.expected ?? []).filter((e) => e.audience === 'beide' || e.audience === view.audience);
+  }, [data, audience, today, profile.children, profile.hiddenKinds, profile.home]);
+  const expected = (data?.expected ?? []).filter((e) => e.audience === 'beide' || e.audience === audience);
 
   const goTo = (p: Pane) => {
     if (p === pane) return;
@@ -144,7 +147,7 @@ export function App() {
   const open = (i: ListItem) => setDetail({ a: i.activity, others: i.others });
   const lastRun = data?.status.lastSuccessfulRun;
   const staleDays = lastRun ? diffDays(dateOf(lastRun), today) : undefined;
-  const wk = view.weekend ? weekendWindow(view.weekend, today, view.audience) : undefined;
+  const wk = view.weekend ? weekendWindow(view.weekend, today, audience) : undefined;
   const scope = view.day
     ? formatLongDate(view.day)
     : wk
@@ -155,7 +158,7 @@ export function App() {
         .filter(Boolean)
         .join(', ')
     : `${formatShortDate(period.from)} – ${formatShortDate(period.to)}`;
-  const who = view.audience === 'kinderen' ? 'voor de kinderen' : 'voor volwassenen';
+  const who = audience === 'kinderen' ? 'voor de kinderen' : 'voor volwassenen';
 
   return (
     <NewContext.Provider value={fresh}>
@@ -181,6 +184,7 @@ export function App() {
 
       <div className="controls">
         <div className="controls-inner">
+          {hasKids && (
           <div className="audience-tabs" role="tablist" aria-label="Voor wie">
             {(
               [
@@ -191,8 +195,8 @@ export function App() {
               <button
                 key={id}
                 role="tab"
-                aria-selected={view.audience === id}
-                className={view.audience === id ? 'is-on' : ''}
+                aria-selected={audience === id}
+                className={audience === id ? 'is-on' : ''}
                 onClick={() => {
                   setView({ audience: id });
                   window.scrollTo({ top: 0 });
@@ -202,6 +206,7 @@ export function App() {
               </button>
             ))}
           </div>
+          )}
 
           <div className="toggle-row">
             {(
@@ -253,7 +258,7 @@ export function App() {
           <p className="banner banner-warn">De agenda is {staleDays} dagen niet bijgewerkt. Tijden en prijzen kunnen veranderd zijn; check de bron.</p>
         )}
         {lists && (
-          <div key={`${pane}-${view.audience}`} className={`pane ${slide}`}>
+          <div key={`${pane}-${audience}`} className={`pane ${slide}`}>
             <p className="scope small muted">
               {who[0].toUpperCase() + who.slice(1)}, {pane === 'altijd' ? 'kan altijd: vaste uitjes zonder einddatum' : scope}
             </p>
