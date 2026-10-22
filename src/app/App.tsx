@@ -37,7 +37,8 @@ export function App() {
     let version = p.hiddenKindsVersion ?? 1;
     for (const m of HIDDEN_KIND_MIGRATIONS) {
       if (m.version <= version) continue;
-      hiddenKinds.volwassenen = [...new Set([...hiddenKinds.volwassenen, ...m.volwassenen])];
+      hiddenKinds.volwassenen = [...new Set([...hiddenKinds.volwassenen, ...m.volwassenen])].filter((k) => !m.remove?.test(k));
+      hiddenKinds.kinderen = hiddenKinds.kinderen.filter((k) => !m.remove?.test(k));
       version = m.version;
     }
     // Verborgen labels die inmiddels zijn samengevoegd, omzetten naar het nieuwe label.
