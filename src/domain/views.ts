@@ -92,8 +92,6 @@ export interface Lists {
   ongoing: ListItem[];
   /** Kinderactiviteiten die voor geen van de kinderen passen (te jong of te oud). */
   hiddenForAge: number;
-  /** Alleen bij Kinderen: geen leeftijd in de bron en niet in te schatten. Apart, standaard ingeklapt. */
-  unknownAge: { days: { day: string; items: ListItem[] }[]; ongoing: ListItem[] };
   total: number;
 }
 
@@ -157,20 +155,16 @@ export function buildLists(
   }
 
   const all = groupSameSession(items);
-  const isUnknown = (i: ListItem) => opts.audience === 'kinderen' && ageUnknown(i.activity);
-  const grouped = all.filter((i) => !isUnknown(i));
-  const unknown = all.filter(isUnknown);
+  // Bij Kinderen: geen leeftijd én geen schatting, terwijl de bron ook volwassenen noemt → niet tonen.
+  // Zegt de bron alleen kinderen of gezin, dan blijft hij staan ("Leeftijd niet vermeld").
+  const grouped = all.filter((i) => !(opts.audience === 'kinderen' && ageUnknown(i.activity) && i.activity.audiences.includes('volwassenen')));
   const ongoing = grouped
     .filter((i) => isLongRunning(i.activity))
     .sort((x, y) => (activityEndDate(x.activity) < activityEndDate(y.activity) ? -1 : 1));
   const dated = grouped.filter((i) => !isLongRunning(i.activity)).sort(chronological);
 
   const days = byDayList(dated);
-  const unknownAge = {
-    days: byDayList(unknown.filter((i) => !isLongRunning(i.activity)).sort(chronological)),
-    ongoing: unknown.filter((i) => isLongRunning(i.activity)).sort((x, y) => (activityEndDate(x.activity) < activityEndDate(y.activity) ? -1 : 1)),
-  };
-  return { days, ongoing, hiddenForAge, unknownAge, total: all.length };
+  return { days, ongoing, hiddenForAge, total: grouped.length };
 }
 
 function byDayList(sorted: ListItem[]): { day: string; items: ListItem[] }[] {

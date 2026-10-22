@@ -73,7 +73,7 @@ export function ActivityCard({
   const nearKm = useContext(NearContext);
   const near = item.km !== undefined && nearKm > 0 && item.km <= nearKm;
   const fit = item.fits ? fitSummary(item.fits) : undefined;
-  const ageShort = fit && fit.label !== 'Leeftijd onbekend' ? ageDisplay(a.age)?.short : undefined;
+  const ageShort = fit && fit.label !== 'Leeftijd niet vermeld' ? ageDisplay(a.age)?.short : undefined;
   const k = kindLabel(a);
   const kind = k === NO_KIND ? undefined : k;
   const cancelled = a.status === 'geannuleerd';

@@ -142,7 +142,7 @@ export function fitSummary(fits: ChildFit[]): {
     return { label: `Geschikt voor ${good.map((f) => f.childName).join(' & ')}`, tone: 'ok' };
   }
   if (maybe.length > 0) return { label: 'Misschien nog wat jong', tone: 'ok' };
-  if (fits.every((f) => f.fit === 'onbekend')) return { label: 'Leeftijd onbekend', tone: 'neutral' };
+  if (fits.every((f) => f.fit === 'onbekend')) return { label: 'Leeftijd niet vermeld', tone: 'neutral' };
   if (fits.some((f) => f.fit === 'te-oud')) return { label: 'Voor jongere kinderen', tone: 'bad' };
   return { label: 'Nog te jong', tone: 'bad' };
 }

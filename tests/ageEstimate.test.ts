@@ -120,3 +120,14 @@ describe('studentenkorting', () => {
     expect(normalize(raw({ priceText: 'studenten € 8', officialMinMonths: 48 })).audiences).not.toEqual(['volwassenen']);
   });
 });
+
+describe('extra schattingswoorden', () => {
+  it.each([
+    ['[TESTDATA] Utrecht Light Walk', 'lichtroute'],
+    ['[TESTDATA] Slidesche Rijn', 'spelen'],
+    ['[TESTDATA] Kerstvakantie: planetariumvoorstellingen', 'planetarium'],
+    ['[TESTDATA] Vuurspuwshow', 'straattheater'],
+  ])('%s', (title, reason) => {
+    expect(estimateAge({ title, kidContext: true })?.reason).toBe(reason);
+  });
+});

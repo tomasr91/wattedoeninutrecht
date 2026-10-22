@@ -165,11 +165,13 @@ describe('verborgen soorten', () => {
 });
 
 describe('leeftijd onbekend', () => {
-  it('staat bij Kinderen apart, niet tussen de gewone dagen', () => {
-    const known = act({ title: '[TESTDATA] Bekend', audiences: ['kinderen'], start: '2026-10-28T10:00' });
-    const unknown = act({ title: '[TESTDATA] Onbekend', audiences: ['kinderen'], age: {}, start: '2026-10-28T11:00' });
-    const l = buildLists([known, unknown], opts(), { today: '2026-10-22', period: { from: '2026-10-22', to: '2026-11-30' }, children: [] });
-    expect(l.days.flatMap((d) => d.items.map((i) => i.activity.title))).toEqual(['[TESTDATA] Bekend']);
-    expect(l.unknownAge.days[0].items[0].activity.title).toBe('[TESTDATA] Onbekend');
+  const ctx = { today: '2026-10-22', period: { from: '2026-10-22', to: '2026-11-30' }, children: [] };
+  it('bron noemt ook volwassenen: niet bij Kinderen', () => {
+    const unknown = act({ title: '[TESTDATA] Rondleiding', audiences: ['gezin', 'volwassenen'], age: {}, start: '2026-10-28T11:00' });
+    expect(buildLists([unknown], opts(), ctx).days).toHaveLength(0);
+  });
+  it('bron noemt alleen kinderen of gezin: blijft staan', () => {
+    const kidOnly = act({ title: '[TESTDATA] Weekendactiviteiten', audiences: ['kinderen', 'gezin'], age: {}, start: '2026-10-28T11:00' });
+    expect(buildLists([kidOnly], opts(), ctx).days[0].items[0].activity.title).toBe('[TESTDATA] Weekendactiviteiten');
   });
 });
