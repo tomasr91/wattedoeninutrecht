@@ -10,7 +10,7 @@ import { childFits, type ChildFit } from './age';
 import { activityEndDate, firstDateInPeriod, overlapsPeriod } from './filters';
 import { DEFAULT_HOME, distanceFromHome } from './geo';
 import { normalizeText } from './dedupe';
-import { kindLabel } from './kind';
+import { canonicalKind, kindLabel } from './kind';
 
 export type ListAudience = 'kinderen' | 'volwassenen';
 
@@ -128,6 +128,8 @@ export function buildLists(
   const window = wk ?? ctx.period;
   const isFridayEvening = (a: Activity) =>
     !!wk?.fridayEvening && dateOf(a.start) === wk.fridayEvening && (timeOf(a.start) ?? '') >= FRIDAY_EVENING_FROM;
+  // Verborgen labels, omgezet naar de samengevoegde labels (oude instellingen blijven zo werken).
+  const hidden = new Set((opts.hiddenKinds ?? []).map(canonicalKind));
   let hiddenForAge = 0;
   const items: ListItem[] = [];
 
@@ -139,7 +141,7 @@ export function buildLists(
     if (activityEndDate(a) < ctx.today || (!overlapsPeriod(a, window) && !friday)) continue;
     if (!matchesAudience(a, opts.audience)) continue;
     if (a.categories.some((c) => opts.excludeCategories.includes(c))) continue;
-    if (opts.hiddenKinds?.length && opts.hiddenKinds.includes(kindLabel(a))) continue;
+    if (hidden.size && hidden.has(kindLabel(a))) continue;
     if (opts.onlyBike && !isBikeDistance(a, home)) continue;
 
     const day = friday ? dateOf(a.start) : firstDateInPeriod(a, window);

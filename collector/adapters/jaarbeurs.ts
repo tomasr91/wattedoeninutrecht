@@ -81,7 +81,7 @@ export function jbToRaw(i: JbItem, nowIso: string): RawEvent | undefined {
     address: 'Jaarbeursplein 6, 3521 AL Utrecht',
     locality: 'Jaarbeurs',
     audiences: ['gezin', 'kinderen'],
-    kind: 'Jaarbeurs',
+    kind: 'Beurs & evenement',
     indoor: 'binnen',
     bookingText: 'tickets',
     extraUncertainties: ['Tijden, prijs en leeftijd staan op de bronpagina'],

@@ -42,6 +42,9 @@ function titleFromSlug(slug: string): string {
   return t.charAt(0).toUpperCase() + t.slice(1);
 }
 
+/** Hoofdgenres, doelgroepen en kortingen van UITagenda: alles wat geen subgenre is. */
+const UIT_TOP_LABELS = /^(cabaret & stand-up|dans & ballet|diversen|festivals|film|klassieke muziek|lezingen|literatuur|musea & exposities|musicals & shows|muziek|nightlife|rondleidingen|theater & toneel|tips van de redactie|kinderen|gezinnen|jongeren|regulier \/ volwassenen|.*korting|gratis)$/i;
+
 /** UITagenda-genre (slug in /genre/<slug>/) → soortlabel in de app. */
 export const GENRE_KIND: Record<string, string> = {
   musea: 'Expositie',
@@ -125,7 +128,7 @@ export function parsePlaytimes(text: string, today: string): { rolling?: boolean
  * Versie van de uitleesregels. Ophogen als parseEventPage iets nieuws of anders uitleest:
  * dan worden alle pagina's de volgende run opnieuw opgehaald.
  */
-export const PARSER_VERSION = 'v7';
+export const PARSER_VERSION = 'v8';
 
 /**
  * Een opgeslagen detailpagina is 5–9 dagen geldig (verspreid per evenement, zodat niet alles
@@ -212,7 +215,13 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
     .filter(Boolean);
   const genreLabels = $('.post-genres .genre-label').map((_, el) => cleanText($(el).text())).get().filter(Boolean);
   // Nightlife gaat voor: een clubavond met ook het label Muziek is uitgaan, geen concert.
-  const kind = (genreSlugs.includes('nightlife') ? 'Uitgaan' : undefined) ?? genreSlugs.map((g) => GENRE_KIND[g]).find(Boolean);
+  // Muziek: "Concert · <subgenre>" (bv. Jazz, Singer-songwriter, Pop & rock); zonder subgenre gewoon "Concert".
+  const subgenre = genreLabels.find((g) => !UIT_TOP_LABELS.test(g) && !/€/.test(g));
+  const music = genreSlugs.includes('muziek') || genreSlugs.includes('klassieke-muziek');
+  const kind =
+    (genreSlugs.includes('nightlife') ? 'Uitgaan' : undefined) ??
+    (music ? (genreSlugs.includes('klassieke-muziek') ? 'Concert · Klassiek' : subgenre ? `Concert · ${subgenre}` : 'Concert') : undefined) ??
+    genreSlugs.map((g) => GENRE_KIND[g]).find(Boolean);
 
   // Velden in de tekst: "Leeftijd: vanaf 6 jaar", "Duur: ± 40–55 minuten", "Kosten: …"
   const fields = new Map<string, string>();

@@ -288,3 +288,19 @@ describe('UITagenda detailopslag', () => {
     expect(detailStillFresh({ fetchedAt: '2026-10-21T03:00:00Z', value: { ...ev, start: '2026-10-21', rolling: true } }, '123', '2026-10-22')).toBe(false);
   });
 });
+
+describe('UITagenda muziek-subgenre', () => {
+  const page = (labels: string) => `<html><body><main>
+    <div class="post-genres">${labels}</div>
+    <h1 class="post-title">[TESTDATA] Concertje</h1>
+    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;dates=20261107T200000/20261107T220000">Google</a>
+  </main></body></html>`;
+  it('Muziek + Jazz → Concert · Jazz', () => {
+    const ev = parseEventPage(page('<a href="https://www.uitagendautrecht.nl/genre/muziek/" class="genre-label">Muziek</a><a href="https://www.uitagendautrecht.nl/genre/jazz/" class="genre-label">Jazz</a><span class="genre-label">Regulier / volwassenen</span>'), 'u', '1', { today: TODAY, nowIso: NOW });
+    expect(ev?.kind).toBe('Concert · Jazz');
+  });
+  it('Muziek zonder subgenre → Concert', () => {
+    const ev = parseEventPage(page('<a href="https://www.uitagendautrecht.nl/genre/muziek/" class="genre-label">Muziek</a><span class="genre-label">€€ (tot 30,-)</span>'), 'u', '2', { today: TODAY, nowIso: NOW });
+    expect(ev?.kind).toBe('Concert');
+  });
+});

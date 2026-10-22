@@ -87,7 +87,7 @@ function base(i: HaarItem, nowIso: string): Omit<RawEvent, 'start' | 'sourceEven
     address: 'Kasteellaan 1, 3455 RR Haarzuilens',
     locality: 'Haarzuilens',
     audiences: kids ? ['gezin', 'kinderen'] : ['gezin', 'volwassenen'],
-    kind: /speurtocht/i.test(i.title) ? 'Speurtocht' : /rondleiding|tour/i.test(i.title) ? 'Rondleiding' : /lumineu|licht/i.test(i.title) ? 'Lichtroute' : 'Kasteel',
+    kind: /speurtocht/i.test(i.title) ? 'Speurtocht' : /rondleiding|tour/i.test(i.title) ? 'Rondleiding' : /lumineu|licht/i.test(i.title) ? 'Lichtroute' : undefined,
     extraUncertainties: ['Tijden en prijs staan op de bronpagina (entree kasteelpark of kasteel)'],
     checkedAt: nowIso,
   };

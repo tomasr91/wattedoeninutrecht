@@ -64,9 +64,9 @@ describe('soort uit de titel als de bron niets zegt', () => {
     ['[TESTDATA] PowerPoint Karaoke', 'Uitgaan'],
     ['[TESTDATA] PechaKucha Night #50', 'Lezing'],
     ['[TESTDATA] Open Mic: Rouw aan het Woord', 'Cursus & ontmoeting'],
-    ['[TESTDATA] Open podium', 'Voorstelling'],
+    ['[TESTDATA] Open podium', 'Theater'],
     ['[TESTDATA] Boek & Yoga (4-8 jaar)', 'Workshop'],
-    ['[TESTDATA] Slaapfeestje voor knuffels', 'Feest'],
+    ['[TESTDATA] Slaapfeestje voor knuffels', 'Feest & seizoen'],
     ['[TESTDATA] USP Night Run', 'Sport'],
     ['[TESTDATA] Langs de muurschilderingen van Utrecht Noord', 'Rondleiding'],
     ['[TESTDATA] Jeremy Pelt Quintet', 'Overig'],
@@ -170,4 +170,18 @@ describe('losse speeldata in de agenda', () => {
     const a = act({ title: '[TESTDATA] Quiz', start: '2026-10-22', end: '2026-11-12', recurrenceNote: 'Elke donderdag · 20:00', occurrences: ['2026-10-22', '2026-10-29', '2026-11-05', '2026-11-12'] });
     expect(expandOccurrences([a])).toHaveLength(1);
   });
+});
+
+import { canonicalKind } from '../src/domain/kind';
+describe('samengevoegde labels', () => {
+  it.each([
+    ['Cabaret', 'Comedy & cabaret'],
+    ['Toneel', 'Theater'],
+    ['Familievoorstelling', 'Kindertheater'],
+    ['Kleuterbios', 'Film'],
+    ['Indie', 'Concert · Indie'],
+    ['Pop', 'Concert · Pop & rock'],
+    ['Concert · Rock', 'Concert · Pop & rock'],
+    ['Club', 'Uitgaan'],
+  ])('%s → %s', (k, out) => expect(canonicalKind(k)).toBe(out));
 });
