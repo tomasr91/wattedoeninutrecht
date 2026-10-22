@@ -102,11 +102,12 @@ export function kindLabel(a: Pick<Activity, 'kind' | 'categories'> & { title?: s
 }
 
 /** Standaard verborgen soorten bij Volwassenen (keuze van de gebruiker, 21-10-2026). */
-export const DEFAULT_HIDDEN_ADULT_KINDS = ['Expositie', 'Dans', 'Opera', 'Musical', 'Podcast', 'Cursus & ontmoeting'];
+export const DEFAULT_HIDDEN_ADULT_KINDS: string[] = [];
 
 /** Soorten die later standaard verborgen werden; bestaande profielen krijgen ze één keer mee. */
 export const HIDDEN_KIND_MIGRATIONS: { version: number; volwassenen: string[]; remove?: RegExp }[] = [
   { version: 2, volwassenen: ['Cursus & ontmoeting'] },
   { version: 3, volwassenen: [] }, // labels samengevoegd (KIND_ALIASES): verborgen labels omzetten
   { version: 4, volwassenen: [], remove: /^(concert · |indie$|metal & punk$|roots & americana$|pop$|rock$|classic pop$|singer-songwriter$|nederlandstalig$)/i }, // geen muziekgenres verbergen (22-10-2026)
+  { version: 5, volwassenen: [], remove: /./ }, // alles zichtbaar; zelf verbergen kan bij Interesses (22-10-2026)
 ];
