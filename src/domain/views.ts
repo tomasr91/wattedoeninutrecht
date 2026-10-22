@@ -162,8 +162,8 @@ export function buildLists(
   const grouped = all.filter((i) => !(opts.audience === 'kinderen' && kidHiddenForUnknownAge(i.activity)));
   const ongoing = grouped
     .filter((i) => isLongRunning(i.activity))
-    // Wat het eerst afloopt bovenaan; bij dezelfde einddatum wat het eerst begint.
-    .sort((x, y) => activityEndDate(x.activity).localeCompare(activityEndDate(y.activity)) || dateOf(x.activity.start).localeCompare(dateOf(y.activity.start)));
+    // Eerst op begindatum (wat al loopt telt als vandaag), dan op einddatum; beide oplopend.
+    .sort((x, y) => effectiveStart(x.activity, ctx.today).localeCompare(effectiveStart(y.activity, ctx.today)) || activityEndDate(x.activity).localeCompare(activityEndDate(y.activity)));
   const dated = grouped.filter((i) => !isLongRunning(i.activity)).sort(chronological);
 
   const days = byDayList(dated);
@@ -235,4 +235,10 @@ export function expandOccurrences(list: Activity[]): Activity[] {
       recurrenceNote: undefined,
     }));
   });
+}
+
+/** Begindatum voor het sorteren: wat al loopt, telt als vandaag. */
+function effectiveStart(a: Activity, today: string): string {
+  const d = dateOf(a.start);
+  return d < today ? today : d;
 }
