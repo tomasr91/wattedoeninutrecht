@@ -35,6 +35,11 @@ export function extractEventLinks(html: string): Map<string, string> {
   return out;
 }
 
+function titleFromSlug(slug: string): string {
+  const t = slug.replace(/-/g, ' ').trim();
+  return t.charAt(0).toUpperCase() + t.slice(1);
+}
+
 export function parseEventPage(html: string, url: string, sourceEventId: string, ctx: Pick<AdapterContext, 'today' | 'nowIso'>): RawEvent | undefined {
   const $ = cheerio.load(html);
   const title =
@@ -74,8 +79,15 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
   }
   if (!start) return undefined;
 
-  const venueLink = $('a[href*="/locatie/"]').first();
-  const venueName = cleanText(venueLink.text()) || location?.split(',')[0];
+  // Locatienaam: linktekst naar de locatiepagina, maar niet knoppen als "Bekijk locatie".
+  const GENERIC_LINK = /^(bekijk|toon|naar|meer|route|kaart|locatie\b)/i;
+  const venueLinks = $('a[href*="/locatie/"]').toArray();
+  const named = venueLinks.map((el) => cleanText($(el).text())).find((t) => t && !GENERIC_LINK.test(t));
+  const slug = venueLinks.map((el) => $(el).attr('href')?.match(/\/locatie\/(?:\d+\/)?([a-z0-9-]+)/i)?.[1]).find(Boolean);
+  const fromSlug = slug ? titleFromSlug(slug) : undefined;
+  const venueName = named || location?.split(',')[0]?.trim() || fromSlug;
+  // Volledig adres uit de agendalink (bv. "Domplein, 3512 JC Utrecht"), zodat wijk en afstand kloppen.
+  const address = location && location.includes(',') ? cleanText(location) : undefined;
 
   const entree = bodyText.match(/Entree\s*:?\s*(gratis|€\s*[\d.,]+(?:\s*[-/–]\s*€?\s*[\d.,]+)?[^.#]{0,40})/i);
   const hints = [
@@ -106,6 +118,7 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
     allDay,
     ongoing: isRange && allDay,
     venueName,
+    address,
     locality: /diverse locaties/i.test(venueName ?? '') ? 'Utrecht' : undefined,
     priceText: entree?.[1],
     bookingText: /reserveren (is )?(verplicht|noodzakelijk)|aanmelden verplicht/i.test(bodyText) ? 'reserveren verplicht' : undefined,

@@ -157,6 +157,16 @@ describe('UITagenda Utrecht — synthetische pagina', () => {
     });
     expect(ev?.hints).toContain('Gezinnen');
   });
+  it('gebruikt geen knoptekst als "Bekijk locatie" als locatienaam', () => {
+    const knop = detail
+      .replace('<a href="/locatie/testplein/">Testplein</a>', '<a href="/locatie/123/stadsschouwburg-utrecht">Bekijk locatie</a>')
+      .replace('location=Utrecht', 'location=Testzaal%2C%20Lucasbolwerk%2024%2C%203512%20EH%20Utrecht');
+    const ev = parseEventPage(knop, 'u', '2', { today: TODAY, nowIso: NOW });
+    expect(ev?.venueName).toBe('Testzaal');
+    expect(ev?.address).toBe('Testzaal, Lucasbolwerk 24, 3512 EH Utrecht');
+    const zonderAgenda = knop.replace(/<a href="https:\/\/calendar[^>]+>Google<\/a>/, '');
+    expect(parseEventPage(zonderAgenda, 'u', '3', { today: TODAY, nowIso: NOW })?.venueName).toBe('Stadsschouwburg utrecht');
+  });
   it('valt terug op paginatekst zonder agendalink', () => {
     const noCal = detail.replace(/<a href="https:\/\/calendar[^>]+>Google<\/a>/, '');
     const ev = parseEventPage(noCal, 'u', '1', { today: TODAY, nowIso: NOW });
