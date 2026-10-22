@@ -34,7 +34,7 @@ export function SettingsSheet({
   const [tab, setTab] = useState<'gezin' | 'soorten' | 'verversing'>(initialTab);
   const hidden = p.hiddenKinds ?? { kinderen: [], volwassenen: [] };
   const kindsFor = (aud: ListAudience) =>
-    [...new Set(activities.filter((a) => (aud === 'kinderen' ? a.audiences.some((x) => x !== 'volwassenen') : a.audiences.includes('volwassenen'))).map(kindLabel))].sort((x, y) =>
+    [...new Set(activities.filter((a) => (aud === 'kinderen' ? a.audiences.some((x) => x !== 'volwassenen') : a.audiences.includes('volwassenen'))).map(kindLabel))].filter((k) => k !== 'Voorlezen').sort((x, y) =>
       x.localeCompare(y, 'nl'),
     );
   const toggleKind = (aud: ListAudience, k: string) => {
