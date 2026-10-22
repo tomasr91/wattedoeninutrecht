@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import type { Activity } from '../../domain/types';
 import { NearContext, NewContext } from '../newContext';
 import { ageDisplay, fitSummary } from '../../domain/age';
-import { dateOf, formatShortDate, relativeDayLabel, timeOf } from '../../domain/dates';
+import { dateOf, formatShortDate, relativeDayLabel, timeOf, todayInAmsterdam } from '../../domain/dates';
 import type { ListItem } from '../../domain/views';
 import { kindLabel, NO_KIND } from '../../domain/kind';
 
@@ -28,6 +28,8 @@ function timeLabel(item: ListItem, ongoing: boolean): string {
   if (ongoing) {
     if (a.recurrenceNote) return a.rolling || !a.end ? a.recurrenceNote : `${a.recurrenceNote} · t/m ${formatShortDate(dateOf(a.end))}`;
     if (a.endUnknown) return 'Doorlopend, einddatum onbekend';
+    // Nog niet begonnen: begindatum erbij ("vr 18 dec t/m wo 30 dec").
+    if (a.end && d > todayInAmsterdam()) return `${formatShortDate(d)} t/m ${formatShortDate(dateOf(a.end))}`;
     return a.end ? `T/m ${formatShortDate(dateOf(a.end))}` : 'Doorlopend';
   }
   if (a.end && dateOf(a.end) !== d) {
