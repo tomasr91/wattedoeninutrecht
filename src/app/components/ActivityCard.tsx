@@ -90,8 +90,8 @@ export function ActivityCard({
       <span className="card-time">
         {isNew && <span className="card-new">Nieuw</span>}
         <span>{timeLabel(item, ongoing)}</span>
-        {near && <span className="near-tag">Dichtbij</span>}
         {kind && <span className="kind">{kind}</span>}
+        {near && <span className="near-tag">Dichtbij</span>}
         {warn && <span className="card-warn">{warn}</span>}
       </span>
       <span className="card-title">{a.title}</span>
