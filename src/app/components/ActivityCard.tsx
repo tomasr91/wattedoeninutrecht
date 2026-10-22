@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import type { Activity } from '../../domain/types';
 import { NewContext } from '../newContext';
-import { fitSummary } from '../../domain/age';
+import { ageDisplay, fitSummary } from '../../domain/age';
 import { dateOf, formatShortDate, relativeDayLabel, timeOf } from '../../domain/dates';
 import type { ListItem } from '../../domain/views';
 import { kindLabel, NO_KIND } from '../../domain/kind';
@@ -69,6 +69,7 @@ export function ActivityCard({
   const a = item.activity;
   const isNew = useContext(NewContext).has(a.id);
   const fit = item.fits ? fitSummary(item.fits) : undefined;
+  const ageShort = fit && fit.label !== 'Leeftijd onbekend' ? ageDisplay(a.age)?.short : undefined;
   const k = kindLabel(a);
   const kind = k === NO_KIND ? undefined : k;
   const cancelled = a.status === 'geannuleerd';
@@ -95,7 +96,12 @@ export function ActivityCard({
         {item.others.length > 0 && <span> · +{item.others.length} locatie{item.others.length > 1 ? 's' : ''}</span>}
       </span>
       {ongoing && a.openingNote && <span className="card-note">{a.openingNote}</span>}
-      {fit && fit.label && <span className={`card-fit fit-${fit.tone}`}>{fit.label}</span>}
+      {fit && fit.label && (
+        <span className={`card-fit fit-${fit.tone}`}>
+          {fit.label}
+          {ageShort && <span className="card-age"> · {ageShort}</span>}
+        </span>
+      )}
     </button>
   );
 }

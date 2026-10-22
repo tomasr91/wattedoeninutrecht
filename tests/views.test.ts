@@ -8,7 +8,7 @@ const profile = testProfile();
 const period = makePeriod('komende-maand', TEST_TODAY); // wo 21-10 t/m vr 20-11
 const ctx = { today: TEST_TODAY, period, children: profile.children, home: profile.home };
 // testActivity is standaard isTestData; buildLists slaat die over, dus hier uitzetten.
-const act = (o: Parameters<typeof testActivity>[0]) => testActivity({ isTestData: false, categories: ['workshop'], ...o });
+const act = (o: Parameters<typeof testActivity>[0]) => testActivity({ isTestData: false, categories: ['workshop'], age: { estimatedMinMonths: 0 }, ...o });
 const opts = (o: Partial<ListOptions> = {}): ListOptions => ({ ...DEFAULT_LIST_OPTIONS, ...o });
 
 describe('fietsafstand', () => {
@@ -161,5 +161,15 @@ describe('verborgen soorten', () => {
     const hidden = ['Indie', 'Expositie'];
     expect(buildLists([expo, indie, comedy], opts({ audience: 'volwassenen', hiddenKinds: hidden }), ctx).total).toBe(1);
     expect(buildLists([expo, indie, comedy], opts({ audience: 'kinderen', hiddenKinds: [] }), ctx).total).toBe(1);
+  });
+});
+
+describe('leeftijd onbekend', () => {
+  it('staat bij Kinderen apart, niet tussen de gewone dagen', () => {
+    const known = act({ title: '[TESTDATA] Bekend', audiences: ['kinderen'], start: '2026-10-28T10:00' });
+    const unknown = act({ title: '[TESTDATA] Onbekend', audiences: ['kinderen'], age: {}, start: '2026-10-28T11:00' });
+    const l = buildLists([known, unknown], opts(), { today: '2026-10-22', period: { from: '2026-10-22', to: '2026-11-30' }, children: [] });
+    expect(l.days.flatMap((d) => d.items.map((i) => i.activity.title))).toEqual(['[TESTDATA] Bekend']);
+    expect(l.unknownAge.days[0].items[0].activity.title).toBe('[TESTDATA] Onbekend');
   });
 });

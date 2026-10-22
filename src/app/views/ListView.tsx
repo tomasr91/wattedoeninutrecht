@@ -7,10 +7,26 @@ import { ActivityCard } from '../components/ActivityCard';
 
 /** Chronologische agenda: per dag, eendaags en meerdaags (op de eerste dag). */
 export function DayList({ lists, today, onOpen, empty }: { lists: Lists; today: string; onOpen: (i: ListItem) => void; empty: string }) {
-  if (lists.days.length === 0) return <p className="empty">{empty}</p>;
+  const unknown = lists.unknownAge.days;
+  const unknownCount = unknown.reduce((n, d) => n + d.items.length, 0);
+  if (lists.days.length === 0 && unknownCount === 0) return <p className="empty">{empty}</p>;
   return (
     <div className="day-list">
-      {lists.days.map((d) => (
+      {lists.days.length === 0 ? <p className="empty">{empty}</p> : <Days days={lists.days} today={today} onOpen={onOpen} />}
+      {unknownCount > 0 && (
+        <details className="season-more">
+          <summary>Leeftijd onbekend ({unknownCount})</summary>
+          <Days days={unknown} today={today} onOpen={onOpen} />
+        </details>
+      )}
+    </div>
+  );
+}
+
+function Days({ days, today, onOpen }: { days: Lists['days']; today: string; onOpen: (i: ListItem) => void }) {
+  return (
+    <>
+      {days.map((d) => (
         <section key={d.day} className="day" aria-labelledby={`day-${d.day}`}>
           <h2 id={`day-${d.day}`} className={`day-head ${weekday(d.day) === 0 || weekday(d.day) === 6 ? 'is-weekend' : ''}`}>
             {relativeDayLabel(d.day, today)}
@@ -24,7 +40,7 @@ export function DayList({ lists, today, onOpen, empty }: { lists: Lists; today: 
           </ul>
         </section>
       ))}
-    </div>
+    </>
   );
 }
 
@@ -60,7 +76,8 @@ export function ExpectedBlock({ items }: { items: ExpectedMoment[] }) {
 export const SEASON_MONTHS = 2;
 
 export function OngoingList({ lists, today, onOpen, empty, expected = [] }: { lists: Lists; today: string; onOpen: (i: ListItem) => void; empty: string; expected?: ExpectedMoment[] }) {
-  if (lists.ongoing.length === 0 && expected.length === 0) return <p className="empty">{empty}</p>;
+  const unknown = lists.unknownAge.ongoing;
+  if (lists.ongoing.length === 0 && expected.length === 0 && unknown.length === 0) return <p className="empty">{empty}</p>;
   const cutoff = addMonths(today, SEASON_MONTHS);
   const soon = lists.ongoing.filter((i) => activityEndDate(i.activity) <= cutoff);
   const later = lists.ongoing.filter((i) => activityEndDate(i.activity) > cutoff);
@@ -76,11 +93,17 @@ export function OngoingList({ lists, today, onOpen, empty, expected = [] }: { li
   return (
     <div className="day-list">
       <ExpectedBlock items={expected} />
-      {soon.length > 0 ? cards(soon) : later.length > 0 && <p className="empty">Niets dat binnenkort afloopt.</p>}
+      {soon.length > 0 ? cards(soon) : (later.length > 0 || unknown.length > 0) && <p className="empty">Niets dat binnenkort afloopt.</p>}
       {later.length > 0 && (
         <details className="season-more">
           <summary>Langer te zien ({later.length})</summary>
           {cards(later)}
+        </details>
+      )}
+      {unknown.length > 0 && (
+        <details className="season-more">
+          <summary>Leeftijd onbekend ({unknown.length})</summary>
+          {cards(unknown)}
         </details>
       )}
     </div>

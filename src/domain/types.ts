@@ -42,6 +42,14 @@ export interface AgeInfo {
   /** Onze inschatting als de bron niets zegt (of als aanvulling). */
   estimatedMinMonths?: number;
   estimatedMaxMonths?: number;
+  /** Waarom we deze leeftijd schatten, bv. "speurtocht" of "peuters en kleuters". */
+  estimateReason?: string;
+  /** Hoe zeker de schatting is: 'middel' (levensfase-woord) of 'laag' (soort activiteit). */
+  estimateConfidence?: 'middel' | 'laag';
+  /** De bronleeftijd komt uit de omschrijving, niet uit een vast veld of de titel. */
+  officialFromText?: boolean;
+  /** Twijfelgeval om na te kijken (bv. bron en soort activiteit spreken elkaar tegen). */
+  needsReview?: string;
   /** Letterlijke leeftijdsaanduiding uit de bron, bv. "4+". */
   label?: string;
   /** Waarom deze activiteit bij jonge kinderen past (korte duur, vrij spelen, …). */

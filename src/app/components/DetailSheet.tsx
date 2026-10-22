@@ -1,5 +1,5 @@
 import type { Activity, Profile } from '../../domain/types';
-import { childFits, monthsLabel, type Fit } from '../../domain/age';
+import { ageDisplay, childFits, type Fit } from '../../domain/age';
 import { dateOf, diffDays, formatLongDate, timeOf } from '../../domain/dates';
 import { distanceFromHome, travelEstimate } from '../../domain/geo';
 import { categoryLabel } from '../../domain/profile';
@@ -78,15 +78,8 @@ export function DetailSheet({
   const km = distanceFromHome(a.venue, profile.home);
   const travel = km !== undefined ? travelEstimate(km) : undefined;
   const stale = diffDays(dateOf(a.lastChecked), today) > 14;
-  const official = a.age.officialMinMonths !== undefined || a.age.officialMaxMonths !== undefined;
-  const estimated = a.age.estimatedMinMonths !== undefined || a.age.estimatedMaxMonths !== undefined;
-  const ageText = a.age.label
-    ? a.age.label
-    : official
-      ? capital(rangeText(a.age.officialMinMonths, a.age.officialMaxMonths))
-      : estimated
-        ? `Ongeveer ${rangeText(a.age.estimatedMinMonths, a.age.estimatedMaxMonths)}`
-        : undefined;
+  const shownAge = ageDisplay(a.age);
+  const ageText = a.age.label && /kijkwijzer/i.test(a.age.label) ? a.age.label : shownAge ? capital(shownAge.text) : undefined;
   const price = a.price.text ?? (a.price.kind !== 'onbekend' ? priceLabel(a) : undefined);
   const where = [a.venue.name, a.venue.locality && !a.venue.name.includes(a.venue.locality) ? a.venue.locality : undefined].filter(Boolean).join(', ');
   const kind = a.kind ?? (a.categories[0] ? categoryLabel(a.categories[0]) : undefined);
@@ -180,7 +173,12 @@ export function DetailSheet({
             <p>Voor volwassenen</p>
           ) : (
             <>
-              {ageText && <p className="detail-age">{ageText}</p>}
+              {ageText && (
+                <p className="detail-age">
+                  {ageText}
+                  {shownAge && <span className="small muted"> · {shownAge.note}</span>}
+                </p>
+              )}
               {fits.length > 0 && fits.every((f) => f.fit === 'onbekend') && !ageText && <p className="muted">De bron noemt geen leeftijd.</p>}
               {fits.length > 0 && !fits.every((f) => f.fit === 'onbekend') && (
                 <ul className="child-fits">
@@ -254,12 +252,6 @@ const FIT_WORDS: Record<Fit, string> = {
 
 const capital = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
 
-function rangeText(min?: number, max?: number): string {
-  if (min !== undefined && max !== undefined) return `${monthsLabel(min)} t/m ${monthsLabel(max)}`;
-  if (min !== undefined) return `vanaf ${monthsLabel(min)}`;
-  if (max !== undefined) return `t/m ${monthsLabel(max)}`;
-  return 'alle leeftijden';
-}
 
 /** Delen via het deelmenu van de telefoon (WhatsApp e.d.); anders WhatsApp-link. */
 function ShareButton({ a, today }: { a: Activity; today: string }) {

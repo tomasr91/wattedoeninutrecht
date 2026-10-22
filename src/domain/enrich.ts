@@ -1,4 +1,5 @@
 import type { AgeInfo, Audience, Category, IndoorKind, Price } from './types';
+import { ageConflict, estimateAge } from './ageEstimate';
 
 /**
  * Afleidingsregels die ruwe brongegevens verrijken. Alles wat hier wordt
@@ -10,7 +11,40 @@ const Y = 12;
 
 /** Haal een officiële leeftijdsaanduiding uit een titel of tekst. */
 export function parseAgeLabel(text: string): Pick<AgeInfo, 'officialMinMonths' | 'officialMaxMonths' | 'label'> | null {
-  const t = text.toLowerCase();
+  const t = text
+    .toLowerCase()
+    .replace(/½/g, ',5')
+    .replace(/(\d)\s*-\s*plus\b/g, '$1+')
+    .replace(/(\d)\s*jaar en ouder/g, '$1+');
+
+  if (/alle leeftijden|elke leeftijd|van 0 tot 100|0 tot 99/.test(t)) return { officialMinMonths: 0, label: 'alle leeftijden' };
+
+  // Schoolgroepen: "groep 1 en 2", "groep 5-8", "groep 3 t/m 5" → leeftijd ≈ groep + 3
+  const groep = t.match(/groep(?:en)?\s*(\d)\s*(?:-|–|t\/m|tot en met|en|tot)\s*(\d)\b/);
+  if (groep) {
+    const a = Number(groep[1]);
+    const b = Number(groep[2]);
+    if (a >= 1 && a <= b && b <= 8) return { officialMinMonths: (a + 3) * Y, officialMaxMonths: (b + 4) * Y, label: `groep ${a}–${b}` };
+  }
+  // "4 t/m 7 jaar", "4 tot 8 jaar", "kinderen van 4 tot en met 7"
+  const tm = t.match(/(?:^|[\s(])(\d{1,2})\s*(?:t\/m|tot en met|tot)\s*(\d{1,2})(?:\s*(?:jaar|jr)\b|(?=\s*\)))/) ?? t.match(/kinderen van\s+(\d{1,2})\s*(?:t\/m|tot en met|tot|-|–)\s*(\d{1,2})\b/);
+  if (tm) {
+    const a = Number(tm[1]);
+    const b = Number(tm[2]);
+    if (a < b && b <= 18) return { officialMinMonths: a * Y, officialMaxMonths: b * Y, label: `${a}-${b} jaar` };
+  }
+  // "minimumleeftijd 8", "minimale leeftijd: 8 jaar"
+  const minimum = t.match(/minim(?:um|ale)\s*leeftijd\s*:?\s*(\d{1,2})/);
+  if (minimum) {
+    const a = Number(minimum[1]);
+    if (a <= 18) return { officialMinMonths: a * Y, label: `${a}+` };
+  }
+  // "vanaf 2,5 jaar"
+  const vanafHalf = t.match(/vanaf\s+(\d{1,2})[,.](\d)\s*(?:jaar|jr)/);
+  if (vanafHalf) {
+    const months = Math.round((Number(vanafHalf[1]) + Number(vanafHalf[2]) / 10) * Y);
+    return { officialMinMonths: months, label: `${vanafHalf[1]},${vanafHalf[2]}+` };
+  }
 
   // Maanden: "(6-18 mnd)", "6-18 maanden"
   const mnd = t.match(/(\d{1,2})\s*[-–]\s*(\d{1,2})\s*(?:mnd|maanden)\b/);
@@ -30,6 +64,20 @@ export function parseAgeLabel(text: string): Pick<AgeInfo, 'officialMinMonths' |
   if (multi) {
     const a = Number(multi[1]);
     return { officialMinMonths: a * Y, label: `${multi[1]}+` };
+  }
+  // "0-2,5 jaar": bovengrens met een half jaar
+  const halfMax = t.match(/(?:^|[\s(])(\d{1,2})\s*[-–]\s*(\d{1,2})[,.](\d)\s*(?:jaar|jr)\b/);
+  if (halfMax) {
+    const a = Number(halfMax[1]);
+    const b = Math.round((Number(halfMax[2]) + Number(halfMax[3]) / 10) * Y);
+    if (a * Y <= b && b <= 18 * Y) return { officialMinMonths: a * Y, officialMaxMonths: b, label: `${a}-${halfMax[2]},${halfMax[3]} jaar` };
+  }
+  // "Voorlezen 4 6 jaar" (streepje weggevallen in de titel)
+  const bare = t.match(/(?:^|\s)(\d{1,2})\s+(\d{1,2})\s+jaar\b/);
+  if (bare) {
+    const a = Number(bare[1]);
+    const b = Number(bare[2]);
+    if (a < b && b <= 18) return { officialMinMonths: a * Y, officialMaxMonths: b * Y, label: `${a}-${b} jaar` };
   }
   // "(2-4 jaar)", "2 - 4 jaar", "4-8 jr", "8-13 jaar"
   const range = t.match(/(?:^|[\s(])(\d{1,2})\s*[-–t/m]+\s*(\d{1,2})\s*(?:jaar|jr)\b/);
@@ -68,16 +116,16 @@ interface Rule {
 
 /** Volgorde is van belang: specifiek vóór generiek. */
 const RULES: Rule[] = [
-  { test: /babyconcert|baby\s*concert|muziek op schoot|krulmuziek/, categories: ['muziek'], audiences: ['kinderen', 'gezin'], estMin: 0, estMax: 3 * Y, fit: ['Kort concert voor de allerkleinsten', 'Ouder blijft erbij'], indoor: 'binnen', durationMinutes: 30 },
-  { test: /voorlez|voorleesochtend|leesfeest|prentenboek/, categories: ['voorlezen'], audiences: ['kinderen'], estMin: 2 * Y, estMax: 6 * Y, fit: ['Korte duur (circa 30 min)', 'Rustig en interactief'], indoor: 'binnen', durationMinutes: 30 },
-  { test: /knutsel|kleuren|maak je eigen|creatief/, categories: ['workshop'], audiences: ['kinderen'], estMin: 3 * Y, fit: ['Zelf iets maken (met hulp van een ouder)'], indoor: 'binnen' },
-  { test: /peuter|dreumes|kleuter/, audiences: ['kinderen'], estMin: 18, estMax: 6 * Y, fit: ['Speciaal voor jonge kinderen'] },
-  { test: /sint[\s-]?maarten|lampion/, categories: ['feest'], audiences: ['gezin', 'kinderen'], estMin: 0, fit: ['Lichtjes en muziek, zelf tempo bepalen'], cautions: ['Begint na het avondeten'], indoor: 'buiten', special: true },
-  { test: /sinterklaas|intocht|pietenhuis|huis van sinterklaas/, categories: ['feest'], audiences: ['gezin', 'kinderen'], estMin: 18, estMax: 9 * Y, fit: ['Sinterklaasfeest voor jonge kinderen'], cautions: ['Kan druk zijn'], special: true },
+  { test: /babyconcert|baby\s*concert|muziek op schoot|krulmuziek/, categories: ['muziek'], audiences: ['kinderen', 'gezin'], fit: ['Kort concert voor de allerkleinsten', 'Ouder blijft erbij'], indoor: 'binnen', durationMinutes: 30 },
+  { test: /voorlez|voorleesochtend|leesfeest|prentenboek/, categories: ['voorlezen'], audiences: ['kinderen'], fit: ['Korte duur (circa 30 min)', 'Rustig en interactief'], indoor: 'binnen', durationMinutes: 30 },
+  { test: /knutsel|kleuren|maak je eigen|creatief/, categories: ['workshop'], audiences: ['kinderen'], fit: ['Zelf iets maken (met hulp van een ouder)'], indoor: 'binnen' },
+  { test: /peuter|dreumes|kleuter/, audiences: ['kinderen'], fit: ['Speciaal voor jonge kinderen'] },
+  { test: /sint[\s-]?maarten|lampion/, categories: ['feest'], audiences: ['gezin', 'kinderen'], fit: ['Lichtjes en muziek, zelf tempo bepalen'], cautions: ['Begint na het avondeten'], indoor: 'buiten', special: true },
+  { test: /sinterklaas|intocht|pietenhuis|huis van sinterklaas/, categories: ['feest'], audiences: ['gezin', 'kinderen'], fit: ['Sinterklaasfeest voor jonge kinderen'], cautions: ['Kan druk zijn'], special: true },
   { test: /kerst|winter\s?kost|lichtjes|lumineu|kerstmarkt|winterfair/, categories: ['feest'], special: true },
-  { test: /speurtocht|zoektocht|ontdekkingstocht/, categories: ['spel'], audiences: ['gezin', 'kinderen'], estMin: 4 * Y, fit: ['Eigen tempo, vrij in te delen'] },
-  { test: /spelletjes|bordspel|lego|destiny|game/, categories: ['spel'], audiences: ['kinderen'], estMin: 5 * Y, indoor: 'binnen' },
-  { test: /kinderboerderij|stadsboerderij|dieren|huisdier|pony|paard/, categories: ['natuur'], audiences: ['gezin', 'kinderen'], estMin: 1 * Y, fit: ['Dieren kijken en aaien'], indoor: 'buiten' },
+  { test: /speurtocht|zoektocht|ontdekkingstocht/, categories: ['spel'], audiences: ['gezin', 'kinderen'], fit: ['Eigen tempo, vrij in te delen'] },
+  { test: /spelletjes|bordspel|lego|destiny|game/, categories: ['spel'], audiences: ['kinderen'], indoor: 'binnen' },
+  { test: /kinderboerderij|stadsboerderij|dieren|huisdier|pony|paard/, categories: ['natuur'], audiences: ['gezin', 'kinderen'], fit: ['Dieren kijken en aaien'], indoor: 'buiten' },
   { test: /herfststukjes|jeugdtheater|familievoorstelling|poppenkast|poppenspel|figurentheater/, categories: ['theater'], audiences: ['kinderen', 'gezin'] },
   { test: /concert|muziek|orkest|band|festival.*muziek/, categories: ['muziek'] },
   { test: /festival|parade|fair\b|fest\b/, categories: ['festival'], special: true },
@@ -112,6 +160,8 @@ export function enrich(input: {
   description?: string;
   sourceHints?: string[];
   startTime?: string;
+  /** Doelgroep die de adapter al vastlegde; telt mee voor de leeftijdsschatting. */
+  knownAudiences?: Audience[];
 }): Enrichment {
   const text = `${input.title} ${(input.sourceHints ?? []).join(' ')}`.toLowerCase();
   const full = `${text} ${(input.description ?? '').toLowerCase()}`;
@@ -120,8 +170,6 @@ export function enrich(input: {
   const audiences = new Set<Audience>();
   const fit: string[] = [];
   const cautions: string[] = [];
-  let estMin: number | undefined;
-  let estMax: number | undefined;
   let indoor: IndoorKind = 'onbekend';
   let durationMinutes: number | undefined;
   let special = false;
@@ -130,8 +178,6 @@ export function enrich(input: {
     if (!r.test.test(text)) continue;
     r.categories?.forEach((c) => categories.add(c));
     r.audiences?.forEach((a) => audiences.add(a));
-    if (estMin === undefined && r.estMin !== undefined) estMin = r.estMin;
-    if (estMax === undefined && r.estMax !== undefined) estMax = r.estMax;
     r.fit?.forEach((f) => fit.includes(f) || fit.push(f));
     r.cautions?.forEach((c) => cautions.includes(c) || cautions.push(c));
     if (indoor === 'onbekend' && r.indoor) indoor = r.indoor;
@@ -145,8 +191,14 @@ export function enrich(input: {
   if (hints.some((h) => /gezin|familie/.test(h))) audiences.add('gezin');
   if (hints.some((h) => /volwassen|regulier/.test(h))) audiences.add('volwassenen');
 
-  const official = parseAgeLabel(input.title) ?? parseAgeLabel(hints.join(' '));
-  if (official) {
+  const fromDescription = input.description ? parseAgeLabel(input.description) : null;
+  const official = parseAgeLabel(input.title) ?? parseAgeLabel(hints.join(' ')) ?? fromDescription;
+  if (official && (official.officialMinMonths ?? 0) >= 16 * Y) {
+    // "18+" e.d.: een leeftijdsgrens voor volwassenen, geen kinderactiviteit.
+    audiences.delete('kinderen');
+    audiences.delete('gezin');
+    audiences.add('volwassenen');
+  } else if (official) {
     audiences.add('kinderen');
     // Theater met alleen een ondergrens: gezinsvoorstelling
     if (categories.has('theater')) audiences.add('gezin');
@@ -177,18 +229,29 @@ export function enrich(input: {
   }
   if (/prikkel|luid|harde muziek|donker/.test(full)) cautions.push('Mogelijk prikkelrijk');
 
+  if (/onder begeleiding|begeleiding van een (?:volwassene|ouder)|samen met (?:een )?(?:ouder|volwassene)/.test(full)) {
+    fit.push('Onder begeleiding van een volwassene');
+  }
+
+  const kidContext = audiences.has('kinderen') || audiences.has('gezin') || !!input.knownAudiences?.some((a) => a !== 'volwassenen');
+  const adultOfficial = official && (official.officialMinMonths ?? 0) >= 16 * Y;
+  const est = adultOfficial ? undefined : estimateAge({ title: input.title, hints: input.sourceHints, description: input.description, kidContext });
+  if (est && !official && est.minMonths < 16 * Y) {
+    audiences.add('kinderen');
+    if (audiences.has('volwassenen') && !ADULT_HINTS.test(text) && !/volwassen|regulier/.test(hints.join(' '))) audiences.delete('volwassenen');
+  }
+
   const age: AgeInfo = {
-    ...(official ?? {}),
-    estimatedMinMonths: estMin,
-    estimatedMaxMonths: estMax,
+    ...(official && !adultOfficial ? official : {}),
+    ...(official && !adultOfficial && fromDescription === official ? { officialFromText: true } : {}),
+    ...(est && !official
+      ? { estimatedMinMonths: est.minMonths, estimatedMaxMonths: est.maxMonths, estimateReason: est.reason, estimateConfidence: est.confidence }
+      : {}),
     fitReasons: fit.length ? fit : undefined,
     cautions: cautions.length ? cautions : undefined,
   };
-
-  // Theater zonder officiële leeftijd: geschat vanaf 4 jaar
-  if (!official && categories.has('theater') && audiences.has('kinderen') && estMin === undefined) {
-    age.estimatedMinMonths = 4 * Y;
-  }
+  const conflict = official && !adultOfficial ? ageConflict({ min: official.officialMinMonths, max: official.officialMaxMonths }, est) : undefined;
+  if (conflict) age.needsReview = conflict;
 
   return { categories: [...categories], audiences: [...audiences], age, indoor, durationMinutes, special };
 }

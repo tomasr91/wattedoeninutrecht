@@ -6,6 +6,7 @@
 import { dedupeRepeated } from './lib/parse.ts';
 import type { Activity, Audience, BookingStatus, Category, Confidence, EventStatus, IndoorKind } from '../src/domain/types.ts';
 import { enrich, parsePrice } from '../src/domain/enrich.ts';
+import { ageConflict } from '../src/domain/ageEstimate.ts';
 import { classifyZone } from '../src/domain/geo.ts';
 import { stableHash, normalizeText } from '../src/domain/dedupe.ts';
 import { dateOf, formatShortDate, timeOf } from '../src/domain/dates.ts';
@@ -52,6 +53,8 @@ export interface RawEvent {
   officialMaxMonths?: number;
   estimatedMinMonths?: number;
   estimatedMaxMonths?: number;
+  /** Reden bij een schatting van de adapter, bv. "Kijkwijzer". */
+  estimateReason?: string;
   ageLabel?: string;
   fitReasons?: string[];
   cautions?: string[];
@@ -105,6 +108,7 @@ export function normalize(raw: RawEvent): Activity {
     description: raw.descriptionForClassification,
     sourceHints: raw.hints,
     startTime: timeOf(raw.start),
+    knownAudiences: raw.audiences,
   });
   const known = lookupVenue(raw.venueName) ?? lookupVenue(raw.locality);
   const venue = {
@@ -127,12 +131,33 @@ export function normalize(raw: RawEvent): Activity {
   if (bookingStatus === 'onbekend') uncertainties.push('Onbekend of reserveren nodig is');
 
   const audiences = raw.audiences ?? e.audiences;
+  const rawOfficial = raw.officialMinMonths !== undefined || raw.officialMaxMonths !== undefined;
+  const rawEstimate = raw.estimatedMinMonths !== undefined || raw.estimatedMaxMonths !== undefined;
+  const base = { ...e.age };
+  if (rawOfficial || rawEstimate) {
+    // Gegevens van de adapter gaan voor; een eigen schatting blijft alleen als controle.
+    if (rawOfficial && base.estimatedMinMonths !== undefined) {
+      const c = ageConflict({ min: raw.officialMinMonths, max: raw.officialMaxMonths }, {
+        minMonths: base.estimatedMinMonths,
+        maxMonths: base.estimatedMaxMonths,
+        reason: base.estimateReason ?? '',
+        confidence: base.estimateConfidence ?? 'laag',
+      });
+      if (c) base.needsReview = c;
+    }
+    delete base.estimatedMinMonths;
+    delete base.estimatedMaxMonths;
+    delete base.estimateReason;
+    delete base.estimateConfidence;
+    if (rawOfficial) delete base.officialFromText;
+  }
   const age = {
-    ...e.age,
+    ...base,
     ...(raw.officialMinMonths !== undefined ? { officialMinMonths: raw.officialMinMonths } : {}),
     ...(raw.officialMaxMonths !== undefined ? { officialMaxMonths: raw.officialMaxMonths } : {}),
     ...(raw.estimatedMinMonths !== undefined ? { estimatedMinMonths: raw.estimatedMinMonths } : {}),
     ...(raw.estimatedMaxMonths !== undefined ? { estimatedMaxMonths: raw.estimatedMaxMonths } : {}),
+    ...(rawEstimate && !rawOfficial ? { estimateReason: raw.estimateReason ?? 'leeftijdslabel van de bron', estimateConfidence: 'middel' as const } : {}),
     ...(raw.ageLabel ? { label: raw.ageLabel } : {}),
     ...(raw.fitReasons ? { fitReasons: raw.fitReasons } : {}),
     ...(raw.cautions ? { cautions: raw.cautions } : {}),

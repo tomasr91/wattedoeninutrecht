@@ -1039,3 +1039,8 @@ h3 {
 .season-more[open] summary {
   margin-bottom: 10px;
 }
+
+.card-age {
+  font-weight: 400;
+  color: var(--muted);
+}

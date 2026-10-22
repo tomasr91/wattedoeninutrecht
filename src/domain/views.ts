@@ -91,6 +91,8 @@ export interface Lists {
   ongoing: ListItem[];
   /** Kinderactiviteiten die voor geen van de kinderen passen (te jong of te oud). */
   hiddenForAge: number;
+  /** Alleen bij Kinderen: geen leeftijd in de bron en niet in te schatten. Apart, standaard ingeklapt. */
+  unknownAge: { days: { day: string; items: ListItem[] }[]; ongoing: ListItem[] };
   total: number;
 }
 
@@ -153,19 +155,37 @@ export function buildLists(
     items.push({ activity: a, day, fits, km: distanceFromHome(a.venue, home), others: [] });
   }
 
-  const grouped = groupSameSession(items);
+  const all = groupSameSession(items);
+  const isUnknown = (i: ListItem) => opts.audience === 'kinderen' && ageUnknown(i.activity);
+  const grouped = all.filter((i) => !isUnknown(i));
+  const unknown = all.filter(isUnknown);
   const ongoing = grouped
     .filter((i) => isLongRunning(i.activity))
     .sort((x, y) => (activityEndDate(x.activity) < activityEndDate(y.activity) ? -1 : 1));
   const dated = grouped.filter((i) => !isLongRunning(i.activity)).sort(chronological);
 
+  const days = byDayList(dated);
+  const unknownAge = {
+    days: byDayList(unknown.filter((i) => !isLongRunning(i.activity)).sort(chronological)),
+    ongoing: unknown.filter((i) => isLongRunning(i.activity)).sort((x, y) => (activityEndDate(x.activity) < activityEndDate(y.activity) ? -1 : 1)),
+  };
+  return { days, ongoing, hiddenForAge, unknownAge, total: all.length };
+}
+
+function byDayList(sorted: ListItem[]): { day: string; items: ListItem[] }[] {
   const byDay = new Map<string, ListItem[]>();
-  for (const i of dated) {
+  for (const i of sorted) {
     if (!byDay.has(i.day)) byDay.set(i.day, []);
     byDay.get(i.day)!.push(i);
   }
-  const days = [...byDay.entries()].sort(([a], [b]) => (a < b ? -1 : 1)).map(([day, list]) => ({ day, items: list }));
-  return { days, ongoing, hiddenForAge, total: grouped.length };
+  return [...byDay.entries()].sort(([a], [b]) => (a < b ? -1 : 1)).map(([day, list]) => ({ day, items: list }));
+}
+
+/** Kinderactiviteit zonder leeftijd van de bron én zonder schatting. */
+export function ageUnknown(a: Activity): boolean {
+  if (a.audiences.length > 0 && a.audiences.every((x) => x === 'volwassenen')) return false;
+  const g = a.age;
+  return g.officialMinMonths === undefined && g.officialMaxMonths === undefined && g.estimatedMinMonths === undefined && g.estimatedMaxMonths === undefined;
 }
 
 /** Op dag, dan: hele dag/meerdaags eerst, daarna op begintijd, dan titel. */

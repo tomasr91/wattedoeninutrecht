@@ -127,6 +127,7 @@ export function patheToRaw(data: PatheData, today: string, until: string, nowIso
       durationMinutes: meta.duration || undefined,
       ageLabel: r.ref === 'al' ? 'Alle leeftijden' : r.ref ? `Kijkwijzer ${r.ref.replace(/\D/g, '')} (jonger met begeleiding)` : undefined,
       estimatedMinMonths: estimatedMinFromRating(r.ref),
+      estimateReason: 'Kijkwijzer',
       checkedAt: nowIso,
     };
     const dutch = (d: string) => (show.days[d].versions ?? []).includes('nlnl');

@@ -141,3 +141,29 @@ export function fitSummary(fits: ChildFit[]): {
   if (fits.some((f) => f.fit === 'te-oud')) return { label: 'Voor jongere kinderen', tone: 'bad' };
   return { label: 'Nog te jong', tone: 'bad' };
 }
+
+/**
+ * Leeftijd zoals de app hem toont. Een bronleeftijd zonder "ca.", een schatting
+ * met "ca." en de reden. Een open bovengrens blijft open ("vanaf 6 jaar").
+ */
+export function ageDisplay(info: AgeInfo): { text: string; short: string; basis: 'bron' | 'schatting'; note: string } | undefined {
+  const { officialMinMonths: oMin, officialMaxMonths: oMax, estimatedMinMonths: eMin, estimatedMaxMonths: eMax } = info;
+  if (oMin !== undefined || oMax !== undefined) {
+    if (info.label === 'alle leeftijden' || (oMin === 0 && oMax === undefined)) {
+      return { text: 'Alle leeftijden', short: 'alle leeftijden', basis: 'bron', note: 'Volgens de bron' };
+    }
+    const r = yearsRange(oMin, oMax);
+    return { text: r, short: r.replace(' jaar', ' jr'), basis: 'bron', note: info.officialFromText ? 'Volgens de omschrijving' : 'Volgens de bron' };
+  }
+  if (eMin !== undefined || eMax !== undefined) {
+    const r = yearsRange(eMin, eMax);
+    return { text: `ca. ${r}`, short: `ca. ${r.replace(' jaar', ' jr')}`, basis: 'schatting', note: info.estimateReason ? `Geschat: ${info.estimateReason}` : 'Geschat' };
+  }
+  return undefined;
+}
+
+function yearsRange(min?: number, max?: number): string {
+  if (min !== undefined && max !== undefined) return min === max ? `${yearsShort(min)} jaar` : `${yearsShort(min)}–${yearsShort(max)} jaar`;
+  if (min !== undefined) return `vanaf ${yearsShort(min)} jaar`;
+  return `t/m ${yearsShort(max!)} jaar`;
+}

@@ -126,6 +126,7 @@ export function unCardToRaw(c: UnCard, nowIso: string, expo = false): RawEvent {
     priceText: c.priceText,
     audiences: unAudiences(c.groups),
     estimatedMinMonths: toddlers ? 18 : undefined,
+    estimateReason: toddlers ? 'volgens de bron voor peuters' : undefined,
     fitReasons: toddlers ? ['Volgens de bron geschikt voor peuters'] : undefined,
     categories: expo ? ['expositie', 'natuur'] : ['natuur'],
     kind: unKind(c, expo),
