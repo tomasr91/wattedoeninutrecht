@@ -1,6 +1,6 @@
 # Dagelijkse update + publicatie op GitHub Pages.
 #
-#  - Elke nacht (02:17 UTC = 03:17 in de winter, 04:17 in de zomer):
+#  - Elke nacht (02:17 UTC = 03:17 in de winter, 04:17 in de zomer), met een reserve-run om 05:47 UTC als GitHub de eerste overslaat:
 #    bronnen ophalen → SQLite bijwerken → JSON exporteren → committen → app bouwen → publiceren.
 #  - Handmatig starten kan via Actions → "Dagelijkse update" → Run workflow
 #    (optioneel met één bron, bv. "bibliotheek-utrecht").
@@ -15,6 +15,8 @@ name: Dagelijkse update
 on:
   schedule:
     - cron: '17 2 * * *'
+    # Reserve: GitHub slaat geplande runs soms over. Deze run doet alleen iets als er vannacht nog niets is bijgewerkt.
+    - cron: '47 5 * * *'
   workflow_dispatch:
     inputs:
       source:
@@ -39,17 +41,36 @@ jobs:
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    outputs:
+      skip: ${{ steps.guard.outputs.skip }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Reserve-run nodig?
+        id: guard
+        run: |
+          skip=false
+          if [ "${{ github.event.schedule }}" = "47 5 * * *" ]; then
+            last=$(node -e "const s=require('./public/data/status.json');console.log(s.lastSuccessfulRun||'')")
+            if [ -n "$last" ] && [ $(( $(date -u +%s) - $(date -u -d "$last" +%s) )) -lt 72000 ]; then
+              echo "Vannacht al bijgewerkt ($last); reserve-run slaat over."
+              skip=true
+            fi
+          fi
+          echo "skip=$skip" >> "$GITHUB_OUTPUT"
+
       - uses: actions/setup-node@v4
+        if: steps.guard.outputs.skip != 'true'
         with:
           node-version: 22
           cache: npm
       - run: npm ci
+        if: steps.guard.outputs.skip != 'true'
       - run: npm test
+        if: steps.guard.outputs.skip != 'true'
 
       - name: Bronnen ophalen en database bijwerken
-        if: github.event_name != 'push'
+        if: github.event_name != 'push' && steps.guard.outputs.skip != 'true'
         env:
           COLLECTOR_CONTACT: ${{ vars.COLLECTOR_CONTACT }}
           GEOCODER: ${{ vars.GEOCODER }}
@@ -62,7 +83,7 @@ jobs:
           fi
 
       - name: Bijgewerkte data committen
-        if: github.event_name != 'push'
+        if: github.event_name != 'push' && steps.guard.outputs.skip != 'true'
         run: |
           git config user.name "agenda-bot"
           git config user.email "agenda-bot@users.noreply.github.com"
@@ -76,7 +97,7 @@ jobs:
           fi
 
       - name: Melding bij bronnen die al dagen mislukken
-        if: github.event_name != 'push'
+        if: github.event_name != 'push' && steps.guard.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -91,13 +112,17 @@ jobs:
           fi
 
       - run: npm run build
+        if: steps.guard.outputs.skip != 'true'
       - uses: actions/configure-pages@v5
+        if: steps.guard.outputs.skip != 'true'
       - uses: actions/upload-pages-artifact@v3
+        if: steps.guard.outputs.skip != 'true'
         with:
           path: dist
 
   deploy:
     needs: update
+    if: needs.update.outputs.skip != 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

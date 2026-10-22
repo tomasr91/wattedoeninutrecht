@@ -92,7 +92,7 @@ Mislukt een bron drie dagen achter elkaar, dan opent de workflow een GitHub-meld
 
 ### De dagelijkse planning
 
-`.github/workflows/weekly-update.yml` draait elke **nacht om 02:17 UTC** (03:17 winter-, 04:17 zomertijd).
+`.github/workflows/weekly-update.yml` draait elke **nacht om 02:17 UTC** (03:17 winter-, 04:17 zomertijd). GitHub slaat geplande runs soms over; daarom is er om 05:47 UTC een reserve-run die alleen werkt als er die nacht nog niets is bijgewerkt.
 Aanpassen kan in de regel `cron:`; handmatig verversen kan altijd via *Run workflow*,
 eventueel voor één bron. GitHub schakelt geplande workflows uit als een repository 60 dagen
 geen activiteit heeft; de dagelijkse data-commit voorkomt dat zolang er iets verandert. Krijg je
