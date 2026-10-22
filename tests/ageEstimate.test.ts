@@ -91,3 +91,16 @@ describe('doelgroeplabels zijn geen leeftijd', () => {
     expect(e.age.estimatedMinMonths).toBeUndefined();
   });
 });
+
+import { fitForAge } from '../src/domain/age';
+describe('schatting met lage zekerheid verbergt niet', () => {
+  it('spookhuis (griezelen, ca. 8–14) voor een kind van 3,5: misschien nog wat jong', () => {
+    expect(fitForAge(42, { estimatedMinMonths: 96, estimatedMaxMonths: 168, estimateConfidence: 'laag' }, false).fit).toBe('mogelijk');
+  });
+  it('jongeren (ca. 12–18, middel) voor een kind van 3,5: te jong', () => {
+    expect(fitForAge(42, { estimatedMinMonths: 144, estimatedMaxMonths: 216, estimateConfidence: 'middel' }, false).fit).toBe('te-jong');
+  });
+  it('bronleeftijd 6+ voor een kind van 3,5: te jong', () => {
+    expect(fitForAge(42, { officialMinMonths: 72 }, false).fit).toBe('te-jong');
+  });
+});

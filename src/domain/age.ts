@@ -74,6 +74,11 @@ export function fitForAge(
   if (eMin === undefined && eMax === undefined) {
     return { fit: 'onbekend', basis: 'geen', reason: 'Geen leeftijdsindicatie in de bron' };
   }
+  // Een grove schatting op basis van het soort activiteit (lage zekerheid) is geen grens:
+  // dan nooit verbergen, alleen waarschuwen. Zo mis je geen gezinsactiviteit door een te strenge gok.
+  if (eMin !== undefined && ageMonths < eMin && info.estimateConfidence === 'laag') {
+    return { fit: 'mogelijk', basis: 'geschat', reason: `Geschat vanaf ${monthsLabel(eMin)}; misschien nog wat jong` };
+  }
   if (eMin !== undefined && ageMonths < eMin - MARGIN_BELOW_MONTHS) {
     return { fit: 'te-jong', basis: 'geschat', reason: `Geschat vanaf ${monthsLabel(eMin)}` };
   }
