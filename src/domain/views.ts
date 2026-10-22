@@ -58,15 +58,16 @@ export function weekendWindow(
   return fri >= today ? { ...w, fridayEvening: fri } : w;
 }
 
+/** Vanaf zoveel kalenderdagen (begin- en einddag meegeteld) staat iets onder Doorlopend. */
+export const LONG_RUNNING_MIN_DAYS = 7;
+
 /**
- * Doorlopend aanbod: exposities, speurtochten en alles wat twee weken of langer loopt.
- * Een festival van een paar dagen blijft in de gewone agenda.
+ * Doorlopend aanbod: alles wat zeven dagen of langer loopt. Alleen de duur telt,
+ * niet hoe de bron het noemt; korter staat in de gewone agenda.
  */
 export function isLongRunning(a: Activity): boolean {
   if (a.endUnknown) return true;
-  const span = diffDays(dateOf(a.start), activityEndDate(a));
-  if (span >= 14) return true;
-  return span >= 1 && !!a.ongoing && !a.categories.includes('festival');
+  return diffDays(dateOf(a.start), activityEndDate(a)) + 1 >= LONG_RUNNING_MIN_DAYS;
 }
 
 export function matchesAudience(a: Activity, audience: ListAudience): boolean {

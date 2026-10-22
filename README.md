@@ -16,8 +16,8 @@ echte activiteiten met een link naar de bron.
 - **Dit weekend** en **Volgend weekend** tonen zaterdag en zondag; bij Volwassenen ook de vrijdagavond (vanaf 18:00). Met **Datum** kies je zelf één dag (× om te wissen).
 - De app toont altijd de komende drie maanden.
 - **Agenda** is chronologisch per dag: eendaagse en meerdaagse activiteiten (een meerdaags festival staat
-  één keer, op de eerste dag). **Doorlopend** bevat exposities, speurtochten en alles wat twee weken of langer
-  loopt. Wissel door opzij te vegen of op de kop te tikken.
+  één keer, op de eerste dag). **Doorlopend** bevat alles wat zeven dagen of langer
+  loopt (alleen de duur telt). Wissel door opzij te vegen of op de kop te tikken.
 - Bij Kinderen verdwijnt wat voor beide kinderen te jong of te oud is op de dag zelf; onderaan staat hoeveel.
   Voorlezen wordt niet getoond (`excludeCategories` in `src/domain/views.ts`).
 - Onder Doorlopend staat bovenaan **Komt eraan**: jaarlijkse momenten (Koningsdag, kerst in Leidsche Rijn Centrum, festivals) die binnen acht weken vallen maar nog geen datum in de agenda hebben. Zie `data/vaste-momenten.json`.

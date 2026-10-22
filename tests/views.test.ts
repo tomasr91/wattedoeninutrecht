@@ -45,12 +45,14 @@ describe('dit weekend', () => {
 });
 
 describe('doorlopend versus agenda', () => {
-  it('een festival van drie dagen blijft in de agenda', () => {
+  it('een festival van vier dagen blijft in de agenda', () => {
     expect(isLongRunning(act({ start: '2026-11-05', end: '2026-11-08', ongoing: true, categories: ['festival'] }))).toBe(false);
   });
-  it('een expositie van een week en alles van twee weken of langer is doorlopend', () => {
-    expect(isLongRunning(act({ start: '2026-11-01', end: '2026-11-08', ongoing: true, categories: ['expositie'] }))).toBe(true);
-    expect(isLongRunning(act({ start: '2026-11-01', end: '2026-11-20', categories: ['feest'] }))).toBe(true);
+  it('alleen de duur telt: korter dan zeven dagen agenda, zeven of meer doorlopend', () => {
+    expect(isLongRunning(act({ start: '2026-11-01', end: '2026-11-06', ongoing: true, categories: ['expositie'] }))).toBe(false);
+    expect(isLongRunning(act({ start: '2026-11-01', end: '2026-11-07', categories: ['feest'] }))).toBe(true);
+    expect(isLongRunning(act({ start: '2026-10-17', end: '2026-10-25', ongoing: false, categories: ['natuur'] }))).toBe(true);
+    expect(isLongRunning(act({ start: '2026-10-17', end: '2026-10-25', ongoing: true, categories: ['theater'] }))).toBe(true);
     expect(isLongRunning(act({ start: '2026-11-01', endUnknown: true, ongoing: true }))).toBe(true);
   });
   it('zonder einddatum wordt niet getoond', () => {
