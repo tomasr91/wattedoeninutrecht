@@ -37,7 +37,8 @@ export function recurrenceLabel(dates: string[], times: string[]): string {
   const sorted = [...new Set(dates)].sort();
   const gaps = sorted.slice(1).map((d, i) => diffDays(sorted[i], d)).sort((x, y) => x - y);
   const medianGap = gaps.length ? gaps[Math.floor(gaps.length / 2)] : 0;
-  if (medianGap > 10) {
+  // Niet wekelijks (eens per maand) of maar een korte periode (een festivalweek): noem de data zelf, geen "Elke …".
+  if (medianGap > 10 || diffDays(sorted[0], sorted.at(-1)!) < SERIES_MIN_SPAN_DAYS) {
     // Niet wekelijks (bv. eens per maand): noem de data zelf.
     const MONTHS = ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
     const short = (d: string) => `${Number(d.slice(8, 10))} ${MONTHS[Number(d.slice(5, 7)) - 1]}`;

@@ -116,7 +116,8 @@ export function parsePlaytimes(text: string, today: string): { rolling?: boolean
     }
   }
   const uniq = [...new Set(dates)].sort();
-  if (uniq.length >= 2) return { occurrences: uniq, note: recurrenceLabel(uniq, times) };
+  // Een korte reeks aaneengesloten dagen (bv. een festival van do t/m zo) is gewoon meerdaags, geen reeks.
+  if (uniq.length >= 2 && diffDays(uniq[0], uniq.at(-1)!) >= 7) return { occurrences: uniq, note: recurrenceLabel(uniq, times) };
   return {};
 }
 
@@ -124,7 +125,7 @@ export function parsePlaytimes(text: string, today: string): { rolling?: boolean
  * Versie van de uitleesregels. Ophogen als parseEventPage iets nieuws of anders uitleest:
  * dan worden alle pagina's de volgende run opnieuw opgehaald.
  */
-export const PARSER_VERSION = 'v6';
+export const PARSER_VERSION = 'v7';
 
 /**
  * Een opgeslagen detailpagina is 5–9 dagen geldig (verspreid per evenement, zodat niet alles

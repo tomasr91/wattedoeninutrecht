@@ -53,7 +53,7 @@ describe('vaste reeksen samenvoegen', () => {
     expect(out[0]).toMatchObject({ recurrenceNote: 'Elke vr en za · 20:30', rolling: true, occurrences: ['2026-10-23', '2026-10-24'] });
   });
   it('label', () => {
-    expect(recurrenceLabel(['2026-10-23', '2026-10-24', '2026-10-30'], ['20:30', '20:30', '20:30'])).toBe('Elke vr en za · 20:30');
+    expect(recurrenceLabel(['2026-10-23', '2026-10-24', '2026-10-30', '2026-11-06'], ['20:30', '20:30', '20:30', '20:30'])).toBe('Elke vr en za · 20:30');
   });
 });
 
@@ -137,5 +137,15 @@ describe('vaste dagen in de omschrijving', () => {
   });
   it('één datum met de hint blijft een losse activiteit', () => {
     expect(collapseSeries([act({ title: '[TESTDATA] Rondleiding', start: '2026-10-25T14:00', recurrenceHint: 'Elke zondag' })], '2026-10-22')[0].id).not.toMatch(/^reeks-/);
+  });
+});
+
+describe('korte periode is geen wekelijkse reeks', () => {
+  it('festival do t/m zo: geen losse data en geen "Elke"', () => {
+    const r = parsePlaytimes('Datum do 22 okt t/m zo 25 okt Tijd do 22 okt: 10:00vr 23 okt: 10:00za 24 okt: 10:00zo 25 okt: 10:00 Voeg toe', '2026-10-22');
+    expect(r).toEqual({});
+  });
+  it('label over minder dan twee weken noemt de data', () => {
+    expect(recurrenceLabel(['2026-10-22', '2026-10-23', '2026-10-29'], ['10:00', '10:00', '10:00'])).not.toMatch(/^Elke/);
   });
 });
