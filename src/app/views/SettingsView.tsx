@@ -1,7 +1,7 @@
 import { dateOf } from '../../domain/dates';
 import { kidHiddenForUnknownAge } from '../../domain/views';
 import type { Activity, Child, Home, Profile, UpdateStatus } from '../../domain/types';
-import { kindLabel } from '../../domain/kind';
+import { kindLabel, NO_KIND } from '../../domain/kind';
 import type { ListAudience } from '../../domain/views';
 import { addMonths, formatDateTime } from '../../domain/dates';
 import { fmtChecked } from '../components/DetailSheet';
@@ -34,7 +34,7 @@ export function SettingsSheet({
   const [tab, setTab] = useState<'gezin' | 'soorten' | 'verversing'>(initialTab);
   const hidden = p.hiddenKinds ?? { kinderen: [], volwassenen: [] };
   const kindsFor = (aud: ListAudience) =>
-    [...new Set(activities.filter((a) => (aud === 'kinderen' ? a.audiences.some((x) => x !== 'volwassenen') : a.audiences.includes('volwassenen'))).map(kindLabel))].filter((k) => k !== 'Voorlezen').sort((x, y) =>
+    [...new Set(activities.filter((a) => (aud === 'kinderen' ? a.audiences.some((x) => x !== 'volwassenen') : a.audiences.includes('volwassenen'))).map(kindLabel))].filter((k) => k !== 'Voorlezen' && k !== NO_KIND).sort((x, y) =>
       x.localeCompare(y, 'nl'),
     );
   const toggleKind = (aud: ListAudience, k: string) => {
@@ -119,15 +119,45 @@ export function SettingsSheet({
           <section key={aud} className="settings-block" aria-labelledby={`set-kinds-${aud}`}>
             <h3 id={`set-kinds-${aud}`}>Wat wil je zien bij {aud === 'kinderen' ? 'Kinderen' : 'Volwassenen'}?</h3>
             <div className="chip-wrap">
-              {kindsFor(aud).map((k) => {
-                const off = hidden[aud].includes(k);
-                return (
-                  <button key={k} className={`kind-chip ${off ? 'is-off' : ''}`} aria-pressed={!off} onClick={() => toggleKind(aud, k)}>
-                    {k}
-                  </button>
-                );
-              })}
+              {kindsFor(aud)
+                .filter((k) => !k.startsWith('Concert'))
+                .map((k) => {
+                  const off = hidden[aud].includes(k);
+                  return (
+                    <button key={k} className={`kind-chip ${off ? 'is-off' : ''}`} aria-pressed={!off} onClick={() => toggleKind(aud, k)}>
+                      {k}
+                    </button>
+                  );
+                })}
             </div>
+            {(() => {
+              // Concerten: één chip voor alles, met de genres eronder.
+              const concerts = kindsFor(aud).filter((k) => k.startsWith('Concert'));
+              if (!concerts.length) return null;
+              const allOff = concerts.every((k) => hidden[aud].includes(k));
+              const setAll = (off: boolean) =>
+                setProfile({
+                  ...p,
+                  hiddenKinds: { ...hidden, [aud]: off ? [...new Set([...hidden[aud], ...concerts])] : hidden[aud].filter((x) => !concerts.includes(x)) },
+                });
+              return (
+                <div className="concert-set">
+                  <button className={`kind-chip ${allOff ? 'is-off' : ''}`} aria-pressed={!allOff} onClick={() => setAll(!allOff)}>
+                    Concert
+                  </button>
+                  <div className="chip-wrap genre-wrap">
+                    {concerts.map((k) => {
+                      const off = hidden[aud].includes(k);
+                      return (
+                        <button key={k} className={`kind-chip genre-chip ${off ? 'is-off' : ''}`} aria-pressed={!off} onClick={() => toggleKind(aud, k)}>
+                          {k === 'Concert' ? 'Zonder genre' : k.slice('Concert · '.length)}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
           </section>
         ))}
 

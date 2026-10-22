@@ -10,6 +10,7 @@ import { readFileSync } from 'node:fs';
 import { todayInAmsterdam, dateOf } from '../src/domain/dates';
 import { kidHiddenForUnknownAge } from '../src/domain/views';
 import type { Activity } from '../src/domain/types';
+import { kindLabel, NO_KIND } from '../src/domain/kind';
 
 const KID_WORDS = /\b(kinder\w*|kids?|familie\w*|gezin\w*|jeugd\w*|peuter\w*|kleuter\w*|baby\w*|dreumes\w*|junior\w*|ouder(?:s)? en kind|knutsel\w*|speel(?:tuin|middag|ochtend|dag|plek|paradijs)|sprookje\w*|poppenkast|sinterklaas|sint[\s-]?maarten|lampion\w*|kerstman|schoolvakantie|herfstvakantie|kerstvakantie|voorjaarsvakantie|meivakantie)\b/i;
 
@@ -36,4 +37,13 @@ if (!candidates.length) {
   for (const { a, word } of candidates) {
     console.log(`- ${a.title} – ${a.sources[0].sourceName}, ${dateOf(a.start)} (woord: "${word}") [↗](${a.url})`);
   }
+}
+
+// Activiteiten zonder label uit de vaste lijst: daar moet een regel voor komen (src/domain/kind.ts).
+const noKind = [...new Map(data.activities.filter((a) => !a.isTestData && dateOf(a.end ?? a.start) >= today && kindLabel(a) === NO_KIND).map((a) => [a.title, a])).values()];
+console.log('');
+if (!noKind.length) console.log('Alle activiteiten hebben een label.');
+else {
+  console.log(`Zonder label (${noKind.length}):`);
+  for (const a of noKind) console.log(`- ${a.title} – ${a.sources[0].sourceName} [↗](${a.url})`);
 }

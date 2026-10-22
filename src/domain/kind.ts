@@ -16,14 +16,22 @@ export const NO_KIND = 'Overig';
 const TITLE_KIND: [RegExp, string][] = [
   [/nightlife|clubnacht|\bdj\b|dj-set|all night long|\bhouse\b|techno|silent disco|\bparty\b|fiesta|karaoke|dansavond|danceparty|\brave\b/, 'Uitgaan'],
   [/pub ?quiz|\bquiz\b|bingo|spelletjes|game night|bordspel|escape/, 'Speurtocht & spel'],
-  [/cursus|\bles\b|lessen|taalcaf|scheidingscaf|rouw|lotgenot|praatgroep|mannentafel|vrouwentafel|burn-?out|spreekuur|inloop|troost|alle talen|studium generale/, 'Cursus & ontmoeting'],
+  [/cursus|\bles\b|lessen|masterclass|coderdojo|programmeer/, 'Workshop'],
+  [/ukkie|peuter(uur|ochtend)|speelochtend|speelmiddag/, 'Spelen'],
+  [/herfstvakantie|kerstvakantie|meivakantie|zomervakantie|voorjaarsvakantie/, 'Feest & festival'],
+  [/erfgoed|openstelling|open huis|open dag/, 'Rondleiding'],
+  [/gast van de raad|u-caf|swap ?shop/, 'Ontmoeting'],
+  [/\bsalons?\b/, 'Lezing'],
+  [/\bcrew\b|breakdance|hip ?hop/, 'Dans'],
+  [/taalcaf|scheidingscaf|rouw|lotgenot|praatgroep|mannentafel|vrouwentafel|burn-?out|spreekuur|inloop|troost|alle talen/, 'Ontmoeting'],
+  [/studium generale|podcast/, 'Lezing'],
   [/diner|proeverij|proeven|wijn|\bbier|beaujolais|tap ?takeover|voorproevers|food|brunch|high tea|spijs/, 'Eten & drinken'],
   [/kitsch of kunst|wintermarkt|winter market|feestmarkt|kerstmarkt|vlooienmarkt|rommelmarkt/, 'Markt'],
   [/pechakucha|\btalk\b|lezing|debat|gesprek|mannentafel|vrouwentafel|filosof|boekpresentatie|presentatie|signeer|schrijver|auteur|interview/, 'Lezing'],
   [/open mic|open podium|poetry|spoken word|storytelling|voordracht/, 'Voorstelling'],
   [/workshop|collage|craft|knutsel|schrijfcaf|schrijf|yoga|maak je|atelier|cursus|masterclass/, 'Workshop'],
   [/wandeling|wandelroute|tour\b|route\b|rondleiding|kijken\b|by night|fietstocht|muurschildering/, 'Rondleiding'],
-  [/\brun\b|loop\b|hardloop|marathon|fietsen|sport|zwem/, 'Sport'],
+  [/run\b|loop\b|hardloop|marathon|fietsen|sport|zwem/, 'Sport'],
   [/slaapfeest|feestje|is jarig|verjaardag|feest\b|kermis/, 'Feest'],
   [/markt|braderie|fair\b/, 'Markt'],
 ];
@@ -87,8 +95,37 @@ const MUSIC_GENRES: Record<string, string> = {
 
 const NOT_MUSIC: Record<string, string> = { Jeugdtheater: 'Kindertheater', Culinair: 'Eten & drinken', Theater: 'Theater', Comedy: 'Comedy' };
 
-/** Label na samenvoegen (zie KIND_ALIASES en MUSIC_GENRES). */
-export function canonicalKind(k: string): string {
+/**
+ * De vaste lijst: elk item krijgt precies één van deze labels (plus Concert · genre).
+ * Doel: in één oogopslag zien wat het is, en per soort kunnen uitzetten. Geen overlap.
+ */
+export const KINDS = [
+  'Kindervoorstelling', 'Theater', 'Dans', 'Comedy', 'Concert', 'Film', 'Lezing', 'Workshop', 'Speurtocht & spel',
+  'Rondleiding', 'Sport & zwemmen', 'Spelen', 'Natuur & dieren', 'Museum', 'Expositie', 'Feest & festival', 'Markt',
+  'Uitgaan', 'Eten & drinken', 'Ontmoeting',
+] as const;
+
+/** Oude en fijnere labels → het label uit KINDS. */
+const TO_FINAL: Record<string, string> = {
+  Kindertheater: 'Kindervoorstelling',
+  Musical: 'Theater',
+  Voorstelling: 'Theater',
+  Podcast: 'Lezing',
+  'Doe-activiteit': 'Workshop',
+  'Cursus & ontmoeting': 'Ontmoeting',
+  Sport: 'Sport & zwemmen',
+  Zwemmen: 'Sport & zwemmen',
+  'Spelen binnen': 'Spelen',
+  'Spelen buiten': 'Spelen',
+  Sterrenkijken: 'Museum',
+  Belevenis: 'Expositie',
+  Festival: 'Feest & festival',
+  'Feest & seizoen': 'Feest & festival',
+  Lichtroute: 'Feest & festival',
+  'Beurs & evenement': 'Feest & festival',
+};
+
+function aliasKind(k: string): string {
   if (k.startsWith('Concert · ')) {
     const g = k.slice('Concert · '.length);
     // Subgenres van UITagenda die geen muziekgenre zijn.
@@ -98,6 +135,12 @@ export function canonicalKind(k: string): string {
   }
   if (MUSIC_GENRES[k]) return `Concert · ${MUSIC_GENRES[k]}`;
   return KIND_ALIASES[k] ?? k;
+}
+
+/** Label na samenvoegen: altijd een label uit KINDS (of Concert · genre). Ook voor eerder verborgen labels. */
+export function canonicalKind(k: string): string {
+  const a = aliasKind(k);
+  return TO_FINAL[a] ?? a;
 }
 
 /**
@@ -113,8 +156,31 @@ const REFINE: { from: RegExp; test: RegExp; to: string }[] = [
   { from: /^(expositie|museum)$/i, test: /doolhof|\bmaze\b|immersive|beleving/, to: 'Belevenis' },
 ];
 
-/** Wat is het? Eerst het label van de bron, dan de categorie, dan woorden in de titel. */
-export function kindLabel(a: Pick<Activity, 'kind' | 'categories'> & { title?: string; start?: string }): string {
+type KindInput = Pick<Activity, 'kind' | 'categories'> & {
+  title?: string;
+  start?: string;
+  audiences?: Activity['audiences'];
+  age?: Pick<Activity['age'], 'officialMaxMonths'>;
+  summary?: string;
+};
+
+/** Wat is het? Precies één label uit KINDS (of Concert · genre). */
+export function kindLabel(a: KindInput): string {
+  const k = canonicalKind(fineKindLabel(a));
+  // Voorstelling of concert voor kinderen: Kindervoorstelling, zodat je Theater bij volwassenen los kunt uitzetten.
+  if ((k === 'Theater' || k === 'Dans' || k.startsWith('Concert')) && forKids(a)) return 'Kindervoorstelling';
+  return k;
+}
+
+function forKids(a: KindInput): boolean {
+  const t = a.title?.toLowerCase() ?? '';
+  if (/babyconcert|kinderconcert|familieconcert|familievoorstelling|kindervoorstelling|jeugdtheater|poppenkast|poppenspel|\(\d{1,2}\s*\+\)|\b\d\+\s*[–-]|\(\d{1,2}\s*-\s*\d{1,2} jaar\)/.test(t)) return true;
+  const max = a.age?.officialMaxMonths;
+  if (max !== undefined && max <= 12 * 12) return true;
+  return !!a.audiences?.includes('kinderen') && !a.audiences.includes('volwassenen');
+}
+
+function fineKindLabel(a: KindInput): string {
   const base = baseKindLabel(a);
   const t = a.title?.toLowerCase() ?? '';
   for (const r of REFINE) if (r.from.test(base) && r.test.test(t)) return r.to;
@@ -123,11 +189,15 @@ export function kindLabel(a: Pick<Activity, 'kind' | 'categories'> & { title?: s
   return base;
 }
 
-function baseKindLabel(a: Pick<Activity, 'kind' | 'categories'> & { title?: string }): string {
-  if (a.kind) return canonicalKind(a.kind);
-  for (const c of a.categories) if (CATEGORY_KIND[c]) return canonicalKind(CATEGORY_KIND[c]!);
+function baseKindLabel(a: KindInput): string {
   const t = a.title?.toLowerCase();
-  if (t) for (const [re, k] of TITLE_KIND) if (re.test(t)) return canonicalKind(k);
+  if (a.kind && a.kind !== 'Overig' && a.kind !== 'Diversen') return aliasKind(a.kind);
+  for (const c of a.categories) if (CATEGORY_KIND[c]) return aliasKind(CATEGORY_KIND[c]!);
+  if (t) for (const [re, k] of TITLE_KIND) if (re.test(t)) return aliasKind(k);
+  // Laatste redmiddel: de korte beschrijving van de bron.
+  const s = a.summary?.toLowerCase() ?? '';
+  if (/installatie|tentoonstelling|expositie|kunst|beeldend|visue|interactie|bespeelbaar/.test(s)) return 'Expositie';
+  if (/evenement|stap .*binnen in|beleef|ontdek de wereld/.test(s)) return 'Feest & festival';
   return NO_KIND;
 }
 

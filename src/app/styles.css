@@ -1170,3 +1170,18 @@ h3 {
 .chev.is-open {
   transform: rotate(90deg);
 }
+
+.concert-set {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+.genre-wrap {
+  padding-left: 14px;
+  border-left: 2px solid var(--line);
+}
+.genre-chip {
+  font-size: 0.8rem;
+  min-height: 30px;
+  padding: 4px 10px;
+}

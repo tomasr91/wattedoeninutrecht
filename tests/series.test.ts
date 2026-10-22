@@ -63,11 +63,11 @@ describe('soort uit de titel als de bron niets zegt', () => {
     ['[TESTDATA] Estella Boersma All Night Long', 'Uitgaan'],
     ['[TESTDATA] PowerPoint Karaoke', 'Uitgaan'],
     ['[TESTDATA] PechaKucha Night #50', 'Lezing'],
-    ['[TESTDATA] Open Mic: Rouw aan het Woord', 'Cursus & ontmoeting'],
+    ['[TESTDATA] Open Mic: Rouw aan het Woord', 'Ontmoeting'],
     ['[TESTDATA] Open podium', 'Theater'],
     ['[TESTDATA] Boek & Yoga (4-8 jaar)', 'Workshop'],
-    ['[TESTDATA] Slaapfeestje voor knuffels', 'Feest & seizoen'],
-    ['[TESTDATA] USP Night Run', 'Sport'],
+    ['[TESTDATA] Slaapfeestje voor knuffels', 'Feest & festival'],
+    ['[TESTDATA] USP Night Run', 'Sport & zwemmen'],
     ['[TESTDATA] Langs de muurschilderingen van Utrecht Noord', 'Rondleiding'],
     ['[TESTDATA] Jeremy Pelt Quintet', 'Overig'],
   ])('%s', (title, kind) => {
@@ -115,8 +115,8 @@ describe('geen uitje', () => {
     expect(notAnOuting(act({ title: '[TESTDATA] Winterconcert' }))).toBeUndefined();
   });
   it.each([
-    ['[TESTDATA] Gratis Japanse les', 'Cursus & ontmoeting'],
-    ['[TESTDATA] Scheidingscafé', 'Cursus & ontmoeting'],
+    ['[TESTDATA] Gratis Japanse les', 'Workshop'],
+    ['[TESTDATA] Scheidingscafé', 'Ontmoeting'],
     ['[TESTDATA] Utrechtse Bierproeverij', 'Eten & drinken'],
     ['[TESTDATA] Wijnmakersdiner', 'Eten & drinken'],
     ['[TESTDATA] Wintermarkt Podium Oost', 'Markt'],
@@ -179,7 +179,7 @@ describe('samengevoegde labels', () => {
     ['Cabaret', 'Comedy'],
     ['Comedy & cabaret', 'Comedy'],
     ['Toneel', 'Theater'],
-    ['Familievoorstelling', 'Kindertheater'],
+    ['Familievoorstelling', 'Kindervoorstelling'],
     ['Kleuterbios', 'Film'],
     ['Indie', 'Concert · Indie'],
     ['Pop', 'Concert · Pop & rock'],
@@ -228,5 +228,20 @@ describe('open dagen', () => {
   it('alleen op vrijdag: niet in een weekend zonder vrijdag', () => {
     expect(openInPeriod('Elke vrijdag · 19:00', '2026-10-24', '2026-10-25')).toBe(false);
     expect(openInPeriod('Elke vrijdag · 19:00', '2026-10-23', '2026-10-25')).toBe(true);
+  });
+});
+
+describe('één label uit de vaste lijst', () => {
+  it('kinderstuk wordt Kindervoorstelling, volwassenenstuk blijft Theater', () => {
+    expect(kindLabel({ title: '[TESTDATA] Dag Poes (4+)', kind: 'Theater', categories: ['theater'], audiences: ['kinderen', 'gezin'] })).toBe('Kindervoorstelling');
+    expect(kindLabel({ title: '[TESTDATA] Hamlet', kind: 'Theater', categories: ['theater'], audiences: ['volwassenen'] })).toBe('Theater');
+    expect(kindLabel({ title: "[TESTDATA] Babyconcert 'Ik droom'", categories: ['muziek'], audiences: ['kinderen'] })).toBe('Kindervoorstelling');
+  });
+  it('fijne labels vallen in de vaste lijst', () => {
+    expect(kindLabel({ title: 'Ballorig', kind: 'Spelen binnen', categories: [] })).toBe('Spelen');
+    expect(kindLabel({ title: 'Sterrenkijkavonden', kind: 'Expositie', categories: [] })).toBe('Museum');
+    expect(kindLabel({ title: 'Doloris Anoma Maze', kind: 'Expositie', categories: [] })).toBe('Expositie');
+    expect(kindLabel({ title: 'Zwembad Den Hommel', kind: 'Zwemmen', categories: [] })).toBe('Sport & zwemmen');
+    expect(kindLabel({ title: 'Lumen', kind: 'Lichtroute', categories: [] })).toBe('Feest & festival');
   });
 });
