@@ -253,6 +253,8 @@ export function inspirationList(activities: Activity[], audience: ListAudience):
   const isPlace = (a: Activity) => a.sources[0]?.sourceId === 'vaste-plekken';
   return activities
     .filter((a) => a.rolling && !a.isTestData && a.status !== 'verlopen' && a.status !== 'geannuleerd' && matchesAudience(a, audience))
+    // Voorlezen wil je niet zien (net als in de agenda).
+    .filter((a) => !a.categories.includes('voorlezen') && !/voorlez|voorleesuur/i.test(a.title))
     .sort((x, y) => Number(isPlace(y)) - Number(isPlace(x)))
     .filter((a) => !seen.has(normalizeText(a.title)) && seen.add(normalizeText(a.title)))
     .sort((x, y) => x.title.localeCompare(y.title, 'nl'));

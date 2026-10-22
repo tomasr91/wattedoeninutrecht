@@ -106,7 +106,7 @@ export function OngoingList({ lists, today, onOpen, empty, expected = [] }: { li
 }
 
 /** Volgorde van de groepen in Altijd; andere soorten volgen op alfabet. */
-const ALWAYS_ORDER = ['Spelen binnen', 'Spelen buiten', 'Natuur & dieren', 'Museum', 'Expositie', 'Zwemmen', 'Sport', 'Rondleiding'];
+const ALWAYS_ORDER = ['Spelen binnen', 'Spelen buiten', 'Natuur & dieren', 'Museum', 'Doe-activiteit', 'Sterrenkijken', 'Belevenis', 'Expositie', 'Zwemmen', 'Sport', 'Rondleiding'];
 
 /** Vaste uitjes zonder einddatum: kan altijd. Inspiratie, los van de agenda, per soort; dichtbij eerst. */
 export function AlwaysList({ items, onOpen, empty }: { items: ListItem[]; onOpen: (i: ListItem) => void; empty: string }) {

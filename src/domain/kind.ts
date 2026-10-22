@@ -92,8 +92,30 @@ export function canonicalKind(k: string): string {
   return KIND_ALIASES[k] ?? k;
 }
 
+/**
+ * Bijstellen van een te grof bronlabel aan de hand van de titel. UITagenda zet bv. alles van musea onder
+ * "Musea & exposities", ook een doolhof, een sterrenkijkavond of een rondleiding.
+ */
+const REFINE: { from: RegExp; test: RegExp; to: string }[] = [
+  { from: /./, test: /voorlez|voorleesuur|prentenboek/, to: 'Voorlezen' },
+  { from: /^(expositie|museum|lezing|festival|theater)$/i, test: /rondleiding|\btour\b|podwalk|stadswandeling|wandelroute|puzzeltocht|speurtocht/, to: 'Rondleiding' },
+  { from: /^(expositie|museum)$/i, test: /familiespel|doe-expo|archeolab|weekendactiviteit|kunstlokaal|verjaardagsfeest|mysterybox|voetzoekertjes|spoordieren|kinderactiviteit|workshop/, to: 'Doe-activiteit' },
+  { from: /^(expositie|museum)$/i, test: /kijkavond|sterrenkijk|zon op zondag|sonnenborgh by night/, to: 'Sterrenkijken' },
+  { from: /^(expositie)$/i, test: /museum\b|museum$|^domunder$|^dom ?under/, to: 'Museum' },
+  { from: /^(expositie|museum)$/i, test: /doolhof|\bmaze\b|immersive|beleving/, to: 'Belevenis' },
+];
+
 /** Wat is het? Eerst het label van de bron, dan de categorie, dan woorden in de titel. */
-export function kindLabel(a: Pick<Activity, 'kind' | 'categories'> & { title?: string }): string {
+export function kindLabel(a: Pick<Activity, 'kind' | 'categories'> & { title?: string; start?: string }): string {
+  const base = baseKindLabel(a);
+  const t = a.title?.toLowerCase() ?? '';
+  for (const r of REFINE) if (r.from.test(base) && r.test.test(t)) return r.to;
+  // Een "expositie" die pas om 22:00 begint, is een clubavond (bv. Canvas in Tivoli).
+  if (base === 'Expositie' && a.start && a.start.slice(11, 13) >= '22') return 'Uitgaan';
+  return base;
+}
+
+function baseKindLabel(a: Pick<Activity, 'kind' | 'categories'> & { title?: string }): string {
   if (a.kind) return canonicalKind(a.kind);
   for (const c of a.categories) if (CATEGORY_KIND[c]) return canonicalKind(CATEGORY_KIND[c]!);
   const t = a.title?.toLowerCase();
