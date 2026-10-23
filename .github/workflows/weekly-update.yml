@@ -1,6 +1,6 @@
 # Dagelijkse update + publicatie op GitHub Pages.
 #
-#  - Elke nacht (02:17 UTC = 03:17 in de winter, 04:17 in de zomer), met een reserve-run om 05:47 UTC als GitHub de eerste overslaat:
+#  - Elke nacht (02:17 UTC = 03:17 in de winter, 04:17 in de zomer), met reserve-runs om 03:47, 04:47 en 05:47 UTC als GitHub de eerste overslaat:
 #    bronnen ophalen → SQLite bijwerken → JSON exporteren → committen → app bouwen → publiceren.
 #  - Handmatig starten kan via Actions → "Dagelijkse update" → Run workflow
 #    (optioneel met één bron, bv. "bibliotheek-utrecht").
@@ -15,7 +15,10 @@ name: Dagelijkse update
 on:
   schedule:
     - cron: '17 2 * * *'
-    # Reserve: GitHub slaat geplande runs soms over. Deze run doet alleen iets als er vannacht nog niets is bijgewerkt.
+    # Reserves: GitHub slaat geplande runs soms over of start ze uren later. Een reserve doet alleen iets
+    # als er vandaag (UTC) nog niets is bijgewerkt.
+    - cron: '47 3 * * *'
+    - cron: '47 4 * * *'
     - cron: '47 5 * * *'
   workflow_dispatch:
     inputs:
@@ -50,10 +53,10 @@ jobs:
         id: guard
         run: |
           skip=false
-          if [ "${{ github.event.schedule }}" = "47 5 * * *" ]; then
+          if [ -n "${{ github.event.schedule }}" ] && [ "${{ github.event.schedule }}" != "17 2 * * *" ]; then
             last=$(node -e "const s=require('./public/data/status.json');console.log(s.lastSuccessfulRun||'')")
-            if [ -n "$last" ] && [ $(( $(date -u +%s) - $(date -u -d "$last" +%s) )) -lt 72000 ]; then
-              echo "Vannacht al bijgewerkt ($last); reserve-run slaat over."
+            if [ "${last:0:10}" = "$(date -u +%F)" ]; then
+              echo "Vandaag al bijgewerkt ($last); reserve-run slaat over."
               skip=true
             fi
           fi
