@@ -90,7 +90,10 @@ const WD = ['ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'];
  * Speeltijden-blok: "Datum doorlopend · Tijd vr t/m za: 20:30" (vaste reeks zonder einddatum)
  * of "Tijd zo 25 okt: 15:00 zo 22 nov: 15:00 …" (losse data binnen een periode).
  */
-export function parsePlaytimes(text: string, today: string): { rolling?: boolean; note?: string; occurrences?: string[] } {
+export function parsePlaytimes(
+  text: string,
+  today: string,
+): { rolling?: boolean; note?: string; occurrences?: string[]; single?: string; time?: string; endTime?: string } {
   const t = cleanText(text).toLowerCase();
   const datum = t.match(/datum\s+(.*?)(?=\s+tijd\b|$)/)?.[1] ?? '';
   const tijd = t.match(/\btijd\s+(.*?)(?=voeg toe|$)/)?.[1] ?? '';
@@ -108,6 +111,14 @@ export function parsePlaytimes(text: string, today: string): { rolling?: boolean
     const order = [...days].sort((x, y) => x - y);
     const dayText = order.length >= 6 ? 'Dagelijks' : order.length === 1 ? `Elke ${['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'][order[0]]}` : `Elke ${order.slice(0, -1).map((d) => WD[d]).join(', ')} en ${WD[order.at(-1)!]}`;
     return { rolling: true, note: times.size === 1 ? `${dayText} · ${[...times][0]}` : dayText };
+  }
+  // "Datum do 26 nov · Tijd 18:00": de bovenkant van de pagina noemt de hele reeks (18 jun t/m 26 nov),
+  // maar het Datum-veld alleen wat er nog komt. Dat geldt.
+  if (datum && !/t\/m|tot en met|\s[-–]\s/.test(datum)) {
+    const ds = [...new Set([...datum.matchAll(/(?<![a-z])(?:ma|di|wo|do|vr|za|zo)\s+(\d{1,2}\s+[a-z]{3,9})/g)].map((m) => parseDutchDate(m[1], today)).filter((d): d is string => !!d))].sort();
+    const tm = parseTimes(tijd);
+    if (ds.length === 1) return { single: ds[0], time: tm.start, endTime: tm.end };
+    if (ds.length >= 2) return { occurrences: ds, note: recurrenceLabel(ds, ds.map(() => tm.start ?? '')) };
   }
   const dates: string[] = [];
   const times: string[] = [];
@@ -141,6 +152,9 @@ export function detailStillFresh(hit: { fetchedAt: string; value: RawEvent }, id
   const maxAge = 5 + (h % 5);
   if (diffDays(dateOf(hit.fetchedAt), today) >= maxAge) return false;
   if (hit.value.rolling && dateOf(hit.value.end ?? hit.value.start) < today) return false;
+  // Opgeslagen vóór het Datum-veld werd gelezen (24-10-2026): meerdaagse items één keer opnieuw lezen.
+  const v = hit.value;
+  if (!v.datumField && v.end && dateOf(v.end) !== dateOf(v.start)) return false;
   return true;
 }
 
@@ -210,6 +224,11 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
     // Losse data binnen een periode: eerste t/m laatste datum, met de data erbij.
     start = combine(play.occurrences[0], start.length > 10 ? start.slice(11) : undefined);
     end = play.occurrences.at(-1);
+  } else if (play.single) {
+    // Eén (resterende) datum: geen periode.
+    start = combine(play.single, play.time ?? (start.length > 10 ? start.slice(11) : undefined));
+    end = play.endTime ? combine(play.single, play.endTime) : undefined;
+    allDay = !(play.time ?? start.length > 10);
   }
 
   // Plek uit "Praktische informatie": <span>Naam<br>Straat 1<br>1234 AB Plaats <a>Bekijk locatie</a></span>
@@ -292,6 +311,7 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
     ongoing: (isRange && allDay) || !!play.rolling || undefined,
     recurrenceNote: play.note,
     rolling: play.rolling,
+    datumField: true,
     occurrences: play.occurrences,
     venueName,
     address,

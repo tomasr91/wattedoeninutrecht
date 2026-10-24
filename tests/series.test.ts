@@ -262,3 +262,13 @@ describe('festival: label naar wat je gaat doen', () => {
     expect(kindLabel({ title: 'nijntje op de fiets 2+ – Klein Amsterdam Producties | Prentenboekjesfestival', kind: 'Jeugdtheater', categories: ['voorlezen', 'theater'] })).toBe('Kindervoorstelling');
   });
 });
+
+describe('UITagenda: Datum-veld met één resterende datum', () => {
+  it('Happen met Grappen: alleen do 26 nov, niet de hele reeks', () => {
+    expect(parsePlaytimes('Entree € 39,50 Datum do 26 nov Tijd 18:00 Voeg toe aan je kalender:', '2026-10-24')).toEqual({ single: '2026-11-26', time: '18:00', endTime: undefined });
+  });
+  it('meerdere losse data in het Datum-veld', () => {
+    const r = parsePlaytimes('Datum do 26 nov, do 10 dec Tijd 20:00 Voeg toe', '2026-10-24');
+    expect(r.occurrences).toEqual(['2026-11-26', '2026-12-10']);
+  });
+});

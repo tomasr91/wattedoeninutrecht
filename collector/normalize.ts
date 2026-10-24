@@ -14,6 +14,8 @@ import { dateOf, formatShortDate, timeOf } from '../src/domain/dates.ts';
 import { lookupVenue } from './venues.ts';
 
 export interface RawEvent {
+  /** UITagenda: Datum-veld van de speeltijden is gelezen (alleen voor de detailcache). */
+  datumField?: boolean;
   sourceId: string;
   sourceName: string;
   sourceEventId?: string;
