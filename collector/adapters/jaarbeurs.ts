@@ -1,5 +1,7 @@
 /**
- * Jaarbeurs — alleen publieksevenementen voor kinderen en gezinnen (LEGO World, Disney On Ice, Winterspektakel …).
+ * Jaarbeurs — alle publieksevenementen. Wat op kinderen of gezinnen wijst (LEGO World, Disney On Ice,
+ * Winterspektakel …) staat bij Kinderen, de rest (Vakantiebeurs, Comic Con, hobbybeurzen …) bij Volwassenen.
+ * Zakelijke en gastevenementen zonder publieksdeel vallen af.
  *
  * Werkwijze (vastgesteld 21-10-2026):
  *  - Agenda: /agenda, items linken naar /agenda-item/<slug>, met datum(bereik) en labels
@@ -66,8 +68,21 @@ export function isFamilyEvent(i: Pick<JbItem, 'title' | 'text' | 'isPublic'>, ke
   return keywords.some((k) => new RegExp(`\\b${k}`, 'i').test(hay));
 }
 
-export function jbToRaw(i: JbItem, nowIso: string): RawEvent | undefined {
+/** Korte tekst op de kaart, zonder titel, datum en labels. */
+export function jbSummary(i: Pick<JbItem, 'title' | 'text'>): string | undefined {
+  const t = cleanText(
+    i.text
+      .replace(i.title, ' ')
+      .replace(new RegExp(`\\d{1,2}(?:\\s+${MONTH})?(?:\\s+\\d{4})?\\s*[–-]\\s*\\d{1,2}\\s+${MONTH}\\s+\\d{4}`, 'gi'), ' ')
+      .replace(new RegExp(`\\b\\d{1,2}\\s+${MONTH}\\s+\\d{4}`, 'gi'), ' ')
+      .replace(/publieksevenement|gastevenement|zakelijk evenement|bekijk|meer info|lees meer|tickets/gi, ' '),
+  );
+  return t.length >= 30 ? t.slice(0, 220) : undefined;
+}
+
+export function jbToRaw(i: JbItem, nowIso: string, keywords = DEFAULT_FAMILY_KEYWORDS): RawEvent | undefined {
   if (!i.start) return undefined;
+  const family = isFamilyEvent(i, keywords);
   return {
     sourceId: ID,
     sourceName: NAME,
@@ -80,8 +95,10 @@ export function jbToRaw(i: JbItem, nowIso: string): RawEvent | undefined {
     venueName: 'Jaarbeurs',
     address: 'Jaarbeursplein 6, 3521 AL Utrecht',
     locality: 'Jaarbeurs',
-    audiences: ['gezin', 'kinderen'],
-    kind: 'Beurs & evenement',
+    audiences: family ? ['gezin', 'kinderen'] : ['volwassenen'],
+    // Gezinsevenement (Winterspektakel, Team Challenge): evenement; anders een publieksbeurs.
+    kind: family ? 'Beurs & evenement' : 'Beurs',
+    summary: jbSummary(i),
     indoor: 'binnen',
     bookingText: 'tickets',
     extraUncertainties: ['Tijden, prijs en leeftijd staan op de bronpagina'],
@@ -99,9 +116,10 @@ export const jaarbeurs: SourceAdapter = {
     const keywords = (ctx.options.familyKeywords as string[] | undefined) ?? DEFAULT_FAMILY_KEYWORDS;
     const items = parseJbList(await fetchText(`${BASE}/agenda`), ctx.today);
     const events = items
-      .filter((i) => isFamilyEvent(i, keywords))
-      .map((i) => jbToRaw(i, ctx.nowIso))
+      .filter((i) => i.isPublic && !/18\+|kamasutra|erotiek/i.test(`${i.title} ${i.text}`))
+      .map((i) => jbToRaw(i, ctx.nowIso, keywords))
       .filter((e): e is RawEvent => !!e && (e.end ?? e.start) >= ctx.today && e.start <= ctx.until);
-    return { events, coverage: { from: ctx.today, to: ctx.until }, notes: `${events.length} gezinsevenementen van ${items.length}` };
+    const fam = events.filter((e) => e.audiences?.includes('kinderen')).length;
+    return { events, coverage: { from: ctx.today, to: ctx.until }, notes: `${events.length} publieksevenementen van ${items.length} (${fam} voor gezinnen)` };
   },
 };

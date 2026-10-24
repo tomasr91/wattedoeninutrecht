@@ -26,6 +26,7 @@ const TITLE_KIND: [RegExp, string][] = [
   [/taalcaf|scheidingscaf|rouw|lotgenot|praatgroep|mannentafel|vrouwentafel|burn-?out|spreekuur|inloop|troost|alle talen/, 'Ontmoeting'],
   [/studium generale|podcast/, 'Lezing'],
   [/diner|proeverij|proeven|wijn|\bbier|beaujolais|tap ?takeover|voorproevers|food|brunch|high tea|spijs/, 'Eten & drinken'],
+  [/\bbeurs\b|beurs$|vakantiebeurs|comic ?con|huishoudbeurs|\bexpo\b/, 'Beurs'],
   [/kitsch of kunst|wintermarkt|winter market|feestmarkt|kerstmarkt|vlooienmarkt|rommelmarkt/, 'Markt'],
   [/pechakucha|\btalk\b|lezing|debat|gesprek|mannentafel|vrouwentafel|filosof|boekpresentatie|presentatie|signeer|schrijver|auteur|interview/, 'Lezing'],
   [/open mic|open podium|poetry|spoken word|storytelling|voordracht/, 'Voorstelling'],
@@ -102,7 +103,7 @@ const NOT_MUSIC: Record<string, string> = { Jeugdtheater: 'Kindertheater', Culin
 export const KINDS = [
   'Kindervoorstelling', 'Theater', 'Dans', 'Comedy', 'Concert', 'Film', 'Lezing', 'Workshop', 'Speurtocht & spel',
   'Rondleiding', 'Sport & zwemmen', 'Spelen', 'Natuur & dieren', 'Museum', 'Expositie', 'Feest & festival', 'Markt',
-  'Uitgaan', 'Eten & drinken', 'Ontmoeting',
+  'Uitgaan', 'Eten & drinken', 'Ontmoeting', 'Beurs',
 ] as const;
 
 /** Oude en fijnere labels → het label uit KINDS. */
@@ -184,7 +185,8 @@ const FESTIVAL_KIND: [RegExp, string][] = [
   [/wijn|borrel|bier|food|proef|culinair|diner/, 'Eten & drinken'],
   [/winterwinkel|markt|fair\b|braderie/, 'Markt'],
   [/po[eë]zie|literatuur|boeken|lezing|debat/, 'Lezing'],
-  [/comic ?con|beurs|challenge|spektakel/, 'Feest & festival'],
+  [/comic ?con|beurs|fair\b/, 'Beurs'],
+  [/challenge|spektakel/, 'Feest & festival'],
   [/smartlap|guess who|no man.s land|jazz|muziekfestival|concert|\bdj\b|music/, 'Concert'],
 ];
 

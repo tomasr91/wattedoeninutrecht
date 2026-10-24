@@ -233,4 +233,16 @@ describe('Jaarbeurs (synthetische HTML)', () => {
     ]);
     expect(normalize(jbToRaw(fam[0], NOW)!).zone).toBe('utrecht');
   });
+  it('overige publieksevenementen bij volwassenen als Beurs; zakelijk valt af', async () => {
+    const { parseJbList, jbToRaw } = await import('../collector/adapters/jaarbeurs');
+    const { kindLabel } = await import('../src/domain/kind');
+    const items = parseJbList(html, TODAY).filter((i) => i.isPublic);
+    expect(items.map((i) => i.slug)).not.toContain('logistica');
+    const esg = normalize(jbToRaw(items.find((i) => i.slug === 'esg-days')!, NOW)!);
+    expect(esg.audiences).toEqual(['volwassenen']);
+    expect(kindLabel(esg)).toBe('Beurs');
+    const winter = normalize(jbToRaw(items.find((i) => i.slug === 'het-utrechtse-winterspektakel')!, NOW)!);
+    expect(winter.audiences).toContain('kinderen');
+    expect(kindLabel(winter)).toBe('Feest & festival');
+  });
 });
