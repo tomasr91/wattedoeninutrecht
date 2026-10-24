@@ -1,0 +1,60 @@
+=== www.uitagendautrecht.nl
+ 0 s:CN = www.uitagendautrecht.nl
+   i:C = US, O = Let's Encrypt, CN = YR2
+   v:NotBefore: Oct  1 08:35:35 2026 GMT; NotAfter: Dec 30 08:35:34 2026 GMT
+ 1 s:C = US, O = Let's Encrypt, CN = YR2
+   i:C = US, O = ISRG, CN = Root YR
+   v:NotBefore: Sep  3 00:00:00 2025 GMT; NotAfter: Sep  2 23:59:59 2028 GMT
+ 2 s:C = US, O = ISRG, CN = Root YR
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   v:NotBefore: May 13 00:00:00 2026 GMT; NotAfter: Sep  2 23:59:59 2032 GMT
+Verify return code: 0 (ok)
+curl: 200 https://www.uitagendautrecht.nl/ ip=45.135.59.238
+45.135.59.238   STREAM uitagendautrecht.nl
+45.135.59.238   DGRAM  
+45.135.59.238   RAW    
+=== www.kasteeldehaar.nl
+ 0 s:CN = kasteeldehaar.nl
+   i:C = US, O = Let's Encrypt, CN = YR1
+   v:NotBefore: Sep 24 23:34:43 2026 GMT; NotAfter: Dec 23 23:34:42 2026 GMT
+ 1 s:C = US, O = Let's Encrypt, CN = YR1
+   i:C = US, O = ISRG, CN = Root YR
+   v:NotBefore: Sep  3 00:00:00 2025 GMT; NotAfter: Sep  2 23:59:59 2028 GMT
+ 2 s:C = US, O = ISRG, CN = Root YR
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   v:NotBefore: May 13 00:00:00 2026 GMT; NotAfter: Sep  2 23:59:59 2032 GMT
+Verify return code: 0 (ok)
+curl: 200 https://www.kasteeldehaar.nl/ ip=65.21.27.51
+65.21.27.51     STREAM www.kasteeldehaar.nl
+65.21.27.51     DGRAM  
+65.21.27.51     RAW    
+=== www.jaarbeurs.nl
+ 0 s:CN = jaarbeurs.nl
+   i:C = US, O = Let's Encrypt, CN = YR1
+   v:NotBefore: Sep 11 03:12:52 2026 GMT; NotAfter: Dec 10 03:12:51 2026 GMT
+ 1 s:C = US, O = Let's Encrypt, CN = YR1
+   i:C = US, O = ISRG, CN = Root YR
+   v:NotBefore: Sep  3 00:00:00 2025 GMT; NotAfter: Sep  2 23:59:59 2028 GMT
+ 2 s:C = US, O = ISRG, CN = Root YR
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   v:NotBefore: May 13 00:00:00 2026 GMT; NotAfter: Sep  2 23:59:59 2032 GMT
+Verify return code: 0 (ok)
+curl: 200 https://www.jaarbeurs.nl/ ip=87.233.245.153
+87.233.245.153  STREAM jaarbeurs.nl
+87.233.245.153  DGRAM  
+87.233.245.153  RAW    
+=== jaarbeurs.nl
+ 0 s:CN = jaarbeurs.nl
+   i:C = US, O = Let's Encrypt, CN = YR1
+   v:NotBefore: Sep 11 03:12:52 2026 GMT; NotAfter: Dec 10 03:12:51 2026 GMT
+ 1 s:C = US, O = Let's Encrypt, CN = YR1
+   i:C = US, O = ISRG, CN = Root YR
+   v:NotBefore: Sep  3 00:00:00 2025 GMT; NotAfter: Sep  2 23:59:59 2028 GMT
+ 2 s:C = US, O = ISRG, CN = Root YR
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   v:NotBefore: May 13 00:00:00 2026 GMT; NotAfter: Sep  2 23:59:59 2032 GMT
+Verify return code: 0 (ok)
+curl: 200 https://www.jaarbeurs.nl/ ip=87.233.245.153
+87.233.245.153  STREAM jaarbeurs.nl
+87.233.245.153  DGRAM  
+87.233.245.153  RAW    

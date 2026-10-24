@@ -1,0 +1,101 @@
+{
+  "at": "2026-10-24T07:33:13.003Z",
+  "userAgent": "UtrechtFamilyAgendaBot/0.1 (persoonlijke gezinsagenda; )",
+  "results": [
+    {
+      "url": "https://www.jaarbeurs.nl/agenda-item/spellenspektakel-2026",
+      "robots": {
+        "status": 200,
+        "text": "User-agent: *\r\nDisallow: /wp-admin/\r\nDisallow: /offerte-aanvragen/\r\nAllow: /wp-admin/admin-ajax.php\r\n\r\nSitemap: https://www.jaarbeurs.nl/sitemap_index.xml"
+      },
+      "page": {
+        "url": "https://www.jaarbeurs.nl/agenda-item/spellenspektakel-2026",
+        "status": 200,
+        "finalUrl": "https://www.jaarbeurs.nl/agenda-item/spellenspektakel-2026",
+        "headers": {
+          "content-type": "text/html; charset=UTF-8"
+        },
+        "length": 857167,
+        "title": "Spellenspektakel - 7 &amp; 8 november 2026 - Jaarbeurs Utrecht",
+        "start": "<!DOCTYPE html> <html lang=\"nl-NL\" prefix=\"og: https://ogp.me/ns#\" class=\"no-js\"> <head> <script> if (typeof document !== 'undefined' && typeof document.documentElement !== 'undefined') { document.documentElement.classList.remove('no-js'); document.documentElement.classList.add('js'); } </script> <title> Spellenspektakel - 7 &amp; 8 november 2026 - Jaarbeurs Utrecht </title> <meta charset=\"UTF-8\">",
+        "savedAs": "diag-1.html"
+      }
+    },
+    {
+      "url": "https://www.jaarbeurs.nl/agenda-item/disney-on-ice-presenteert-road-trip-adventures",
+      "robots": {
+        "status": 200,
+        "text": "User-agent: *\r\nDisallow: /wp-admin/\r\nDisallow: /offerte-aanvragen/\r\nAllow: /wp-admin/admin-ajax.php\r\n\r\nSitemap: https://www.jaarbeurs.nl/sitemap_index.xml"
+      },
+      "page": {
+        "url": "https://www.jaarbeurs.nl/agenda-item/disney-on-ice-presenteert-road-trip-adventures",
+        "status": 200,
+        "finalUrl": "https://www.jaarbeurs.nl/agenda-item/disney-on-ice-presenteert-road-trip-adventures",
+        "headers": {
+          "content-type": "text/html; charset=UTF-8"
+        },
+        "length": 857283,
+        "title": "Disney On Ice presenteert Road Trip Adventures - Jaarbeurs",
+        "start": "<!DOCTYPE html> <html lang=\"nl-NL\" prefix=\"og: https://ogp.me/ns#\" class=\"no-js\"> <head> <script> if (typeof document !== 'undefined' && typeof document.documentElement !== 'undefined') { document.documentElement.classList.remove('no-js'); document.documentElement.classList.add('js'); } </script> <title> Disney On Ice presenteert Road Trip Adventures - Jaarbeurs </title> <meta charset=\"UTF-8\"> <me",
+        "savedAs": "diag-2.html"
+      }
+    },
+    {
+      "url": "https://www.jaarbeurs.nl/agenda-item/verzameljaarbeurs-najaarseditie-2026",
+      "robots": {
+        "status": 200,
+        "text": "User-agent: *\r\nDisallow: /wp-admin/\r\nDisallow: /offerte-aanvragen/\r\nAllow: /wp-admin/admin-ajax.php\r\n\r\nSitemap: https://www.jaarbeurs.nl/sitemap_index.xml"
+      },
+      "page": {
+        "url": "https://www.jaarbeurs.nl/agenda-item/verzameljaarbeurs-najaarseditie-2026",
+        "status": 200,
+        "finalUrl": "https://www.jaarbeurs.nl/agenda-item/verzameljaarbeurs-najaarseditie-2026",
+        "headers": {
+          "content-type": "text/html; charset=UTF-8"
+        },
+        "length": 845523,
+        "title": "VerzamelJaarbeurs Najaarseditie 2026 - Jaarbeurs",
+        "start": "<!DOCTYPE html> <html lang=\"nl-NL\" prefix=\"og: https://ogp.me/ns#\" class=\"no-js\"> <head> <script> if (typeof document !== 'undefined' && typeof document.documentElement !== 'undefined') { document.documentElement.classList.remove('no-js'); document.documentElement.classList.add('js'); } </script> <title> VerzamelJaarbeurs Najaarseditie 2026 - Jaarbeurs </title> <meta charset=\"UTF-8\"> <meta name=\"v",
+        "savedAs": "diag-3.html"
+      }
+    },
+    {
+      "url": "https://www.jaarbeurs.nl/agenda-item/het-utrechtse-winterspektakel",
+      "robots": {
+        "status": 200,
+        "text": "User-agent: *\r\nDisallow: /wp-admin/\r\nDisallow: /offerte-aanvragen/\r\nAllow: /wp-admin/admin-ajax.php\r\n\r\nSitemap: https://www.jaarbeurs.nl/sitemap_index.xml"
+      },
+      "page": {
+        "url": "https://www.jaarbeurs.nl/agenda-item/het-utrechtse-winterspektakel",
+        "status": 200,
+        "finalUrl": "https://www.jaarbeurs.nl/agenda-item/het-utrechtse-winterspektakel",
+        "headers": {
+          "content-type": "text/html; charset=UTF-8"
+        },
+        "length": 862786,
+        "title": "Het Utrechtse Winterspektakel - Jaarbeurs",
+        "start": "<!DOCTYPE html> <html lang=\"nl-NL\" prefix=\"og: https://ogp.me/ns#\" class=\"no-js\"> <head> <script> if (typeof document !== 'undefined' && typeof document.documentElement !== 'undefined') { document.documentElement.classList.remove('no-js'); document.documentElement.classList.add('js'); } </script> <title> Het Utrechtse Winterspektakel - Jaarbeurs </title> <meta charset=\"UTF-8\"> <meta name=\"viewport",
+        "savedAs": "diag-4.html"
+      }
+    },
+    {
+      "url": "https://www.jaarbeurs.nl/agenda-item/metakids-team-challenge",
+      "robots": {
+        "status": 200,
+        "text": "User-agent: *\r\nDisallow: /wp-admin/\r\nDisallow: /offerte-aanvragen/\r\nAllow: /wp-admin/admin-ajax.php\r\n\r\nSitemap: https://www.jaarbeurs.nl/sitemap_index.xml"
+      },
+      "page": {
+        "url": "https://www.jaarbeurs.nl/agenda-item/metakids-team-challenge",
+        "status": 200,
+        "finalUrl": "https://www.jaarbeurs.nl/agenda-item/metakids-team-challenge",
+        "headers": {
+          "content-type": "text/html; charset=UTF-8"
+        },
+        "length": 841631,
+        "title": "Metakids Team Challenge - Jaarbeurs",
+        "start": "<!DOCTYPE html> <html lang=\"nl-NL\" prefix=\"og: https://ogp.me/ns#\" class=\"no-js\"> <head> <script> if (typeof document !== 'undefined' && typeof document.documentElement !== 'undefined') { document.documentElement.classList.remove('no-js'); document.documentElement.classList.add('js'); } </script> <title> Metakids Team Challenge - Jaarbeurs </title> <meta charset=\"UTF-8\"> <meta name=\"viewport\" cont",
+        "savedAs": "diag-5.html"
+      }
+    }
+  ]
+}
