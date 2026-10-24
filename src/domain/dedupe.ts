@@ -142,13 +142,17 @@ export function mergeActivities(x: Activity, y: Activity): Activity {
     if (!sources.some((q) => q.sourceId === src.sourceId && q.url === src.url)) sources.push(src);
   }
   const lastChecked = [p.lastChecked, s.lastChecked].sort().at(-1)!;
-  const start = timeOf(p.start) ? p.start : timeOf(s.start) ? s.start : p.start;
+  // Een bron die bewust geen begintijd geeft omdat de tijden per dag verschillen (met openingstijden erbij),
+  // gaat voor: anders zou de tijd van dag 1 op de kaart staan alsof die elke dag geldt.
+  const varies = [p, s].find((x) => x.openingNote && !timeOf(x.start) && x.end && dateOf(x.end) !== dateOf(x.start));
+  const start = varies ? varies.start : timeOf(p.start) ? p.start : timeOf(s.start) ? s.start : p.start;
   const priceKnown = p.price.kind !== 'onbekend' || s.price.kind !== 'onbekend';
   return {
     ...p,
     start,
     end: p.end ?? s.end,
     summary: p.summary ?? s.summary,
+    openingNote: p.openingNote ?? s.openingNote,
     venue: p.venue.geoPrecision === 'unknown' && s.venue.geoPrecision !== 'unknown' ? s.venue : p.venue,
     age: {
       ...s.age,
