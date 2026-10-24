@@ -1,6 +1,6 @@
 {
-  "lastSuccessfulRun": "2026-10-24T06:28:06.307Z",
-  "lastRun": "2026-10-24T06:28:06.307Z",
+  "lastSuccessfulRun": "2026-10-24T06:33:31.016Z",
+  "lastRun": "2026-10-24T06:33:31.016Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
@@ -45,10 +45,10 @@
       "sourceName": "Jaarbeurs",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-24T06:28:03.666Z",
-      "lastSuccess": "2026-10-24T06:28:03.666Z",
-      "fetched": 17,
-      "notes": "17 publieksevenementen van 42 (3 voor gezinnen)"
+      "lastAttempt": "2026-10-24T06:33:27.656Z",
+      "lastSuccess": "2026-10-24T06:33:27.656Z",
+      "fetched": 8,
+      "notes": "8 publieksevenementen van 42 (3 voor gezinnen)"
     },
     {
       "sourceId": "kasteel-de-haar",
@@ -156,7 +156,7 @@
   ],
   "totals": {
     "active": 1698,
-    "added": 14,
+    "added": 0,
     "updated": 0,
     "cancelled": 0,
     "expired": 0,
