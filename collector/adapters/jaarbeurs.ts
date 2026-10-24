@@ -25,6 +25,22 @@ export const JB_LINK = /\/agenda-item\/([a-z0-9-]+)\/?$/;
 const MONTH = '(?:jan|feb|mrt|maart|apr|mei|jun|jul|aug|sep|okt|nov|dec)[a-z]*';
 export const DEFAULT_FAMILY_KEYWORDS = ['kind', 'kinderen', 'kids', 'familie', 'gezin', 'lego', 'disney', 'winterspektakel', 'circus', 'speelgoed', 'sinterklaas', 'kerst'];
 
+/**
+ * "Publieksevenement" betekent bij de Jaarbeurs ook vakcongressen en studiebeurzen. Dat zijn geen uitjes:
+ * die laten we weg (getest op de agenda van 24-10-2026).
+ */
+export const DEFAULT_EXCLUDE = [
+  'conference', 'congres', 'summit', 'professionals', 'business', 'marketing', 'scrum', 'techorama', 'esg days',
+  'overtuigen', 'studiekeuze', 'master fair', 'buitenlandbeurs', 'go-abroad', 'opleidingen', 'carrière', 'vacature',
+  'the send',
+];
+
+export function isOuting(i: Pick<JbItem, 'title' | 'text'>, exclude = DEFAULT_EXCLUDE): boolean {
+  const hay = `${i.title} ${i.text}`.toLowerCase();
+  if (/18\+|kamasutra|erotiek/.test(hay)) return false;
+  return !exclude.some((k) => hay.includes(k.toLowerCase()));
+}
+
 export interface JbItem {
   slug: string;
   url: string;
@@ -97,7 +113,7 @@ export function jbToRaw(i: JbItem, nowIso: string, keywords = DEFAULT_FAMILY_KEY
     locality: 'Jaarbeurs',
     audiences: family ? ['gezin', 'kinderen'] : ['volwassenen'],
     // Gezinsevenement (Winterspektakel, Team Challenge): evenement; anders een publieksbeurs.
-    kind: family ? 'Beurs & evenement' : 'Beurs',
+    kind: family ? 'Beurs & evenement' : /wielren|sport|hardloop|schaats|fiets/i.test(`${i.title} ${i.text}`) ? 'Sport' : 'Beurs',
     summary: jbSummary(i),
     indoor: 'binnen',
     bookingText: 'tickets',
@@ -116,7 +132,7 @@ export const jaarbeurs: SourceAdapter = {
     const keywords = (ctx.options.familyKeywords as string[] | undefined) ?? DEFAULT_FAMILY_KEYWORDS;
     const items = parseJbList(await fetchText(`${BASE}/agenda`), ctx.today);
     const events = items
-      .filter((i) => i.isPublic && !/18\+|kamasutra|erotiek/i.test(`${i.title} ${i.text}`))
+      .filter((i) => i.isPublic && isOuting(i, (ctx.options.excludeKeywords as string[] | undefined) ?? DEFAULT_EXCLUDE))
       .map((i) => jbToRaw(i, ctx.nowIso, keywords))
       .filter((e): e is RawEvent => !!e && (e.end ?? e.start) >= ctx.today && e.start <= ctx.until);
     const fam = events.filter((e) => e.audiences?.includes('kinderen')).length;

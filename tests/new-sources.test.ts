@@ -244,5 +244,9 @@ describe('Jaarbeurs (synthetische HTML)', () => {
     const winter = normalize(jbToRaw(items.find((i) => i.slug === 'het-utrechtse-winterspektakel')!, NOW)!);
     expect(winter.audiences).toContain('kinderen');
     expect(kindLabel(winter)).toBe('Feest & festival');
+    const { isOuting } = await import('../collector/adapters/jaarbeurs');
+    expect(isOuting({ title: 'Scrum Day Europe 2026', text: 'community event' })).toBe(false);
+    expect(isOuting({ title: 'Studiekeuzebeurs Midden 2026', text: '' })).toBe(false);
+    expect(isOuting({ title: 'CardCon 2026', text: 'Trefpunt voor fans van trading card games' })).toBe(true);
   });
 });
