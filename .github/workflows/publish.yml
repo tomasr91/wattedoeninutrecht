@@ -6,7 +6,7 @@ name: Publiceren
 on:
   push:
     branches: [main]
-    paths-ignore: ['**.md', 'docs/**']
+    paths-ignore: ['**.md', 'docs/**', '.github/run-request']
   workflow_dispatch:
 
 permissions:

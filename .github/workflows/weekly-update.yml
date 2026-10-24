@@ -20,6 +20,11 @@ on:
     - cron: '47 3 * * *'
     - cron: '47 4 * * *'
     - cron: '47 5 * * *'
+  # Wekker van buitenaf: de geplande Claude-taak "Ochtendcontrole update" zet de datum in dit bestand als er
+  # vandaag nog niets is bijgewerkt. Een push start direct, de klok van GitHub start soms uren te laat of niet.
+  push:
+    branches: [main]
+    paths: ['.github/run-request']
   workflow_dispatch:
     inputs:
       source:
@@ -53,7 +58,7 @@ jobs:
         id: guard
         run: |
           skip=false
-          if [ -n "${{ github.event.schedule }}" ] && [ "${{ github.event.schedule }}" != "17 2 * * *" ]; then
+          if { [ -n "${{ github.event.schedule }}" ] && [ "${{ github.event.schedule }}" != "17 2 * * *" ]; } || [ "${{ github.event_name }}" = "push" ]; then
             last=$(node -e "const s=require('./public/data/status.json');console.log(s.lastSuccessfulRun||'')")
             if [ "${last:0:10}" = "$(date -u +%F)" ]; then
               echo "Vandaag al bijgewerkt ($last); reserve-run slaat over."
