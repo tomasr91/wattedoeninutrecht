@@ -250,3 +250,22 @@ describe('Jaarbeurs (synthetische HTML)', () => {
     expect(isOuting({ title: 'CardCon 2026', text: 'Trefpunt voor fans van trading card games' })).toBe(true);
   });
 });
+
+describe('Jaarbeurs detailpagina (synthetische HTML)', () => {
+  const page = (slots: string) => `<main><div class="col-md-6"><h1>[TESTDATA] Testbeurs</h1><p>Een gezellige testbeurs met honderden standhouders en veel te ontdekken.</p></div>
+    <div class="agenda__info-box"><div class="agenda__meta">${slots}</div><h5 class="agenda__tickets-starting">€13,50</h5></div></main>`;
+  it('tijden per dag, prijs en beschrijving', async () => {
+    const { parseJbDetail, withJbDetail } = await import('../collector/adapters/jaarbeurs');
+    const d = parseJbDetail(page('<div>14 nov 2026 09:00 - 17:00</div><div>15 nov 2026 09:00 - 16:00</div>'), TODAY);
+    const e = withJbDetail({ sourceId: 'jaarbeurs', sourceName: 'Jaarbeurs', url: 'u', title: 't', start: '2026-11-14', end: '2026-11-15', allDay: true }, d);
+    expect(e).toMatchObject({ start: '2026-11-14T09:00', end: '2026-11-15', priceText: 'v.a. €13,50', openingNote: 'za 14 nov 09:00–17:00; zo 15 nov 09:00–16:00' });
+    expect(e.summary).toMatch(/testbeurs/);
+  });
+  it('voorstellingen met twee tijden per dag en een paar vrije dagen', async () => {
+    const { parseJbDetail, withJbDetail } = await import('../collector/adapters/jaarbeurs');
+    const days = ['19', '20', '21', '24', '25', '26'].map((x) => `<div>${x} dec 2026 11:00 - 12:40</div><div>${x} dec 2026 15:00 - 16:40</div>`).join('');
+    const e = withJbDetail({ sourceId: 'jaarbeurs', sourceName: 'Jaarbeurs', url: 'u', title: 't', start: '2026-12-19', end: '2026-12-26', allDay: true }, parseJbDetail(page(days), TODAY));
+    expect(e.start).toBe('2026-12-19');
+    expect(e.openingNote).toBe('Voorstellingen op 6 dagen, meestal om 11:00 en 15:00 (niet op di 22 dec, wo 23 dec)');
+  });
+});
