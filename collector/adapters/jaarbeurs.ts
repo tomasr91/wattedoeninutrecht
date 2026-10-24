@@ -32,7 +32,7 @@ export const DEFAULT_FAMILY_KEYWORDS = ['kind', 'kinderen', 'kids', 'familie', '
 export const DEFAULT_EXCLUDE = [
   'conference', 'congres', 'summit', 'professionals', 'business', 'marketing', 'scrum', 'techorama', 'esg days',
   'overtuigen', 'studiekeuze', 'master fair', 'buitenlandbeurs', 'go-abroad', 'opleidingen', 'carrière', 'vacature',
-  'the send',
+  'the send', 'vakdagen', 'gebruikersdagen', 'ondernemersdagen',
 ];
 
 export function isOuting(i: Pick<JbItem, 'title' | 'text'>, exclude = DEFAULT_EXCLUDE): boolean {
