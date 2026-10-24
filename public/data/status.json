@@ -1,6 +1,6 @@
 {
-  "lastSuccessfulRun": "2026-10-24T07:43:05.104Z",
-  "lastRun": "2026-10-24T07:43:05.104Z",
+  "lastSuccessfulRun": "2026-10-24T07:48:57.120Z",
+  "lastRun": "2026-10-24T07:48:57.120Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
@@ -45,8 +45,8 @@
       "sourceName": "Jaarbeurs",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-10-24T07:42:50.402Z",
-      "lastSuccess": "2026-10-24T07:42:50.402Z",
+      "lastAttempt": "2026-10-24T07:48:43.162Z",
+      "lastSuccess": "2026-10-24T07:48:43.162Z",
       "fetched": 8,
       "notes": "8 publieksevenementen van 42 (3 voor gezinnen), 8 met details"
     },
@@ -155,11 +155,11 @@
     }
   ],
   "totals": {
-    "active": 1692,
+    "active": 1690,
     "added": 0,
-    "updated": 8,
+    "updated": 6,
     "cancelled": 0,
     "expired": 0,
-    "merged": 135
+    "merged": 137
   }
 }
