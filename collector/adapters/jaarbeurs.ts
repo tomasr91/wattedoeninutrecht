@@ -155,7 +155,8 @@ export function withJbDetail(e: RawEvent, d: JbDetail): RawEvent {
   const out: RawEvent = { ...e };
   if (d.price) out.priceText = /^v\.?a\.?/i.test(d.price) ? d.price : `v.a. ${d.price}`;
   if (d.summary) out.summary = d.summary;
-  const slots = d.days.filter((x) => x.date >= dateOnly(e.start) && x.date <= dateOnly(e.end ?? e.start));
+  // De detailpagina is leidend: de agendakaart noemt soms alleen de eerste dag.
+  const slots = d.days;
   if (!slots.length) return out;
   const dates = [...new Set(slots.map((x) => x.date))];
   const first = slots[0];
@@ -193,7 +194,6 @@ export function withJbDetail(e: RawEvent, d: JbDetail): RawEvent {
   return out;
 }
 
-const dateOnly = (s: string) => s.slice(0, 10);
 function mostCommon(xs: string[]): string {
   const c = new Map<string, number>();
   for (const x of xs) c.set(x, (c.get(x) ?? 0) + 1);
