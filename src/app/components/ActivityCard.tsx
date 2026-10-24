@@ -17,7 +17,8 @@ export function whenLabel(a: Activity, today: string): string {
   if (a.ongoing || (a.end && dateOf(a.end) !== d)) {
     if (a.endUnknown) return d <= today ? 'Doorlopend' : `Vanaf ${formatShortDate(d)}`;
     const from = d <= today ? 'Nu' : formatShortDate(d);
-    return a.end ? `${from} t/m ${formatShortDate(dateOf(a.end))}` : from;
+    const range = a.end ? `${from} t/m ${formatShortDate(dateOf(a.end))}` : from;
+    return t ? `${range} · ${t}` : range;
   }
   const day = relativeDayLabel(d, today);
   return t ? `${day} · ${t}${tEnd && dateOf(a.end!) === d ? `–${tEnd}` : ''}` : `${day} · ${a.allDay ? 'hele dag' : 'tijd zie bron'}`;
@@ -36,9 +37,11 @@ function timeLabel(item: ListItem, ongoing: boolean): string {
     return a.end ? `T/m ${formatShortDate(dateOf(a.end))}` : 'Doorlopend';
   }
   if (a.end && dateOf(a.end) !== d) {
+    // Meerdere dagen achter elkaar (bv. een voorstelling vr én za om 20:30): de bron geeft één begintijd,
+    // die geldt dan elke dag. Zonder tijd: "Loopt al" of alleen de einddatum.
     const t = timeOf(a.start);
-    const started = d < item.day ? 'Loopt al, ' : t && d === item.day ? `${t}, ` : '';
-    return `${started}t/m ${formatShortDate(dateOf(a.end))}`;
+    if (t) return `${t} · t/m ${formatShortDate(dateOf(a.end))}`;
+    return `${d < item.day ? 'Loopt al, ' : ''}t/m ${formatShortDate(dateOf(a.end))}`;
   }
   const t = timeOf(a.start);
   const tEnd = a.end ? timeOf(a.end) : undefined;
