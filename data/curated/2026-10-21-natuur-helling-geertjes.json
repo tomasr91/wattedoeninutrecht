@@ -25,35 +25,6 @@
         "De agenda van de hoeve bevat deels data van vorig jaar; alleen data die kloppen met de kalender van 2026 zijn overgenomen",
         "Prijs niet vermeld"
       ],
-      "sourceEventId": "geertjes-herfstvakantie-2026",
-      "url": "https://geertjeshoeve.nl/info/agenda/herfstvakantie/",
-      "title": "Herfstvakantie op Geertjes Hoeve (o.a. pompoen snijden)",
-      "start": "2026-10-17",
-      "allDay": true,
-      "end": "2026-10-25",
-      "summary": "Herfstvakantie-activiteiten op de boerderij, waaronder pompoen snijden.",
-      "checkedAt": "2026-10-22T12:18:00Z",
-      "confidence": "middel"
-    },
-    {
-      "sourceName": "Geertjes Hoeve",
-      "venueName": "Geertjes Hoeve",
-      "locality": "Haarzuilens",
-      "audiences": [
-        "kinderen",
-        "gezin"
-      ],
-      "categories": [
-        "natuur",
-        "feest"
-      ],
-      "kind": "Kinderboerderij",
-      "estimatedMinMonths": 12,
-      "openingNote": "Wo t/m za 10:00–17:00, zo 11:00–17:00; van 26 okt t/m 20 feb op ma en di gesloten",
-      "extraUncertainties": [
-        "De agenda van de hoeve bevat deels data van vorig jaar; alleen data die kloppen met de kalender van 2026 zijn overgenomen",
-        "Prijs niet vermeld"
-      ],
       "sourceEventId": "geertjes-sint-intocht-2026",
       "url": "https://geertjeshoeve.nl/info/agenda/sinterklaas-intocht/",
       "title": "Sinterklaasintocht kijken op Geertjes Hoeve",
@@ -65,7 +36,7 @@
       ],
       "special": true,
       "summary": "Intocht op groot scherm met kruidnoten bakken en een speurtocht.",
-      "checkedAt": "2026-10-22T12:18:00Z",
+      "checkedAt": "2026-10-26T23:33:00Z",
       "confidence": "middel"
     },
     {
@@ -96,7 +67,7 @@
       "ongoing": true,
       "special": true,
       "summary": "Speurtocht langs Sinterklaasborden op de boerderij.",
-      "checkedAt": "2026-10-22T12:18:00Z",
+      "checkedAt": "2026-10-26T23:33:00Z",
       "confidence": "middel"
     },
     {
@@ -127,7 +98,7 @@
         "Klimmen in de pietenbaan, activiteiten en pietendiploma"
       ],
       "summary": "Sinterklaasactiviteiten met pietenbaan en pietendiploma.",
-      "checkedAt": "2026-10-22T12:18:00Z",
+      "checkedAt": "2026-10-26T23:33:00Z",
       "confidence": "middel",
       "priceText": "Pietendiploma € 7,50 per kind; Sinterklaasspeurtocht € 3,50; speculaaspop versieren € 4 p.p.; ponyrijden € 2"
     },
@@ -159,7 +130,7 @@
         "Klimmen in de pietenbaan, activiteiten en pietendiploma"
       ],
       "summary": "Sinterklaasactiviteiten met pietenbaan en pietendiploma.",
-      "checkedAt": "2026-10-22T12:18:00Z",
+      "checkedAt": "2026-10-26T23:33:00Z",
       "confidence": "middel",
       "priceText": "Pietendiploma € 7,50 per kind; Sinterklaasspeurtocht € 3,50; speculaaspop versieren € 4 p.p.; ponyrijden € 2"
     },
@@ -191,7 +162,7 @@
         "Klimmen in de pietenbaan, activiteiten en pietendiploma"
       ],
       "summary": "Sinterklaasactiviteiten met pietenbaan en pietendiploma.",
-      "checkedAt": "2026-10-22T12:18:00Z",
+      "checkedAt": "2026-10-26T23:33:00Z",
       "confidence": "middel",
       "priceText": "Pietendiploma € 7,50 per kind; Sinterklaasspeurtocht € 3,50; speculaaspop versieren € 4 p.p.; ponyrijden € 2"
     },
@@ -223,7 +194,7 @@
         "Klimmen in de pietenbaan, activiteiten en pietendiploma"
       ],
       "summary": "Sinterklaasactiviteiten met pietenbaan en pietendiploma.",
-      "checkedAt": "2026-10-22T12:18:00Z",
+      "checkedAt": "2026-10-26T23:33:00Z",
       "confidence": "middel",
       "priceText": "Pietendiploma € 7,50 per kind; Sinterklaasspeurtocht € 3,50; speculaaspop versieren € 4 p.p.; ponyrijden € 2"
     },
@@ -253,7 +224,7 @@
       "allDay": true,
       "special": true,
       "summary": "Warme chocolademelk, winterknutsels en kerststukjes maken.",
-      "checkedAt": "2026-10-22T12:18:00Z",
+      "checkedAt": "2026-10-26T23:33:00Z",
       "confidence": "middel"
     },
     {
@@ -282,7 +253,7 @@
       "allDay": true,
       "special": true,
       "summary": "Warme chocolademelk, winterknutsels en kerststukjes maken.",
-      "checkedAt": "2026-10-22T12:18:00Z",
+      "checkedAt": "2026-10-26T23:33:00Z",
       "confidence": "middel"
     },
     {
@@ -312,7 +283,7 @@
       "ongoing": true,
       "special": true,
       "summary": "In de kerstvakantie dagelijks open met winterspeurtocht, marshmallows en speelhoek.",
-      "checkedAt": "2026-10-22T12:18:00Z",
+      "checkedAt": "2026-10-26T23:33:00Z",
       "confidence": "middel",
       "priceText": "Winterspeurtocht € 3 p.p.; ponyrijden en geitjes voeren € 2 p.p.; marshmallows € 1,50; varkens borstelen en strobaan gratis"
     }
