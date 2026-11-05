@@ -47,7 +47,7 @@ if (!args.includes(tag) && !newer(tag, `v${local.version}`)) {
 
 const tmp = mkdtempSync(join(tmpdir(), 'uit-core-'));
 try {
-  git('clone', '--quiet', '--depth', '1', '--branch', tag, repoUrl, tmp);
+  git('-c', 'advice.detachedHead=false', 'clone', '--quiet', '--depth', '1', '--branch', tag, repoUrl, tmp);
   const next = JSON.parse(readFileSync(join(tmp, 'core.json'), 'utf8'));
   // Oude motorpaden weg (ook paden die in de nieuwe versie niet meer bestaan), dan de nieuwe erin.
   for (const p of new Set([...local.paths, ...next.paths])) {
