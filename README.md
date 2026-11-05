@@ -24,8 +24,12 @@ echte activiteiten met een link naar de bron.
 - Nieuw toegevoegde activiteiten krijgen een week lang het label **Nieuw** (per toestel bijgehouden). **Gratis** en **Binnen** staan als label op de kaart; bij een activiteit kun je hem **delen** (WhatsApp e.d.).
 - Via het gezinsicoon rechtsboven vul je naam en geboortedatum van de kinderen in (kinderen toevoegen of verwijderen kan daar ook) en zie je de status van de bronnen, het tijdstip van de laatste update en de app-versie (bouwmoment).
 
-Zie ook [docs/BRONNEN.md](docs/BRONNEN.md) voor de bronnen en hun beperkingen, en
-[docs/ARCHITECTUUR.md](docs/ARCHITECTUUR.md) voor de opbouw van de code.
+Zie ook [docs/BRONNEN.md](docs/BRONNEN.md) voor de bronnen en hun beperkingen,
+[docs/ARCHITECTUUR.md](docs/ARCHITECTUUR.md) voor de opbouw van de code en
+[docs/GEPLANDE-TAKEN.md](docs/GEPLANDE-TAKEN.md) voor het onderhoud dat Claude als geplande taak doet.
+
+Alles wat bij Utrecht hoort, staat in het stadsprofiel `city/` (naam, kleuren, thuiswijk, locaties, eigen bronnen).
+De rest van de code bevat geen stadsnamen, zodat dezelfde app ook voor een andere stad kan werken.
 
 ## Snel starten (lokaal)
 
@@ -34,7 +38,7 @@ Vereist: Node.js 22.13 of nieuwer.
 ```bash
 npm install
 npm run dev          # app op http://localhost:5173 (gebruikt public/data/activities.json)
-npm test             # 155 tests
+npm test             # alle tests
 npm run typecheck    # TypeScript voor app én verzamellaag
 ```
 
@@ -112,10 +116,10 @@ Andere hosting kan ook: elke statische host (Netlify, Cloudflare Pages, een eige
   `"type": "jsonld"` (voorbeeld staat in de config).
 - **Een activiteit met de hand toevoegen:** zet hem in een JSON-bestand in `data/curated/`
   (zelfde vorm als het startbestand), met bronlink en `checkedAt`.
-- **Een nieuwe locatie met coördinaten:** `collector/venues.ts`.
+- **Een nieuwe locatie met coördinaten:** `city/venues.ts`.
 - **Een bron geeft fouten:** kijk in de log van de Actions-run, of draai lokaal
   `npm run collect:dry -- --source=<id>`. Websites veranderen hun opmaak; de parsers staan in
-  `collector/adapters/` en hebben tests in `tests/collector.test.ts`.
+  `city/adapters/` (bronnen van deze stad) en `collector/adapters/` (algemene adapters) en hebben tests in `tests/`.
 
 ## Privacy
 
