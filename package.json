@@ -1,9 +1,9 @@
 {
-  "name": "utrecht-family-agenda",
+  "name": "uit-agenda",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Persoonlijke, mobiele gezinsagenda voor Utrecht en Leidsche Rijn",
+  "description": "Persoonlijke, mobiele gezinsagenda per stad (motor: uit-core)",
   "engines": {
     "node": ">=22.13"
   },

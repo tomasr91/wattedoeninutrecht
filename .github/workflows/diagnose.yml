@@ -19,6 +19,8 @@ permissions:
 
 jobs:
   diagnose:
+    # Niet in de motor zelf (tomasr91/uit-core), wel in elke stadsrepo.
+    if: github.repository != 'tomasr91/uit-core'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -36,11 +38,16 @@ jobs:
         # Via een variabele, zodat tekens als & in een URL niet door de shell worden uitgevoerd.
         run: npx tsx collector/diagnose.ts $URLS > /tmp/diagnose.json; cat /tmp/diagnose.json
       - name: TLS en doorverwijzingen controleren
+        env:
+          URLS: ${{ github.event.inputs.urls }}
         run: |
-          for h in www.uitagendautrecht.nl www.kasteeldehaar.nl www.jaarbeurs.nl jaarbeurs.nl; do
+          # Hosts uit de opgegeven URL's, anders uit diagnoseUrls in city/sources.config.json.
+          hosts=$(URLS="$URLS" node -e "const u=(process.env.URLS||'').split(/\\s+/).filter(Boolean);const l=u.length?u:(require('./city/sources.config.json').diagnoseUrls||[]);console.log([...new Set(l.map(x=>new URL(x).host))].join(' '))")
+          bot=$(npx tsx -e "import('./city/config.ts').then((m) => console.log(m.CITY.bot.name))")
+          for h in $hosts; do
             echo "=== $h" >> /tmp/tls.txt
             echo | timeout 20 openssl s_client -connect $h:443 -servername $h -showcerts 2>&1 | grep -E "^ *[0-9] s:|^ *i:|NotAfter|v:NotBefore|Verify return|verify error" >> /tmp/tls.txt || true
-            curl -sS -o /dev/null -w "curl: %{http_code} %{url_effective} ip=%{remote_ip}\n" -L --max-time 20 -A "UtrechtFamilyAgendaBot/0.1" https://$h/ >> /tmp/tls.txt 2>&1 || true
+            curl -sS -o /dev/null -w "curl: %{http_code} %{url_effective} ip=%{remote_ip}\n" -L --max-time 20 -A "$bot/0.1" https://$h/ >> /tmp/tls.txt 2>&1 || true
             getent ahosts $h | head -3 >> /tmp/tls.txt || true
           done
           cat /tmp/tls.txt

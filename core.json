@@ -1,0 +1,26 @@
+{
+  "$comment": "Motor (uit-core). Deze paden worden bij een motorupdate (scripts/update-core.mjs) in hun geheel vervangen door de versie uit tomasr91/uit-core. Pas ze in een stadsrepo niet aan: wijzigingen gaan bij de volgende update verloren. Alles wat niet in deze lijst staat (city/, data/, public/icons/, public/data/, README.md) is van de stad.",
+  "repository": "tomasr91/uit-core",
+  "version": "1.0.0",
+  "paths": [
+    ".claude/skills",
+    ".env.example",
+    ".github/workflows",
+    ".gitignore",
+    "CLAUDE.md",
+    "LICENSE",
+    "collector",
+    "core.json",
+    "docs",
+    "index.html",
+    "package-lock.json",
+    "package.json",
+    "public/sw.js",
+    "scripts",
+    "src",
+    "tests",
+    "tsconfig.collector.json",
+    "tsconfig.json",
+    "vite.config.ts"
+  ]
+}

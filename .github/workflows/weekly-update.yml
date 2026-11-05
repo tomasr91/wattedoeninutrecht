@@ -3,7 +3,7 @@
 #  - Elke nacht (02:17 UTC = 03:17 in de winter, 04:17 in de zomer), met reserve-runs om 03:47, 04:47 en 05:47 UTC als GitHub de eerste overslaat:
 #    bronnen ophalen → SQLite bijwerken → JSON exporteren → committen → app bouwen → publiceren.
 #  - Handmatig starten kan via Actions → "Dagelijkse update" → Run workflow
-#    (optioneel met één bron, bv. "bibliotheek-utrecht").
+#    (optioneel met één bron-ID uit city/sources.config.json).
 #  - Codewijzigingen worden apart en direct gepubliceerd door publish.yml ("Publiceren").
 #
 # Eenmalig instellen: Settings → Pages → Source: "GitHub Actions".
@@ -44,6 +44,8 @@ concurrency:
 
 jobs:
   update:
+    # Niet in de motor zelf (tomasr91/uit-core), wel in elke stadsrepo.
+    if: github.repository != 'tomasr91/uit-core'
     runs-on: ubuntu-latest
     timeout-minutes: 120
     outputs:

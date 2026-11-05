@@ -1,6 +1,6 @@
 /**
  * Eigen adapters van deze stad (stadsprofiel). De sleutel is de bron-ID in
- * collector/sources.config.json. Algemene adapters (handmatig, vaste-plekken,
+ * city/sources.config.json. Algemene adapters (handmatig, vaste-plekken,
  * pathe en de types ical/jsonld/tribe) levert de verzamellaag zelf: zie
  * collector/adapters/registry.ts.
  */

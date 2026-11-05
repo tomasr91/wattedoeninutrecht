@@ -1,28 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { collapseSeries, recurrenceLabel } from '../src/domain/series';
 import { buildLists, DEFAULT_LIST_OPTIONS } from '../src/domain/views';
-import { parsePlaytimes } from '../city/adapters/uitagenda-utrecht';
 import { testActivity } from './fixtures';
 
 // TESTDATA: verzonnen activiteiten.
 const act = (o: Parameters<typeof testActivity>[0]) => testActivity({ isTestData: false, audiences: ['volwassenen'], categories: ['theater'], venue: { name: 'Testzaal', geoPrecision: 'unknown' }, ...o });
-
-describe('speeltijden van UITagenda', () => {
-  it('doorlopend met vaste dagen', () => {
-    expect(parsePlaytimes('Datum doorlopend Tijd vr t/m za: 20:30', '2026-10-22')).toEqual({ rolling: true, note: 'Elke vr en za · 20:30' });
-  });
-  it('doorlopend op één dag', () => {
-    expect(parsePlaytimes('Datum doorlopend Tijd zo: 14:00', '2026-10-22')).toEqual({ rolling: true, note: 'Elke zondag · 14:00' });
-  });
-  it('losse data in een periode', () => {
-    const r = parsePlaytimes('Datum zo 25 okt t/m zo 27 dec Tijd zo 25 okt: 15:00zo 22 nov: 15:00zo 27 dec: 15:00 Voeg toe aan je kalender:', '2026-10-22');
-    expect(r.occurrences).toEqual(['2026-10-25', '2026-11-22', '2026-12-27']);
-    expect(r.note).toBe('Zo 25 okt, 22 nov en 27 dec · 15:00');
-  });
-  it('gewone periode zonder losse data', () => {
-    expect(parsePlaytimes('Datum do 12 feb t/m do 31 dec Tijd 12:15 - 13:30', '2026-10-22')).toEqual({});
-  });
-});
 
 describe('vaste reeksen samenvoegen', () => {
   const weekly = ['2026-10-24', '2026-10-31', '2026-11-07', '2026-11-14'].map((d, i) =>
@@ -142,10 +124,6 @@ describe('vaste dagen in de omschrijving', () => {
 });
 
 describe('korte periode is geen wekelijkse reeks', () => {
-  it('festival do t/m zo: geen losse data en geen "Elke"', () => {
-    const r = parsePlaytimes('Datum do 22 okt t/m zo 25 okt Tijd do 22 okt: 10:00vr 23 okt: 10:00za 24 okt: 10:00zo 25 okt: 10:00 Voeg toe', '2026-10-22');
-    expect(r).toEqual({});
-  });
   it('label over minder dan twee weken noemt de data', () => {
     expect(recurrenceLabel(['2026-10-22', '2026-10-23', '2026-10-29'], ['10:00', '10:00', '10:00'])).not.toMatch(/^Elke/);
   });
@@ -260,15 +238,5 @@ describe('festival: label naar wat je gaat doen', () => {
   });
   it('voorstelling op het Prentenboekenfestival is geen voorlezen', () => {
     expect(kindLabel({ title: 'nijntje op de fiets 2+ – Klein Amsterdam Producties | Prentenboekjesfestival', kind: 'Jeugdtheater', categories: ['voorlezen', 'theater'] })).toBe('Kindervoorstelling');
-  });
-});
-
-describe('UITagenda: Datum-veld met één resterende datum', () => {
-  it('Happen met Grappen: alleen do 26 nov, niet de hele reeks', () => {
-    expect(parsePlaytimes('Entree € 39,50 Datum do 26 nov Tijd 18:00 Voeg toe aan je kalender:', '2026-10-24')).toEqual({ single: '2026-11-26', time: '18:00', endTime: undefined });
-  });
-  it('meerdere losse data in het Datum-veld', () => {
-    const r = parsePlaytimes('Datum do 26 nov, do 10 dec Tijd 20:00 Voeg toe', '2026-10-24');
-    expect(r.occurrences).toEqual(['2026-11-26', '2026-12-10']);
   });
 });

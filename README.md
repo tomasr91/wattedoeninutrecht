@@ -24,12 +24,13 @@ echte activiteiten met een link naar de bron.
 - Nieuw toegevoegde activiteiten krijgen een week lang het label **Nieuw** (per toestel bijgehouden). **Gratis** en **Binnen** staan als label op de kaart; bij een activiteit kun je hem **delen** (WhatsApp e.d.).
 - Via het gezinsicoon rechtsboven vul je naam en geboortedatum van de kinderen in (kinderen toevoegen of verwijderen kan daar ook) en zie je de status van de bronnen, het tijdstip van de laatste update en de app-versie (bouwmoment).
 
-Zie ook [docs/BRONNEN.md](docs/BRONNEN.md) voor de bronnen en hun beperkingen,
+Zie ook [city/BRONNEN.md](city/BRONNEN.md) voor de bronnen en hun beperkingen,
 [docs/ARCHITECTUUR.md](docs/ARCHITECTUUR.md) voor de opbouw van de code en
 [docs/GEPLANDE-TAKEN.md](docs/GEPLANDE-TAKEN.md) voor het onderhoud dat Claude als geplande taak doet.
 
-Alles wat bij Utrecht hoort, staat in het stadsprofiel `city/` (naam, kleuren, thuiswijk, locaties, eigen bronnen).
-De rest van de code bevat geen stadsnamen, zodat dezelfde app ook voor een andere stad kan werken.
+Alles wat bij Utrecht hoort, staat in het stadsprofiel `city/` (naam, kleuren, thuiswijk, locaties, eigen bronnen, stadstests).
+De rest is de **motor** [uit-core](https://github.com/tomasr91/uit-core) (zie `core.json`): pas die bestanden hier niet aan, maar in uit-core.
+Elke maandag zet de workflow *Motor bijwerken* een nieuwe motorversie klaar als pull request; handmatig kan met `node scripts/update-core.mjs`.
 
 ## Snel starten (lokaal)
 
@@ -68,7 +69,7 @@ Een run doet het volgende:
 De database bewaart de volledige reeks activiteiten; de dagelijkse run vult alleen aan en werkt bij.
 Zo zie je in de app altijd het hele gekozen venster, ook drie maanden vooruit.
 
-Instellingen staan in `collector/sources.config.json` (bron aan/uit, venster, limieten) en
+Instellingen staan in `city/sources.config.json` (bron aan/uit, venster, limieten) en
 optioneel in `.env` (zie `.env.example`). Er zijn geen API-sleutels of geheimen nodig.
 
 ## Online zetten (GitHub Pages, gratis)
@@ -111,7 +112,7 @@ Andere hosting kan ook: elke statische host (Netlify, Cloudflare Pages, een eige
 
 ## Onderhoud
 
-- **Een bron uitschakelen:** `"enabled": false` in `collector/sources.config.json`.
+- **Een bron uitschakelen:** `"enabled": false` in `city/sources.config.json`.
 - **Een iCal- of JSON-LD-bron toevoegen zonder code:** voeg een item toe met `"type": "ical"` of
   `"type": "jsonld"` (voorbeeld staat in de config).
 - **Een activiteit met de hand toevoegen:** zet hem in een JSON-bestand in `data/curated/`

@@ -3,7 +3,7 @@
  *
  * De rest van de code (app, domeinlogica, verzamellaag) leest stad-specifieke
  * waarden alleen hier. Een andere stad = dit bestand, city/venues.ts,
- * city/Landmark.tsx, collector/sources.config.json en de eigen adapters.
+ * city/Landmark.tsx, city/sources.config.json en de eigen adapters.
  *
  * Dit bestand bevat alleen gegevens (geen React, geen Node), zodat app,
  * verzamellaag, tests én vite.config.ts het kunnen importeren.

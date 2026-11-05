@@ -1,0 +1,80 @@
+# Motor bijwerken: elke maandag kijken of er een nieuwe versie van uit-core is.
+# Zo ja: motorbestanden vervangen (scripts/update-core.mjs), testen en bouwen met jouw stad,
+# en het resultaat klaarzetten als pull request. Jij beslist met "Merge".
+#
+# Eenmalig instellen: Settings → Actions → General → "Allow GitHub Actions to create and approve pull requests" aanzetten.
+name: Motor bijwerken
+
+on:
+  schedule:
+    - cron: '23 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Versie (bv. v1.2.0; leeg = nieuwste)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-core
+  cancel-in-progress: false
+
+jobs:
+  update:
+    # Niet in de motor zelf (tomasr91/uit-core), wel in elke stadsrepo.
+    if: github.repository != 'tomasr91/uit-core'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Motor ophalen
+        id: core
+        run: |
+          before=$(node -e "console.log(require('./core.json').version)")
+          node scripts/update-core.mjs ${{ github.event.inputs.version }}
+          after=$(node -e "console.log(require('./core.json').version)")
+          echo "before=$before" >> "$GITHUB_OUTPUT"
+          echo "after=$after" >> "$GITHUB_OUTPUT"
+          if git diff --quiet && [ -z "$(git status --porcelain)" ]; then echo "changed=false" >> "$GITHUB_OUTPUT"; else echo "changed=true" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Testen en bouwen met deze stad
+        id: check
+        if: steps.core.outputs.changed == 'true'
+        continue-on-error: true
+        run: |
+          npm ci
+          npm test 2>&1 | tail -15 | tee /tmp/test.txt
+          npm run build 2>&1 | tail -5 | tee -a /tmp/test.txt
+
+      - name: Pull request klaarzetten
+        if: steps.core.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RESULT: ${{ steps.check.outcome }}
+        run: |
+          v=${{ steps.core.outputs.after }}
+          branch="motor-v$v"
+          git config user.name "agenda-bot"
+          git config user.email "agenda-bot@users.noreply.github.com"
+          git checkout -B "$branch"
+          git add -A
+          git commit -m "Motor bijwerken naar v$v"
+          git push -f origin "$branch"
+          if [ "$RESULT" = "success" ]; then status="✅ Tests en build geslaagd met jouw stad."; else status="❌ Tests of build mislukt met jouw stad. Niet mergen; kijk in de log van deze workflow."; fi
+          body=$(printf '%s\n\nVan v%s naar v%s. Wat er veranderd is: https://github.com/%s/releases/tag/v%s\n\n```\n%s\n```' \
+            "$status" "${{ steps.core.outputs.before }}" "$v" "$(node -e "console.log(require('./core.json').repository)")" "$v" "$(cat /tmp/test.txt 2>/dev/null)")
+          if gh pr view "$branch" >/dev/null 2>&1; then
+            gh pr edit "$branch" --body "$body"
+          else
+            gh pr create --base main --head "$branch" --title "Motor bijwerken naar v$v" --body "$body"
+          fi

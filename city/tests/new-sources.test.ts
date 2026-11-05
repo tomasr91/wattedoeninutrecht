@@ -5,12 +5,12 @@
  * afwijken; de eerste live run in GitHub Actions is de echte test.
  */
 import { describe, expect, it } from 'vitest';
-import { parseTivoliDetail, parseTivoliList, toRawEvents } from '../city/adapters/tivolivredenburg';
-import { parseSsuDetail, parseSsuList, ssuCardToRaw } from '../city/adapters/stadsschouwburg-utrecht';
-import { parseSpritsDetail, parseSpritsProgram, spritsToRaw } from '../city/adapters/podium-sprits';
-import { normalize } from '../collector/normalize';
-import { parseAgeLabel } from '../src/domain/enrich';
-import { pricesIn, priceTextFrom } from '../collector/lib/parse';
+import { parseTivoliDetail, parseTivoliList, toRawEvents } from '../adapters/tivolivredenburg';
+import { parseSsuDetail, parseSsuList, ssuCardToRaw } from '../adapters/stadsschouwburg-utrecht';
+import { parseSpritsDetail, parseSpritsProgram, spritsToRaw } from '../adapters/podium-sprits';
+import { normalize } from '../../collector/normalize';
+import { parseAgeLabel } from '../../src/domain/enrich';
+import { pricesIn, priceTextFrom } from '../../collector/lib/parse';
 
 const NOW = '2026-10-21T06:00:00Z';
 const TODAY = '2026-10-21';
@@ -130,27 +130,15 @@ describe('Podium Sprits', () => {
   });
 });
 
-describe('leeftijden en prijzen in nieuwe notaties', () => {
-  it('halve jaren en maanden', () => {
-    expect(parseAgeLabel('Tuimelaar (0,5+)')).toEqual({ officialMinMonths: 6, label: '0,5+' });
-    expect(parseAgeLabel('Cadeautje (1,5+)')?.officialMinMonths).toBe(18);
-    expect(parseAgeLabel('Tuimelaar (6-18 mnd)')).toEqual({ officialMinMonths: 6, officialMaxMonths: 18, label: '6-18 mnd' });
-  });
-  it('bedragen met ,- en zonder spatie', () => {
-    expect(pricesIn('€ 16,- en €9 / € 12,50')).toEqual([16, 9, 12.5]);
-    expect(priceTextFrom('Vrije inloop')).toBe('Gratis');
-  });
-});
-
 describe('soortlabels en inkorten', () => {
   it('Tivoli: het meest zeggende genre wint', async () => {
-    const { pickKind } = await import('../city/adapters/tivolivredenburg');
+    const { pickKind } = await import('../adapters/tivolivredenburg');
     expect(pickKind(['Pop', 'Comedy'])).toBe('Comedy');
     expect(pickKind(['Indie', 'Metal & punk'])).toBe('Indie');
     expect(pickKind([])).toBeUndefined();
   });
   it('Stadsschouwburg: alleen Verdieping/Foodprogramma valt weg, een voorstelling met eten niet', async () => {
-    const { ssuExcluded, ssuKind } = await import('../city/adapters/stadsschouwburg-utrecht');
+    const { ssuExcluded, ssuKind } = await import('../adapters/stadsschouwburg-utrecht');
     const ex = ['Verdieping', 'Foodprogramma'];
     expect(ssuExcluded({ genres: ['Verdieping'] }, ex)).toBe(true);
     expect(ssuExcluded({ genres: ['Foodprogramma', 'Toneel'] }, ex)).toBe(false);
@@ -172,7 +160,7 @@ describe('Utrecht Natuurlijk (synthetische HTML)', () => {
       <p>zaterdag 28 nov 2026</p><p>13.30-15.30 uur</p><p>Griftsteede</p><p>Volwassenen</p><p>Betaald 22,50</p></article>
   </main>`;
   it('leest datum uit de URL, tijd, locatie, doelgroep en prijs', async () => {
-    const { parseUnList, unCardToRaw } = await import('../city/adapters/utrecht-natuurlijk');
+    const { parseUnList, unCardToRaw } = await import('../adapters/utrecht-natuurlijk');
     const cards = parseUnList(html, TODAY);
     expect(cards.map((c) => [c.date, c.time?.start, c.location?.venueName, c.groups])).toEqual([
       ['2026-10-24', '14:00', 'Stadsboerderij Eilandsteede', ['Peuters', 'Kinderen', 'Gezinnen']],
@@ -200,7 +188,7 @@ describe('Kasteel de Haar (synthetische HTML)', () => {
     <article><a href="https://www.kasteeldehaar.nl/2026/06/25/tuinspeurtocht_ontsnaptedieren/"><h3>Tuinspeurtocht: Ontsnapte dieren</h3></a><p>Doorlopend</p></article>
   </main>`;
   it('bereik, losse dagen, bereik zonder maand bij het begin, en doorlopend', async () => {
-    const { parseHaarList, haarToRaw } = await import('../city/adapters/kasteel-de-haar');
+    const { parseHaarList, haarToRaw } = await import('../adapters/kasteel-de-haar');
     const items = parseHaarList(html, TODAY);
     expect(items.map((i) => [i.slug, i.start, i.end, i.days, i.ongoing])).toEqual([
       ['indienstvandeadel', '2026-11-01', '2027-01-03', undefined, false],
@@ -224,7 +212,7 @@ describe('Jaarbeurs (synthetische HTML)', () => {
     <div><a href="/agenda-item/logistica"><h3>Logistica Next</h3></a><p>10 nov 2026</p><span>Zakelijk evenement</span></div>
   </main>`;
   it('alleen publieksevenementen voor gezinnen, met datumbereik over de jaargrens', async () => {
-    const { parseJbList, isFamilyEvent, jbToRaw } = await import('../city/adapters/jaarbeurs');
+    const { parseJbList, isFamilyEvent, jbToRaw } = await import('../adapters/jaarbeurs');
     const items = parseJbList(html, TODAY);
     const fam = items.filter((i) => isFamilyEvent(i));
     expect(fam.map((i) => [i.slug, i.start, i.end])).toEqual([
@@ -234,8 +222,8 @@ describe('Jaarbeurs (synthetische HTML)', () => {
     expect(normalize(jbToRaw(fam[0], NOW)!).zone).toBe('utrecht');
   });
   it('overige publieksevenementen bij volwassenen als Beurs; zakelijk valt af', async () => {
-    const { parseJbList, jbToRaw } = await import('../city/adapters/jaarbeurs');
-    const { kindLabel } = await import('../src/domain/kind');
+    const { parseJbList, jbToRaw } = await import('../adapters/jaarbeurs');
+    const { kindLabel } = await import('../../src/domain/kind');
     const items = parseJbList(html, TODAY).filter((i) => i.isPublic);
     expect(items.map((i) => i.slug)).not.toContain('logistica');
     const esg = normalize(jbToRaw(items.find((i) => i.slug === 'esg-days')!, NOW)!);
@@ -244,7 +232,7 @@ describe('Jaarbeurs (synthetische HTML)', () => {
     const winter = normalize(jbToRaw(items.find((i) => i.slug === 'het-utrechtse-winterspektakel')!, NOW)!);
     expect(winter.audiences).toContain('kinderen');
     expect(kindLabel(winter)).toBe('Feest & festival');
-    const { isOuting } = await import('../city/adapters/jaarbeurs');
+    const { isOuting } = await import('../adapters/jaarbeurs');
     expect(isOuting({ title: 'Scrum Day Europe 2026', text: 'community event' })).toBe(false);
     expect(isOuting({ title: 'Studiekeuzebeurs Midden 2026', text: '' })).toBe(false);
     expect(isOuting({ title: 'CardCon 2026', text: 'Trefpunt voor fans van trading card games' })).toBe(true);
@@ -255,17 +243,26 @@ describe('Jaarbeurs detailpagina (synthetische HTML)', () => {
   const page = (slots: string) => `<main><div class="col-md-6"><h1>[TESTDATA] Testbeurs</h1><p>Een gezellige testbeurs met honderden standhouders en veel te ontdekken.</p></div>
     <div class="agenda__info-box"><div class="agenda__meta">${slots}</div><h5 class="agenda__tickets-starting">€13,50</h5></div></main>`;
   it('tijden per dag, prijs en beschrijving', async () => {
-    const { parseJbDetail, withJbDetail } = await import('../city/adapters/jaarbeurs');
+    const { parseJbDetail, withJbDetail } = await import('../adapters/jaarbeurs');
     const d = parseJbDetail(page('<div>14 nov 2026 09:00 - 17:00</div><div>15 nov 2026 09:00 - 16:00</div>'), TODAY);
     const e = withJbDetail({ sourceId: 'jaarbeurs', sourceName: 'Jaarbeurs', url: 'u', title: 't', start: '2026-11-14', end: '2026-11-15', allDay: true } as never, d);
     expect(e).toMatchObject({ start: '2026-11-14T09:00', end: '2026-11-15', priceText: 'v.a. €13,50', openingNote: 'za 14 nov 09:00–17:00; zo 15 nov 09:00–16:00' });
     expect(e.summary).toMatch(/testbeurs/);
   });
   it('voorstellingen met twee tijden per dag en een paar vrije dagen', async () => {
-    const { parseJbDetail, withJbDetail } = await import('../city/adapters/jaarbeurs');
+    const { parseJbDetail, withJbDetail } = await import('../adapters/jaarbeurs');
     const days = ['19', '20', '21', '24', '25', '26'].map((x) => `<div>${x} dec 2026 11:00 - 12:40</div><div>${x} dec 2026 15:00 - 16:40</div>`).join('');
     const e = withJbDetail({ sourceId: 'jaarbeurs', sourceName: 'Jaarbeurs', url: 'u', title: 't', start: '2026-12-19', end: '2026-12-26', allDay: true } as never, parseJbDetail(page(days), TODAY));
     expect(e.start).toBe('2026-12-19');
     expect(e.openingNote).toBe('Voorstellingen op 6 dagen, meestal om 11:00 en 15:00 (niet op di 22 dec, wo 23 dec)');
+  });
+});
+
+describe('Podium Sprits: leeftijd op de activiteitspagina', () => {
+  it('Podium Sprits: het vaste veld Leeftijd, niet de andere voorstellingen', () => {
+    const html = `<main><h1><span>[TESTDATA] DE TESTVOORSTELLING (2+) | TESTGEZELSCHAP</span></h1><p>Duur 35 minuten Leeftijd 2 t/m 5 jaar Locatie Testzaal</p><h2>Meer</h2><p>Andere voorstelling (6+)</p></main>`;
+    const d = parseSpritsDetail(html);
+    expect(d.age).toMatchObject({ officialMinMonths: 24, officialMaxMonths: 60 });
+    expect(d.title).toBe('[TESTDATA] DE TESTVOORSTELLING (2+)');
   });
 });

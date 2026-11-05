@@ -64,7 +64,7 @@ function writeExport(db: dbm.Db, today: string, nowIso: string, totals: UpdateSt
 }
 
 async function main() {
-  const config = JSON.parse(readFileSync(join(ROOT, 'collector', 'sources.config.json'), 'utf8')) as Config;
+  const config = JSON.parse(readFileSync(join(ROOT, 'city', 'sources.config.json'), 'utf8')) as Config;
   const nowIso = new Date().toISOString();
   const today = process.env.TODAY_OVERRIDE ?? todayInAmsterdam();
   const until = addDays(addMonths(today, config.windowMonths), config.windowMarginDays);
@@ -86,7 +86,7 @@ async function main() {
   for (const cfg of config.sources) {
     const adapter = adapterFor(cfg, REGISTRY);
     if (!adapter) {
-      log(`! Onbekende bron "${cfg.id}" in sources.config.json — overgeslagen`);
+      log(`! Onbekende bron "${cfg.id}" in city/sources.config.json — overgeslagen`);
       continue;
     }
     if (!dryRun) {

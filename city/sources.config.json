@@ -4,6 +4,14 @@
   "windowMarginDays": 14,
   "maxDetailPagesPerSource": 400,
   "pruneExpiredAfterDays": 60,
+  "$diagnoseUrls": "Standaardlijst voor de workflow Bronnen diagnose (collector/diagnose.ts zonder argumenten).",
+  "diagnoseUrls": [
+    "https://www.tivolivredenburg.nl/agenda/",
+    "https://bibliotheekutrecht.op-shop.nl/",
+    "https://www.jaarbeurs.nl/agenda",
+    "https://www.uitagendautrecht.nl/agenda/",
+    "https://www.kasteeldehaar.nl/agenda"
+  ],
   "sources": [
     {
       "id": "handmatig",

@@ -3,20 +3,15 @@
  * doorverwijzing, een paar kopregels (server, CDN) en het begin van de pagina.
  * Gebruikt dezelfde, eerlijke User-Agent als de verzamellaag; doet geen pogingen om blokkades te omzeilen.
  *
- *   npx tsx collector/diagnose.ts [url ...]   (zonder argumenten: de standaardlijst hieronder)
+ *   npx tsx collector/diagnose.ts [url ...]   (zonder argumenten: diagnoseUrls uit city/sources.config.json)
  */
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { describeNetworkError, USER_AGENT } from './lib/http.ts';
 
 let saved = 0;
 
-const DEFAULT_URLS = [
-  'https://www.tivolivredenburg.nl/agenda/',
-  'https://bibliotheekutrecht.op-shop.nl/',
-  'https://www.jaarbeurs.nl/agenda',
-  'https://www.uitagendautrecht.nl/agenda/',
-  'https://www.kasteeldehaar.nl/agenda',
-];
+const DEFAULT_URLS: string[] =
+  (JSON.parse(readFileSync(new URL('../city/sources.config.json', import.meta.url), 'utf8')) as { diagnoseUrls?: string[] }).diagnoseUrls ?? [];
 
 const HEADERS = ['access-control-allow-origin', 'server', 'content-type', 'location', 'cf-ray', 'cf-mitigated', 'x-cache', 'via', 'x-sucuri-id', 'x-served-by', 'retry-after'];
 

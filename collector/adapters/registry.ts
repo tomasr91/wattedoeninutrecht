@@ -1,5 +1,5 @@
 /**
- * Adapterregister: koppelt een bron uit collector/sources.config.json aan een adapter.
+ * Adapterregister: koppelt een bron uit city/sources.config.json aan een adapter.
  *
  *  1. type "ical" / "jsonld" / "tribe": algemene adapter, alleen configuratie (geen code).
  *  2. Algemene adapters van de verzamellaag: handmatig (data/curated), vaste-plekken (data/places.json), pathe.

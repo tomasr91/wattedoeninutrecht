@@ -4,7 +4,7 @@ Een persoonlijke gezinsagenda als statische web-app (React + TypeScript, Vite) m
 
 ## Stad en motor
 
-- Alles wat bij één stad hoort, staat in `city/`: `config.ts` (naam, thema, thuiswijk, zones, teksten), `venues.ts` (bekende locaties), `Landmark.tsx` (herkenningspunt in de kop), `adapters/` (eigen bronnen) en `claude/` (stadsdelen voor de skills). Daarnaast `collector/sources.config.json`, `data/curated/` en `data/places.json`.
+- Alles wat bij één stad hoort, staat in `city/`: `config.ts` (naam, thema, thuiswijk, zones, teksten), `venues.ts` (bekende locaties), `Landmark.tsx` (herkenningspunt in de kop), `adapters/` (eigen bronnen) en `claude/` (stadsdelen voor de skills). Ook `sources.config.json` (welke bronnen) en `BRONNEN.md` (uitleg per bron) staan daar. De data staat in `data/` (`curated/`, `places.json`, `agenda.sqlite`) en `public/data/`.
 - De rest (`src/`, `collector/`, `scripts/`) is de motor en bevat geen stadsnamen. Zet stad-specifieke waarden in het stadsprofiel, niet in de motor.
 - Zone-ID's (`home.zoneId`, `city.zoneId`) komen in de data terecht: niet meer veranderen als een stad draait.
 

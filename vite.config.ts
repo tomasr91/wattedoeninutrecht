@@ -59,7 +59,7 @@ export default defineConfig({
   },
   build: { outDir: 'dist', sourcemap: false, chunkSizeWarningLimit: 600 },
   test: {
-    include: ['tests/**/*.test.ts'],
+    include: ['tests/**/*.test.ts', 'city/tests/**/*.test.ts'],
     environment: 'node',
   },
 });

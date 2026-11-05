@@ -20,6 +20,8 @@ concurrency:
 
 jobs:
   build:
+    # Niet in de motor zelf (tomasr91/uit-core), wel in elke stadsrepo.
+    if: github.repository != 'tomasr91/uit-core'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

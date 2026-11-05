@@ -11,7 +11,7 @@ Respecteer robots.txt (een ROBOTS_DISALLOWED van WebFetch = die pagina overslaan
 
 ## Voorbereiden
 
-0. Lees `CLAUDE.md`, `city/config.ts` (welke stad, welke thuiswijk) en `public/data/status.json`. Bronnen met een eigen adapter die "ok" zijn, beheer je NIET: hun handmatige kopieën ruimt de nachtelijke update zelf op. Welke bronnen een eigen adapter hebben, zie je in `collector/sources.config.json` (`enabled: true`) en `city/adapters/index.ts`.
+0. Lees `CLAUDE.md`, `city/config.ts` (welke stad, welke thuiswijk) en `public/data/status.json`. Bronnen met een eigen adapter die "ok" zijn, beheer je NIET: hun handmatige kopieën ruimt de nachtelijke update zelf op. Welke bronnen een eigen adapter hebben, zie je in `city/sources.config.json` (`enabled: true`) en `city/adapters/index.ts`.
 
 ## Niet opnemen
 
