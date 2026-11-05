@@ -15,7 +15,7 @@ import { fetchText } from '../../collector/lib/http.ts';
 import { cleanText, combine, introFrom, parseDutchDate, parseDutchDateRange, parseGoogleCalendarLink, parseTimes } from '../../collector/lib/parse.ts';
 import { recurrenceLabel } from '../../src/domain/series.ts';
 import { parseIcs } from '../../collector/lib/ics.ts';
-import { dateOf, diffDays } from '../../src/domain/dates.ts';
+import { addDays, dateOf, diffDays } from '../../src/domain/dates.ts';
 import { parseAgeLabel } from '../../src/domain/enrich.ts';
 import type { RawEvent } from '../../collector/normalize.ts';
 import type { AdapterContext, AdapterResult, SourceAdapter } from '../../collector/adapters/types.ts';
@@ -43,7 +43,8 @@ function titleFromSlug(slug: string): string {
 }
 
 /** Hoofdgenres, doelgroepen en kortingen van UITagenda: alles wat geen subgenre is. */
-const UIT_TOP_LABELS = /^(cabaret & stand-up|dans & ballet|diversen|festivals|film|klassieke muziek|lezingen|literatuur|musea & exposities|musicals & shows|muziek|nightlife|rondleidingen|theater & toneel|tips van de redactie|kinderen|gezinnen|jongeren|regulier \/ volwassenen|.*korting|gratis)$/i;
+const UIT_TOP_LABELS =
+  /^(cabaret & stand-up|dans & ballet|diversen|festivals|film|klassieke muziek|lezingen|literatuur|musea & exposities|musicals & shows|muziek|nightlife|rondleidingen|theater & toneel|tips van de redactie|kinderen|gezinnen|jongeren|regulier \/ volwassenen|.*korting|gratis)$/i;
 
 /** UITagenda-genre (slug in /genre/<slug>/) → soortlabel in de app. */
 export const GENRE_KIND: Record<string, string> = {
@@ -100,7 +101,9 @@ export function parsePlaytimes(
   if (/doorlopend/.test(datum)) {
     const days = new Set<number>();
     const times = new Set<string>();
-    for (const m of tijd.matchAll(/(?<![a-z])(ma|di|wo|do|vr|za|zo)(?:\s*(?:t\/m|-|–)\s*(ma|di|wo|do|vr|za|zo))?(?:\s*(?:,|en)\s*(ma|di|wo|do|vr|za|zo))?\s*:\s*(\d{1,2}[:.]\d{2})/g)) {
+    for (const m of tijd.matchAll(
+      /(?<![a-z])(ma|di|wo|do|vr|za|zo)(?:\s*(?:t\/m|-|–)\s*(ma|di|wo|do|vr|za|zo))?(?:\s*(?:,|en)\s*(ma|di|wo|do|vr|za|zo))?\s*:\s*(\d{1,2}[:.]\d{2})/g,
+    )) {
       const a = WD.indexOf(m[1]);
       const b = m[2] ? WD.indexOf(m[2]) : a;
       for (let i = a; i <= (b >= a ? b : b + 7); i++) days.add(i % 7);
@@ -109,16 +112,37 @@ export function parsePlaytimes(
     }
     if (!days.size) return { rolling: true, note: 'Doorlopend' };
     const order = [...days].sort((x, y) => x - y);
-    const dayText = order.length >= 6 ? 'Dagelijks' : order.length === 1 ? `Elke ${['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'][order[0]]}` : `Elke ${order.slice(0, -1).map((d) => WD[d]).join(', ')} en ${WD[order.at(-1)!]}`;
+    const dayText =
+      order.length >= 6
+        ? 'Dagelijks'
+        : order.length === 1
+          ? `Elke ${['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'][order[0]]}`
+          : `Elke ${order
+              .slice(0, -1)
+              .map((d) => WD[d])
+              .join(', ')} en ${WD[order.at(-1)!]}`;
     return { rolling: true, note: times.size === 1 ? `${dayText} · ${[...times][0]}` : dayText };
   }
   // "Datum do 26 nov · Tijd 18:00": de bovenkant van de pagina noemt de hele reeks (18 jun t/m 26 nov),
   // maar het Datum-veld alleen wat er nog komt. Dat geldt.
   if (datum && !/t\/m|tot en met|\s[-–]\s/.test(datum)) {
-    const ds = [...new Set([...datum.matchAll(/(?<![a-z])(?:ma|di|wo|do|vr|za|zo)\s+(\d{1,2}\s+[a-z]{3,9})/g)].map((m) => parseDutchDate(m[1], today)).filter((d): d is string => !!d))].sort();
+    const ds = [
+      ...new Set(
+        [...datum.matchAll(/(?<![a-z])(?:ma|di|wo|do|vr|za|zo)\s+(\d{1,2}\s+[a-z]{3,9})/g)]
+          .map((m) => parseDutchDate(m[1], today))
+          .filter((d): d is string => !!d),
+      ),
+    ].sort();
     const tm = parseTimes(tijd);
     if (ds.length === 1) return { single: ds[0], time: tm.start, endTime: tm.end };
-    if (ds.length >= 2) return { occurrences: ds, note: recurrenceLabel(ds, ds.map(() => tm.start ?? '')) };
+    if (ds.length >= 2)
+      return {
+        occurrences: ds,
+        note: recurrenceLabel(
+          ds,
+          ds.map(() => tm.start ?? ''),
+        ),
+      };
   }
   const dates: string[] = [];
   const times: string[] = [];
@@ -160,9 +184,7 @@ export function detailStillFresh(hit: { fetchedAt: string; value: RawEvent }, id
 
 export function parseEventPage(html: string, url: string, sourceEventId: string, ctx: Pick<AdapterContext, 'today' | 'nowIso'>): RawEvent | undefined {
   const $ = cheerio.load(html);
-  const title =
-    cleanText($('h1').first().text()) ||
-    cleanText($('meta[property="og:title"]').attr('content')).replace(/\s*[|–-]\s*UITagenda.*$/i, '');
+  const title = cleanText($('h1').first().text()) || cleanText($('meta[property="og:title"]').attr('content')).replace(/\s*[|–-]\s*UITagenda.*$/i, '');
   if (!title) return undefined;
   const bodyText = cleanText($('main').text() || $('body').text());
 
@@ -191,7 +213,7 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
     if (range) {
       // Tijd uit het veld "Tijd" ("ma: 19:30 - 21:00"), anders uit een korte datumregel met dezelfde datum.
       const tijd = bodyText.match(/\bTijd\s+(.{0,200}?)(?:Voeg toe|Locatie|Prijs|$)/);
-      let times = tijd ? parseTimes(tijd[1]) : { all: [] as string[] } as ReturnType<typeof parseTimes>;
+      let times = tijd ? parseTimes(tijd[1]) : ({ all: [] as string[] } as ReturnType<typeof parseTimes>);
       if (!times.start) {
         const short = bodyText.match(/((?:ma|di|wo|do|vr|za|zo)\s+\d{1,2}\s+[a-z]{3,9})\b/i);
         if (short && parseDutchDate(short[1], ctx.today) === range.start) {
@@ -242,12 +264,20 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
   const GENERIC_LINK = /^(bekijk|toon|naar|meer|route|kaart|locatie\b)/i;
   const venueLinks = $('a[href*="/locatie/"]').toArray();
   const named = venueLinks.map((el) => cleanText($(el).text())).find((t) => t && !GENERIC_LINK.test(t));
-  const slug = venueLinks.map((el) => $(el).attr('href')?.match(/\/locatie\/(?:\d+\/)?([a-z0-9-]+)/i)?.[1]).find(Boolean);
+  const slug = venueLinks
+    .map(
+      (el) =>
+        $(el)
+          .attr('href')
+          ?.match(/\/locatie\/(?:\d+\/)?([a-z0-9-]+)/i)?.[1],
+    )
+    .find(Boolean);
   const venueName = addrLines[0] || ld || named || location?.split(',')[0]?.trim() || (slug ? titleFromSlug(slug) : undefined);
   const street = addrLines.length >= 3 ? addrLines[1] : undefined;
   const postcodeCity = addrLines.at(-1)?.match(/^(\d{4}\s?[A-Z]{2})\s+(.+)$/);
   // Adres uit de praktische informatie; anders uit de agendalink (bv. "Domplein, 3512 JC Utrecht").
-  const address = street && postcodeCity ? `${street}, ${postcodeCity[1]} ${postcodeCity[2]}` : location && location.includes(',') ? cleanText(location) : undefined;
+  const address =
+    street && postcodeCity ? `${street}, ${postcodeCity[1]} ${postcodeCity[2]}` : location && location.includes(',') ? cleanText(location) : undefined;
   const city = postcodeCity?.[2];
 
   // Genres bovenaan de pagina (links naar /genre/<slug>/) en doelgroeplabels
@@ -255,7 +285,10 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
     .map((_, el) => ($(el).attr('href') ?? '').match(/\/genre\/([a-z0-9-]+)/)?.[1] ?? '')
     .get()
     .filter(Boolean);
-  const genreLabels = $('.post-genres .genre-label').map((_, el) => cleanText($(el).text())).get().filter(Boolean);
+  const genreLabels = $('.post-genres .genre-label')
+    .map((_, el) => cleanText($(el).text()))
+    .get()
+    .filter(Boolean);
   // Nightlife gaat voor: een clubavond met ook het label Muziek is uitgaan, geen concert.
   // Muziek: "Concert · <subgenre>" (bv. Jazz, Singer-songwriter, Pop & rock); zonder subgenre gewoon "Concert".
   const subgenre = genreLabels.find((g) => !UIT_TOP_LABELS.test(g) && !/€/.test(g));
@@ -278,7 +311,9 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
   });
   const field = (k: string) => fields.get(k.toLowerCase());
   const ageField = field('Leeftijd');
-  const age = ageField ? parseAgeLabel(/^\d/.test(ageField) && !/jaar|\+/.test(ageField) ? `${ageField}+` : ageField.replace(/vanaf\s+(\d{1,2})\s*jaar/i, '$1+')) : null;
+  const age = ageField
+    ? parseAgeLabel(/^\d/.test(ageField) && !/jaar|\+/.test(ageField) ? `${ageField}+` : ageField.replace(/vanaf\s+(\d{1,2})\s*jaar/i, '$1+'))
+    : null;
   const durField = field('Duur');
   const dur = durField?.match(/(\d{1,3})\s*(?:[–-]\s*\d{1,3}\s*)?(min|minuten|uur)/i);
   const durationMinutes = dur ? Number(dur[1]) * (/uur/i.test(dur[2]) ? 60 : 1) : undefined;
@@ -287,7 +322,12 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
   const entree = bodyText.match(/Entree\s*:?\s*(gratis|€\s*[\d.,]+(?:\s*[-/–]\s*€?\s*[\d.,]+)?[^.#]{0,40})/i);
   // Alleen labels en tags van dít evenement: onderaan staan "Meer inspiratie"-blokken van andere
   // evenementen met hun eigen labels (Kinderen, Jeugdtheater, 4+), die hier niet mogen meetellen.
-  const tags = $('.post-tags-list').first().find('a').map((_, el) => cleanText($(el).text())).get().filter((t) => t.startsWith('#'));
+  const tags = $('.post-tags-list')
+    .first()
+    .find('a')
+    .map((_, el) => cleanText($(el).text()))
+    .get()
+    .filter((t) => t.startsWith('#'));
   const hints = [...new Set([...tags, ...genreLabels.filter((g) => !/€/.test(g))].map((h) => h.trim()))];
   const ownText = cleanText([$('.post-header').first().text(), $('.post-playtimes').first().text(), $('.post-content').first().text()].join(' ')) || bodyText;
   // "#0 10" = leeftijd 0 t/m 10 jaar volgens de agenda
@@ -329,7 +369,8 @@ export function parseEventPage(html: string, url: string, sourceEventId: string,
     estimatedMaxMonths: ageTag ? Number(ageTag[2]) * 12 : undefined,
     estimateReason: ageTag ? 'leeftijdslabel van UITagenda' : undefined,
     summary: introFrom($, $('.post-content').first().length ? $('.post-content').first() : undefined),
-    descriptionForClassification: (cleanText($('.post-content').first().text()).slice(0, 1500) || cleanText($('meta[name="description"]').attr('content'))) ?? undefined,
+    descriptionForClassification:
+      (cleanText($('.post-content').first().text()).slice(0, 1500) || cleanText($('meta[name="description"]').attr('content'))) ?? undefined,
     statusText,
     checkedAt: ctx.nowIso,
     extraUncertainties: extra.length ? extra : undefined,
@@ -341,40 +382,53 @@ export const uitagendaUtrecht: SourceAdapter = {
   name: NAME,
   homepage: BASE,
   method: 'html',
-  description:
-    'Stadsbrede cultuuragenda. Lijstpagina’s per genre en wijk; datum en tijd uit de agendalink op elke evenementpagina.',
+  description: 'Stadsbrede cultuuragenda. Lijstpagina’s per genre en wijk; datum en tijd uit de agendalink op elke evenementpagina.',
   async run(ctx: AdapterContext): Promise<AdapterResult> {
     const genres = (ctx.options.genres as string[] | undefined) ?? ['jeugdtheater', 'festivals', 'musea'];
     const wijken = (ctx.options.wijken as string[] | undefined) ?? ['leidsche-rijn,vleuten-de-meern'];
     const maxPages = (ctx.options.maxPagesPerQuery as number | undefined) ?? 10;
     const maxDetail = (ctx.options.maxDetailPages as number | undefined) ?? ctx.maxDetailPages;
-    const filtered = [
-      ...genres.map((g) => `genres=${encodeURIComponent(g)}`),
-      ...wijken.map((w) => `wijk=${w}`),
-    ];
+    const filtered = [...genres.map((g) => `genres=${encodeURIComponent(g)}`), ...wijken.map((w) => `wijk=${w}`)];
     // Geen genres en geen wijken: de complete agenda van de hele stad in één lijst.
     const queries = filtered.length ? filtered : [''];
 
     const links = new Map<string, string>();
     // Alleen als alles volledig is opgehaald, mogen ontbrekende items als "verdwenen" gelden.
     let complete = true;
-    for (const q of queries) {
-      for (let page = 1; page <= maxPages; page++) {
-        const url = `${BASE}/agenda/?vanaf=${dmy(ctx.today)}&tot=${dmy(ctx.until)}${q ? `&${q}` : ''}${page > 1 ? `&page=${page}` : ''}`;
-        const html = await fetchText(url);
-        const found = extractEventLinks(html);
-        let added = 0;
-        for (const [id, href] of found) {
-          if (!links.has(id)) {
-            links.set(id, href);
-            added++;
-          }
-        }
-        ctx.log(`  ${q || 'hele agenda'} p${page}: ${found.size} links, ${added} nieuw`);
-        if (added === 0) break;
-        if (page === maxPages) complete = false;
-      }
+    // De site geeft een serverfout (HTTP 500) bij diepe pagina's (vanaf ± pagina 35). Daarom per maand ophalen:
+    // dan blijft elke lijst kort. Faalt toch een vervolgpagina, dan houden we wat we hebben (niet alles weggooien).
+    const windows: [string, string][] = [];
+    for (let from = ctx.today; from <= ctx.until;) {
+      const to = addDays(from, 30) < ctx.until ? addDays(from, 30) : ctx.until;
+      windows.push([from, to]);
+      from = addDays(to, 1);
     }
+    for (const q of queries)
+      for (const [from, to] of windows) {
+        for (let page = 1; page <= maxPages; page++) {
+          const url = `${BASE}/agenda/?vanaf=${dmy(from)}&tot=${dmy(to)}${q ? `&${q}` : ''}${page > 1 ? `&page=${page}` : ''}`;
+          let html: string;
+          try {
+            html = await fetchText(url);
+          } catch (e) {
+            if (page === 1 && links.size === 0) throw e;
+            ctx.log(`  ${from}–${to} p${page}: ${(e as Error).message}; verder met wat er is`);
+            complete = false;
+            break;
+          }
+          const found = extractEventLinks(html);
+          let added = 0;
+          for (const [id, href] of found) {
+            if (!links.has(id)) {
+              links.set(id, href);
+              added++;
+            }
+          }
+          ctx.log(`  ${q || 'hele agenda'} ${from}–${to} p${page}: ${found.size} links, ${added} nieuw`);
+          if (added === 0) break;
+          if (page === maxPages) complete = false;
+        }
+      }
 
     const events: RawEvent[] = [];
     let n = 0;
@@ -405,9 +459,16 @@ export const uitagendaUtrecht: SourceAdapter = {
             const parsed = parseIcs(await fetchText(new URL(ics, BASE).toString()))[0];
             if (parsed) {
               ev = {
-                sourceId: ID, sourceName: NAME, sourceEventId: id, url,
-                title: parsed.summary ?? 'Onbekende titel', start: parsed.start, end: parsed.end,
-                allDay: parsed.allDay, venueName: parsed.location?.split(',')[0], checkedAt: ctx.nowIso,
+                sourceId: ID,
+                sourceName: NAME,
+                sourceEventId: id,
+                url,
+                title: parsed.summary ?? 'Onbekende titel',
+                start: parsed.start,
+                end: parsed.end,
+                allDay: parsed.allDay,
+                venueName: parsed.location?.split(',')[0],
+                checkedAt: ctx.nowIso,
               };
             }
           }
