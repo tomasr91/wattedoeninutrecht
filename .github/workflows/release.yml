@@ -1,0 +1,42 @@
+# Alleen in de motor (tomasr91/uit-core): staat er in core.json een versie waarvoor nog geen tag bestaat,
+# dan worden de tests gedraaid en worden tag vX.Y.Z en een release aangemaakt. Stadsrepo's halen die versie
+# daarna op met de workflow "Motor bijwerken". Een nieuwe versie uitbrengen = versie in core.json ophogen en naar main.
+name: Versie uitbrengen
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: github.repository == 'tomasr91/uit-core'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Nieuwe versie?
+        id: v
+        run: |
+          v="v$(node -e "console.log(require('./core.json').version)")"
+          echo "tag=$v" >> "$GITHUB_OUTPUT"
+          if git rev-parse -q --verify "refs/tags/$v" >/dev/null; then echo "new=false" >> "$GITHUB_OUTPUT"; else echo "new=true" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/setup-node@v4
+        if: steps.v.outputs.new == 'true'
+        with:
+          node-version: 22
+          cache: npm
+      - name: Testen met de voorbeeldstad
+        if: steps.v.outputs.new == 'true'
+        run: npm ci && npm test && npm run typecheck && npm run build
+      - name: Tag en release
+        if: steps.v.outputs.new == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.v.outputs.tag }}" --target "$GITHUB_SHA" --title "uit-core ${{ steps.v.outputs.tag }}" --generate-notes
