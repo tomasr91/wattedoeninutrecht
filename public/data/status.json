@@ -1,23 +1,23 @@
 {
-  "lastSuccessfulRun": "2026-11-04T09:31:50.297Z",
-  "lastRun": "2026-11-04T09:31:50.297Z",
+  "lastSuccessfulRun": "2026-11-05T04:19:16.832Z",
+  "lastRun": "2026-11-05T04:19:16.832Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
       "sourceName": "Bibliotheek Utrecht",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-04T09:19:48.104Z",
-      "lastSuccess": "2026-11-04T09:19:48.104Z",
-      "fetched": 333
+      "lastAttempt": "2026-11-05T04:08:00.562Z",
+      "lastSuccess": "2026-11-05T04:08:00.562Z",
+      "fetched": 314
     },
     {
       "sourceId": "comedyhuis",
       "sourceName": "Comedyhuis",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-04T09:19:48.104Z",
-      "lastSuccess": "2026-11-04T09:19:48.104Z",
+      "lastAttempt": "2026-11-05T04:08:00.562Z",
+      "lastSuccess": "2026-11-05T04:08:00.562Z",
       "fetched": 28,
       "notes": "28 shows van 319 in de agenda"
     },
@@ -26,9 +26,9 @@
       "sourceName": "Alternatief verzameld",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-04T09:19:48.104Z",
-      "lastSuccess": "2026-11-04T09:19:48.104Z",
-      "fetched": 64
+      "lastAttempt": "2026-11-05T04:08:00.562Z",
+      "lastSuccess": "2026-11-05T04:08:00.562Z",
+      "fetched": 61
     },
     {
       "sourceId": "hofman",
@@ -45,28 +45,28 @@
       "sourceName": "Jaarbeurs",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-04T09:19:48.104Z",
-      "lastSuccess": "2026-11-04T09:19:48.104Z",
+      "lastAttempt": "2026-11-05T04:08:00.562Z",
+      "lastSuccess": "2026-11-05T04:08:00.562Z",
       "fetched": 12,
-      "notes": "12 publieksevenementen van 38 (4 voor gezinnen), 12 met details"
+      "notes": "12 publieksevenementen van 39 (4 voor gezinnen), 12 met details"
     },
     {
       "sourceId": "kasteel-de-haar",
       "sourceName": "Kasteel de Haar",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-04T09:19:48.104Z",
-      "lastSuccess": "2026-11-04T09:19:48.104Z",
+      "lastAttempt": "2026-11-05T04:08:00.562Z",
+      "lastSuccess": "2026-11-05T04:08:00.562Z",
       "fetched": 11,
-      "notes": "17 agenda-items"
+      "notes": "16 agenda-items"
     },
     {
       "sourceId": "maximapark",
       "sourceName": "Máximapark",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-04T09:19:48.104Z",
-      "lastSuccess": "2026-11-04T09:19:48.104Z",
+      "lastAttempt": "2026-11-05T04:08:00.562Z",
+      "lastSuccess": "2026-11-05T04:08:00.562Z",
       "fetched": 4
     },
     {
@@ -74,18 +74,18 @@
       "sourceName": "Pathé",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-04T09:19:48.104Z",
-      "lastSuccess": "2026-11-04T09:19:48.104Z",
-      "fetched": 11,
-      "notes": "11 kinderfilms en Kleuterbios-dagen"
+      "lastAttempt": "2026-11-05T04:08:00.562Z",
+      "lastSuccess": "2026-11-05T04:08:00.562Z",
+      "fetched": 10,
+      "notes": "10 kinderfilms en Kleuterbios-dagen"
     },
     {
       "sourceId": "podium-hoge-woerd",
       "sourceName": "Podium Hoge Woerd",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-04T09:19:48.104Z",
-      "lastSuccess": "2026-11-04T09:19:48.104Z",
+      "lastAttempt": "2026-11-05T04:08:00.562Z",
+      "lastSuccess": "2026-11-05T04:08:00.562Z",
       "fetched": 10
     },
     {
@@ -93,20 +93,20 @@
       "sourceName": "Podium Sprits",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-04T09:19:48.104Z",
-      "lastSuccess": "2026-11-04T09:19:48.104Z",
-      "fetched": 35,
-      "notes": "31 producties in het programma"
+      "lastAttempt": "2026-11-05T04:08:00.562Z",
+      "lastSuccess": "2026-11-05T04:08:00.562Z",
+      "fetched": 29,
+      "notes": "30 producties in het programma"
     },
     {
       "sourceId": "stadsschouwburg-utrecht",
       "sourceName": "Stadsschouwburg Utrecht",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-04T09:19:48.104Z",
-      "lastSuccess": "2026-11-04T09:19:48.104Z",
-      "fetched": 220,
-      "notes": "220 voorstellingen, 152 productiepagina's"
+      "lastAttempt": "2026-11-05T04:08:00.562Z",
+      "lastSuccess": "2026-11-05T04:08:00.562Z",
+      "fetched": 219,
+      "notes": "219 voorstellingen, 153 productiepagina's"
     },
     {
       "sourceId": "tivolivredenburg",
@@ -122,29 +122,29 @@
       "sourceName": "UITagenda Utrecht",
       "enabled": true,
       "ok": false,
-      "lastAttempt": "2026-11-04T09:19:48.104Z",
+      "lastAttempt": "2026-11-05T04:08:00.562Z",
       "lastSuccess": "2026-10-30T08:42:04.856Z",
       "failingSince": "2026-10-31T04:08:48.308Z",
       "fetched": 969,
-      "error": "HTTP 500 (www.uitagendautrecht.nl/agenda/?vanaf=04-11-2026&tot=18-02-2027&page=36)"
+      "error": "HTTP 500 (www.uitagendautrecht.nl/agenda/?vanaf=05-11-2026&tot=19-02-2027&page=35)"
     },
     {
       "sourceId": "utrecht-natuurlijk",
       "sourceName": "Utrecht Natuurlijk",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-04T09:19:48.104Z",
-      "lastSuccess": "2026-11-04T09:19:48.104Z",
-      "fetched": 65,
-      "notes": "65 activiteiten"
+      "lastAttempt": "2026-11-05T04:08:00.562Z",
+      "lastSuccess": "2026-11-05T04:08:00.562Z",
+      "fetched": 63,
+      "notes": "63 activiteiten"
     },
     {
       "sourceId": "vaste-plekken",
       "sourceName": "Vaste plekken",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-04T09:19:48.104Z",
-      "lastSuccess": "2026-11-04T09:19:48.104Z",
+      "lastAttempt": "2026-11-05T04:08:00.562Z",
+      "lastSuccess": "2026-11-05T04:08:00.562Z",
       "fetched": 33,
       "notes": "33 vaste plekken"
     },
@@ -157,11 +157,11 @@
     }
   ],
   "totals": {
-    "active": 1546,
-    "added": 0,
-    "updated": 1,
-    "cancelled": 0,
-    "expired": 0,
-    "merged": 152
+    "active": 1509,
+    "added": 4,
+    "updated": 58,
+    "cancelled": 3,
+    "expired": 43,
+    "merged": 147
   }
 }
