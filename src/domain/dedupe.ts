@@ -1,6 +1,7 @@
 import type { Activity, Confidence } from './types';
 import { dateOf, timeOf } from './dates';
 import { haversineKm } from './geo';
+import { CITY } from '../../city/config';
 
 /** Kleine, deterministische hash (FNV-1a, 52 bits) voor stabiele ID's — browser én Node. */
 export function stableHash(input: string): string {
@@ -79,9 +80,10 @@ export function isDuplicate(x: Activity, y: Activity): boolean {
 
 /** Woorden die op dezelfde avond in één zaal vaak in verschillende titels staan. */
 const GENERIC = new Set([
-  'utrecht', 'tivolivredenburg', 'live', 'night', 'nacht', 'show', 'orkest', 'concert', 'theater', 'voorstelling', 'festival',
+  ...CITY.dedupeGenericWords,
+  'live', 'night', 'nacht', 'show', 'orkest', 'concert', 'theater', 'voorstelling', 'festival',
   'halloween', 'edition', 'special', 'presents', 'tour', 'workshop', 'rondleiding', 'opening', 'tentoonstelling', 'muziek',
-  'with', 'feat', 'and', 'from', 'jubileum', 'kerst', 'sint', 'club', 'party', 'comedy', 'stadsschouwburg',
+  'with', 'feat', 'and', 'from', 'jubileum', 'kerst', 'sint', 'club', 'party', 'comedy',
 ]);
 
 function sharesDistinctWord(a: string, b: string): boolean {

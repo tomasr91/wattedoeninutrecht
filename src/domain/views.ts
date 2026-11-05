@@ -8,17 +8,18 @@ import type { Activity, Category, Child, Home } from './types';
 import { addDays, dateOf, diffDays, isWeekend, timeOf, weekday } from './dates';
 import { childFits, type ChildFit } from './age';
 import { activityEndDate, firstDateInPeriod, overlapsPeriod } from './filters';
-import { DEFAULT_HOME, distanceFromHome } from './geo';
+import { CITY_ZONE, DEFAULT_HOME, HOME_ZONE, distanceFromHome } from './geo';
+import { CITY } from '../../city/config';
 import { normalizeText } from './dedupe';
 import { canonicalKind, isVoorlezen, kindLabel } from './kind';
 
 export type ListAudience = 'kinderen' | 'volwassenen';
 
-/** Fietsafstand: binnen 8 km van Leidsche Rijn Centrum, of in de gemeente Utrecht zelf. */
-export const BIKE_MAX_KM = 8;
+/** Fietsafstand: binnen zoveel km van het thuispunt, of in de gemeente zelf (stadsprofiel). */
+export const BIKE_MAX_KM = CITY.bikeMaxKm;
 
 export function isBikeDistance(a: Activity, home: Home = DEFAULT_HOME, maxKm = BIKE_MAX_KM): boolean {
-  if (a.zone === 'leidsche-rijn' || a.zone === 'utrecht') return true;
+  if (a.zone === HOME_ZONE || a.zone === CITY_ZONE) return true;
   const km = distanceFromHome(a.venue, home);
   return km !== undefined && km <= maxKm;
 }

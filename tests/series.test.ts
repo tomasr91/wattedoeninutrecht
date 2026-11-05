@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { collapseSeries, recurrenceLabel } from '../src/domain/series';
 import { buildLists, DEFAULT_LIST_OPTIONS } from '../src/domain/views';
-import { parsePlaytimes } from '../collector/adapters/uitagenda-utrecht';
+import { parsePlaytimes } from '../city/adapters/uitagenda-utrecht';
 import { testActivity } from './fixtures';
 
 // TESTDATA: verzonnen activiteiten.

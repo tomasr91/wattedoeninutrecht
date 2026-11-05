@@ -8,8 +8,8 @@ import { describe, expect, it } from 'vitest';
 import { inferYear, parseDutchDate, parseDutchDateRange, parseGoogleCalendarLink, parseTimes, extractJsonLdEvents } from '../collector/lib/parse';
 import { parseIcs } from '../collector/lib/ics';
 import { isAllowed, parseRobots } from '../collector/lib/http';
-import { branchesIn, parseCard } from '../collector/adapters/bibliotheek-utrecht';
-import { extractEventLinks, parseEventPage } from '../collector/adapters/uitagenda-utrecht';
+import { branchesIn, parseCard } from '../city/adapters/bibliotheek-utrecht';
+import { extractEventLinks, parseEventPage } from '../city/adapters/uitagenda-utrecht';
 import { normalize, type RawEvent } from '../collector/normalize';
 import { buildExport } from '../collector/export';
 import { testActivity } from './fixtures';
@@ -267,7 +267,7 @@ describe('bibliotheek: titels', () => {
 
 describe('Utrecht Natuurlijk: bereik met ― (U+2015)', () => {
   it('leest de einddatum en geeft een stabiele ID', async () => {
-    const { parseUnList, unCardToRaw } = await import('../collector/adapters/utrecht-natuurlijk');
+    const { parseUnList, unCardToRaw } = await import('../city/adapters/utrecht-natuurlijk');
     const html = `<article class="activity-card"><h2>[TESTDATA] Herfstvakantie</h2><p class="font-bold">donderdag 22 oktober 2026 &#8213; zondag 25 oktober 2026</p><div>Eilandsteede</div><a href="https://www.utrechtnatuurlijk.nl/activiteit/herfst-test/?date=2026-10-22">x</a></article>`;
     const [c] = parseUnList(html, '2026-10-22');
     expect([c.date, c.end]).toEqual(['2026-10-22', '2026-10-25']);
@@ -275,10 +275,10 @@ describe('Utrecht Natuurlijk: bereik met ― (U+2015)', () => {
   });
 });
 
-import { detailStillFresh } from '../collector/adapters/uitagenda-utrecht';
+import { detailStillFresh } from '../city/adapters/uitagenda-utrecht';
 describe('Utrecht Natuurlijk: doelgroep', () => {
   it('"Alle leeftijden" alleen is voor volwassenen, niet voor kinderen', async () => {
-    const { unAudiences } = await import('../collector/adapters/utrecht-natuurlijk');
+    const { unAudiences } = await import('../city/adapters/utrecht-natuurlijk');
     expect(unAudiences(['Alle leeftijden'])).toEqual(['volwassenen']);
     expect(unAudiences(['Alle leeftijden', 'Gezinnen']).sort()).toEqual(['gezin', 'volwassenen']);
     expect(unAudiences(['Peuters'])).toEqual(['kinderen']);

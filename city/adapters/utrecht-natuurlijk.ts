@@ -11,11 +11,11 @@
  *  - Geen iCal of RSS. robots.txt staat alles toe (crawl-delay 5 voor een paar bots).
  */
 import * as cheerio from 'cheerio';
-import { fetchText } from '../lib/http.ts';
-import { cardTextAround, cleanText, detailInfo, parseDutchDate, priceTextFrom } from '../lib/parse.ts';
-import type { RawEvent } from '../normalize.ts';
+import { fetchText } from '../../collector/lib/http.ts';
+import { cardTextAround, cleanText, detailInfo, parseDutchDate, priceTextFrom } from '../../collector/lib/parse.ts';
+import type { RawEvent } from '../../collector/normalize.ts';
 import type { Audience } from '../../src/domain/types.ts';
-import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
+import type { AdapterContext, AdapterResult, SourceAdapter } from '../../collector/adapters/types.ts';
 
 const BASE = 'https://www.utrechtnatuurlijk.nl';
 const ID = 'utrecht-natuurlijk';

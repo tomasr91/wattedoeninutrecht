@@ -13,10 +13,10 @@
  */
 import * as cheerio from 'cheerio';
 import { parseAgeLabel } from '../../src/domain/enrich.ts';
-import { fetchText } from '../lib/http.ts';
-import { cleanText, inferYear, introFrom, priceTextFrom, spacedText } from '../lib/parse.ts';
-import type { RawEvent } from '../normalize.ts';
-import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
+import { fetchText } from '../../collector/lib/http.ts';
+import { cleanText, inferYear, introFrom, priceTextFrom, spacedText } from '../../collector/lib/parse.ts';
+import type { RawEvent } from '../../collector/normalize.ts';
+import type { AdapterContext, AdapterResult, SourceAdapter } from '../../collector/adapters/types.ts';
 
 const BASE = 'https://podiumsprits.nl';
 const ID = 'podium-sprits';

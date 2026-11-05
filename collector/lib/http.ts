@@ -5,9 +5,10 @@
  *  - minimaal interval per host (standaard 1,5 s)
  *  - time-out en beperkte retries bij tijdelijke fouten
  */
+import { CITY } from '../../city/config.ts';
 
-const CONTACT = process.env.COLLECTOR_CONTACT ?? 'zie README van utrecht-family-agenda';
-export const USER_AGENT = `UtrechtFamilyAgendaBot/0.1 (persoonlijke gezinsagenda; ${CONTACT})`;
+const CONTACT = process.env.COLLECTOR_CONTACT ?? `zie README van ${CITY.bot.project}`;
+export const USER_AGENT = `${CITY.bot.name}/0.1 (persoonlijke gezinsagenda; ${CONTACT})`;
 
 const lastRequestAt = new Map<string, number>();
 const robotsCache = new Map<string, RobotsRules>();
@@ -54,7 +55,7 @@ export interface HttpOptions {
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-export function parseRobots(txt: string, agentName = 'utrechtfamilyagendabot'): RobotsRules {
+export function parseRobots(txt: string, agentName = CITY.bot.name.toLowerCase()): RobotsRules {
   const groups: { agents: string[]; rules: RobotsRules }[] = [];
   let current: { agents: string[]; rules: RobotsRules } | null = null;
   let lastWasAgent = false;

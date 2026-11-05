@@ -5,9 +5,9 @@
  * afwijken; de eerste live run in GitHub Actions is de echte test.
  */
 import { describe, expect, it } from 'vitest';
-import { parseTivoliDetail, parseTivoliList, toRawEvents } from '../collector/adapters/tivolivredenburg';
-import { parseSsuDetail, parseSsuList, ssuCardToRaw } from '../collector/adapters/stadsschouwburg-utrecht';
-import { parseSpritsDetail, parseSpritsProgram, spritsToRaw } from '../collector/adapters/podium-sprits';
+import { parseTivoliDetail, parseTivoliList, toRawEvents } from '../city/adapters/tivolivredenburg';
+import { parseSsuDetail, parseSsuList, ssuCardToRaw } from '../city/adapters/stadsschouwburg-utrecht';
+import { parseSpritsDetail, parseSpritsProgram, spritsToRaw } from '../city/adapters/podium-sprits';
 import { normalize } from '../collector/normalize';
 import { parseAgeLabel } from '../src/domain/enrich';
 import { pricesIn, priceTextFrom } from '../collector/lib/parse';
@@ -144,13 +144,13 @@ describe('leeftijden en prijzen in nieuwe notaties', () => {
 
 describe('soortlabels en inkorten', () => {
   it('Tivoli: het meest zeggende genre wint', async () => {
-    const { pickKind } = await import('../collector/adapters/tivolivredenburg');
+    const { pickKind } = await import('../city/adapters/tivolivredenburg');
     expect(pickKind(['Pop', 'Comedy'])).toBe('Comedy');
     expect(pickKind(['Indie', 'Metal & punk'])).toBe('Indie');
     expect(pickKind([])).toBeUndefined();
   });
   it('Stadsschouwburg: alleen Verdieping/Foodprogramma valt weg, een voorstelling met eten niet', async () => {
-    const { ssuExcluded, ssuKind } = await import('../collector/adapters/stadsschouwburg-utrecht');
+    const { ssuExcluded, ssuKind } = await import('../city/adapters/stadsschouwburg-utrecht');
     const ex = ['Verdieping', 'Foodprogramma'];
     expect(ssuExcluded({ genres: ['Verdieping'] }, ex)).toBe(true);
     expect(ssuExcluded({ genres: ['Foodprogramma', 'Toneel'] }, ex)).toBe(false);
@@ -172,7 +172,7 @@ describe('Utrecht Natuurlijk (synthetische HTML)', () => {
       <p>zaterdag 28 nov 2026</p><p>13.30-15.30 uur</p><p>Griftsteede</p><p>Volwassenen</p><p>Betaald 22,50</p></article>
   </main>`;
   it('leest datum uit de URL, tijd, locatie, doelgroep en prijs', async () => {
-    const { parseUnList, unCardToRaw } = await import('../collector/adapters/utrecht-natuurlijk');
+    const { parseUnList, unCardToRaw } = await import('../city/adapters/utrecht-natuurlijk');
     const cards = parseUnList(html, TODAY);
     expect(cards.map((c) => [c.date, c.time?.start, c.location?.venueName, c.groups])).toEqual([
       ['2026-10-24', '14:00', 'Stadsboerderij Eilandsteede', ['Peuters', 'Kinderen', 'Gezinnen']],
@@ -200,7 +200,7 @@ describe('Kasteel de Haar (synthetische HTML)', () => {
     <article><a href="https://www.kasteeldehaar.nl/2026/06/25/tuinspeurtocht_ontsnaptedieren/"><h3>Tuinspeurtocht: Ontsnapte dieren</h3></a><p>Doorlopend</p></article>
   </main>`;
   it('bereik, losse dagen, bereik zonder maand bij het begin, en doorlopend', async () => {
-    const { parseHaarList, haarToRaw } = await import('../collector/adapters/kasteel-de-haar');
+    const { parseHaarList, haarToRaw } = await import('../city/adapters/kasteel-de-haar');
     const items = parseHaarList(html, TODAY);
     expect(items.map((i) => [i.slug, i.start, i.end, i.days, i.ongoing])).toEqual([
       ['indienstvandeadel', '2026-11-01', '2027-01-03', undefined, false],
@@ -224,7 +224,7 @@ describe('Jaarbeurs (synthetische HTML)', () => {
     <div><a href="/agenda-item/logistica"><h3>Logistica Next</h3></a><p>10 nov 2026</p><span>Zakelijk evenement</span></div>
   </main>`;
   it('alleen publieksevenementen voor gezinnen, met datumbereik over de jaargrens', async () => {
-    const { parseJbList, isFamilyEvent, jbToRaw } = await import('../collector/adapters/jaarbeurs');
+    const { parseJbList, isFamilyEvent, jbToRaw } = await import('../city/adapters/jaarbeurs');
     const items = parseJbList(html, TODAY);
     const fam = items.filter((i) => isFamilyEvent(i));
     expect(fam.map((i) => [i.slug, i.start, i.end])).toEqual([
@@ -234,7 +234,7 @@ describe('Jaarbeurs (synthetische HTML)', () => {
     expect(normalize(jbToRaw(fam[0], NOW)!).zone).toBe('utrecht');
   });
   it('overige publieksevenementen bij volwassenen als Beurs; zakelijk valt af', async () => {
-    const { parseJbList, jbToRaw } = await import('../collector/adapters/jaarbeurs');
+    const { parseJbList, jbToRaw } = await import('../city/adapters/jaarbeurs');
     const { kindLabel } = await import('../src/domain/kind');
     const items = parseJbList(html, TODAY).filter((i) => i.isPublic);
     expect(items.map((i) => i.slug)).not.toContain('logistica');
@@ -244,7 +244,7 @@ describe('Jaarbeurs (synthetische HTML)', () => {
     const winter = normalize(jbToRaw(items.find((i) => i.slug === 'het-utrechtse-winterspektakel')!, NOW)!);
     expect(winter.audiences).toContain('kinderen');
     expect(kindLabel(winter)).toBe('Feest & festival');
-    const { isOuting } = await import('../collector/adapters/jaarbeurs');
+    const { isOuting } = await import('../city/adapters/jaarbeurs');
     expect(isOuting({ title: 'Scrum Day Europe 2026', text: 'community event' })).toBe(false);
     expect(isOuting({ title: 'Studiekeuzebeurs Midden 2026', text: '' })).toBe(false);
     expect(isOuting({ title: 'CardCon 2026', text: 'Trefpunt voor fans van trading card games' })).toBe(true);
@@ -255,14 +255,14 @@ describe('Jaarbeurs detailpagina (synthetische HTML)', () => {
   const page = (slots: string) => `<main><div class="col-md-6"><h1>[TESTDATA] Testbeurs</h1><p>Een gezellige testbeurs met honderden standhouders en veel te ontdekken.</p></div>
     <div class="agenda__info-box"><div class="agenda__meta">${slots}</div><h5 class="agenda__tickets-starting">€13,50</h5></div></main>`;
   it('tijden per dag, prijs en beschrijving', async () => {
-    const { parseJbDetail, withJbDetail } = await import('../collector/adapters/jaarbeurs');
+    const { parseJbDetail, withJbDetail } = await import('../city/adapters/jaarbeurs');
     const d = parseJbDetail(page('<div>14 nov 2026 09:00 - 17:00</div><div>15 nov 2026 09:00 - 16:00</div>'), TODAY);
     const e = withJbDetail({ sourceId: 'jaarbeurs', sourceName: 'Jaarbeurs', url: 'u', title: 't', start: '2026-11-14', end: '2026-11-15', allDay: true } as never, d);
     expect(e).toMatchObject({ start: '2026-11-14T09:00', end: '2026-11-15', priceText: 'v.a. €13,50', openingNote: 'za 14 nov 09:00–17:00; zo 15 nov 09:00–16:00' });
     expect(e.summary).toMatch(/testbeurs/);
   });
   it('voorstellingen met twee tijden per dag en een paar vrije dagen', async () => {
-    const { parseJbDetail, withJbDetail } = await import('../collector/adapters/jaarbeurs');
+    const { parseJbDetail, withJbDetail } = await import('../city/adapters/jaarbeurs');
     const days = ['19', '20', '21', '24', '25', '26'].map((x) => `<div>${x} dec 2026 11:00 - 12:40</div><div>${x} dec 2026 15:00 - 16:40</div>`).join('');
     const e = withJbDetail({ sourceId: 'jaarbeurs', sourceName: 'Jaarbeurs', url: 'u', title: 't', start: '2026-12-19', end: '2026-12-26', allDay: true } as never, parseJbDetail(page(days), TODAY));
     expect(e.start).toBe('2026-12-19');

@@ -1,9 +1,10 @@
 /**
+ * Herkenningspunt van de stad in de kop en het icoon (stadsprofiel).
  * Eigen, vereenvoudigde tekening van de Domtoren: twee vierkante geledingen,
  * de achthoekige lantaarn met pinakels, de bekroning en de doorgang onderin.
  * De toren neemt currentColor aan; vensters en doorgang zijn uitsparingen.
  */
-export function DomTower({ height = 44, title, line = false }: { height?: number; title?: string; line?: boolean }) {
+export function Landmark({ height = 44, title, line = false }: { height?: number; title?: string; line?: boolean }) {
   return (
     <svg
       viewBox="0 0 32 96"

@@ -6,7 +6,8 @@
  *  - 'YYYY-MM-DDTHH:mm'    voor activiteiten met een begintijd
  */
 
-export type Zone = 'leidsche-rijn' | 'utrecht' | 'omgeving';
+/** Zone-ID uit het stadsprofiel: thuiswijk (city/config.ts → home.zoneId), stad (city.zoneId) of 'omgeving'. */
+export type Zone = string;
 
 export type Audience = 'kinderen' | 'gezin' | 'volwassenen';
 
@@ -176,8 +177,8 @@ export interface Profile {
   nearbyKm?: number;
   /** Maximale afstand in km voor de standaardweergave. */
   maxDistanceKm: number;
-  /** 0 = geen voorkeur, 1 = normaal, 2 = sterk. */
-  leidscheRijnPreference: number;
+  /** Voorrang voor de thuiswijk (stadsprofiel). 0 = geen voorkeur, 1 = normaal, 2 = sterk. */
+  homePreference: number;
   interests: Category[];
   includeAdults: boolean;
   defaultPeriod: PeriodPreset;

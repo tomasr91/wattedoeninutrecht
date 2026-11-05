@@ -4,7 +4,7 @@
  *
  * Gebruik:
  *   npm run collect                 alle ingeschakelde bronnen
- *   npm run collect -- --source=bibliotheek-utrecht   (meerdere: --source=a,b)
+ *   npm run collect -- --source=<bron-id>   (meerdere: --source=a,b)
  *   npm run collect:dry             ophalen en rapporteren, niets opslaan
  *   npm run export                  alleen opnieuw exporteren uit de database
  *
@@ -22,22 +22,8 @@ import * as dbm from './db.ts';
 import { notAnOuting } from './outings.ts';
 import type { DetailCache } from './adapters/types.ts';
 import { geocodeAddressesPdok, geocodeMissing, geocodingEnabled } from './geocode.ts';
-import type { SourceAdapter } from './adapters/types.ts';
-import { uitagendaUtrecht } from './adapters/uitagenda-utrecht.ts';
-import { bibliotheekUtrecht } from './adapters/bibliotheek-utrecht.ts';
-import { podiumHogeWoerd } from './adapters/podium-hoge-woerd.ts';
-import { curatedAdapter, pruneCuratedFiles } from './adapters/curated.ts';
-import { tivoliVredenburg } from './adapters/tivolivredenburg.ts';
-import { stadsschouwburgUtrecht } from './adapters/stadsschouwburg-utrecht.ts';
-import { podiumSprits } from './adapters/podium-sprits.ts';
-import { utrechtNatuurlijk } from './adapters/utrecht-natuurlijk.ts';
-import { kasteelDeHaar } from './adapters/kasteel-de-haar.ts';
-import { placesAdapter } from './adapters/places.ts';
-import { jaarbeurs } from './adapters/jaarbeurs.ts';
-import { pathe } from './adapters/pathe.ts';
-import { comedyhuis } from './adapters/comedyhuis.ts';
-import { hofman } from './adapters/hofman.ts';
-import { icalAdapter, jsonLdAdapter, tribeAdapter } from './adapters/generic.ts';
+import { pruneCuratedFiles } from './adapters/curated.ts';
+import { adapterFor, buildRegistry, type SourceConfig } from './adapters/registry.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = new Set(process.argv.slice(2));
@@ -45,14 +31,6 @@ const only = process.argv.find((a) => a.startsWith('--source='))?.split('=')[1];
 const dryRun = args.has('--dry-run');
 const exportOnly = args.has('--export-only');
 
-interface SourceConfig {
-  id: string;
-  enabled: boolean;
-  type?: 'ical' | 'jsonld' | 'tribe';
-  name?: string;
-  homepage?: string;
-  options?: Record<string, unknown>;
-}
 interface Config {
   windowMonths: number;
   windowMarginDays: number;
@@ -61,29 +39,7 @@ interface Config {
   sources: SourceConfig[];
 }
 
-const BUILT_IN: Record<string, SourceAdapter> = {
-  'uitagenda-utrecht': uitagendaUtrecht,
-  'bibliotheek-utrecht': bibliotheekUtrecht,
-  'podium-hoge-woerd': podiumHogeWoerd,
-  tivolivredenburg: tivoliVredenburg,
-  'stadsschouwburg-utrecht': stadsschouwburgUtrecht,
-  'podium-sprits': podiumSprits,
-  'utrecht-natuurlijk': utrechtNatuurlijk,
-  'kasteel-de-haar': kasteelDeHaar,
-  jaarbeurs,
-  pathe,
-  comedyhuis,
-  hofman,
-  handmatig: curatedAdapter(join(ROOT, 'data', 'curated')),
-  'vaste-plekken': placesAdapter(join(ROOT, 'data', 'places.json')),
-};
-
-function adapterFor(cfg: SourceConfig): SourceAdapter | undefined {
-  if (cfg.type === 'ical') return icalAdapter({ id: cfg.id, name: cfg.name ?? cfg.id, homepage: cfg.homepage, options: cfg.options });
-  if (cfg.type === 'tribe') return tribeAdapter({ id: cfg.id, name: cfg.name ?? cfg.id, homepage: cfg.homepage, options: cfg.options });
-  if (cfg.type === 'jsonld') return jsonLdAdapter({ id: cfg.id, name: cfg.name ?? cfg.id, homepage: cfg.homepage, options: cfg.options });
-  return BUILT_IN[cfg.id];
-}
+const REGISTRY = buildRegistry(ROOT);
 
 const logLines: string[] = [];
 const log = (m: string) => {
@@ -128,7 +84,7 @@ async function main() {
   const dropKeys: string[] = [];
 
   for (const cfg of config.sources) {
-    const adapter = adapterFor(cfg);
+    const adapter = adapterFor(cfg, REGISTRY);
     if (!adapter) {
       log(`! Onbekende bron "${cfg.id}" in sources.config.json — overgeslagen`);
       continue;

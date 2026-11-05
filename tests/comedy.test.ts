@@ -1,7 +1,7 @@
 /** Comedyhuis en Hofman. De HTML hieronder is ⚠️ TESTDATA, nagebouwd naar de opbouw van 21-10-2026. */
 import { describe, expect, it } from 'vitest';
-import { comedyToRaw, isRealShow, parseComedyhuis } from '../collector/adapters/comedyhuis';
-import { wednesdays, weeklyComedyTime } from '../collector/adapters/hofman';
+import { comedyToRaw, isRealShow, parseComedyhuis } from '../city/adapters/comedyhuis';
+import { wednesdays, weeklyComedyTime } from '../city/adapters/hofman';
 
 const card = (slug: string, title: string, taal: string, place: string, date: string, time: string, desc = 'Een avond stand-up met een MC en drie acts.') => `
 <div class="fwpl-result r1"><div class="fwpl-item img"><a href="https://comedyhuis.nl/shows/${slug}/"><img src="x.jpg" alt=""><noscript><img src="x.jpg"></noscript></a></div>

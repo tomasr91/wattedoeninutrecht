@@ -64,7 +64,7 @@ describe('weergave', () => {
 });
 
 import { ageFromText } from '../collector/lib/parse';
-import { parseSpritsDetail } from '../collector/adapters/podium-sprits';
+import { parseSpritsDetail } from '../city/adapters/podium-sprits';
 describe('leeftijd uit de tekst van een activiteitspagina', () => {
   it.each([
     ['[TESTDATA] Kom luisteren. De verhalen zijn geschikt voor kinderen van 5 tot 8 jaar oud. Inschrijven is niet nodig.', 60, 96],

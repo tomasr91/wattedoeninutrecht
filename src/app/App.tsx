@@ -13,7 +13,8 @@ import { loadDataset } from './data';
 import { load, save } from './storage';
 import { DetailSheet } from './components/DetailSheet';
 import { IconSettings } from './components/Icons';
-import { DomTower } from './components/DomTower';
+import { Landmark } from '../../city/Landmark';
+import { CITY } from '../../city/config';
 import { AlwaysList, DayList, OngoingList } from './views/ListView';
 import { updateSeen, type SeenState } from '../domain/newness';
 import { NearContext, NewContext } from './newContext';
@@ -49,7 +50,11 @@ export function App() {
     // Verborgen labels die inmiddels zijn samengevoegd, omzetten naar het nieuwe label.
     hiddenKinds.kinderen = [...new Set(hiddenKinds.kinderen.map(canonicalKind))];
     hiddenKinds.volwassenen = [...new Set(hiddenKinds.volwassenen.map(canonicalKind))];
-    return { ...d, ...p, hiddenKinds, hiddenKindsVersion: version };
+    // Oudere profielen (voor het stadsprofiel) bewaarden dit als leidscheRijnPreference.
+    const legacy = (p as { leidscheRijnPreference?: number }).leidscheRijnPreference;
+    const homePreference = p.homePreference ?? legacy ?? d.homePreference;
+    const { leidscheRijnPreference: _old, ...rest } = p as Profile & { leidscheRijnPreference?: number };
+    return { ...d, ...rest, homePreference, hiddenKinds, hiddenKindsVersion: version };
   });
   const [view, setViewState] = useState<ViewState>(() => {
     const v = load<Partial<ViewState> & { onlyWeekend?: boolean }>('view', DEFAULT_VIEW);
@@ -183,14 +188,14 @@ export function App() {
     <div className="app">
       <header className="masthead">
         <span className="masthead-art" aria-hidden="true">
-          <DomTower height={180} line />
+          <Landmark height={180} line />
         </span>
         <div className="masthead-inner">
           <div className="brand">
-            <DomTower height={54} />
+            <Landmark height={54} />
             <div>
-              <h1>Uit in 030</h1>
-              <p className="brand-sub">Ontdek. Kies. Ga.</p>
+              <h1>{CITY.app.name}</h1>
+              <p className="brand-sub">{CITY.app.tagline}</p>
             </div>
           </div>
           <button className="icon-btn on-brand" onClick={() => setSettingsOpen('gezin')} aria-label="Instellingen">

@@ -11,14 +11,14 @@
  *  - Zonder genres en wijken haalt de adapter de complete agenda van de hele stad op.
  */
 import * as cheerio from 'cheerio';
-import { fetchText } from '../lib/http.ts';
-import { cleanText, combine, introFrom, parseDutchDate, parseDutchDateRange, parseGoogleCalendarLink, parseTimes } from '../lib/parse.ts';
+import { fetchText } from '../../collector/lib/http.ts';
+import { cleanText, combine, introFrom, parseDutchDate, parseDutchDateRange, parseGoogleCalendarLink, parseTimes } from '../../collector/lib/parse.ts';
 import { recurrenceLabel } from '../../src/domain/series.ts';
-import { parseIcs } from '../lib/ics.ts';
+import { parseIcs } from '../../collector/lib/ics.ts';
 import { dateOf, diffDays } from '../../src/domain/dates.ts';
 import { parseAgeLabel } from '../../src/domain/enrich.ts';
-import type { RawEvent } from '../normalize.ts';
-import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
+import type { RawEvent } from '../../collector/normalize.ts';
+import type { AdapterContext, AdapterResult, SourceAdapter } from '../../collector/adapters/types.ts';
 
 const BASE = 'https://www.uitagendautrecht.nl';
 const ID = 'uitagenda-utrecht';

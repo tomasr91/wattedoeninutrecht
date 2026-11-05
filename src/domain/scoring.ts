@@ -3,6 +3,8 @@ import { childFits, type ChildFit } from './age';
 import { dateOf, diffDays, isWeekend, timeOf, weekday } from './dates';
 import { distanceFromHome } from './geo';
 import { firstDateInPeriod, type Period } from './filters';
+import { CITY_ZONE, HOME_ZONE } from './geo';
+import { CITY } from '../../city/config';
 
 export const DEFAULT_WEIGHTS: ScoreWeights = {
   age: 30,
@@ -40,24 +42,23 @@ function ageComponent(fits: ChildFit[]): number {
 }
 
 /**
- * Afstand: kinderactiviteiten krijgen een sterke voorkeur voor Leidsche Rijn,
+ * Afstand: kinderactiviteiten krijgen een sterke voorkeur voor de thuiswijk (stadsprofiel),
  * volwassenenactiviteiten een mildere afstandscurve (de binnenstad is prima).
  */
 function distanceComponent(a: Activity, km: number | undefined, profile: Profile, lens: ScoreBreakdown['lens']): number {
-  const pref = profile.leidscheRijnPreference; // 0..2
+  const pref = profile.homePreference; // 0..2
   if (km === undefined) {
     // Geen coördinaten: val terug op zone
-    const z = { 'leidsche-rijn': 0.9, utrecht: 0.6, omgeving: 0.3 }[a.zone];
-    return z;
+    return a.zone === HOME_ZONE ? 0.9 : a.zone === CITY_ZONE ? 0.6 : 0.3;
   }
   const max = Math.max(5, profile.maxDistanceKm);
   if (lens === 'volwassenen') {
     return clamp(1 - (km / max) * 0.8);
   }
-  // Gezin: steilere curve + bonus voor Leidsche Rijn
+  // Gezin: steilere curve + bonus voor de thuiswijk
   const base = clamp(1 - Math.pow(km / max, 0.6));
-  const lrBonus = a.zone === 'leidsche-rijn' ? 0.15 * pref : 0;
-  return clamp(base + lrBonus);
+  const homeBonus = a.zone === HOME_ZONE ? 0.15 * pref : 0;
+  return clamp(base + homeBonus);
 }
 
 function interestComponent(a: Activity, profile: Profile, lens: ScoreBreakdown['lens']): number {
@@ -145,8 +146,8 @@ export function explain(a: Activity, fits: ChildFit[], km: number | undefined, l
   } else {
     r.push('Interessant voor volwassenen');
   }
-  if (a.zone === 'leidsche-rijn') r.push('Dichtbij in Leidsche Rijn');
-  else if (km !== undefined && km < 6) r.push('Op korte afstand van Leidsche Rijn');
+  if (a.zone === HOME_ZONE) r.push(`Dichtbij in ${CITY.home.name}`);
+  else if (km !== undefined && km < 6) r.push(`Op korte afstand van ${CITY.home.name}`);
   if (a.special) r.push('Bijzonder of seizoensgebonden');
   if (a.price.kind === 'gratis') r.push('Gratis');
   if (a.indoor === 'binnen' && lens === 'gezin') r.push('Ideaal voor een regenachtige middag');

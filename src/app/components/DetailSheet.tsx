@@ -6,6 +6,7 @@ import { distanceFromHome, travelEstimate } from '../../domain/geo';
 import { Sheet } from './Sheet';
 import { priceLabel, whenLabel } from './ActivityCard';
 import { IconCalendarPlus, IconExternal, IconRoute, IconShare } from './Icons';
+import { CITY } from '../../../city/config';
 
 const BOOKING_LABEL = {
   verplicht: 'Kaartje kopen of reserveren nodig',
@@ -29,7 +30,7 @@ export function routeUrl(a: Activity): string {
   const dest =
     a.venue.lat !== undefined && a.venue.lon !== undefined && a.venue.geoPrecision === 'exact'
       ? `${a.venue.lat},${a.venue.lon}`
-      : [a.venue.name, a.venue.address, a.venue.locality ?? 'Utrecht'].filter(Boolean).join(', ');
+      : [a.venue.name, a.venue.address, a.venue.locality ?? CITY.cityName].filter(Boolean).join(', ');
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}`;
 }
 

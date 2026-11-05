@@ -38,7 +38,7 @@ export function defaultProfile(today: string): Profile {
       { id: 'kind2', name: 'Kind 2', birthDate: birthDateFromAge(42, today), birthDateEstimated: true },
     ],
     maxDistanceKm: 30,
-    leidscheRijnPreference: 1,
+    homePreference: 1,
     interests: ['theater', 'voorlezen', 'muziek', 'museum', 'natuur', 'feest', 'festival', 'markt', 'spel', 'expositie', 'workshop'],
     includeAdults: true,
     defaultPeriod: 'komende-maand',

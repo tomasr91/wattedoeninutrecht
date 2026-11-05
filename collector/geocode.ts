@@ -11,6 +11,7 @@
  */
 import type { Activity } from '../src/domain/types.ts';
 import { classifyZone } from '../src/domain/geo.ts';
+import { CITY } from '../city/config.ts';
 import type { Db } from './db.ts';
 import { USER_AGENT } from './lib/http.ts';
 
@@ -74,7 +75,7 @@ export async function geocodeMissing(db: Db, list: Activity[], log: (m: string) 
   let fixed = 0;
   for (const a of list) {
     if (a.venue.geoPrecision !== 'unknown' || /diverse|meerdere|onbekend/i.test(a.venue.name)) continue;
-    const q = [a.venue.address ?? a.venue.name, a.venue.locality ?? 'Utrecht', 'Nederland'].join(', ');
+    const q = [a.venue.address ?? a.venue.name, a.venue.locality ?? CITY.cityName, 'Nederland'].join(', ');
     let hit = get.get(q) as { lat: number | null; lon: number | null } | undefined;
     if (!hit && looked < max) {
       looked++;

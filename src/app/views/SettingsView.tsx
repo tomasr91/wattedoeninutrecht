@@ -10,6 +10,7 @@ import { lookupAddress } from '../geocode';
 import { IconInfo } from '../components/Icons';
 import { useRef, useState, type ReactNode } from 'react';
 import { formatShortDate } from '../../domain/dates';
+import { CITY } from '../../../city/config';
 
 /** Instellingen: alleen wat nu nodig is — de kinderen en de status van de bronnen. */
 export function SettingsSheet({
@@ -339,7 +340,7 @@ function HomeBlock({ home, onChange, nearbyKm, onNearby }: { home?: Home; onChan
         <label htmlFor="home-q" className="sr-only">
           Adres of postcode
         </label>
-        <input id="home-q" type="text" value={q} placeholder="Straat 1, Utrecht of 3541 AA" autoComplete="street-address" onChange={(e) => setQ(e.target.value)} />
+        <input id="home-q" type="text" value={q} placeholder={CITY.addressPlaceholder} autoComplete="street-address" onChange={(e) => setQ(e.target.value)} />
         <button className="btn" type="submit" disabled={busy || !q.trim()}>
           {busy ? 'Zoeken…' : home ? 'Wijzig' : 'Zoek'}
         </button>
@@ -376,8 +377,8 @@ function ManualSource({ activities, today }: { activities: Activity[]; today: st
       {open && (
         <div className="small source-info">
           <p>
-            Bronnen die de nachtelijke update niet zelf kan ophalen. Ze zijn bij de officiële bron opgezocht en vastgelegd; Tivoli en
-            Leidsche Rijn Centrum worden elke dinsdag opnieuw opgehaald.
+            Bronnen die de nachtelijke update niet zelf kan ophalen. Ze zijn bij de officiële bron opgezocht en vastgelegd;{' '}
+            {CITY.curatedNote}
           </p>
           <ul>
             {list.map(([name, g]) => (

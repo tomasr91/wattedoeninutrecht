@@ -11,10 +11,10 @@
  */
 import * as cheerio from 'cheerio';
 import type { AnyNode } from 'domhandler';
-import { fetchText } from '../lib/http.ts';
-import { cleanText, dedupeRepeated, introFrom, parseTimes } from '../lib/parse.ts';
-import type { RawEvent } from '../normalize.ts';
-import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
+import { fetchText } from '../../collector/lib/http.ts';
+import { cleanText, dedupeRepeated, introFrom, parseTimes } from '../../collector/lib/parse.ts';
+import type { RawEvent } from '../../collector/normalize.ts';
+import type { AdapterContext, AdapterResult, SourceAdapter } from '../../collector/adapters/types.ts';
 
 const BASE = 'https://bibliotheekutrecht.op-shop.nl';
 const ID = 'bibliotheek-utrecht';

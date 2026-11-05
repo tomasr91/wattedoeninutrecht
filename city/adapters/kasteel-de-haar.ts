@@ -10,10 +10,10 @@
  *  - robots.txt staat /agenda toe.
  */
 import * as cheerio from 'cheerio';
-import { fetchText } from '../lib/http.ts';
-import { cardTextAround, cleanText, detailInfo, parseDutchDate, parseDutchDateRange } from '../lib/parse.ts';
-import type { RawEvent } from '../normalize.ts';
-import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
+import { fetchText } from '../../collector/lib/http.ts';
+import { cardTextAround, cleanText, detailInfo, parseDutchDate, parseDutchDateRange } from '../../collector/lib/parse.ts';
+import type { RawEvent } from '../../collector/normalize.ts';
+import type { AdapterContext, AdapterResult, SourceAdapter } from '../../collector/adapters/types.ts';
 
 const BASE = 'https://www.kasteeldehaar.nl';
 const ID = 'kasteel-de-haar';

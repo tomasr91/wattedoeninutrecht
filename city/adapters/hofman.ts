@@ -7,11 +7,11 @@
  *  - Daarom: zolang de pagina dit nog zo vermeldt, zetten we elke woensdag binnen het venster in de agenda.
  *    Verdwijnt de tekst, dan levert de bron niets meer op en verdwijnen de avonden vanzelf.
  */
-import { fetchText } from '../lib/http.ts';
-import { cleanText } from '../lib/parse.ts';
+import { fetchText } from '../../collector/lib/http.ts';
+import { cleanText } from '../../collector/lib/parse.ts';
 import { addDays, weekday } from '../../src/domain/dates.ts';
-import type { RawEvent } from '../normalize.ts';
-import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
+import type { RawEvent } from '../../collector/normalize.ts';
+import type { AdapterContext, AdapterResult, SourceAdapter } from '../../collector/adapters/types.ts';
 
 const URL_AGENDA = 'https://hofman-utrecht.nl/agenda/';
 const ID = 'hofman';

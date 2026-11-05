@@ -10,10 +10,10 @@
  *  - Geen iCal, RSS of API gevonden; kaartverkoop via Ticketmatic. robots.txt staat /agenda toe.
  */
 import * as cheerio from 'cheerio';
-import { fetchText } from '../lib/http.ts';
-import { cardTextAround, cleanText, introFrom, parseDutchDate, priceTextFrom, spacedText } from '../lib/parse.ts';
-import type { RawEvent } from '../normalize.ts';
-import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
+import { fetchText } from '../../collector/lib/http.ts';
+import { cardTextAround, cleanText, introFrom, parseDutchDate, priceTextFrom, spacedText } from '../../collector/lib/parse.ts';
+import type { RawEvent } from '../../collector/normalize.ts';
+import type { AdapterContext, AdapterResult, SourceAdapter } from '../../collector/adapters/types.ts';
 
 const BASE = 'https://stadsschouwburg-utrecht.nl';
 const ID = 'stadsschouwburg-utrecht';

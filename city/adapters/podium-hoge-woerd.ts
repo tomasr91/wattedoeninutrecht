@@ -12,10 +12,10 @@
  * samengevoegd. Deze adapter levert de status (uitverkocht/geannuleerd) direct van het theater.
  */
 import * as cheerio from 'cheerio';
-import { fetchText } from '../lib/http.ts';
-import { cleanText, combine, extractJsonLdEvents, introFrom, isoToLocal, parseDutchDate, parseTimes } from '../lib/parse.ts';
-import type { RawEvent } from '../normalize.ts';
-import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
+import { fetchText } from '../../collector/lib/http.ts';
+import { cleanText, combine, extractJsonLdEvents, introFrom, isoToLocal, parseDutchDate, parseTimes } from '../../collector/lib/parse.ts';
+import type { RawEvent } from '../../collector/normalize.ts';
+import type { AdapterContext, AdapterResult, SourceAdapter } from '../../collector/adapters/types.ts';
 
 const BASE = 'https://www.podiumhogewoerd.nl';
 const ID = 'podium-hoge-woerd';

@@ -1,36 +1,19 @@
 import type { Home, Venue, Zone } from './types';
+import { CITY } from '../../city/config';
 
-/** Standaard thuisbasis: Leidsche Rijn Centrum (Berlijnplein). Instelbaar in het profiel. */
-export const DEFAULT_HOME: Home = { label: 'Leidsche Rijn Centrum', lat: 52.0946, lon: 5.0604 };
+/** Standaard thuisbasis uit het stadsprofiel. Instelbaar in het profiel. */
+export const DEFAULT_HOME: Home = { label: CITY.home.label, lat: CITY.home.lat, lon: CITY.home.lon };
 
-/** Wijken en kernen die samen "Leidsche Rijn en directe omgeving" vormen. */
-export const LEIDSCHE_RIJN_LOCALITIES = [
-  'leidsche rijn',
-  'leidsche rijn centrum',
-  'vleuterweide',
-  'vleuten',
-  'de meern',
-  'terwijde',
-  'parkwijk',
-  'langerak',
-  'het lageland',
-  'veldhuizen',
-  'haarzuilens',
-  'hoge woerd',
-  'máximapark',
-  'maximapark',
-  'leeuwesteyn',
-  'rijnvliet',
-  'the wonderwoods',
-];
+/** Zone-ID's van dit stadsprofiel. */
+export const HOME_ZONE: Zone = CITY.home.zoneId;
+export const CITY_ZONE: Zone = CITY.city.zoneId;
+export const OUTSIDE_ZONE: Zone = 'omgeving';
 
-/** Plaatsen binnen de gemeente Utrecht (buiten Leidsche Rijn). */
-const UTRECHT_LOCALITIES = [
-  'utrecht', 'binnenstad', 'centrum', 'oost', 'west', 'zuid', 'noordoost', 'noordwest', 'zuidwest',
-  'overvecht', 'kanaleneiland', 'lombok', 'zuilen', 'hoograven', 'lunetten', 'oog in al',
-  'tuinwijk', 'wittevrouwen', 'wilhelminapark', 'rivierenwijk', 'transwijk', 'dichterswijk',
-  'ondiep', 'tuindorp', 'voordorp', 'merwede', 'jaarbeurs', 'rijnsweerd', 'science park',
-];
+/** Wijken en kernen die samen de thuiswijk vormen. */
+export const HOME_LOCALITIES = CITY.home.localities;
+
+/** Plaatsen binnen de gemeente (buiten de thuiswijk). */
+const CITY_LOCALITIES = CITY.city.localities;
 
 export function haversineKm(aLat: number, aLon: number, bLat: number, bLon: number): number {
   const R = 6371;
@@ -59,23 +42,29 @@ export function travelEstimate(km: number): { mode: 'fiets' | 'auto'; minutes: n
 
 export function classifyZone(venue: Venue, home: Home = DEFAULT_HOME): Zone {
   const loc = `${venue.locality ?? ''} ${venue.address ?? ''} ${venue.name}`.toLowerCase();
-  if (LEIDSCHE_RIJN_LOCALITIES.some((l) => loc.includes(l))) return 'leidsche-rijn';
-  if (UTRECHT_LOCALITIES.some((l) => new RegExp(`\\b${l}\\b`).test(loc))) return 'utrecht';
-  // Een expliciet genoemde plaats buiten de gemeente (Bunnik, Houten, Amersfoort…) is "omgeving".
-  if (venue.locality && venue.locality.trim()) return 'omgeving';
+  if (HOME_LOCALITIES.some((l) => loc.includes(l))) return HOME_ZONE;
+  if (CITY_LOCALITIES.some((l) => new RegExp(`\\b${l}\\b`).test(loc))) return CITY_ZONE;
+  // Een expliciet genoemde plaats buiten de gemeente is "omgeving".
+  if (venue.locality && venue.locality.trim()) return OUTSIDE_ZONE;
   const km = distanceFromHome(venue, home);
   if (km !== undefined) {
-    // West van het Amsterdam-Rijnkanaal en dichtbij: Leidsche Rijn
-    if (km < 3.5 && venue.lon !== undefined && venue.lon < 5.085) return 'leidsche-rijn';
-    // Ruwe begrenzing van de gemeente Utrecht
-    const kmFromCenter = haversineKm(52.0907, 5.1214, venue.lat!, venue.lon!);
-    if (kmFromCenter < 6.5) return 'utrecht';
+    // Dichtbij het thuispunt (en binnen de eventuele grenzen van het stadsprofiel): thuiswijk
+    if (km < CITY.home.radiusKm && withinHomeBounds(venue)) return HOME_ZONE;
+    // Ruwe begrenzing van de gemeente
+    const kmFromCenter = haversineKm(CITY.center.lat, CITY.center.lon, venue.lat!, venue.lon!);
+    if (kmFromCenter < CITY.cityRadiusKm) return CITY_ZONE;
   }
-  return 'omgeving';
+  return OUTSIDE_ZONE;
 }
 
-export const ZONE_LABEL: Record<Zone, string> = {
-  'leidsche-rijn': 'Utrecht',
-  utrecht: 'Utrecht',
-  omgeving: 'Omgeving',
-};
+function withinHomeBounds(venue: Venue): boolean {
+  const { minLon, maxLon, minLat, maxLat } = CITY.home;
+  if (venue.lat === undefined || venue.lon === undefined) return false;
+  if (minLon !== undefined && venue.lon < minLon) return false;
+  if (maxLon !== undefined && venue.lon >= maxLon) return false;
+  if (minLat !== undefined && venue.lat < minLat) return false;
+  if (maxLat !== undefined && venue.lat >= maxLat) return false;
+  return true;
+}
+
+export const ZONE_LABEL: Record<Zone, string> = CITY.zoneLabels;

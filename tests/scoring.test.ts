@@ -69,9 +69,9 @@ describe('geografische prioritering', () => {
   it('de voorkeur voor Leidsche Rijn is instelbaar', () => {
     const p = testProfile();
     const gap = () => scoreActivity(kidsEvent(LR), p, ctx).total - scoreActivity(kidsEvent(CENTRUM), p, ctx).total;
-    p.leidscheRijnPreference = 2;
+    p.homePreference = 2;
     const strong = gap();
-    p.leidscheRijnPreference = 0;
+    p.homePreference = 0;
     const none = gap();
     expect(strong).toBeGreaterThan(none);
   });

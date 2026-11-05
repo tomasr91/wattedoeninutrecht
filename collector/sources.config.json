@@ -87,9 +87,12 @@
     {
       "id": "pathe",
       "enabled": true,
+      "homepage": "https://www.pathe.nl/nl/bioscopen/pathe-utrecht-leidsche-rijn",
+      "description": "Kinderfilms (keuring t/m 12, gefilterd op de leeftijd van de kinderen) en Kleuterbios in Pathé Utrecht Leidsche Rijn.",
       "options": {
         "$comment": "Kinderfilms en Kleuterbios. Voeg 'pathe-rembrandt-utrecht' toe voor de binnenstad. Keuringen die worden opgehaald; de app toont een film vanaf een geschatte leeftijd (Kijkwijzer 6 → 4 jaar, 9 → 6, 12 → 9; zie MIN_YEARS_BY_RATING in collector/adapters/pathe.ts).",
         "cinemas": ["pathe-utrecht-leidsche-rijn"],
+        "localities": { "pathe-utrecht-leidsche-rijn": "Leidsche Rijn Centrum", "pathe-rembrandt-utrecht": "Binnenstad" },
         "ratings": ["al", "-6ans", "-9ans", "-12ans"]
       }
     },

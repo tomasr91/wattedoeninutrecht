@@ -11,11 +11,15 @@ const assets = join(root, 'dist', 'assets');
 const files = readdirSync(assets);
 const css = readFileSync(join(assets, files.find((f) => f.endsWith('.css'))), 'utf8');
 const js = readFileSync(join(assets, files.find((f) => f.endsWith('.js'))), 'utf8').replace(/<\/script/gi, '<\\/script');
+const built = readFileSync(join(root, 'dist', 'index.html'), 'utf8');
+// Naam en beschrijving komen uit het stadsprofiel; vite.config.ts heeft ze al in dist/index.html gezet.
+const title = built.match(/<title>([^<]*)<\/title>/)?.[1] ?? '';
+const description = built.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '';
 const data = readFileSync(join(root, 'public', 'data', 'activities.json'), 'utf8').replace(/<\//g, '<\\/');
 
-const html = `<title>Uit in 030</title>
+const html = `<title>${title}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Persoonlijke gezinsagenda voor Leidsche Rijn, Utrecht en omgeving.">
+<meta name="description" content="${description}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Noto+Sans:wght@400;600;700&display=swap">

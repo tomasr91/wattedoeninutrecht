@@ -1,5 +1,6 @@
 /**
- * Pathé — kinderfilms en Kleuterbios in Pathé Utrecht Leidsche Rijn (optioneel ook Rembrandt Utrecht).
+ * Pathé — kinderfilms en Kleuterbios in de Pathé-bioscopen uit sources.config.json (options.cinemas).
+ *  - options.localities: wijk/plaats per bioscoop-slug (anders de plaats uit het adres van Pathé).
  *
  * Werkwijze (vastgesteld 21-10-2026, vanaf een GitHub-server):
  *  - De bioscooppagina /nl/bioscopen/<slug> bevat in <script id="ng-state"> de data die de site
@@ -18,7 +19,8 @@ import type { AdapterContext, AdapterResult, SourceAdapter } from './types.ts';
 const BASE = 'https://www.pathe.nl';
 const ID = 'pathe';
 const NAME = 'Pathé';
-export const DEFAULT_CINEMAS = ['pathe-utrecht-leidsche-rijn'];
+/** Zonder options.cinemas haalt deze bron niets op: kies in sources.config.json de bioscopen van je stad. */
+export const DEFAULT_CINEMAS: string[] = [];
 /** Keuringen die we ophalen; de app bepaalt per kind (op de dag zelf) of een film past. */
 export const DEFAULT_RATINGS = ['al', '-6ans', '-9ans', '-12ans'];
 /**
@@ -98,12 +100,19 @@ export function isKidsFilm(show: CinemaShow, meta?: ShowMeta): boolean {
 
 const isKleuter = (d: DayInfo) => !!d.tags?.includes('kleuter') || /kleuterbios/i.test(d.flag ?? '');
 
-export function patheToRaw(data: PatheData, today: string, until: string, nowIso: string, ratings = DEFAULT_RATINGS): RawEvent[] {
+export function patheToRaw(
+  data: PatheData,
+  today: string,
+  until: string,
+  nowIso: string,
+  ratings = DEFAULT_RATINGS,
+  localities: Record<string, string> = {},
+): RawEvent[] {
   const t = data.theater;
   const venue = {
     venueName: t?.name ?? 'Pathé',
     address: t?.addressLine1 ? `${t.addressLine1}, ${(t.addressZip ?? '').trim()} ${t.addressCity ?? ''}`.trim() : undefined,
-    locality: data.cinema.includes('leidsche-rijn') ? 'Leidsche Rijn Centrum' : 'Binnenstad',
+    locality: localities[data.cinema] ?? t?.addressCity?.trim(),
     lat: t?.gpsPosition?.x,
     lon: t?.gpsPosition?.y,
   };
@@ -169,16 +178,17 @@ export function patheToRaw(data: PatheData, today: string, until: string, nowIso
 export const pathe: SourceAdapter = {
   id: ID,
   name: NAME,
-  homepage: `${BASE}/nl/bioscopen/pathe-utrecht-leidsche-rijn`,
+  homepage: `${BASE}/nl/bioscopen`,
   method: 'html',
-  description: 'Kinderfilms (keuring t/m 12, gefilterd op de leeftijd van de kinderen) en Kleuterbios in Pathé Utrecht Leidsche Rijn.',
+  description: 'Kinderfilms (keuring t/m 12, gefilterd op de leeftijd van de kinderen) en Kleuterbios in Pathé.',
   async run(ctx: AdapterContext): Promise<AdapterResult> {
     const cinemas = (ctx.options.cinemas as string[] | undefined) ?? DEFAULT_CINEMAS;
     const ratings = (ctx.options.ratings as string[] | undefined) ?? DEFAULT_RATINGS;
+    const localities = (ctx.options.localities as Record<string, string> | undefined) ?? {};
     const events: RawEvent[] = [];
     for (const c of cinemas) {
       const data = parsePathePage(await fetchText(`${BASE}/nl/bioscopen/${c}`), c);
-      events.push(...patheToRaw(data, ctx.today, ctx.until, ctx.nowIso, ratings));
+      events.push(...patheToRaw(data, ctx.today, ctx.until, ctx.nowIso, ratings, localities));
     }
     return { events, coverage: { from: ctx.today, to: ctx.until }, notes: `${events.length} kinderfilms en Kleuterbios-dagen` };
   },

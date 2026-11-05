@@ -11,5 +11,5 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["collector", "src/domain", "tests"]
+  "include": ["collector", "src/domain", "tests", "city/**/*.ts"]
 }

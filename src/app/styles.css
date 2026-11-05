@@ -1,4 +1,5 @@
-/* Layout: grachtenblauwe kopbalk met de Dom (scrolt weg); daaronder een wit blok met de bediening dat over de
+/* Kleuren van kop en merk komen uit het stadsprofiel (city/config.ts, zie main.tsx); de waarden hieronder zijn alleen de terugval.
+   Layout: grachtenblauwe kopbalk met het herkenningspunt van de stad (scrolt weg); daaronder een wit blok met de bediening dat over de
    kopbalk heen schuift en blijft plakken; daaronder witte kaarten op koel lichtgrijs.
    Alleen een licht thema (geen donkere modus). Kleur: één blauwe kleurfamilie. Blauw = gekozen/actief. Groen/oranje = geschiktheid, rood alleen voor waarschuwingen. */
 :root {
@@ -18,7 +19,7 @@
   --head-bg: #1f3a4d;
   --head-ink: #ffffff;
   --head-muted: #c3d3df;
-  --head-dom: #cfe0ec;
+  --head-landmark: #cfe0ec;
   --head-art: rgb(255 255 255 / 14%);
   --day-ink: #1f3a4d;
   --good: #3b5f22;
@@ -128,7 +129,7 @@ h3 {
   position: relative;
 }
 .brand svg {
-  color: var(--head-dom);
+  color: var(--head-landmark);
 }
 .masthead-inner {
   display: flex;
