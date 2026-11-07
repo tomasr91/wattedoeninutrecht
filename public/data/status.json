@@ -1,14 +1,14 @@
 {
-  "lastSuccessfulRun": "2026-11-07T04:21:16.174Z",
-  "lastRun": "2026-11-07T04:21:16.174Z",
+  "lastSuccessfulRun": "2026-11-07T09:01:31.524Z",
+  "lastRun": "2026-11-07T09:01:31.524Z",
   "sources": [
     {
       "sourceId": "bibliotheek-utrecht",
       "sourceName": "Bibliotheek Utrecht",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T04:08:07.656Z",
-      "lastSuccess": "2026-11-07T04:08:07.656Z",
+      "lastAttempt": "2026-11-07T08:50:21.110Z",
+      "lastSuccess": "2026-11-07T08:50:21.110Z",
       "fetched": 310
     },
     {
@@ -16,8 +16,8 @@
       "sourceName": "Comedyhuis",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T04:08:07.656Z",
-      "lastSuccess": "2026-11-07T04:08:07.656Z",
+      "lastAttempt": "2026-11-07T08:50:21.110Z",
+      "lastSuccess": "2026-11-07T08:50:21.110Z",
       "fetched": 30,
       "notes": "30 shows van 332 in de agenda"
     },
@@ -26,8 +26,8 @@
       "sourceName": "Alternatief verzameld",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T04:08:07.656Z",
-      "lastSuccess": "2026-11-07T04:08:07.656Z",
+      "lastAttempt": "2026-11-07T08:50:21.110Z",
+      "lastSuccess": "2026-11-07T08:50:21.110Z",
       "fetched": 58
     },
     {
@@ -45,8 +45,8 @@
       "sourceName": "Jaarbeurs",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T04:08:07.656Z",
-      "lastSuccess": "2026-11-07T04:08:07.656Z",
+      "lastAttempt": "2026-11-07T08:50:21.110Z",
+      "lastSuccess": "2026-11-07T08:50:21.110Z",
       "fetched": 12,
       "notes": "12 publieksevenementen van 35 (4 voor gezinnen), 12 met details"
     },
@@ -55,8 +55,8 @@
       "sourceName": "Kasteel de Haar",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T04:08:07.656Z",
-      "lastSuccess": "2026-11-07T04:08:07.656Z",
+      "lastAttempt": "2026-11-07T08:50:21.110Z",
+      "lastSuccess": "2026-11-07T08:50:21.110Z",
       "fetched": 11,
       "notes": "16 agenda-items"
     },
@@ -65,8 +65,8 @@
       "sourceName": "Máximapark",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T04:08:07.656Z",
-      "lastSuccess": "2026-11-07T04:08:07.656Z",
+      "lastAttempt": "2026-11-07T08:50:21.110Z",
+      "lastSuccess": "2026-11-07T08:50:21.110Z",
       "fetched": 4
     },
     {
@@ -74,8 +74,8 @@
       "sourceName": "Pathé",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T04:08:07.656Z",
-      "lastSuccess": "2026-11-07T04:08:07.656Z",
+      "lastAttempt": "2026-11-07T08:50:21.110Z",
+      "lastSuccess": "2026-11-07T08:50:21.110Z",
       "fetched": 10,
       "notes": "10 kinderfilms en Kleuterbios-dagen"
     },
@@ -84,8 +84,8 @@
       "sourceName": "Podium Hoge Woerd",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T04:08:07.656Z",
-      "lastSuccess": "2026-11-07T04:08:07.656Z",
+      "lastAttempt": "2026-11-07T08:50:21.110Z",
+      "lastSuccess": "2026-11-07T08:50:21.110Z",
       "fetched": 10
     },
     {
@@ -93,8 +93,8 @@
       "sourceName": "Podium Sprits",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T04:08:07.656Z",
-      "lastSuccess": "2026-11-07T04:08:07.656Z",
+      "lastAttempt": "2026-11-07T08:50:21.110Z",
+      "lastSuccess": "2026-11-07T08:50:21.110Z",
       "fetched": 30,
       "notes": "30 producties in het programma"
     },
@@ -103,8 +103,8 @@
       "sourceName": "Stadsschouwburg Utrecht",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T04:08:07.656Z",
-      "lastSuccess": "2026-11-07T04:08:07.656Z",
+      "lastAttempt": "2026-11-07T08:50:21.110Z",
+      "lastSuccess": "2026-11-07T08:50:21.110Z",
       "fetched": 219,
       "notes": "219 voorstellingen, 152 productiepagina's"
     },
@@ -122,8 +122,8 @@
       "sourceName": "UITagenda Utrecht",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T04:08:07.656Z",
-      "lastSuccess": "2026-11-07T04:08:07.656Z",
+      "lastAttempt": "2026-11-07T08:50:21.110Z",
+      "lastSuccess": "2026-11-07T08:50:21.110Z",
       "fetched": 534,
       "notes": "Niet volledig opgehaald; verdwenen items worden deze run niet gemarkeerd"
     },
@@ -132,8 +132,8 @@
       "sourceName": "Utrecht Natuurlijk",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T04:08:07.656Z",
-      "lastSuccess": "2026-11-07T04:08:07.656Z",
+      "lastAttempt": "2026-11-07T08:50:21.110Z",
+      "lastSuccess": "2026-11-07T08:50:21.110Z",
       "fetched": 54,
       "notes": "54 activiteiten"
     },
@@ -142,8 +142,8 @@
       "sourceName": "Vaste plekken",
       "enabled": true,
       "ok": true,
-      "lastAttempt": "2026-11-07T04:08:07.656Z",
-      "lastSuccess": "2026-11-07T04:08:07.656Z",
+      "lastAttempt": "2026-11-07T08:50:21.110Z",
+      "lastSuccess": "2026-11-07T08:50:21.110Z",
       "fetched": 33,
       "notes": "33 vaste plekken"
     },
@@ -157,10 +157,10 @@
   ],
   "totals": {
     "active": 1515,
-    "added": 12,
-    "updated": 66,
-    "cancelled": 8,
-    "expired": 19,
+    "added": 0,
+    "updated": 2,
+    "cancelled": 0,
+    "expired": 0,
     "merged": 148
   }
 }
