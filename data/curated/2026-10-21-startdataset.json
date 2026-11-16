@@ -1,95 +1,9 @@
 {
   "meta": {
-    "collectedAt": "2026-10-22T12:18:00Z",
+    "collectedAt": "2026-11-16T23:21:37Z",
     "collectedBy": "Claude (webonderzoek in opdracht van de gebruiker)",
     "method": "Handmatig nagelopen op 21-10-2026 via de officiële agenda's: Bibliotheek Utrecht (OP-shop), UITagenda Utrecht, Podium Hoge Woerd; twee Sinterklaasintochten via Kidsproof (secundair). Alleen gegevens die op de bronpagina's stonden; ontbrekende informatie staat als onzekerheid vermeld.",
     "note": "Samenvattingen zijn zelf geschreven, geen brontekst."
   },
-  "events": [
-    {
-      "sourceName": "UITagenda Utrecht / Sint Maarten Parade",
-      "sourceEventId": "ua-51641",
-      "url": "https://www.uitagendautrecht.nl/evenement/51641/sint-maarten-parade",
-      "title": "Sint Maarten Parade: De Ronde van Sint Maarten",
-      "start": "2026-11-07T18:00",
-      "end": "2026-11-07T21:00",
-      "venueName": "Route door de binnenstad",
-      "locality": "Binnenstad",
-      "lat": 52.0907,
-      "lon": 5.1214,
-      "priceText": "Gratis",
-      "bookingStatus": "niet-nodig",
-      "hints": [
-        "Gezinnen",
-        "#kinderen",
-        "#0 10"
-      ],
-      "categories": [
-        "feest",
-        "festival"
-      ],
-      "audiences": [
-        "gezin",
-        "kinderen"
-      ],
-      "estimatedMinMonths": 0,
-      "estimatedMaxMonths": 120,
-      "indoor": "buiten",
-      "special": true,
-      "fitReasons": [
-        "Zelf tempo bepalen, overal aanhaken",
-        "Route geschikt voor kinderwagens"
-      ],
-      "cautions": [
-        "Begint na het avondeten",
-        "Druk en donker; neem een lampion of lampje mee"
-      ],
-      "summary": "Lichtjesroute van ca. 4 km door de binnenstad, langs o.a. Neude, Domkerk en Museum Speelklok. Je kunt overal aanhaken; tip van de organisatie: start uiterlijk 19:00.",
-      "extraUncertainties": [
-        "Coördinaten: middelpunt van de route (Domplein)"
-      ],
-      "confidence": "hoog",
-      "bookingUrl": "https://sintmaartenparade.nl/",
-      "geoPrecision": "approx",
-      "checkedAt": "2026-10-26T23:33:00Z"
-    },
-    {
-      "sourceName": "Kidsproof Utrecht (secundaire bron)",
-      "sourceEventId": "kp-intocht-utrecht-2026",
-      "url": "https://www.kidsproof.nl/utrecht/uitje/intocht-sinterklaas-utrecht-boot/",
-      "title": "Intocht Sinterklaas Utrecht (per boot)",
-      "start": "2026-11-15",
-      "allDay": true,
-      "venueName": "Weerdsluis / Domplein",
-      "locality": "Binnenstad",
-      "lat": 52.0985,
-      "lon": 5.1195,
-      "priceText": "Gratis",
-      "bookingStatus": "niet-nodig",
-      "categories": [
-        "feest"
-      ],
-      "audiences": [
-        "gezin",
-        "kinderen"
-      ],
-      "indoor": "buiten",
-      "special": true,
-      "estimatedMinMonths": 18,
-      "estimatedMaxMonths": 108,
-      "cautions": [
-        "Kan erg druk zijn"
-      ],
-      "summary": "Sinterklaas komt per boot aan in de binnenstad; te zien bij de Weerdsluis en op het Domplein.",
-      "extraUncertainties": [
-        "Tijd en route nog niet bekendgemaakt",
-        "Gemeld door een secundaire bron; controleer de gemeente of organisatie",
-        "Coördinaten benaderd"
-      ],
-      "confidence": "middel",
-      "hints": [],
-      "geoPrecision": "approx",
-      "checkedAt": "2026-10-22T12:18:00Z"
-    }
-  ]
+  "events": []
 }
