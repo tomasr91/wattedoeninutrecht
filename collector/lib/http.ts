@@ -51,6 +51,10 @@ export interface HttpOptions {
   timeoutMs?: number;
   retries?: number;
   respectRobots?: boolean;
+  /** POST voor sites die hun lijst zo laden (zoals de site zelf doet); standaard GET. */
+  method?: 'GET' | 'POST';
+  /** Body bij POST; een object wordt als JSON verstuurd. */
+  body?: string | Record<string, unknown>;
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -131,8 +135,16 @@ export async function fetchText(url: string, opts: HttpOptions = {}): Promise<st
     if (wait > 0) await sleep(wait);
     lastRequestAt.set(u.host, Date.now());
     try {
+      const json = opts.body !== undefined && typeof opts.body !== 'string';
       const res = await fetch(url, {
-        headers: { 'user-agent': USER_AGENT, accept: 'text/html,application/xhtml+xml,text/calendar,*/*;q=0.8', 'accept-language': 'nl-NL,nl;q=0.9' },
+        method: opts.method ?? 'GET',
+        headers: {
+          'user-agent': USER_AGENT,
+          accept: json ? 'application/json, text/plain, */*' : 'text/html,application/xhtml+xml,text/calendar,*/*;q=0.8',
+          'accept-language': 'nl-NL,nl;q=0.9',
+          ...(json ? { 'content-type': 'application/json' } : {}),
+        },
+        body: opts.body === undefined ? undefined : json ? JSON.stringify(opts.body) : (opts.body as string),
         redirect: 'follow',
         signal: AbortSignal.timeout(timeoutMs),
       });

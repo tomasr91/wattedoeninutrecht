@@ -208,6 +208,8 @@ export interface SourceRunStatus {
   ok: boolean;
   lastAttempt?: string;
   lastSuccess?: string;
+  /** Eerste geslaagde run: wat de bron toen binnenbracht, telt niet als "Nieuw". */
+  firstSuccess?: string;
   /** Sinds wanneer de bron onafgebroken mislukt. */
   failingSince?: string;
   fetched: number;

@@ -1,33 +1,27 @@
 /**
- * "Nieuw"-label: welke activiteiten zijn sinds een eerder bezoek aan de agenda toegevoegd?
- * Per toestel bijgehouden: per activiteit de eerste dag dat de app hem zag.
- * Bij het allereerste bezoek is niets nieuw. Een activiteit blijft NEW_DAYS dagen "nieuw".
+ * "Nieuw"-label: alleen op de dag dat een activiteit voor het eerst in de agenda staat.
+ *
+ * Bepaald uit de data, niet per toestel: per bron weet de verzamellaag wanneer hij een activiteit
+ * voor het eerst zag (sources[].firstSeen). Een activiteit is nieuw als dat (in Amsterdam) vandaag was.
+ * De eerste lading van een bron die net is toegevoegd telt niet: dan stond de bron er gisteren nog niet
+ * in en is "alles nieuw" geen nieuws.
  */
-import { addDays } from './dates';
+import { dateOf, utcToLocal } from './dates';
+import type { Activity, UpdateStatus } from './types';
 
-export const NEW_DAYS = 7;
+const localDay = (iso: string) => dateOf(utcToLocal(new Date(iso)));
 
-export interface SeenState {
-  /** Dag van het eerste bezoek. */
-  since: string;
-  /** Activiteit-ID → eerste dag gezien. */
-  firstSeen: Record<string, string>;
+export function isNew(a: Pick<Activity, 'sources'>, firstSuccessDay: Map<string, string>, today: string): boolean {
+  if (!a.sources.length) return false;
+  const days = a.sources.map((s) => ({ id: s.sourceId, day: localDay(s.firstSeen) }));
+  // Stond hij er via een andere bron al eerder in, dan is hij niet nieuw.
+  if (days.some((d) => d.day < today)) return false;
+  return days.some((d) => d.day === today && (firstSuccessDay.get(d.id) ?? today) < today);
 }
 
-export function updateSeen(prev: SeenState | null, ids: string[], today: string): { state: SeenState; fresh: Set<string> } {
-  if (!prev || !prev.since) {
-    const firstSeen: Record<string, string> = {};
-    for (const id of ids) firstSeen[id] = today;
-    return { state: { since: today, firstSeen }, fresh: new Set() };
-  }
-  const firstSeen: Record<string, string> = {};
-  const fresh = new Set<string>();
-  const cutoff = addDays(today, -NEW_DAYS);
-  for (const id of ids) {
-    // Op de eerste dag zelf toegevoegd telt niet als nieuw (alles was toen al nieuw voor je).
-    const seen = prev.firstSeen[id] ?? today;
-    firstSeen[id] = seen;
-    if (seen > prev.since && seen > cutoff) fresh.add(id);
-  }
-  return { state: { since: prev.since, firstSeen }, fresh };
+/** IDs van de activiteiten die vandaag nieuw zijn. */
+export function newToday(activities: Pick<Activity, 'id' | 'sources'>[], status: Pick<UpdateStatus, 'sources'> | undefined, today: string): Set<string> {
+  const firstSuccessDay = new Map<string, string>();
+  for (const s of status?.sources ?? []) if (s.firstSuccess) firstSuccessDay.set(s.sourceId, localDay(s.firstSuccess));
+  return new Set(activities.filter((a) => isNew(a, firstSuccessDay, today)).map((a) => a.id));
 }

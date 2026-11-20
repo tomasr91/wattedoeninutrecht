@@ -195,3 +195,24 @@ describe('handmatig gecontroleerde bron', () => {
     expect(r.activities[0].sources[0].lastChecked).toBe('2026-10-21T09:00:00Z');
   });
 });
+
+import { mergeActivities as mergeForInfo } from '../src/domain/dedupe';
+describe('samenvoegen bewaart informatie van beide bronnen', () => {
+  it('soort, beschikbaarheid, bestellink en uitverkocht komen van de andere bron als de hoofdversie ze mist', async () => {
+    const { testActivity } = await import('./fixtures');
+    const bare = testActivity({ title: '[TESTDATA] Voorstelling', start: '2026-11-08T11:00' });
+    const rich = testActivity({
+      title: '[TESTDATA] Voorstelling',
+      start: '2026-11-08T11:00',
+      kind: 'Kindervoorstelling',
+      status: 'uitverkocht',
+      booking: { status: 'aanbevolen', url: 'https://example.invalid/kaarten', availability: { label: 'Uitverkocht', checkedAt: '2026-11-05T00:00:00Z' } },
+    });
+    for (const m of [mergeForInfo(bare, rich), mergeForInfo(rich, bare)]) {
+      expect(m.kind).toBe('Kindervoorstelling');
+      expect(m.status).toBe('uitverkocht');
+      expect(m.booking.availability?.label).toBe('Uitverkocht');
+      expect(m.booking.url).toBe('https://example.invalid/kaarten');
+    }
+  });
+});

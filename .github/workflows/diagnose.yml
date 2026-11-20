@@ -1,8 +1,14 @@
-# Bronnen diagnosticeren: handmatig starten via Actions → "Bronnen diagnose" → Run workflow.
-# Schrijft diagnose.json naar de aparte branch "diagnose" (niet naar main).
+# Bronnen diagnosticeren. Starten kan op twee manieren:
+#  - handmatig: Actions → "Bronnen diagnose" → Run workflow (URL's en "bewaren" invullen);
+#  - door .github/diagnose-request te pushen (bv. door Claude): één URL per regel, regels met # worden
+#    overgeslagen, en een regel "bewaar" bewaart de volledige pagina's (voor het schrijven van een adapter).
+# Schrijft diagnose.json (en bewaarde pagina's) naar de aparte branch "diagnose" (niet naar main).
 name: Bronnen diagnose
 
 on:
+  push:
+    branches: [main]
+    paths: ['.github/diagnose-request']
   workflow_dispatch:
     inputs:
       urls:
@@ -30,16 +36,30 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Opdracht lezen
+        id: req
+        env:
+          URLS_INPUT: ${{ github.event.inputs.urls }}
+          SAVE_INPUT: ${{ github.event.inputs.save }}
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            urls=$(grep -vE '^\s*(#|$)' .github/diagnose-request | grep -viE '^\s*bewaar\s*$' | tr '\n' ' ')
+            if grep -qiE '^\s*bewaar\s*$' .github/diagnose-request; then save=1; else save=; fi
+          else
+            urls="$URLS_INPUT"; save="$SAVE_INPUT"
+          fi
+          echo "urls=$urls" >> "$GITHUB_OUTPUT"
+          echo "save=$save" >> "$GITHUB_OUTPUT"
       - name: Diagnose
         env:
           COLLECTOR_CONTACT: ${{ vars.COLLECTOR_CONTACT }}
-          DIAG_SAVE: ${{ github.event.inputs.save }}
-          URLS: ${{ github.event.inputs.urls }}
+          DIAG_SAVE: ${{ steps.req.outputs.save }}
+          URLS: ${{ steps.req.outputs.urls }}
         # Via een variabele, zodat tekens als & in een URL niet door de shell worden uitgevoerd.
         run: npx tsx collector/diagnose.ts $URLS > /tmp/diagnose.json; cat /tmp/diagnose.json
       - name: TLS en doorverwijzingen controleren
         env:
-          URLS: ${{ github.event.inputs.urls }}
+          URLS: ${{ steps.req.outputs.urls }}
         run: |
           # Hosts uit de opgegeven URL's, anders uit diagnoseUrls in city/sources.config.json.
           hosts=$(URLS="$URLS" node -e "const u=(process.env.URLS||'').split(/\\s+/).filter(Boolean);const l=u.length?u:(require('./city/sources.config.json').diagnoseUrls||[]);console.log([...new Set(l.map(x=>new URL(x).host))].join(' '))")

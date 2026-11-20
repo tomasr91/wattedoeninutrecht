@@ -34,6 +34,17 @@ describe('vaste reeksen samenvoegen', () => {
     const out = collapseSeries([one], '2026-10-22');
     expect(out[0]).toMatchObject({ recurrenceNote: 'Elke vr en za · 20:30', rolling: true, occurrences: ['2026-10-23', '2026-10-24'] });
   });
+  it('(bijna) dagelijks wordt ook één regel: "Dagelijks"', () => {
+    const days = Array.from({ length: 21 }, (_, i) => `2026-11-${String(5 + i).padStart(2, '0')}`).filter((_, i) => i !== 1);
+    const daily = days.map((d, i) => act({ id: `d${i}`, title: '[TESTDATA] Speurtocht', start: `${d}T08:00`, end: `${d}T20:00` }));
+    const out = collapseSeries(daily, '2026-11-05');
+    expect(out).toHaveLength(1);
+    expect(out[0].recurrenceNote).toBe('Dagelijks · 08:00');
+  });
+  it('vier losse weekdagen met gaten is geen dagelijkse reeks', () => {
+    const scattered = ['2026-11-02', '2026-11-04', '2026-11-12', '2026-11-20'].map((d, i) => act({ id: `s${i}`, title: '[TESTDATA] Concert', start: `${d}T20:00` }));
+    expect(collapseSeries(scattered, '2026-11-01')).toHaveLength(4);
+  });
   it('label', () => {
     expect(recurrenceLabel(['2026-10-23', '2026-10-24', '2026-10-30', '2026-11-06'], ['20:30', '20:30', '20:30', '20:30'])).toBe('Elke vr en za · 20:30');
   });

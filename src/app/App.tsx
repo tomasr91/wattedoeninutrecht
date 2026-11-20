@@ -16,7 +16,7 @@ import { IconSettings } from './components/Icons';
 import { Landmark } from '../../city/Landmark';
 import { CITY } from '../../city/config';
 import { AlwaysList, DayList, OngoingList } from './views/ListView';
-import { updateSeen, type SeenState } from '../domain/newness';
+import { newToday } from '../domain/newness';
 import { NearContext, NewContext } from './newContext';
 import { SettingsSheet } from './views/SettingsView';
 import { normalizeText } from '../domain/dedupe';
@@ -74,9 +74,7 @@ export function App() {
   const [fresh, setFresh] = useState<Set<string>>(new Set());
   useEffect(() => {
     loadDataset().then((d) => {
-      const { state, fresh: f } = updateSeen(load<SeenState | null>('seen', null), d.activities.map((a) => a.id), today);
-      save('seen', state);
-      setFresh(f);
+      setFresh(newToday(d.activities, d.status, today));
       setData(d);
     }, (e: Error) => setError(e.message));
   }, []);

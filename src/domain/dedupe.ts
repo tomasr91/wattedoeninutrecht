@@ -161,12 +161,23 @@ export function mergeActivities(x: Activity, y: Activity): Activity {
       ...Object.fromEntries(Object.entries(p.age).filter(([, v]) => v !== undefined)),
     },
     price: p.price.kind === 'onbekend' ? s.price : p.price,
-    booking: p.booking.status === 'onbekend' ? s.booking : p.booking,
+    booking: {
+      ...(p.booking.status === 'onbekend' ? s.booking : p.booking),
+      // Beschikbaarheid ("Laatste tickets", "Uitverkocht") en de bestellink niet kwijtraken bij samenvoegen.
+      availability: p.booking.availability ?? s.booking.availability,
+      url: p.booking.url ?? s.booking.url,
+    },
+    kind: p.kind ?? s.kind,
     indoor: p.indoor === 'onbekend' ? s.indoor : p.indoor,
     categories: [...new Set([...p.categories, ...s.categories])],
     audiences: [...new Set([...p.audiences, ...s.audiences])],
     // Een annulering in één bron is belangrijk genoeg om over te nemen
-    status: p.status === 'geannuleerd' || s.status === 'geannuleerd' ? 'geannuleerd' : p.status,
+    status:
+      p.status === 'geannuleerd' || s.status === 'geannuleerd'
+        ? 'geannuleerd'
+        : p.status === 'uitverkocht' || s.status === 'uitverkocht'
+          ? 'uitverkocht'
+          : p.status,
     special: p.special || s.special,
     // Onzekerheid die door de andere bron is opgelost, vervalt
     uncertainties: [...new Set([...p.uncertainties, ...s.uncertainties])].filter(

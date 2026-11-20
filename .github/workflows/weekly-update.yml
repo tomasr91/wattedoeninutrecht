@@ -62,7 +62,10 @@ jobs:
           skip=false
           if { [ -n "${{ github.event.schedule }}" ] && [ "${{ github.event.schedule }}" != "17 2 * * *" ]; } || [ "${{ github.event_name }}" = "push" ]; then
             last=$(node -e "const s=require('./public/data/status.json');console.log(s.lastSuccessfulRun||'')")
-            if [ "${last:0:10}" = "$(date -u +%F)" ]; then
+            # Een regel "forceer" in .github/run-request start de update toch (bv. na een nieuwe bron).
+            if [ "${{ github.event_name }}" = "push" ] && grep -qiE '^\s*forceer\s*$' .github/run-request; then
+              echo "Update geforceerd via .github/run-request."
+            elif [ "${last:0:10}" = "$(date -u +%F)" ]; then
               echo "Vandaag al bijgewerkt ($last); reserve-run slaat over."
               skip=true
             fi

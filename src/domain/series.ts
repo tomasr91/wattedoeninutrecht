@@ -10,12 +10,16 @@ import { normalizeText, stableHash } from './dedupe';
  *
  * Herkend aan:
  * 1. de bron: "doorlopend", "elke vrijdag en zaterdag", "wekelijks" (`recurrenceNote`);
- * 2. het patroon: minstens 3 data, verspreid over minstens 2 weken, op hooguit 3 vaste weekdagen.
+ * 2. het patroon: minstens 3 data, verspreid over minstens 2 weken, op hooguit 3 vaste weekdagen;
+ * 3. (bijna) dagelijks: minstens 3 data over minstens 2 weken, op minstens 70% van de dagen
+ *    (bv. een speurtocht die de bron elke dag apart noemt).
  */
 
 export const SERIES_MIN_DATES = 3;
 export const SERIES_MIN_SPAN_DAYS = 14;
 const MAX_WEEKDAYS = 3;
+/** Deel van de dagen in de periode waarop iets moet zijn om als "(bijna) dagelijks" te gelden. */
+export const SERIES_DAILY_SHARE = 0.7;
 /** Een losse activiteit van meer dan een week (expositie) is al doorlopend; die laten we zo. */
 const MAX_MEMBER_SPAN_DAYS = 7;
 
@@ -87,7 +91,9 @@ export function collapseSeries(activities: Activity[], today: string): Activity[
     const fromText = members.find((m) => m.recurrenceNote)?.recurrenceNote;
     // Omschrijving noemt vaste dagen ("elke maandag en elke donderdag") én er zijn minstens 2 data.
     const hint = dates.length >= 2 ? members.find((m) => m.recurrenceHint)?.recurrenceHint : undefined;
-    const byPattern = dates.length >= SERIES_MIN_DATES && diffDays(dates[0], dates.at(-1)!) >= SERIES_MIN_SPAN_DAYS && weekdays.size <= MAX_WEEKDAYS;
+    const spanDays = dates.length ? diffDays(dates[0], dates.at(-1)!) : 0;
+    const daily = dates.length >= SERIES_DAILY_SHARE * (spanDays + 1);
+    const byPattern = dates.length >= SERIES_MIN_DATES && spanDays >= SERIES_MIN_SPAN_DAYS && (weekdays.size <= MAX_WEEKDAYS || daily);
     if ((!fromText && !hint && !byPattern) || dates.length === 0) {
       out.push(...members);
       continue;
